@@ -42,7 +42,7 @@ _Para iniciar en producción usamos Heroku_
 
 ## Versionado 📌
 
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/jeanValverde/proyectoSpringJavaBasico/tags).
+Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/jeanValverde/Bacon/tags).
 
 ## Autores ✒️
 
