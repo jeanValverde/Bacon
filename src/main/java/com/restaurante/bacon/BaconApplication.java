@@ -12,7 +12,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 public class BaconApplication {
 
     
-    //hola
+    
     public static void main(String[] args) {
         SpringApplication.run(BaconApplication.class, args);
     }
