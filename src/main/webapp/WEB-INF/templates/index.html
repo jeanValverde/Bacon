@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+<head>
+    
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>BACON Restaurante</title>
+  <!-- base:css -->
+  <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+  <!-- endinject -->
+  <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+  
+  <!---->
+  
+</head>
+
+<body class="sidebar-fixed">
+  <div class="container-scroller">
+    <!-- partial:../../fragments/_navbar.html -->
+      <nav th:replace="fragments/_navbar :: nav"></nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../fragments/_settings-panel.html -->
+      <div th:replace="fragments/_settings-panel :: div"></div>
+      <!-- partial -->
+      <!-- partial:../../fragments/_sidebar.html -->
+      <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+            
+            <!--Desarrollar acá-->
+            
+            
+            
+            
+            
+            <!--final-->
+            
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../fragments/_footer.html -->
+        <footer th:replace="fragments/_footer :: footer"></footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+    
+ 
+  <!-- container-scroller -->
+  <!-- base:js -->
+  <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script th:src="@{/js/off-canvas.js}"></script>
+  <script th:src="@{/js/hoverable-collapse.js}"></script>
+  <script th:src="@{/js/template.js}"></script>
+  <script th:src="@{/js/settings.js}"></script>
+  <script th:src="@{/js/todolist.js}"></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <!-- End custom js for this page-->
+  
+</body>
+
+</html>

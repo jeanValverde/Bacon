@@ -1,0 +1,186 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar" th:fragment="navSilebar (nombreUsuario, rol )" >
+    <div class="sidebar-profile">
+        <div class="d-flex align-items-center justify-content-between">
+            <div th:if="${rol == 'ADMIN'}" ><img src="https://ih1.redbubble.net/image.60315036.5137/pp,840x830-pad,1000x1000,f8f8f8.jpg" alt="profile"></div>
+            <div th:if="${rol == 'BODEGA'}" ><img src="https://via.placeholder.com/37x37" alt="profile"></div>
+            <div th:if="${rol == 'FINANZAS'}" ><img src="https://via.placeholder.com/37x37" alt="profile"></div>            
+            <div th:if="${rol == 'GARZON'}" ><img src="https://via.placeholder.com/37x37" alt="profile"></div>
+            <div th:if="${rol == 'COCINA'}" ><img src="https://via.placeholder.com/37x37" alt="profile"></div>
+            <div th:if="${rol == 'BAR'}" ><img src="https://via.placeholder.com/37x37" alt="profile"></div>
+            <div class="profile-desc">
+                <p class="name mb-0" th:text="${nombreUsuario}" ></p>
+                <p class="designation mb-0" th:if="${rol == 'ADMIN'}" >Administrador</p>
+                <p class="designation mb-0" th:if="${rol == 'BODEGA'}" >Bodega</p>
+                <p class="designation mb-0" th:if="${rol == 'FINANZAS'}" >Finanzas</p>
+                <p class="designation mb-0" th:if="${rol == 'GARZON'}" >Garzón</p>
+                <p class="designation mb-0" th:if="${rol == 'COCINA'}" >Cocina</p>
+                <p class="designation mb-0" th:if="${rol == 'BAR'}" >Bar</p>
+            </div>
+        </div>
+    </div>
+        
+    <ul class="nav" th:if="${rol == 'ADMIN'}" >
+        <li class="nav-item" >
+            <a class="nav-link" href="index.html">
+                <i class="mdi mdi-shield-half-full menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
+        <li class="nav-item"  >
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <i class="mdi mdi-checkbox-blank-circle-outline menu-icon"></i>
+                <span class="menu-title">Mantención</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/accordions.html">Personal</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Proveedores</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/badges.html">Insumos</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/breadcrumbs.html">Proveedores Insumos</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Recetas</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/modals.html">Mesas</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
+                <i class="mdi mdi-palette menu-icon"></i>
+                <span class="menu-title">Bodega</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-advanced">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/context-menu.html">Controlar Stock</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dragula.html">Solicitud Pedido</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/clipboard.html">Pedidos</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/slider.html">Disponibilidad Recetas</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/colcade.html">Ingresar Inumos</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/carousel.html">Inusmos Utilizados</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">Cocina</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Tablero Ejecución</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
+                <i class="mdi mdi-pencil menu-icon"></i>
+                <span class="menu-title">Bar</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="editors">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="pages/forms/text_editor.html">Tablero Ejecución</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+                <i class="mdi mdi-poll menu-icon"></i>
+                <span class="menu-title">Servicio</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">Tablero Ejecución</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+                <i class="mdi mdi-view-list menu-icon"></i>
+                <span class="menu-title">Finanzas</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Cobrar Mesas</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/tables/data-table.html">Cierre Caja</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/tables/js-grid.html">Informes</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    
+     <ul class="nav" th:switch="${rol}" >
+        <li class="nav-item" th:case="'BODEGA'" >
+            <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
+                <i class="mdi mdi-palette menu-icon"></i>
+                <span class="menu-title">Bodega</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-advanced">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/context-menu.html">Controlar Stock</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dragula.html">Solicitud Pedido</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/clipboard.html">Pedidos</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/slider.html">Disponibilidad Recetas</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/colcade.html">Ingresar Inumos</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/carousel.html">Inusmos Utilizados</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item" th:case="'COCINA'" >
+            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+                <i class="mdi mdi-view-headline menu-icon"></i>
+                <span class="menu-title">Cocina</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Tablero Ejecución</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item" th:case="'BAR'" >
+            <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
+                <i class="mdi mdi-pencil menu-icon"></i>
+                <span class="menu-title">Bar</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="editors">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="pages/forms/text_editor.html">Tablero Ejecución</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item" th:case="'GARZON'" >
+            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+                <i class="mdi mdi-poll menu-icon"></i>
+                <span class="menu-title">Servicio</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">Tablero Ejecución</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item" th:case="'FINANZAS'" >
+            <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+                <i class="mdi mdi-view-list menu-icon"></i>
+                <span class="menu-title">Finanzas</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Cobrar Mesas</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/tables/data-table.html">Cierre Caja</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="pages/tables/js-grid.html">Informes</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    
+    
+</nav>

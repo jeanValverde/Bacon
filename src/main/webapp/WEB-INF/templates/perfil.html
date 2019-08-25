@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!--date-->
+        <link rel="stylesheet" th:href="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css}" />
+
+
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../fragments/_navbar.html -->
+            <nav th:replace="fragments/_navbar :: nav"></nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../fragments/_settings-panel.html -->
+                <div th:replace="fragments/_settings-panel :: div"></div>
+                <!-- partial -->
+                <!-- partial:../../fragments/_sidebar.html -->
+                <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+
+                        <!--Desarrollar acá-->
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="border-bottom text-center pb-4">
+                                                    <img src="https://via.placeholder.com/92x92" alt="profile" class="img-lg rounded-circle mb-3" />
+                                                    <div class="mb-3">
+                                                        <h3 th:text="${personalSesion.nombresPersonal} + ' ' + ${personalSesion.apePaternoPersonal} + ' ' + ${personalSesion.apeMaternoPersonal}"  ></h3>
+                                                    </div>
+                                                    <p>Rol</p>
+                                                    <div>
+                                                        <label class="badge badge-outline-dark" th:if="${personalSesion.idRol.descripcionRol == 'ADMIN'}" >Administrador</label>
+                                                        <label class="badge badge-outline-dark" th:if="${personalSesion.idRol.descripcionRol == 'BODEGA'}" >Bodega</label>
+                                                        <label class="badge badge-outline-dark" th:if="${personalSesion.idRol.descripcionRol == 'COCINA'}" >Cocina</label>
+                                                        <label class="badge badge-outline-dark" th:if="${personalSesion.idRol.descripcionRol == 'BAR'}" >Bar</label>
+                                                        <label class="badge badge-outline-dark" th:if="${personalSesion.idRol.descripcionRol == 'GARZON'}" >Garzón</label>
+                                                        <label class="badge badge-outline-dark" th:if="${personalSesion.idRol.descripcionRol == 'FINANZAS'}" >Finanzas</label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="py-4">
+                                                    <p class="clearfix">
+                                                        <span class="float-left">
+                                                            RUT
+                                                        </span>
+                                                        <span class="float-right text-muted" th:text="${personalSesion.rutPersonal}" ></span>
+                                                    </p>
+                                                    <p class="clearfix">
+                                                        <span class="float-left">
+                                                            Correo
+                                                        </span>
+                                                        <span class="float-right text-muted">
+                                                            <a href="#" th:text="${personalSesion.correoPersonal}" ></a> 
+                                                        </span>
+                                                    </p>
+                                                    <p class="clearfix">
+                                                        <span class="float-left">
+                                                            Celular
+                                                        </span>
+                                                        <span class="float-right text-muted">
+                                                            <a href="#" th:text="${personalSesion.celularPersonal}" ></a> 
+                                                        </span>
+                                                    </p>
+                                                    <p class="clearfix">
+                                                        <span class="float-left">
+                                                            Edad
+                                                        </span>
+                                                        <span class="float-right text-muted" th:text="${edad}" ></span>
+                                                    </p>
+                                                    <p class="clearfix">
+                                                        <span class="float-left">
+                                                            Fecha Nacimiento
+                                                        </span>
+                                                        <span class="float-right text-muted" th:text="${personalSesion.fechaNacimientoPersonal}" ></span>
+                                                    </p>
+                                                </div>
+                                                <!--<button class="btn btn-primary btn-block mb-2">Preview</button>--->
+                                                <h4 class="card-title text-center">Cambiar Contraseña</h4>
+                                                <form class="forms-sample" name="updatePassword" method="POST" th:action="@{/updatePassword}" >
+                                                    <div class="form-group">
+                                                        <label for="exampleInputUsername1">Nueva Contraseña</label>
+                                                        <input  type="password" name="contrasena" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                        <div class="valid-feedback">
+                                                            ¡Fantástica elección!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            La contraseña debe tener mínimo 6 caracteres, al menos una mayúscula, al menos una minúscula, al menos un número.
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Repetir Contraseña</label>
+                                                        <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                                                        <div class="valid-feedback">
+                                                            ¡Perfecto!
+                                                        </div>
+                                                        <div class="invalid-feedback">
+                                                            Las contraseñas no coinciden, ¡reintenta!
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mr-2">Cambiar</button>
+                                                </form>
+                                                <br />
+                                            </div>
+                                            <div class="col-lg-8">
+
+
+
+                                                <form class="form-sample" name="updatePersonal" method="POST" th:action="@{/updatePerfil}" >
+                                                    <p class="card-description">
+                                                        Información Personal
+                                                    </p>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Nombres</label>
+                                                                <div class="col-sm-9">
+                                                                    <input th:value="${personalSesion.nombresPersonal}" name="nombre" type="text" id="nombres" class="form-control">
+                                                                    <div class="valid-feedback">
+                                                                        Se ve bien!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Escribe al menos un carácter.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Apellido Paterno</label>
+                                                                <div class="col-sm-9">
+                                                                    <input th:value="${personalSesion.apePaternoPersonal}" name="apePaterno" type="text" id="apePaterno" class="form-control">
+                                                                    <div class="valid-feedback">
+                                                                        Se ve bien!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Escribe al menos un carácter.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Apellido Materno</label>
+                                                                <div class="col-sm-9">
+                                                                    <input th:value="${personalSesion.apeMaternoPersonal}" name="apeMaterno"  type="text" id="apeMaterno" class="form-control">
+                                                                    <div class="valid-feedback">
+                                                                        Se ve bien!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        Escribe al menos un carácter.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Fecha de Nacimiento</label>
+                                                                <div class="col-sm-9">
+                                                                    <div id="datepicker-popup" class="input-group date datepicker">
+                                                                        <input th:value="${personalSesion.fechaNacimientoPersonal}" name="fechaNacimiento" type="text" id="fecha" class="form-control">
+                                                                        <span class="input-group-addon input-group-append border-left">
+                                                                            <span class="mdi mdi-calendar input-group-text"></span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Celular</label>
+                                                                <div class="col-sm-9">
+                                                                    <input th:value="${personalSesion.celularPersonal}" name="celular" type="number" min="111111111" max="999999999" id="celular" class="form-control">
+                                                                    <div class="valid-feedback">
+                                                                        Se ve bien!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        El texto no es un número.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-3 col-form-label">Correo</label>
+                                                                <div class="col-sm-9">
+                                                                    <input th:value="${personalSesion.correoPersonal}" name="correo" type="email" id="email" class="form-control">
+                                                                    <div class="valid-feedback">
+                                                                        ¡Buen Email!
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                        No es un correo electrónico
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mr-2">Actualizar Perfil</button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--final-->
+
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+
+        <!--date-->
+        <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+
+        <script th:src="@{/custom/formularios.js}"></script>
+        <script type="text/javascript" >
+            var formularioPassword = document.getElementsByName("updatePassword")[0];
+            validatorForms(formularioPassword);
+            var formularioPersonal = document.getElementsByName("updatePersonal")[0];
+            validatorForms(formularioPersonal);
+        </script>
+
+        <script>
+            $('#datepicker-popup').datepicker();
+        </script>
+
+
+    </body>
+
+</html>
