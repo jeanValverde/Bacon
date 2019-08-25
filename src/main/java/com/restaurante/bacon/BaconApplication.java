@@ -47,7 +47,9 @@ public class BaconApplication {
         // for safer backwards compatibility.
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
+
     }
-    
+
+    }
 
 }
