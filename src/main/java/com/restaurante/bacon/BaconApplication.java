@@ -11,6 +11,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 @SpringBootApplication
 public class BaconApplication {
 
+    
+    //hola
     public static void main(String[] args) {
         SpringApplication.run(BaconApplication.class, args);
     }
