@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -60,7 +61,27 @@ public class PersonalController {
         //
         return "users/administrador/index";
     }
-
+    @RequestMapping("/mantenedor")
+    public String mantenedor(Model modelo,@RequestParam("pagina") String pagina) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        
+        //desarrollo aca 
+        
+        
+        
+   
+        //fin desarrollo 
+        //despachos 
+        
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/"+pagina;
+    }
     
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL **CAMBIAR A PORST**
     @RequestMapping("/add")

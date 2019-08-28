@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-1to10.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-horizontal.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-movie.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-pill.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-reversed.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-square.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bootstrap-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/css-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/examples.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{//vendors/jquery-bar-rating/fontawesome-stars-o.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/fontawesome-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-asColorPicker/css/asColorPicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/x-editable/bootstrap-editable.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/dropify/dropify.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-file-upload/uploadfile.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-tags-input/jquery.tagsinput.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!---->
+
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../fragments/_navbar.html -->
+            <nav th:replace="fragments/_navbar :: nav"></nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../fragments/_settings-panel.html -->
+                <div th:replace="fragments/_settings-panel :: div"></div>
+                <!-- partial -->
+                <!-- partial:../../fragments/_sidebar.html -->
+                <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div class="row">
+                            <div class="col-lg-12 grid-margin stretch-card">
+                                <div class="card">
+                                    
+                                        <div class="card-body">
+
+                                            <h4 class="card-title d-flex">Agregar insumo
+                                                <small class="ml-auto align-self-end">
+                                                    <a href="dropify.html" class="font-weight-light" target="_blank">More dropify examples</a>
+                                                </small>
+                                            </h4>
+                                            <div class="row">
+                                                <div class="col-lg-5" >
+                                                    <label for="exampleInputUsername1">Nombre</label>
+                                                    <input type="text" class="form-control"/>
+                                                    <label for="exampleInputUsername1">Descripcion</label>
+                                                    <textarea class="form-control" ></textarea>
+                                                    <label for="exampleInputUsername1">Unidad de medida</label>
+                                                    <input type="text" class="form-control"/>
+                                                </div>
+                                                <div class="col-lg-3" >
+                                                    <label for="exampleInputUsername1">Stock</label>
+                                                    <input type="number" class="form-control"/>
+                                                    <label for="exampleInputUsername1">Stock minimo</label>
+                                                    <input type="number" class="form-control"/>
+                                                    <label for="exampleInputUsername1">Stock maximo</label>
+                                                    <input type="number" class="form-control"/>
+                                                </div>
+                                                <div class="col-lg-4" >
+                                                    <label for="exampleInputUsername1">Foto</label>
+                                                    <input type="file" class="dropify" />
+                                                </div>
+                                                <div class="col-lg-12"><button type="button" class="btn btn-success btn-rounded btn-fw">Registrar</button></div>
+                                            </div>
+                                            
+                                            
+
+                                        </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!--Desarrollar acá-->
+
+
+
+
+                        <!--final-->
+
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+        <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+        <script th:src="@{/vendors/moment/moment.min.js}"></script>
+        <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+        <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+        <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+        <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+        <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+        <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+        <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+        <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+        <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script src="../../../../js/formpickers.js"></script>
+        <script src="../../../../js/form-addons.js"></script>
+        <script src="../../../../js/x-editable.js"></script>
+        <script src="../../../../js/dropify.js"></script>
+        <script src="../../../../js/dropzone.js"></script>
+        <script src="../../../../js/jquery-file-upload.js"></script>
+        <script src="../../../../js/formpickers.js"></script>
+        <script src="../../../../js/form-repeater.js"></script>
+        <!-- End custom js for this page-->
+    </body>
+
+</html>
