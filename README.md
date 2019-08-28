@@ -32,6 +32,13 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar
 ```
 
+* **En el navergador** 
+
+```
+http://localhost:8034/
+```
+
+
 Mira **Deployment** para conocer como desplegar el proyecto.
 
 
