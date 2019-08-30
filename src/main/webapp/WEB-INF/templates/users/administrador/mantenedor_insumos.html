@@ -60,43 +60,328 @@
                         <div class="row">
                             <div class="col-lg-12 grid-margin stretch-card">
                                 <div class="card">
-                                    
-                                        <div class="card-body">
 
-                                            <h4 class="card-title d-flex">Agregar insumo
-                                                <small class="ml-auto align-self-end">
-                                                    <a href="dropify.html" class="font-weight-light" target="_blank">More dropify examples</a>
-                                                </small>
-                                            </h4>
-                                            <div class="row">
-                                                <div class="col-lg-5" >
-                                                    <label for="exampleInputUsername1">Nombre</label>
-                                                    <input type="text" class="form-control"/>
-                                                    <label for="exampleInputUsername1">Descripcion</label>
-                                                    <textarea class="form-control" ></textarea>
-                                                    <label for="exampleInputUsername1">Unidad de medida</label>
-                                                    <input type="text" class="form-control"/>
-                                                </div>
-                                                <div class="col-lg-3" >
-                                                    <label for="exampleInputUsername1">Stock</label>
-                                                    <input type="number" class="form-control"/>
-                                                    <label for="exampleInputUsername1">Stock minimo</label>
-                                                    <input type="number" class="form-control"/>
-                                                    <label for="exampleInputUsername1">Stock maximo</label>
-                                                    <input type="number" class="form-control"/>
-                                                </div>
-                                                <div class="col-lg-4" >
-                                                    <label for="exampleInputUsername1">Foto</label>
-                                                    <input type="file" class="dropify" />
-                                                </div>
-                                                <div class="col-lg-12"><button type="button" class="btn btn-success btn-rounded btn-fw">Registrar</button></div>
+                                    <div class="card-body">
+
+                                        <h1 class="card-title d-flex">Agregar insumo
+                                            <small class="ml-auto align-self-end">
+                                                <a href="dropify.html" class="font-weight-light" target="_blank">More dropify examples</a>
+                                            </small>
+                                        </h1>
+                                        <form  th:action="@{/administrador/ingresar_insumo}" name="form" method="post">
+                                        <div class="row">
+                                            
+                                            <div class="col-lg-5" >
+                                                <label for="exampleInputUsername1" >Nombre</label>
+                                                <input type="text" class="form-control" name="nombre"/>
+                                                <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
+                                                <textarea class="form-control" name="descripcion"></textarea>
+                                                <label style="margin-top: 20px" for="exampleInputUsername1">Unidad de medida</label>
+                                                <input type="text" class="form-control" name="unidadMedida"/>
+                                            </div>
+                                            <div class="col-lg-3" >
+                                                <label for="exampleInputUsername1">Stock</label>
+                                                <input type="number" class="form-control" name="stock"/>
+                                                <label style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
+                                                <input type="number" class="form-control" name="stockMinimo"/>
+                                                <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
+                                                <input type="number" class="form-control" name="stockMaximo"/>
+                                            </div>
+                                            <div class="col-lg-4" >
+                                                <label for="exampleInputUsername1">Foto</label>
+                                                <input type="file" class="dropify" name="imagenRuta"/>
+                                            </div>
+                                            <div class="col-lg-12" style="margin-top: 30px;text-align:center">
+                                                <button type="submit" class="btn btn-success btn-rounded btn-fw">Registrar</button>
                                             </div>
                                             
-                                            
-
                                         </div>
-                                    
-                                    
+                                        </form>
+
+
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-12 col-xl-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Insumos</h3>
+                                        <p class="card-description">Basic nav pills</p>
+                                        <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                <div class="media">
+                                                    <div class="row">
+                                                        <div class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                                                            <div class="card">
+                                                                <div class="card-body text-center">
+                                                                    <div style="text-align:right">
+                                                                        <button type="button" class="btn btn-success btn-rounded btn-icon">
+                                                                            <i class="mdi mdi-lead-pencil"></i>
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-danger btn-rounded btn-icon">
+                                                                            <i class="mdi mdi-close"></i>
+                                                                        </button>
+                                                                    </div>
+
+                                                                    <div >
+
+                                                                        <img src="https://via.placeholder.com/92x92" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                        <h4>Maria Johnson</h4>
+                                                                        <p class="text-muted mb-0">Developer</p>
+
+                                                                    </div>
+                                                                    <p class="mt-2 card-text">
+                                                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                                                        Aenean commodo ligula eget dolor. Lorem
+                                                                    </p>
+                                                                    <button class="btn btn-info btn-sm mt-3 mb-4">Follow</button>
+                                                                    <div class="border-top pt-3">
+                                                                        <div class="row">
+                                                                            <div class="col-4">
+                                                                                <h6>5896</h6>
+                                                                                <p>Post</p>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <h6>1596</h6>
+                                                                                <p>Followers</p>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <h6>7896</h6>
+                                                                                <p>Likes</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                                                            <div class="card">
+                                                                <div class="card-body text-center">
+                                                                    <div>
+                                                                        <img src="https://via.placeholder.com/92x92" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                        <h4>Maria Johnson</h4>
+                                                                        <p class="text-muted mb-0">Developer</p>
+                                                                    </div>
+                                                                    <p class="mt-2 card-text">
+                                                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                                                        Aenean commodo ligula eget dolor. Lorem
+                                                                    </p>
+                                                                    <button class="btn btn-info btn-sm mt-3 mb-4">Follow</button>
+                                                                    <div class="border-top pt-3">
+                                                                        <div class="row">
+                                                                            <div class="col-4">
+                                                                                <h6>5896</h6>
+                                                                                <p>Post</p>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <h6>1596</h6>
+                                                                                <p>Followers</p>
+                                                                            </div>
+                                                                            <div class="col-4">
+                                                                                <h6>7896</h6>
+                                                                                <p>Likes</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <div class="media">
+                                                    <div class="table-responsive">
+                                                        <table id="order-listing" class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Order #</th>
+                                                                    <th>Purchased On</th>
+                                                                    <th>Customer</th>
+                                                                    <th>Ship to</th>
+                                                                    <th>Base Price</th>
+                                                                    <th>Purchased Price</th>
+                                                                    <th>Status</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>2012/08/03</td>
+                                                                    <td>Edinburgh</td>
+                                                                    <td>New York</td>
+                                                                    <td>$1500</td>
+                                                                    <td>$3200</td>
+                                                                    <td>
+                                                                        <label class="badge badge-info">On hold</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>2</td>
+                                                                    <td>2015/04/01</td>
+                                                                    <td>Doe</td>
+                                                                    <td>Brazil</td>
+                                                                    <td>$4500</td>
+                                                                    <td>$7500</td>
+                                                                    <td>
+                                                                        <label class="badge badge-danger">Pending</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>3</td>
+                                                                    <td>2010/11/21</td>
+                                                                    <td>Sam</td>
+                                                                    <td>Tokyo</td>
+                                                                    <td>$2100</td>
+                                                                    <td>$6300</td>
+                                                                    <td>
+                                                                        <label class="badge badge-success">Closed</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>4</td>
+                                                                    <td>2016/01/12</td>
+                                                                    <td>Sam</td>
+                                                                    <td>Tokyo</td>
+                                                                    <td>$2100</td>
+                                                                    <td>$6300</td>
+                                                                    <td>
+                                                                        <label class="badge badge-success">Closed</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>5</td>
+                                                                    <td>2017/12/28</td>
+                                                                    <td>Sam</td>
+                                                                    <td>Tokyo</td>
+                                                                    <td>$2100</td>
+                                                                    <td>$6300</td>
+                                                                    <td>
+                                                                        <label class="badge badge-success">Closed</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>6</td>
+                                                                    <td>2000/10/30</td>
+                                                                    <td>Sam</td>
+                                                                    <td>Tokyo</td>
+                                                                    <td>$2100</td>
+                                                                    <td>$6300</td>
+                                                                    <td>
+                                                                        <label class="badge badge-info">On-hold</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>7</td>
+                                                                    <td>2011/03/11</td>
+                                                                    <td>Cris</td>
+                                                                    <td>Tokyo</td>
+                                                                    <td>$2100</td>
+                                                                    <td>$6300</td>
+                                                                    <td>
+                                                                        <label class="badge badge-success">Closed</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>8</td>
+                                                                    <td>2015/06/25</td>
+                                                                    <td>Tim</td>
+                                                                    <td>Italy</td>
+                                                                    <td>$6300</td>
+                                                                    <td>$2100</td>
+                                                                    <td>
+                                                                        <label class="badge badge-info">On-hold</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>9</td>
+                                                                    <td>2016/11/12</td>
+                                                                    <td>John</td>
+                                                                    <td>Tokyo</td>
+                                                                    <td>$2100</td>
+                                                                    <td>$6300</td>
+                                                                    <td>
+                                                                        <label class="badge badge-success">Closed</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>10</td>
+                                                                    <td>2003/12/26</td>
+                                                                    <td>Tom</td>
+                                                                    <td>Germany</td>
+                                                                    <td>$1100</td>
+                                                                    <td>$2300</td>
+                                                                    <td>
+                                                                        <label class="badge badge-danger">Pending</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                                <div class="media">
+                                                    <img class="mr-3 w-25 rounded" src="https://via.placeholder.com/115x115" alt="sample image">
+                                                    <div class="media-body">
+                                                        <p>
+                                                            I'm really more an apartment person. This man is a knight in shining armor. Oh I beg to differ, I think we have a lot to discuss. After all, you are a client. You all right, Dexter?
+                                                        </p>
+                                                        <p>
+                                                            I'm generally confused most of the time. Cops, another community I'm not part of. You're a killer. I catch killers. Hello, Dexter Morgan.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

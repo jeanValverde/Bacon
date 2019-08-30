@@ -6,9 +6,12 @@
 package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.config.UserRol;
+import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.dto.Rol;
 import com.restaurante.bacon.service.PersonalService;
+import com.restaurante.bacon.service.InsumoService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -34,7 +37,9 @@ public class PersonalController {
     //acceder a CRUB y más del personal 
     @Autowired
     PersonalService personalService;
-
+    InsumoService insumoService;
+    @Autowired
+    ProcedureQuery procedureQuery;
     //para ingresar una contraseña encriptada 
     @Autowired
     private BCryptPasswordEncoder encoder;
@@ -81,6 +86,28 @@ public class PersonalController {
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/"+pagina;
+    }
+    @RequestMapping("/ingresar_insumo")
+    public String ingresar_insumo(Model modelo,@RequestParam("nombre") String nombre,
+            @RequestParam("descripcion") String descripcion,
+            @RequestParam("unidadMedida") String unidadMedida,
+            @RequestParam("stock") BigInteger stock,
+            @RequestParam("stockMinimo") BigInteger stockMinimo,
+            @RequestParam("stockMaximo") BigInteger stockMaximo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        
+        this.procedureQuery.InsertInsumo(nombre, descripcion, Integer.SIZE, Integer.SIZE, Integer.SIZE, unidadMedida);
+        //fin desarrollo 
+        //despachos 
+        
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_insumos";
     }
     
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL **CAMBIAR A PORST**
