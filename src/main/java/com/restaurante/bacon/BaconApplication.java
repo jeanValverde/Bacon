@@ -11,6 +11,8 @@ import org.thymeleaf.templatemode.TemplateMode;
 @SpringBootApplication
 public class BaconApplication {
 
+    
+    
     public static void main(String[] args) {
         SpringApplication.run(BaconApplication.class, args);
     }
@@ -33,7 +35,7 @@ public class BaconApplication {
         templateResolver.setCacheable(true);
         return templateResolver;
     }
-
+    
     @Bean
     public SpringTemplateEngine templateEngine() {
         // SpringTemplateEngine automatically applies SpringStandardDialect and
