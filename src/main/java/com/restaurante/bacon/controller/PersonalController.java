@@ -60,6 +60,29 @@ public class PersonalController {
         //
         return "users/administrador/index";
     }
+    
+    @RequestMapping("/proveedorInsumos")
+    public String proveedorInsumos(Model modelo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        
+        //desarrollo aca 
+        
+        
+        
+   
+        //fin desarrollo 
+        //despachos 
+        
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/index";
+    }
+    
 
     
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL **CAMBIAR A PORST**
