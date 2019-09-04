@@ -39,8 +39,8 @@ public class Insumo implements Serializable {
     @Id
     @Basic(optional = false)
     //declarar que el id se usa con una secuencia 
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_INS")
-    @SequenceGenerator(name="SEQ_INS",sequenceName="SEQ_INSUMO", allocationSize=1 )
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEC_INS")
+    @SequenceGenerator(name="SEC_INS",sequenceName="SEC_INSUMO", allocationSize=1 )
     //declarar la secuencia 
     @NotNull
     @Column(name = "ID_INSUMO")
@@ -77,16 +77,7 @@ public class Insumo implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "FOTO_INSUMO")
     private String fotoInsumo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<EgresoStock> egresoStockCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<IngresoStock> ingresoStockCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<InsumoPedido> insumoPedidoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<InsumoProveedor> insumoProveedorCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<Ingrediente> ingredienteCollection;
+   
 
     public Insumo() {
     }
@@ -170,50 +161,7 @@ public class Insumo implements Serializable {
         this.fotoInsumo = fotoInsumo;
     }
 
-    @XmlTransient
-    public Collection<EgresoStock> getEgresoStockCollection() {
-        return egresoStockCollection;
-    }
-
-    public void setEgresoStockCollection(Collection<EgresoStock> egresoStockCollection) {
-        this.egresoStockCollection = egresoStockCollection;
-    }
-
-    @XmlTransient
-    public Collection<IngresoStock> getIngresoStockCollection() {
-        return ingresoStockCollection;
-    }
-
-    public void setIngresoStockCollection(Collection<IngresoStock> ingresoStockCollection) {
-        this.ingresoStockCollection = ingresoStockCollection;
-    }
-
-    @XmlTransient
-    public Collection<InsumoPedido> getInsumoPedidoCollection() {
-        return insumoPedidoCollection;
-    }
-
-    public void setInsumoPedidoCollection(Collection<InsumoPedido> insumoPedidoCollection) {
-        this.insumoPedidoCollection = insumoPedidoCollection;
-    }
-
-    @XmlTransient
-    public Collection<InsumoProveedor> getInsumoProveedorCollection() {
-        return insumoProveedorCollection;
-    }
-
-    public void setInsumoProveedorCollection(Collection<InsumoProveedor> insumoProveedorCollection) {
-        this.insumoProveedorCollection = insumoProveedorCollection;
-    }
-
-    @XmlTransient
-    public Collection<Ingrediente> getIngredienteCollection() {
-        return ingredienteCollection;
-    }
-
-    public void setIngredienteCollection(Collection<Ingrediente> ingredienteCollection) {
-        this.ingredienteCollection = ingredienteCollection;
-    }
+    
 
     @Override
     public int hashCode() {

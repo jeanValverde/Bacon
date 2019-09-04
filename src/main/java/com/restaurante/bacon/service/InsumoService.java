@@ -27,5 +27,9 @@ public class InsumoService {
     public Insumo addInsumo(Insumo insumo) {
         return this.insumoDao.save(insumo);
     }
+    public List<Insumo> listarInsumos(){
+        return this.insumoDao.findAll();
+    }
+   
     
 }

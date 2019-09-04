@@ -14,7 +14,9 @@ import com.restaurante.bacon.service.PersonalService;
 import com.restaurante.bacon.service.InsumoService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  *
  * @author jean
- * 
- * No crear metodos propios en los controladores para eso esta el servicio 
- * 
- * 
+ *
+ * No crear metodos propios en los controladores para eso esta el servicio
+ *
+ *
  */
 @RequestMapping("/administrador")
 @Controller
@@ -37,6 +39,7 @@ public class PersonalController {
     //acceder a CRUB y más del personal 
     @Autowired
     PersonalService personalService;
+    @Autowired
     InsumoService insumoService;
     @Autowired
     ProcedureQuery procedureQuery;
@@ -44,51 +47,45 @@ public class PersonalController {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-
     @RequestMapping("/index")
     public String prueba(Model modelo) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
+
         //desarrollo aca 
-        
-        
-        
-   
         //fin desarrollo 
         //despachos 
-        
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/index";
     }
-    @RequestMapping("/mantenedor")
-    public String mantenedor(Model modelo,@RequestParam("pagina") String pagina) {
+
+    @RequestMapping("/mantenedor_insumos")
+    public String mantenedor_insumos(Model modelo) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
+        List<Insumo> insumos= new ArrayList<Insumo>();
+        insumos = this.insumoService.listarInsumos();
         //desarrollo aca 
-        
-        
-        
-   
+        modelo.addAttribute("insumos", insumos);
+
         //fin desarrollo 
         //despachos 
-        
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
-        return "users/administrador/"+pagina;
+        return "users/administrador/mantenedor_insumos";
     }
+
     @RequestMapping("/ingresar_insumo")
-    public String ingresar_insumo(Model modelo,@RequestParam("nombre") String nombre,
+    public String ingresar_insumo(Model modelo, @RequestParam("nombre") String nombre,
             @RequestParam("descripcion") String descripcion,
             @RequestParam("unidadMedida") String unidadMedida,
             @RequestParam("stock") BigInteger stock,
@@ -98,18 +95,22 @@ public class PersonalController {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
+
         this.procedureQuery.InsertInsumo(nombre, descripcion, Integer.SIZE, Integer.SIZE, Integer.SIZE, unidadMedida);
-        //fin desarrollo 
+        List<Insumo> insumos= new ArrayList<Insumo>();
+        insumos = this.insumoService.listarInsumos();
+        //desarrollo aca 
+        modelo.addAttribute("insumos", insumos);
+//fin desarrollo 
         //despachos 
-        
+         
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/mantenedor_insumos";
     }
-    
+
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL **CAMBIAR A PORST**
     @RequestMapping("/add")
     public String add(Model modelo) {
@@ -137,18 +138,14 @@ public class PersonalController {
         person.setIdRol(rol);
 
         this.personalService.addPersonal(person);
-        
+
         //fin desarrollo 
         //despacho 
-        
         //fin despacacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/index";
     }
-    
-    
-   
 
 }
