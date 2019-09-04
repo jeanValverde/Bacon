@@ -60,7 +60,6 @@ public class PersonalService implements UserDetailsService {
     //elimina la contraseña para mantener la seguridad de la página 
     public Personal getPersonalSesion(String rut) {
         Personal personal = findByRut(rut);
-        personal.setContrasenaPersonal("");
         return personal;
     }
 

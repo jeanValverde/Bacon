@@ -8,6 +8,7 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Notificacion.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\exceptions\NonexistentEntityException.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IRecetaDao.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\BoletaControl.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\CategoriaReceta.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Insumo.java
@@ -29,6 +30,7 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\IndexController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Cliente.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\CocinaController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Proveedor.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\exceptions\PreexistingEntityException.java
@@ -36,6 +38,8 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrdenada.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Personal.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\IngresoStock.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\RecetaService.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ICategoriaRecetaDao.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Receta.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\config\WebConfig.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\EstadoPedido.java

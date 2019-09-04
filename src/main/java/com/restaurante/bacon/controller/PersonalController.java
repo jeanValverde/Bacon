@@ -6,25 +6,36 @@
 package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.config.UserRol;
+import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Personal;
+import com.restaurante.bacon.dto.Receta;
 import com.restaurante.bacon.dto.Rol;
 import com.restaurante.bacon.service.PersonalService;
+import com.restaurante.bacon.service.RecetaService;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Date;
+import javax.sound.midi.Patch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author jean
- * 
- * No crear metodos propios en los controladores para eso esta el servicio 
- * 
- * 
+ *
+ * No crear metodos propios en los controladores para eso esta el servicio
+ *
+ *
  */
 @RequestMapping("/administrador")
 @Controller
@@ -34,10 +45,15 @@ public class PersonalController {
     @Autowired
     PersonalService personalService;
 
+    @Autowired
+    RecetaService recetaService;
+    
+    public static String uploadDirImagen = System.getProperty("user.dir")+ "/src/main/resources/static/uploads";
+
+    
     //para ingresar una contraseña encriptada 
     @Autowired
     private BCryptPasswordEncoder encoder;
-
 
     @RequestMapping("/index")
     public String prueba(Model modelo) {
@@ -45,15 +61,12 @@ public class PersonalController {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
+
         //desarrollo aca 
-        
-        
-        
-   
+        modelo.addAttribute("funcionarios", this.personalService.getAllUsuario());
+
         //fin desarrollo 
         //despachos 
-        
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
@@ -61,7 +74,74 @@ public class PersonalController {
         return "users/administrador/index";
     }
 
-    
+    @RequestMapping("/receta")
+    public String addReceta(Model modelo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+ 
+        modelo.addAttribute("img","bank.png");
+        
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedorReceta";
+    }
+
+    @PostMapping("/addReceta")
+    public String updatePerfil(Model modelo,
+            @RequestParam("nombreReceta") String nombreReceta,
+            @RequestParam("descripcionReceta") String descripcionReceta,
+            @RequestParam("duracionReceta") Integer duracionReceta,
+            @RequestParam("precioReceta") Integer precioReceta,
+            @RequestParam("cantidadReceta") Integer cantidadReceta,
+            @RequestParam("tipoReceta") String tipoReceta,
+            @RequestParam("categoriaReceta") String categoriaReceta, 
+            @RequestParam("imagenReceta") MultipartFile[] file ) throws IOException {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+
+        Receta receta = new Receta();
+        
+        receta.setNombreReceta(nombreReceta);
+        receta.setDescripcionReceta(descripcionReceta);
+        receta.setDuracionPreparacion(BigInteger.valueOf(duracionReceta));  
+        receta.setDisponibilidadReceta(BigInteger.valueOf(1)); 
+        receta.setPrecioReceta(BigInteger.valueOf(precioReceta));  
+        receta.setCantidadPrepDiariaReceta(BigInteger.valueOf(cantidadReceta)); 
+        receta.setFoto("foto");
+        receta.setTipoReceta(tipoReceta); 
+        CategoriaReceta categoria = new CategoriaReceta();
+        categoria.setIdCategoriaReceta(BigDecimal.valueOf(Integer.parseInt(categoriaReceta)));  
+        receta.setIdCategoriaReceta(categoria);
+        
+        StringBuilder filename = new StringBuilder();
+        Path fileNamePath = Paths.get(uploadDirImagen, file[0].getOriginalFilename());
+        filename.append(file[0].getOriginalFilename());
+        Files.write(fileNamePath, file[0].getBytes());
+        this.recetaService.add(receta);
+        
+        //desarollo
+        //fin desarrollo 
+        //despacho  modelo.addAttribute(nombreDespacho, objetoAdespachar)
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion",personal);
+        //
+        //cargar el html *nombre*
+        return "perfil";
+    }
+
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL **CAMBIAR A PORST**
     @RequestMapping("/add")
     public String add(Model modelo) {
@@ -89,18 +169,14 @@ public class PersonalController {
         person.setIdRol(rol);
 
         this.personalService.addPersonal(person);
-        
+
         //fin desarrollo 
         //despacho 
-        
         //fin despacacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/index";
     }
-    
-    
-   
 
 }

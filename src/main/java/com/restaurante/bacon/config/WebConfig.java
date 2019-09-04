@@ -28,7 +28,8 @@ public class WebConfig implements WebMvcConfigurer {
                 "/js/**",
                 "/scss/**",
                 "/vendors/**",
-                "/custom/**")
+                "/custom/**",
+                "/uploads/**")
                 .addResourceLocations(
                         "classpath:/static/css/",
                         "classpath:/static/fonts/",
@@ -36,6 +37,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "classpath:/static/js/",
                         "classpath:/static/scss/",
                         "classpath:/static/vendors/",
-                        "classpath:/static/custom/");
+                        "classpath:/static/custom/",
+                        "classpath:/static/uploads/");
     }
 }
