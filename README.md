@@ -14,6 +14,7 @@ _Este proyecto WEB contiene._
 * [Spring Security](https://spring.io/projects/spring-security) 
 * [Spring Data JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
 * [Project Lombok](https://mvnrepository.com/artifact/org.projectlombok/lombok)
+* [Validador HTML Bootstrap](https://github.com/jeanValverde/validarFormularioConBootstrap)
 
 ### Pre-requisitos 📋
 

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-1to10.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-horizontal.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-movie.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-pill.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-reversed.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-square.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bootstrap-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/css-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/examples.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{//vendors/jquery-bar-rating/fontawesome-stars-o.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/fontawesome-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-asColorPicker/css/asColorPicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/x-editable/bootstrap-editable.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/dropify/dropify.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-file-upload/uploadfile.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-tags-input/jquery.tagsinput.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.css}">
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!---->
+
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../fragments/_navbar.html -->
+            <nav th:replace="fragments/_navbar :: nav"></nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../fragments/_settings-panel.html -->
+                <div th:replace="fragments/_settings-panel :: div"></div>
+                <!-- partial -->
+                <!-- partial:../../fragments/_sidebar.html -->
+                <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div class="row">
+                            <div th:if="${agregar}" class="col-lg-4 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Agregar Insumo</h4>
+                                        <form  th:action="@{/administrador/ingresar_insumo}" name="form" method="post">
+                                            <div class="row">
+                                                <div class="col-lg-12" >
+                                                    <label for="exampleInputUsername1" >Nombre</label>
+                                                    <input type="text" class="form-control" name="nombre"/>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
+                                                    <textarea class="form-control" name="descripcion"></textarea>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Unidad de medida</label>
+                                                    <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="unidadMedida">
+                                                        <option value="0">Selectione</option>
+                                                        <option value="Kilos">Kilos</option>
+                                                        <option value="Litros">Litros</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6" >
+                                                    <label  style="margin-top: 20px" for="exampleInputUsername1">Stock</label>
+                                                    <input type="number" class="form-control" name="stock"/>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
+                                                    <input type="number" class="form-control" name="stockMinimo"/>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
+                                                    <input type="number" class="form-control" name="stockMaximo"/>
+                                                </div>
+                                                <div class="col-lg-6" >
+                                                    <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
+                                                    <input type="file" class="dropify" name="imagenRuta"/>
+                                                </div>
+                                                <div class="col-lg-12" style="margin-top: 30px;text-align:center">
+                                                    <button type="submit" class="btn btn-success btn-rounded btn-fw">Registrar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- -------------------------------------------------------------------------------------------------------------- -->
+                            <div th:if="${modificar}" class="col-lg-4 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Modificar Insumo</h4>
+                                        <form  th:action="@{/administrador/modificar_insumo}" name="form" method="post">
+                                            <div class="row">
+                                                <div class="col-lg-12" >
+                                                    <input th:value="${insumo.idInsumo}"  type="hidden" name="id"/>
+                                                    <label for="exampleInputUsername1" >Nombre</label>
+                                                    <input th:value="${insumo.nombreInsumo}"  type="text" class="form-control" name="nombre"/>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
+                                                    <textarea class="form-control" name="descripcion">[[${insumo.descripcionInsumo}]]</textarea>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Unidad de medida</label>
+                                                    <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="unidadMedida">
+                                                        <option th:selected="${insumo.unidadMedidaInsumo} == Kilos" value="Kilos">Kilos</option>
+                                                        <option th:selected="${insumo.unidadMedidaInsumo} == Litros" value="Litros">Litros</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6" >
+                                                    <label  style="margin-top: 20px" for="exampleInputUsername1">Stock</label>
+                                                    <input th:value="${insumo.stockInsumo}" type="number" class="form-control" name="stock"/>
+                                                    <label  style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
+                                                    <input th:value="${insumo.minimoStockInsumo}" type="number" class="form-control" name="stockMinimo"/>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
+                                                    <input th:value="${insumo.maximoStockInsumo}" type="number" class="form-control" name="stockMaximo"/>
+                                                </div>
+                                                <div class="col-lg-6" >
+                                                    <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
+                                                    <input type="file" class="dropify" name="imagenRuta"/>
+                                                </div>
+                                                <div class="col-lg-12" style="margin-top: 30px;text-align:center">
+                                                    <button type="submit" class="btn btn-success btn-rounded btn-fw">Actualizar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
+                            <div class="col-md-8 col-xl-8 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Insumos</h3>
+                                        <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                <div class="media">
+                                                    <div  class="row">
+                                                        <div th:each="ins: ${insumos}" class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                                                            <div class="card">
+                                                                <div class="card-body text-center">
+                                                                    <div style="text-align:right">
+                                                                        <!--
+                                                                        <button type="button" class="btn btn-success btn-rounded btn-icon">
+                                                                            <i class="mdi mdi-lead-pencil"></i>
+                                                                        </button>
+                                                                        -->
+                                                                        <a  th:href="@{/administrador/cargar_insumo?(idInsumo=${ins.idInsumo})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
+                                                                        <!--
+                                                                        <button type="button" class="btn btn-danger btn-rounded btn-icon" >
+                                                                            <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
+                                                                            <i class="mdi mdi-close"></i>
+                                                                        </button>
+                                                                        -->
+                                                                        <a  th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
+                                                                    </div>
+
+                                                                    <div >
+
+                                                                        <img src="https://vivanda.vteximg.com.br/arquivos/ids/178947-1000-1000/120930.jpg?v=636978561154000000" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                        <h4 th:text="${ins.nombreInsumo}"></h4>
+                                                                        <p th:text="${ins.unidadMedidaInsumo}" class="text-muted mb-0">Unidad: Kilos</p>
+
+                                                                    </div>
+                                                                    <p th:text="${ins.descripcionInsumo}" class="mt-2 card-text">
+                                                                        Zanahoria especial sabor zanagoria
+                                                                    </p>
+                                                                    <div class="border-top pt-3">
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                
+                                                                                <h6>Stock actual: </h6>4
+                                                                            </div>
+                                                                            <div class="col-12">
+                                                                                
+                                                                                <h6>Stock minimo: </h6>5
+                                                                            </div>
+                                                                            <div class="col-12">
+                                                                                
+                                                                                <h6>Stock maximo: </h6>6
+                                                                            </div>
+                                                                            
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <div class="media">
+                                                    <div class="table-responsive">
+                                                        <table id="order-listing" class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Order #</th>
+                                                                    <th>Purchased On</th>
+                                                                    <th>Customer</th>
+                                                                    <th>Ship to</th>
+                                                                    <th>Base Price</th>
+                                                                    <th>Purchased Price</th>
+                                                                    <th>Status</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tbody>
+                                                                <tr th:each="ins: ${insumos}">
+                                                                    <td th:text="${ins.nombreInsumo}">Oranges</td>
+                                                                    <td>2015/06/25</td>
+                                                                    <td>Tim</td>
+                                                                    <td>Italy</td>
+                                                                    <td>$6300</td>
+                                                                    <td>$2100</td>
+                                                                    <td>
+                                                                        <label class="badge badge-info">On-hold</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+
+                        <!--Desarrollar acá-->
+
+
+
+
+                        <!--final-->
+
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+        <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+        <script th:src="@{/vendors/moment/moment.min.js}"></script>
+        <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+        <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+        <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+        <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+        <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+        <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+        <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+        <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+        <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-addons.js}"></script>
+        <script th:src="@{/js/x-editable.js}"></script>
+        <script th:src="@{/js/dropify.js}"></script>
+        <script th:src="@{/js/dropzone.js}"></script>
+        <script th:src="@{/js/jquery-file-upload.js}"></script>
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-repeater.js}"></script>
+        <!-- End custom js for this page-->
+        <!-- plugin js for this page -->
+        <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
+        <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
+        <script th:src="@{/js/data-table.js}"></script>
+
+        <!--validate form--->
+        <script th:src="@{/custom/formulario.js}"></script>
+    </body>
+
+</html>
