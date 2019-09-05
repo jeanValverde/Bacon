@@ -8,6 +8,7 @@ package com.restaurante.bacon.service;
 import com.restaurante.bacon.dao.ICategoriaRecetaDao;
 import com.restaurante.bacon.dao.IRecetaDao;
 import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dao.ProcedureQueryReceta;
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Receta;
 import java.util.List;
@@ -29,7 +30,7 @@ public class RecetaService {
     ICategoriaRecetaDao categoriaReceta;
 
     @Autowired
-    ProcedureQuery procedureQuery;
+    ProcedureQueryReceta procedureQuery;
 
     public Receta add(Receta receta) {
         return this.recetaDao.save(receta);
