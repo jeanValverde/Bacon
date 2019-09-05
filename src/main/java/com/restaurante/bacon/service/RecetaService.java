@@ -7,6 +7,7 @@ package com.restaurante.bacon.service;
 
 import com.restaurante.bacon.dao.ICategoriaRecetaDao;
 import com.restaurante.bacon.dao.IRecetaDao;
+import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Receta;
 import java.util.List;
@@ -26,6 +27,9 @@ public class RecetaService {
     @Autowired
     ICategoriaRecetaDao categoriaReceta;
     
+    @Autowired
+    ProcedureQuery procedureQuery;
+    
     
     public Receta add(Receta receta){
         return this.recetaDao.save(receta); 
@@ -37,6 +41,10 @@ public class RecetaService {
     
     public List<CategoriaReceta> listarCategoria(){
         return this.categoriaReceta.findAll();
+    }
+    
+    public List<Receta> filtrarRecetasByNombre(String nombreReceta){
+        return this.procedureQuery.filtrarRecetaByNombre(nombreReceta);
     }
     
     

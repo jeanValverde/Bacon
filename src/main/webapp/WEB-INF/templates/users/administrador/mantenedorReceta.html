@@ -181,10 +181,10 @@
                                                                         <div class="col-md-7 grid-margin stretch-card">
                                                                             <div class="card">
                                                                                 <div class="card-body">
-                                                                                    <form class="" action="index.html" method="post">
+                                                                                    <form class="" th:action="@{/administrador/filtro}" method="GET">
                                                                                         <div class="form-group">
                                                                                             <div class="input-group">
-                                                                                                <input type="text" class="form-control" placeholder="Escribe el nombre de la receta" aria-label="Escribe el nombre de la receta">
+                                                                                                <input type="text" class="form-control" name="nombreReceta" placeholder="Escribe el nombre de la receta" aria-label="Escribe el nombre de la receta">
                                                                                                     <div class="input-group-append">
                                                                                                         <button class="btn btn-sm btn-primary" type="submit">Buscar</button>
                                                                                                     </div>
