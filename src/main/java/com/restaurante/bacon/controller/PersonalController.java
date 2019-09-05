@@ -48,7 +48,7 @@ public class PersonalController {
     @Autowired
     RecetaService recetaService;
     
-    public static String uploadDirImagen = System.getProperty("user.dir")+ "/src/main/resources/static/uploads";
+    public static String UPLOAD_DIR_IMAGEN = System.getProperty("user.dir")+ "/src/main/resources/static/uploads";
 
     
     //para ingresar una contraseña encriptada 
@@ -87,6 +87,9 @@ public class PersonalController {
  
         modelo.addAttribute("img","bank.png");
         
+        modelo.addAttribute("recetas", this.recetaService.listar());
+        
+        
         //fin desarrollo 
         //despachos 
         //fin despacho 
@@ -119,17 +122,22 @@ public class PersonalController {
         receta.setDisponibilidadReceta(BigInteger.valueOf(1)); 
         receta.setPrecioReceta(BigInteger.valueOf(precioReceta));  
         receta.setCantidadPrepDiariaReceta(BigInteger.valueOf(cantidadReceta)); 
-        receta.setFoto("foto");
+        
         receta.setTipoReceta(tipoReceta); 
         CategoriaReceta categoria = new CategoriaReceta();
         categoria.setIdCategoriaReceta(BigDecimal.valueOf(Integer.parseInt(categoriaReceta)));  
         receta.setIdCategoriaReceta(categoria);
         
-        StringBuilder filename = new StringBuilder();
-        Path fileNamePath = Paths.get(uploadDirImagen, file[0].getOriginalFilename());
-        filename.append(file[0].getOriginalFilename());
-        Files.write(fileNamePath, file[0].getBytes());
+        String nombre = this.personalService.subirImagen(file);
+        
+        if(nombre == null){
+            nombre = "foto";
+        }else{
+             receta.setFoto(nombre);
+        }
+                
         this.recetaService.add(receta);
+      
         
         //desarollo
         //fin desarrollo 

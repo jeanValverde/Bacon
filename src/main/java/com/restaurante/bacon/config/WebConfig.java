@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+    
     //Carga los archivos estaticos del proyecto 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

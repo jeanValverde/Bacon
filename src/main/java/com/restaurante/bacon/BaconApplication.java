@@ -18,7 +18,7 @@ public class BaconApplication {
     
     
     public static void main(String[] args) {
-        new File(PersonalController.uploadDirImagen).mkdir();
+        new File(PersonalController.UPLOAD_DIR_IMAGEN).mkdir();
         SpringApplication.run(BaconApplication.class, args);
     }
 

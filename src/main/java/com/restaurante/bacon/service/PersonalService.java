@@ -5,6 +5,7 @@
  */
 package com.restaurante.bacon.service;
 
+import static com.restaurante.bacon.controller.PersonalController.UPLOAD_DIR_IMAGEN;
 import com.restaurante.bacon.dto.Personal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,26 +14,31 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.restaurante.bacon.dao.IPersonalDao;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.UUID;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author jean
- * 
- * Esta clase es para crear los metodos para la capa de servicio 
- * 
- * Este servicio esta implementado de UserDetailsService por que 
- * se necesita sobreescribir el metodo loadUserByUsername para 
- * gestionar la dependencia de seguridad de spring e iniciar sesión 
- * 
+ *
+ * Esta clase es para crear los metodos para la capa de servicio
+ *
+ * Este servicio esta implementado de UserDetailsService por que se necesita
+ * sobreescribir el metodo loadUserByUsername para gestionar la dependencia de
+ * seguridad de spring e iniciar sesión
+ *
  */
 @Service
 public class PersonalService implements UserDetailsService {
@@ -61,6 +67,36 @@ public class PersonalService implements UserDetailsService {
     public Personal getPersonalSesion(String rut) {
         Personal personal = findByRut(rut);
         return personal;
+    }
+
+    public String subirImagen(MultipartFile[] file) {
+        try {
+            StringBuilder filename = new StringBuilder();
+
+            String nombreArchivo = file[0].getOriginalFilename();
+
+            String extencion = "";
+
+            int index = nombreArchivo.lastIndexOf('.');
+            if (index == -1) {
+                extencion = "";
+            } else {
+                extencion = nombreArchivo.substring(index + 1);
+            }
+
+            UUID uuid = UUID.randomUUID();
+
+            nombreArchivo = uuid.toString() + "." + extencion; //nonmbre del archivo con formato unico 
+
+            Path fileNamePath = Paths.get(UPLOAD_DIR_IMAGEN, nombreArchivo);
+
+            filename.append(nombreArchivo);
+
+            Files.write(fileNamePath, file[0].getBytes());
+            return nombreArchivo;
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     //busca el usuario en  la base de datos y carga la 
@@ -99,7 +135,7 @@ public class PersonalService implements UserDetailsService {
         return "";
     }
 
-   //calcula la edad a partir de la fecha  
+    //calcula la edad a partir de la fecha  
     private static int calcularEdad(Calendar fechaNac) {
         Calendar today = Calendar.getInstance();
         int diffYear = today.get(Calendar.YEAR) - fechaNac.get(Calendar.YEAR);
@@ -111,21 +147,19 @@ public class PersonalService implements UserDetailsService {
         }
         return diffYear;
     }
-    
+
     /**
      * Permite convertir un String en fecha (Date).
+     *
      * @param fecha Cadena de fecha dd/MM/yyyy
      * @return Objeto Date
      */
-    public static Date ParseFecha(String fecha)
-    {
+    public static Date ParseFecha(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("MM/dd/yyyy");
         Date fechaDate = null;
         try {
             fechaDate = formato.parse(fecha);
-        } 
-        catch (ParseException ex) 
-        {
+        } catch (ParseException ex) {
             System.out.println(ex);
         }
         return fechaDate;
