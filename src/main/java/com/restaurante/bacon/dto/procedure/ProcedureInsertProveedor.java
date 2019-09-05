@@ -38,7 +38,7 @@ import lombok.Setter;
         {
             @NamedStoredProcedureQuery(name = "InsertProveedor", procedureName = "PACKAGE_PROVEEDOR.PR_INSERT_PROVEEDOR",
                     parameters = {
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_RUT_PROVEEDOR , type = String.class)
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = P_RUT_PROVEEDOR, type = String.class)
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_NOMBRE_PROVEEDOR, type = String.class)
                         ,
@@ -46,24 +46,24 @@ import lombok.Setter;
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_TELEFONO_PROVEEDOR, type = String.class)
                         ,
+
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_CONTACTO_VENTA, type = String.class)
+
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_TIPO_PROVEEDOR, type = String.class)
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_CORREO_PROVEEDOR, type = String.class)
-                                            ,
+                        ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_CELULAR_PROVEEDOR, type = Integer.class)
-                                            ,
+                        ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_CATEGORIA_PROVEEDOR, type = String.class)
                     }
             )
         }
 )
 public class ProcedureInsertProveedor implements Serializable {
-     @Id
-    private int id;
-     
 
-    
-     
+    @Id
+    private int id;
+
 }
