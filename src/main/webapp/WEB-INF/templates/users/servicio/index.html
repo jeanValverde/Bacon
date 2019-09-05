@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!---->
+
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../fragments/_navbar.html -->
+            <nav th:replace="fragments/_navbar :: nav"></nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../fragments/_settings-panel.html -->
+                <div th:replace="fragments/_settings-panel :: div"></div>
+                <!-- partial -->
+                <!-- partial:../../fragments/_sidebar.html -->
+                <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+
+                        <!--Desarrollar acá-->
+
+
+
+
+                        <!--inicio row-->
+                        <div class="row">
+                            <div class="col-md-12 grid-margin">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Fitro de mesas</h4>
+                                        <div class="template-demo">
+
+                                            <div class="row">
+
+                                                <div class="col-md-5">
+
+                                                    <button class="btn btn-outline-success btn-icon-text ml-2 mt-2">
+                                                        <i class="mdi mdi-check btn-icon-prepend mdi-36px"></i>
+                                                        <span class="d-inline-block text-left">
+                                                            <small class="font-weight-light d-block">Ver las mesas</small>
+                                                            Disponibles
+                                                        </span>
+                                                    </button>
+
+                                                    <button class="btn btn-outline-danger btn-icon-text ml-2 mt-2">
+                                                        <i class="mdi mdi-window-close btn-icon-prepend mdi-36px"></i>
+                                                        <span class="d-inline-block text-left">
+                                                            <small class="font-weight-light d-block">Ver las mesas</small>
+                                                            No disponibles
+                                                        </span>
+                                                    </button>
+
+                                                    <button class="btn btn-outline-dark btn-icon-text ml-2 mt-2">
+                                                        <i class="mdi mdi-apps btn-icon-prepend mdi-36px"></i>
+                                                        <span class="d-inline-block text-left">
+                                                            <small class="font-weight-light d-block">Ver </small>
+                                                            Todas las mesas
+                                                        </span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="col-md-7">
+                                                    <div class="row">
+                                                        <div class="col-md-10">
+                                                            <div class="form-group mt-2">
+                                                                <select class="js-example-basic-single w-100 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
+                                                                    <option value="AL">8</option>
+                                                                    <option value="WY">5</option>
+                                                                    <option value="AM">7</option>
+                                                                    <option value="CA">3</option>
+                                                                    <option value="RU">4</option>
+                                                                </select>
+                                                                <br />
+                                                                <small>Bucar por la cantidad de personas</small>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 mt-2">
+                                                            <button type="button" class="btn btn-success btn-rounded btn-icon ml-2">
+                                                                <i class="mdi mdi-account-search"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--fin row-->
+
+                        <!--inicio row--->
+                        <div class="col-md-12 grid-margin">
+
+                            <div class="card-columns">
+
+                                <!--inicio tarjeta de ordenes--->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mt-3">Mesa número #452</h4>
+                                        <div class="badge badge-outline-primary">Capacidad de Asientos 19</div>
+                                        <div class="badge badge-success mr-3">Disponible</div>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-right"><button type="button" class="btn btn-outline-success btn-fw">Tomar Mesa</button></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--fin tarjeta de ordenes--->
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mt-3">Mesa número #452</h4>
+                                        <div class="badge badge-outline-primary">Capacidad de Asientos 19</div>
+                                        <div class="badge badge-outline-primary">20 minutos</div>
+                                        <div class="badge badge-danger mr-3">No Disponible</div>
+                                        <h4 class="card-title mt-3">Cliente</h4>
+                                        <p class="card-text">Nombre del cliente </p>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-right"></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mt-3">Mesa número #432</h4>
+                                        <div class="badge badge-outline-primary">Capacidad de Asientos 19</div>
+                                        <div class="badge badge-outline-primary">20 minutos</div>
+                                        <div class="badge badge-danger mr-3">No disponibles</div>
+                                        <h4 class="card-title mt-3">Cliente</h4>
+                                        <p class="card-text">Nombre del cliente </p>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-right"></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mt-3">Mesa número #482</h4>
+                                        <div class="badge badge-outline-primary">Capacidad de Asientos 19</div>
+                                        <div class="badge badge-success mr-3">Disponible</div>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-right"><button type="button" class="btn btn-outline-success btn-fw">Tomar Mesa</button></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mt-3">Mesa número #482</h4>
+                                        <div class="badge badge-outline-primary">Capacidad de Asientos 19</div>
+                                        <div class="badge badge-success mr-3">Disponible</div>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-right"><button type="button" class="btn btn-outline-success btn-fw">Tomar Mesa</button></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title mt-3">Mesa número #482</h4>
+                                        <div class="badge badge-outline-primary">Capacidad de Asientos 19</div>
+                                        <div class="badge badge-outline-primary">20 minutos</div>
+                                        <div class="badge badge-danger mr-3">No Disponible</div>
+                                        <h4 class="card-title mt-3">Cliente</h4>
+                                        <p class="card-text">Nombre del cliente </p>
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-right"></th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!---fin columnas--->
+                        </div>
+                        <!--fin row--->
+
+
+
+
+
+
+
+                        <!--final-->
+
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+
+    </body>
+
+</html>
