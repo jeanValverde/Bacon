@@ -62,7 +62,7 @@ public class ProcedureQuery {
             return false;
         }
     }
-<<<<<<< HEAD
+
     
     
     
@@ -112,8 +112,7 @@ public class ProcedureQuery {
             return false;
         }
     }
-    
-=======
+
 
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
@@ -162,5 +161,4 @@ public class ProcedureQuery {
         }
     }
 
->>>>>>> Jean
 }

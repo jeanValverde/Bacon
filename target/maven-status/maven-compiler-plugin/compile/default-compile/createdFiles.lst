@@ -9,11 +9,8 @@ com\restaurante\bacon\dto\InsumoPedidoProveedor.class
 com\restaurante\bacon\dto\Mesa.class
 com\restaurante\bacon\service\RecetaService.class
 com\restaurante\bacon\dao\IRolDao.class
-<<<<<<< HEAD
-com\restaurante\bacon\dao\IInsumoDao.class
-=======
 com\restaurante\bacon\dao\IRecetaDao.class
->>>>>>> Jean
+com\restaurante\bacon\dao\IInsumoDao.class
 com\restaurante\bacon\dto\Pedido.class
 com\restaurante\bacon\dto\MedioPago.class
 com\restaurante\bacon\dto\Rol.class
