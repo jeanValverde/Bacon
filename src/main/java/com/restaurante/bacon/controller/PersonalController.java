@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -40,6 +41,9 @@ public class PersonalController {
     
     @Autowired
     ProcedureQuery procedureQuery;
+    
+    @Autowired
+    ProveedorService proveedorService;
 
     //para ingresar una contraseña encriptada 
     @Autowired
@@ -79,7 +83,7 @@ public class PersonalController {
         
         return "users/administrador/mantenedor_proveedor";
     }
-    @RequestMapping("/ingresar_proveedor")
+    @PostMapping("/ingresar_proveedor")
     public String ingresar_proveedor(Model modelo,
             @RequestParam("rut") String rut,
             @RequestParam("nombre") String nombre,
@@ -97,9 +101,8 @@ public class PersonalController {
         
         //desarrollo aca 
        
-        this.procedureQuery.InsertProveedor(rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
-        
-        
+        this.proveedorService.addProveedor(rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
+ 
    
         //fin desarrollo 
         //despachos 

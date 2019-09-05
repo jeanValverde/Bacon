@@ -5,6 +5,15 @@
  */
 package com.restaurante.bacon.dao;
 
+import static com.restaurante.bacon.dto.Proveedor.P_CATEGORIA_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_CELULAR_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_CONTACTO_VENTA;
+import static com.restaurante.bacon.dto.Proveedor.P_CORREO_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_DIRECCION_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_NOMBRE_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_RUT_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_TIPO_PROVEEDOR;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.EntityManager;
@@ -60,15 +69,15 @@ public class ProcedureQuery {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("InsertProveedor")
-                    .setParameter("P_RUT_PROVEEDOR", rut)
-                    .setParameter("P_NOMBRE_PROVEEDOR", nombre)
-                    .setParameter("P_DIRECCION_PROVEEDOR",direccion)
-                    .setParameter("P_TELEFONO_PROVEEDOR",telefono)
-                    .setParameter("P_CONTACTO_PROVEEDOR",contacto)
-                    .setParameter("P_TIPO_PROVEEDOR",tipo)
-                    .setParameter("P_CORREO_PROVEEDOR", correo)
-                    .setParameter("P_CELULAR_PROVEEDOR", celular)
-                    .setParameter("P_CATEGORIA-PROVEEDOR", categoria).execute();
+                    .setParameter(P_RUT_PROVEEDOR, rut)
+                    .setParameter(P_NOMBRE_PROVEEDOR, nombre)
+                    .setParameter(P_DIRECCION_PROVEEDOR,direccion)
+                    .setParameter(P_TELEFONO_PROVEEDOR,telefono)
+                    .setParameter(P_CONTACTO_VENTA,contacto)
+                    .setParameter(P_TIPO_PROVEEDOR,tipo)
+                    .setParameter(P_CORREO_PROVEEDOR, correo)
+                    .setParameter(P_CELULAR_PROVEEDOR, celular)
+                    .setParameter(P_CATEGORIA_PROVEEDOR, categoria).execute();
                     
                     
             return true;
