@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import javax.sound.midi.Patch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -82,11 +83,12 @@ public class PersonalController {
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
         //desarrollo aca 
+        
+        
 
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
- 
-        modelo.addAttribute("img","bank.png");
+        modelo.addAttribute("tipoForm", "agregar");
         
         modelo.addAttribute("recetas", this.recetaService.listar());
         
@@ -111,14 +113,12 @@ public class PersonalController {
 
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
- 
-        modelo.addAttribute("img","bank.png");
         
         List<Receta> recetas = this.recetaService.filtrarRecetasByNombre(nombreReceta);
         
         modelo.addAttribute("recetas", recetas );
         
-        
+        modelo.addAttribute("tipoForm", "agregar");
         //fin desarrollo 
         //despachos 
         //fin despacho 
@@ -127,6 +127,63 @@ public class PersonalController {
         //
         return "users/administrador/mantenedorReceta";
     }
+    
+     @RequestMapping("/deleteReceta")
+    public String eliminarReceta(Model modelo, @RequestParam("idReceta") Integer idReceta ) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+        this.recetaService.deleteRecetaById(idReceta); 
+        
+        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+        
+        List<Receta> recetas = this.recetaService.listar();
+        
+        modelo.addAttribute("recetas", recetas );
+        
+        modelo.addAttribute("tipoForm", "agregar");
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedorReceta";
+    }
+    
+     @RequestMapping("/loadEditarReceta")
+    public String cargarEditarReceta(Model modelo, @RequestParam("idReceta") Integer idReceta ) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+        Receta receta = this.recetaService.buscarRecetaById(idReceta);
+        
+            
+        List<Receta> recetas = this.recetaService.listar();
+        
+        modelo.addAttribute("recetas", recetas );
+        
+        modelo.addAttribute("recetaEdit", receta);
+        
+        modelo.addAttribute("tipoForm", "editar");
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedorReceta";
+    }
+    
 
     @PostMapping("/addReceta")
     public String updatePerfil(Model modelo,

@@ -42,5 +42,4 @@ com\restaurante\bacon\controller\CocinaController.class
 com\restaurante\bacon\dto\EstadoPedido.class
 com\restaurante\bacon\config\UserRol.class
 com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.class
-com\restaurante\bacon\dao\IProcedureQueryReceta.class
 com\restaurante\bacon\dto\InsumoProveedor.class

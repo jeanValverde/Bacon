@@ -11,6 +11,7 @@ import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Receta;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,32 +21,38 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RecetaService {
-    
+
     @Autowired
     IRecetaDao recetaDao;
-    
+
     @Autowired
     ICategoriaRecetaDao categoriaReceta;
-    
+
     @Autowired
     ProcedureQuery procedureQuery;
-    
-    
-    public Receta add(Receta receta){
-        return this.recetaDao.save(receta); 
+
+    public Receta add(Receta receta) {
+        return this.recetaDao.save(receta);
     }
-    
-    public List<Receta> listar(){
+
+    public List<Receta> listar() {
         return this.recetaDao.findAll();
     }
-    
-    public List<CategoriaReceta> listarCategoria(){
+
+    public List<CategoriaReceta> listarCategoria() {
         return this.categoriaReceta.findAll();
     }
-    
-    public List<Receta> filtrarRecetasByNombre(String nombreReceta){
+
+    public List<Receta> filtrarRecetasByNombre(String nombreReceta) {
         return this.procedureQuery.filtrarRecetaByNombre(nombreReceta);
     }
-    
-    
+
+    public void deleteRecetaById(Integer idReceta) {
+        this.recetaDao.deleteById(idReceta);
+    }
+
+    public Receta buscarRecetaById(Integer idReceta) {
+        return this.recetaDao.findByIdReceta(idReceta);
+    }
+
 }

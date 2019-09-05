@@ -9,11 +9,9 @@ import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
@@ -69,25 +67,22 @@ public class ProcedureQuery {
     @SuppressWarnings("unchecked")
     public List<Receta> filtrarRecetaByNombre(String nombreReceta) {
         try {
-            //si no se realiza el procedimiento adecuadamente cae en una exeption 
-//            StoredProcedureQuery query = em.createNamedStoredProcedureQuery("FIlTRO_NOMBRE");
-//            query.setParameter("NOMBRE_RECETA", nombreReceta);
-
-            StoredProcedureQuery storedProcedureQuery = em.createStoredProcedureQuery("PACKAGE_RECETA.FILTRO_NOMBRE_RECETA");
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_RECETA.FILTRO_NOMBRE_RECETA");
 
             // Registrar los parámetros de entrada y salida
-            storedProcedureQuery.registerStoredProcedureParameter("P_NOMBRE_RECETA", String.class, ParameterMode.IN);
-            storedProcedureQuery.registerStoredProcedureParameter("P_RECETAS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+            query.registerStoredProcedureParameter("P_NOMBRE_RECETA", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_RECETAS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
 
             // Configuramos el valor de entrada
-            storedProcedureQuery.setParameter("P_NOMBRE_RECETA", nombreReceta);
+            query.setParameter("P_NOMBRE_RECETA", nombreReceta);
 
-            storedProcedureQuery.execute();
+            query.execute();
 
             // Obtenemos el resultado del cursos en una lista
-            List<Object[]> results = storedProcedureQuery.getResultList();
+            List<Object[]> results = query.getResultList();
             List<Receta> recetas = new ArrayList<Receta>();
             
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
                 Receta receta = new Receta();
                 receta.setIdReceta(Integer.parseInt(result[0].toString()));
@@ -106,19 +101,7 @@ public class ProcedureQuery {
                 receta.setIdCategoriaReceta(categoria); 
                 recetas.add(receta);
             }
-
-            // Recorremos la lista con map y devolvemos un List<BusinessObject>
-//           recetas = results.stream().map(result -> new Receta(
-//                    ((BigInteger) result[0] ).intValue() , 
-//                    (String) result[1],
-//                    (String) result[2],
-//                    (BigInteger) result[3],
-//                    (BigInteger) result[4],
-//                    (BigInteger) result[5],
-//                    (BigInteger) result[6],
-//                    (String) result[7],
-//                    (String) result[8]
-//            )).collect(Collectors.toList());
+            
             return recetas;
 
         } catch (Exception ex) {

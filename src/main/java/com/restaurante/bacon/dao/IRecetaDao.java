@@ -16,4 +16,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IRecetaDao extends JpaRepository<Receta, Integer>{
     
+    Receta findByIdReceta(Integer idReceta);
+    
 }
