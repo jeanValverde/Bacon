@@ -6,9 +6,12 @@
 package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.config.UserRol;
+import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dto.Proveedor;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.dto.Rol;
 import com.restaurante.bacon.service.PersonalService;
+import com.restaurante.bacon.service.ProveedorService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
@@ -17,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -33,6 +37,9 @@ public class PersonalController {
     //acceder a CRUB y más del personal 
     @Autowired
     PersonalService personalService;
+    
+    @Autowired
+    ProcedureQuery procedureQuery;
 
     //para ingresar una contraseña encriptada 
     @Autowired
@@ -60,16 +67,37 @@ public class PersonalController {
         //
         return "users/administrador/index";
     }
-    
-    @RequestMapping("/proveedorInsumos")
-    public String proveedorInsumos(Model modelo) {
+    @RequestMapping("/mantenedor_proveedor")
+    public String mantenedor_proveedor(Model modelo){
+        UserRol user = new UserRol();
+        Personal persona1 = this.personalService.getPersonalSesion(user.getUsername());
+        
+        modelo.addAttribute("agregar", true);
+        
+        
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        
+        return "users/administrador/mantenedor_proveedor";
+    }
+    @RequestMapping("/ingresar_proveedor")
+    public String ingresar_proveedor(Model modelo,
+            @RequestParam("rut") String rut,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("direccion") String direccion,
+            @RequestParam("telefono") String telefono,
+            @RequestParam("contacto") String contacto,
+            @RequestParam("tipo") String tipo,
+            @RequestParam("correo") String correo,
+            @RequestParam("celular") Integer celular,
+            @RequestParam("categoria") String categoria) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
         
         //desarrollo aca 
-        
+       
+        this.procedureQuery.InsertProveedor(rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
         
         
    
@@ -80,7 +108,7 @@ public class PersonalController {
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
-        return "users/administrador/index";
+        return "users/administrador/mantenedor_proveedor";
     }
     
 

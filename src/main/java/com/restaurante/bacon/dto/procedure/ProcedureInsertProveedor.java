@@ -6,8 +6,6 @@
 package com.restaurante.bacon.dto.procedure;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedStoredProcedureQueries;
@@ -28,26 +26,30 @@ import lombok.Setter;
 @Setter
 @NamedStoredProcedureQueries(
         {
-            @NamedStoredProcedureQuery(name = "updatePerfilPersonal", procedureName = "PACKAGE_PERSONAL.PR_UPDATE_PERFIL_PERSONAL",
+            @NamedStoredProcedureQuery(name = "InsertProveedor", procedureName = "PACKAGE_PROVEEDOR.PR_INSERT_PROVEEDOR",
                     parameters = {
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_PERSONAL", type = BigDecimal.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_RUT_PROVEEDOR", type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE_PROVEEDOR", type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_APE_PATERNO", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_DIRECCION_PROVEEDOR", type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_APE_MATERNO", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_TELEFONO_PROVEEDOR", type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_NACIMIENTO", type = Date.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CONTACTO_PROVEEDOR", type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CELULAR", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_TIPO_PROVEEDOR", type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CORREO", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CORREO_PROVEEDOR", type = String.class)
+                                            ,
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CELULAR_PROVEEDOR", type = Integer.class)
+                                            ,
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CATEGORIA_PROVEEDOR", type = String.class)
                     }
             )
         }
 )
-public class ProcedureUpdatePerfilPersonal implements Serializable {
+public class ProcedureInsertProveedor implements Serializable {
      @Id
     private int id;
 }

@@ -19,6 +19,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\BaconApplication.jav
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Personal.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Orden.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IProveedorDao.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IPersonalDao.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoOrden.java
@@ -26,6 +27,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\IndexController.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\IngresoStock.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertProveedor.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQuery.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\CategoriaReceta.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
@@ -35,6 +37,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProv
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Notificacion.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\service\PersonalService.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\service\ProveedorService.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Insumo.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\config\WebSecurityConfig.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Boleta.java

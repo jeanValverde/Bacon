@@ -7,6 +7,8 @@ com\restaurante\bacon\dto\Insumo.class
 com\restaurante\bacon\dto\InsumoPedidoProveedor.class
 com\restaurante\bacon\dto\Mesa.class
 com\restaurante\bacon\dao\IRolDao.class
+com\restaurante\bacon\dto\procedure\ProcedureInsertProveedor.class
+com\restaurante\bacon\dao\IProveedorDao.class
 com\restaurante\bacon\dto\Pedido.class
 com\restaurante\bacon\dto\MedioPago.class
 com\restaurante\bacon\dto\Rol.class
@@ -31,6 +33,7 @@ com\restaurante\bacon\dto\BoletaControl.class
 com\restaurante\bacon\config\WebSecurityConfig.class
 com\restaurante\bacon\BaconApplication.class
 com\restaurante\bacon\dto\Personal.class
+com\restaurante\bacon\service\ProveedorService.class
 com\restaurante\bacon\dto\ControlCaja.class
 com\restaurante\bacon\dto\RecetaOrdenada.class
 com\restaurante\bacon\dto\IngresoStock.class
