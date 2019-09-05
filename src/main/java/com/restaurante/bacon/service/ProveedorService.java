@@ -24,4 +24,7 @@ public class ProveedorService {
     public Proveedor addProveedor(Proveedor proveedor){
         return this.provedorDao.save(proveedor);
     }
+    public List<Proveedor> listarProveedores(){
+        return this.provedorDao.findAll();
+    }
 }

@@ -36,7 +36,7 @@ import lombok.Setter;
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_TELEFONO_PROVEEDOR", type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CONTACTO_PROVEEDOR", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CONTACTO_VENTA", type = String.class)
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_TIPO_PROVEEDOR", type = String.class)
                         ,

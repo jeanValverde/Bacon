@@ -55,8 +55,8 @@ public class ProcedureQuery {
         }
     }
     
-       @SuppressWarnings("unchecked")
-    public boolean InsertProveedor(String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria) {
+    @SuppressWarnings("unchecked")
+    public boolean InsertProveedor(String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, int celular, String categoria) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("InsertProveedor")
@@ -64,15 +64,30 @@ public class ProcedureQuery {
                     .setParameter("P_NOMBRE_PROVEEDOR", nombre)
                     .setParameter("P_DIRECCION_PROVEEDOR",direccion)
                     .setParameter("P_TELEFONO_PROVEEDOR",telefono)
-                    .setParameter("P_CONTACTO_PROVEEDOR",contacto)
+                    .setParameter("P_CONTACTO_VENTA",contacto)
                     .setParameter("P_TIPO_PROVEEDOR",tipo)
                     .setParameter("P_CORREO_PROVEEDOR", correo)
                     .setParameter("P_CELULAR_PROVEEDOR", celular)
-                    .setParameter("P_CATEGORIA-PROVEEDOR", categoria).execute();
+                    .setParameter("P_CATEGORIA_PROVEEDOR", categoria).execute();
                     
                     
             return true;
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    @SuppressWarnings("unchecked")
+    public boolean DeleteProveedorById(Integer id) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("DeleteProveedorById")
+                    .setParameter("P_ID_PROVEEDOR", id).execute();
+                    
+                    
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }

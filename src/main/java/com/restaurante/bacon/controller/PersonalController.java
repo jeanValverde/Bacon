@@ -37,6 +37,8 @@ public class PersonalController {
     //acceder a CRUB y más del personal 
     @Autowired
     PersonalService personalService;
+    @Autowired
+    ProveedorService proveedorService;
     
     @Autowired
     ProcedureQuery procedureQuery;
@@ -73,7 +75,7 @@ public class PersonalController {
         Personal persona1 = this.personalService.getPersonalSesion(user.getUsername());
         
         modelo.addAttribute("agregar", true);
-        
+        modelo.addAttribute("proveedores", this.proveedorService.listarProveedores());
         
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         
@@ -100,7 +102,7 @@ public class PersonalController {
         this.procedureQuery.InsertProveedor(rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
         
         
-   
+        modelo.addAttribute("agregar", true);
         //fin desarrollo 
         //despachos 
         

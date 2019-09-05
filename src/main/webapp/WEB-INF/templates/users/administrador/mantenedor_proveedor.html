@@ -119,12 +119,14 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-6" >
+                                                    <!--
                                                     <label  style="margin-top: 20px" for="exampleInputUsername1">Stock</label>
                                                     <input th:value="${insumo.stockInsumo}" type="number" class="form-control" name="stock"/>
                                                     <label  style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
                                                     <input th:value="${insumo.minimoStockInsumo}" type="number" class="form-control" name="stockMinimo"/>
                                                     <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
                                                     <input th:value="${insumo.maximoStockInsumo}" type="number" class="form-control" name="stockMaximo"/>
+                                                    -->
                                                 </div>
                                                 <div class="col-lg-6" >
                                                     <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
@@ -155,7 +157,7 @@
                                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                                 <div class="media">
                                                     <div  class="row">
-                                                        <div th:each="ins: ${insumos}" class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                                                        <div th:each="prov: ${proveedores}" class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
                                                             <div class="card">
                                                                 <div class="card-body text-center">
                                                                     <div style="text-align:right">
@@ -164,24 +166,24 @@
                                                                             <i class="mdi mdi-lead-pencil"></i>
                                                                         </button>
                                                                         -->
-                                                                        <a  th:href="@{/administrador/cargar_insumo?(idInsumo=${ins.idInsumo})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
+                                                                        <a  th:href="@{/administrador/cargar_insumo?(idInsumo=${prov.idProveedor})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
                                                                         <!--
                                                                         <button type="button" class="btn btn-danger btn-rounded btn-icon" >
                                                                             <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
                                                                             <i class="mdi mdi-close"></i>
                                                                         </button>
                                                                         -->
-                                                                        <a  th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
+                                                                        <a  th:href="@{/administrador/eliminar_insumo?(idInsumo=${prov.nombreProveedor})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
                                                                     </div>
 
                                                                     <div >
 
                                                                         <img src="https://vivanda.vteximg.com.br/arquivos/ids/178947-1000-1000/120930.jpg?v=636978561154000000" class="img-lg rounded-circle mb-2" alt="profile image"/>
-                                                                        <h4 th:text="${ins.nombreInsumo}"></h4>
-                                                                        <p th:text="${ins.unidadMedidaInsumo}" class="text-muted mb-0">Unidad: Kilos</p>
+                                                                        <h4 th:text="${prov.nombreProveedor}"></h4>
+                                                                        <p th:text="${prov.nombreProveedor}" class="text-muted mb-0">Unidad: Kilos</p>
 
                                                                     </div>
-                                                                    <p th:text="${ins.descripcionInsumo}" class="mt-2 card-text">
+                                                                    <p th:text="${prov.nombreProveedor}" class="mt-2 card-text">
                                                                         Zanahoria especial sabor zanagoria
                                                                     </p>
                                                                     <div class="border-top pt-3">
@@ -226,8 +228,8 @@
                                                             </thead>
                                                             <tbody>
                                                             <tbody>
-                                                                <tr th:each="ins: ${insumos}">
-                                                                    <td th:text="${ins.nombreInsumo}">Oranges</td>
+                                                                <tr th:each="ins: ${proveedores}">
+                                                                    <td th:text="${proveedores.nombreProveedor}">Oranges</td>
                                                                     <td>2015/06/25</td>
                                                                     <td>Tim</td>
                                                                     <td>Italy</td>
