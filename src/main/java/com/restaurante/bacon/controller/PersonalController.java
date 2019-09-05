@@ -70,10 +70,11 @@ public class PersonalController {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        List<Insumo> insumos= new ArrayList<Insumo>();
+        List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
         //desarrollo aca 
         modelo.addAttribute("insumos", insumos);
+        modelo.addAttribute("agregar", true);
 
         //fin desarrollo 
         //despachos 
@@ -88,22 +89,93 @@ public class PersonalController {
     public String ingresar_insumo(Model modelo, @RequestParam("nombre") String nombre,
             @RequestParam("descripcion") String descripcion,
             @RequestParam("unidadMedida") String unidadMedida,
-            @RequestParam("stock") BigInteger stock,
-            @RequestParam("stockMinimo") BigInteger stockMinimo,
-            @RequestParam("stockMaximo") BigInteger stockMaximo) {
+            @RequestParam("stock") Integer stock,
+            @RequestParam("stockMinimo") Integer stockMinimo,
+            @RequestParam("stockMaximo") Integer stockMaximo) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
 
-        this.procedureQuery.InsertInsumo(nombre, descripcion, Integer.SIZE, Integer.SIZE, Integer.SIZE, unidadMedida);
-        List<Insumo> insumos= new ArrayList<Insumo>();
+        this.procedureQuery.InsertInsumo(nombre, descripcion, stock, stockMinimo, stockMaximo, unidadMedida);
+        List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
         //desarrollo aca 
+        modelo.addAttribute("agregar", true);
         modelo.addAttribute("insumos", insumos);
-//fin desarrollo 
+        //fin desarrollo 
         //despachos 
-         
+
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_insumos";
+    }
+    @RequestMapping("/modificar_insumo")
+    public String modificar_insumo(Model modelo, @RequestParam("id") Integer id,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("descripcion") String descripcion,
+            @RequestParam("unidadMedida") String unidadMedida,
+            @RequestParam("stock") Integer stock,
+            @RequestParam("stockMinimo") Integer stockMinimo,
+            @RequestParam("stockMaximo") Integer stockMaximo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+
+        this.procedureQuery.UpdateInsumo(id,nombre, descripcion, stock, stockMinimo, stockMaximo, unidadMedida);
+        List<Insumo> insumos = new ArrayList<Insumo>();
+        insumos = this.insumoService.listarInsumos();
+        //desarrollo aca 
+        modelo.addAttribute("agregar", true);
+        modelo.addAttribute("insumos", insumos);
+        //fin desarrollo 
+        //despachos 
+
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_insumos";
+    }
+    @RequestMapping("/eliminar_insumo")
+    public String eliminar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        this.procedureQuery.DeleteInsumo(idInsumo);
+        List<Insumo> insumos = new ArrayList<Insumo>();
+        insumos = this.insumoService.listarInsumos();
+        modelo.addAttribute("insumos", insumos);
+        //desarrollo aca 
+
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_insumos";
+    }
+
+    @RequestMapping("/cargar_insumo")
+    public String cargar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        List<Insumo> insumos = new ArrayList<Insumo>();
+        insumos = this.insumoService.listarInsumos();
+        modelo.addAttribute("insumos", insumos);
+        //desarrollo aca 
+        Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
+        modelo.addAttribute("modificar",true);
+        modelo.addAttribute("insumo",insumo);
+        //fin desarrollo 
+        //despachos 
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));

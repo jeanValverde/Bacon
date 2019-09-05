@@ -60,15 +60,12 @@
                 <div class="main-panel">
                     <div class="content-wrapper">
                         <div class="row">
-                            <div class="col-lg-4 grid-margin stretch-card">
+                            <div th:if="${agregar}" class="col-lg-4 grid-margin stretch-card">
                                 <div class="card">
-
                                     <div class="card-body">
-
-
+                                        <h4 class="card-title">Agregar Insumo</h4>
                                         <form  th:action="@{/administrador/ingresar_insumo}" name="form" method="post">
                                             <div class="row">
-
                                                 <div class="col-lg-12" >
                                                     <label for="exampleInputUsername1" >Nombre</label>
                                                     <input type="text" class="form-control" name="nombre"/>
@@ -96,18 +93,52 @@
                                                 <div class="col-lg-12" style="margin-top: 30px;text-align:center">
                                                     <button type="submit" class="btn btn-success btn-rounded btn-fw">Registrar</button>
                                                 </div>
-
                                             </div>
                                         </form>
-
-
-
                                     </div>
-
-
                                 </div>
-
                             </div>
+                            <!-- -------------------------------------------------------------------------------------------------------------- -->
+                            <div th:if="${modificar}" class="col-lg-4 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Modificar Insumo</h4>
+                                        <form  th:action="@{/administrador/modificar_insumo}" name="form" method="post">
+                                            <div class="row">
+                                                <div class="col-lg-12" >
+                                                    <input th:value="${insumo.idInsumo}"  type="hidden" name="id"/>
+                                                    <label for="exampleInputUsername1" >Nombre</label>
+                                                    <input th:value="${insumo.nombreInsumo}"  type="text" class="form-control" name="nombre"/>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
+                                                    <textarea class="form-control" name="descripcion">[[${insumo.descripcionInsumo}]]</textarea>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Unidad de medida</label>
+                                                    <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="unidadMedida">
+                                                        <option th:selected="${insumo.unidadMedidaInsumo} == Kilos" value="Kilos">Kilos</option>
+                                                        <option th:selected="${insumo.unidadMedidaInsumo} == Litros" value="Litros">Litros</option>
+                                                        
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6" >
+                                                    <label  style="margin-top: 20px" for="exampleInputUsername1">Stock</label>
+                                                    <input th:value="${insumo.stockInsumo}" type="number" class="form-control" name="stock"/>
+                                                    <label  style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
+                                                    <input th:value="${insumo.minimoStockInsumo}" type="number" class="form-control" name="stockMinimo"/>
+                                                    <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
+                                                    <input th:value="${insumo.maximoStockInsumo}" type="number" class="form-control" name="stockMaximo"/>
+                                                </div>
+                                                <div class="col-lg-6" >
+                                                    <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
+                                                    <input type="file" class="dropify" name="imagenRuta"/>
+                                                </div>
+                                                <div class="col-lg-12" style="margin-top: 30px;text-align:center">
+                                                    <button type="submit" class="btn btn-success btn-rounded btn-fw">Actualizar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
                             <div class="col-md-8 col-xl-8 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
@@ -128,12 +159,19 @@
                                                             <div class="card">
                                                                 <div class="card-body text-center">
                                                                     <div style="text-align:right">
+                                                                        <!--
                                                                         <button type="button" class="btn btn-success btn-rounded btn-icon">
                                                                             <i class="mdi mdi-lead-pencil"></i>
                                                                         </button>
-                                                                        <button type="button" class="btn btn-danger btn-rounded btn-icon">
+                                                                        -->
+                                                                        <a  th:href="@{/administrador/cargar_insumo?(idInsumo=${ins.idInsumo})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
+                                                                        <!--
+                                                                        <button type="button" class="btn btn-danger btn-rounded btn-icon" >
+                                                                            <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
                                                                             <i class="mdi mdi-close"></i>
                                                                         </button>
+                                                                        -->
+                                                                        <a  th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
                                                                     </div>
 
                                                                     <div >
@@ -148,18 +186,19 @@
                                                                     </p>
                                                                     <div class="border-top pt-3">
                                                                         <div class="row">
-                                                                            <div class="col-6">
-                                                                                <h6>Stock maximo</h6>
-                                                                                <p>40</p>
-                                                                            </div>
-                                                                            <div class="col-6">
-                                                                                <h6>Stock minimo</h6>
-                                                                                <p>10</p>
+                                                                            <div class="col-12">
+                                                                                
+                                                                                <h6>Stock actual: </h6>4
                                                                             </div>
                                                                             <div class="col-12">
-                                                                                <h6>Stock actual</h6>
-                                                                                <p>36</p>
+                                                                                
+                                                                                <h6>Stock minimo: </h6>5
                                                                             </div>
+                                                                            <div class="col-12">
+                                                                                
+                                                                                <h6>Stock maximo: </h6>6
+                                                                            </div>
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>

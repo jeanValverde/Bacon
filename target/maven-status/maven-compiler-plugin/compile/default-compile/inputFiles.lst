@@ -1,5 +1,6 @@
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\service\InsumoService.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Orden.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Cliente.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
@@ -20,6 +21,7 @@ C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurant
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\ControlCaja.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Notificacion.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IInsumoDao.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureDeletetInsumo.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\exceptions\PreexistingEntityException.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Insumo.java

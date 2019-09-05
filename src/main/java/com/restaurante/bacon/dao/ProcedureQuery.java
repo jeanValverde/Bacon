@@ -74,5 +74,34 @@ public class ProcedureQuery {
             return false;
         }
     }
+    @SuppressWarnings("unchecked")
+    public boolean UpdateInsumo(Integer id,String nombre, String descripcion,Integer stock,Integer stockMinimo,Integer stockMaximo,String unidad) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("UpdateInsumo")
+                    .setParameter("P_ID_INSUMO", id)
+                    .setParameter("P_NOMBRE_INSUMO", nombre)
+                    .setParameter("P_DESCRIPCION_INSUMO", descripcion)
+                    .setParameter("P_STOCK_INSUMO", stock)
+                    .setParameter("P_UNIDAD_MEDIDA_INSUMO", unidad)
+                    .setParameter("P_MINIMO_STOCK_INSUMO", stockMinimo)
+                    .setParameter("P_MAXIMO_STOCK_INSUMO", stockMaximo)
+                    .setParameter("P_FOTO_INSUMO", "https://via.placeholder.com/92x92").execute();
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+    @SuppressWarnings("unchecked")
+    public boolean DeleteInsumo(Integer id) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("DeleteInsumo")
+                    .setParameter("P_ID_INSUMO", id).execute();
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
     
 }

@@ -6,6 +6,8 @@
 package com.restaurante.bacon.dao;
 
 import com.restaurante.bacon.dto.Insumo;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IInsumoDao extends JpaRepository<Insumo, Integer>{
+
+   
     
 }
