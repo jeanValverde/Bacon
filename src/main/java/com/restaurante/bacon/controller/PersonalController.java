@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.List;
 import javax.sound.midi.Patch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -88,6 +89,34 @@ public class PersonalController {
         modelo.addAttribute("img","bank.png");
         
         modelo.addAttribute("recetas", this.recetaService.listar());
+        
+        
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedorReceta";
+    }
+    
+    
+    @RequestMapping("/filtro")
+    public String filtro(Model modelo, @RequestParam("nombreReceta") String nombreReceta) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+ 
+        modelo.addAttribute("img","bank.png");
+        
+        List<Receta> recetas = this.recetaService.filtrarRecetasByNombre(nombreReceta);
+        
+        modelo.addAttribute("recetas", recetas );
         
         
         //fin desarrollo 
