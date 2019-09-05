@@ -77,7 +77,7 @@ public class PersonalController {
     }
 
     @RequestMapping("/receta")
-    public String addReceta(Model modelo) {
+    public String receta(Model modelo) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
@@ -129,7 +129,7 @@ public class PersonalController {
     }
     
      @RequestMapping("/deleteReceta")
-    public String eliminarReceta(Model modelo, @RequestParam("idReceta") Integer idReceta ) {
+    public String deleteReceta(Model modelo, @RequestParam("idReceta") Integer idReceta ) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
@@ -156,7 +156,7 @@ public class PersonalController {
     }
     
      @RequestMapping("/loadEditarReceta")
-    public String cargarEditarReceta(Model modelo, @RequestParam("idReceta") Integer idReceta ) {
+    public String loadEditarReceta(Model modelo, @RequestParam("idReceta") Integer idReceta ) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
@@ -186,7 +186,7 @@ public class PersonalController {
     
 
     @PostMapping("/addReceta")
-    public String updatePerfil(Model modelo,
+    public String addReceta(Model modelo,
             @RequestParam("nombreReceta") String nombreReceta,
             @RequestParam("descripcionReceta") String descripcionReceta,
             @RequestParam("duracionReceta") Integer duracionReceta,
