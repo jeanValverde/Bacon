@@ -41,6 +41,7 @@ public class ProcedureQueryReceta {
             // Configuramos el valor de entrada
             query.setParameter("P_NOMBRE_RECETA", nombreReceta);
 
+            //ejecutamos la query
             query.execute();
 
             // Obtenemos el resultado del cursos en una lista
@@ -73,6 +74,6 @@ public class ProcedureQueryReceta {
             ex.printStackTrace();
             return null;
         }
-    }
+    }  
 
 }
