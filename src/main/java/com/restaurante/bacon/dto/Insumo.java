@@ -13,10 +13,13 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,9 +38,13 @@ public class Insumo implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
+    //declarar que el id se usa con una secuencia 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEC_INS")
+    @SequenceGenerator(name = "SEC_INS", sequenceName = "SEC_INSUMO", allocationSize = 1)
+    //declarar la secuencia 
     @NotNull
     @Column(name = "ID_INSUMO")
-    private BigDecimal idInsumo;
+    private Integer idInsumo;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
@@ -70,25 +77,15 @@ public class Insumo implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "FOTO_INSUMO")
     private String fotoInsumo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<EgresoStock> egresoStockCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<IngresoStock> ingresoStockCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<InsumoPedido> insumoPedidoCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<InsumoProveedor> insumoProveedorCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idInsumo")
-    private Collection<Ingrediente> ingredienteCollection;
 
     public Insumo() {
     }
 
-    public Insumo(BigDecimal idInsumo) {
+    public Insumo(Integer idInsumo) {
         this.idInsumo = idInsumo;
     }
 
-    public Insumo(BigDecimal idInsumo, String nombreInsumo, String descripcionInsumo, BigInteger stockInsumo, String unidadMedidaInsumo, BigInteger minimoStockInsumo, BigInteger maximoStockInsumo, String fotoInsumo) {
+    public Insumo(Integer idInsumo, String nombreInsumo, String descripcionInsumo, BigInteger stockInsumo, String unidadMedidaInsumo, BigInteger minimoStockInsumo, BigInteger maximoStockInsumo, String fotoInsumo) {
         this.idInsumo = idInsumo;
         this.nombreInsumo = nombreInsumo;
         this.descripcionInsumo = descripcionInsumo;
@@ -99,11 +96,11 @@ public class Insumo implements Serializable {
         this.fotoInsumo = fotoInsumo;
     }
 
-    public BigDecimal getIdInsumo() {
+    public Integer getIdInsumo() {
         return idInsumo;
     }
 
-    public void setIdInsumo(BigDecimal idInsumo) {
+    public void setIdInsumo(Integer idInsumo) {
         this.idInsumo = idInsumo;
     }
 
@@ -163,51 +160,6 @@ public class Insumo implements Serializable {
         this.fotoInsumo = fotoInsumo;
     }
 
-    @XmlTransient
-    public Collection<EgresoStock> getEgresoStockCollection() {
-        return egresoStockCollection;
-    }
-
-    public void setEgresoStockCollection(Collection<EgresoStock> egresoStockCollection) {
-        this.egresoStockCollection = egresoStockCollection;
-    }
-
-    @XmlTransient
-    public Collection<IngresoStock> getIngresoStockCollection() {
-        return ingresoStockCollection;
-    }
-
-    public void setIngresoStockCollection(Collection<IngresoStock> ingresoStockCollection) {
-        this.ingresoStockCollection = ingresoStockCollection;
-    }
-
-    @XmlTransient
-    public Collection<InsumoPedido> getInsumoPedidoCollection() {
-        return insumoPedidoCollection;
-    }
-
-    public void setInsumoPedidoCollection(Collection<InsumoPedido> insumoPedidoCollection) {
-        this.insumoPedidoCollection = insumoPedidoCollection;
-    }
-
-    @XmlTransient
-    public Collection<InsumoProveedor> getInsumoProveedorCollection() {
-        return insumoProveedorCollection;
-    }
-
-    public void setInsumoProveedorCollection(Collection<InsumoProveedor> insumoProveedorCollection) {
-        this.insumoProveedorCollection = insumoProveedorCollection;
-    }
-
-    @XmlTransient
-    public Collection<Ingrediente> getIngredienteCollection() {
-        return ingredienteCollection;
-    }
-
-    public void setIngredienteCollection(Collection<Ingrediente> ingredienteCollection) {
-        this.ingredienteCollection = ingredienteCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -228,5 +180,4 @@ public class Insumo implements Serializable {
         return true;
     }
 
-    
 }
