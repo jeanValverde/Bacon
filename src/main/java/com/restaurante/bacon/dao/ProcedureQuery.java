@@ -5,7 +5,7 @@
  */
 package com.restaurante.bacon.dao;
 
-<<<<<<< HEAD
+
 import static com.restaurante.bacon.dto.Proveedor.P_CATEGORIA_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_CELULAR_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_CONTACTO_VENTA;
@@ -15,10 +15,8 @@ import static com.restaurante.bacon.dto.Proveedor.P_NOMBRE_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_RUT_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TIPO_PROVEEDOR;
-=======
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Receta;
->>>>>>> Cristian
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -74,7 +72,7 @@ public class ProcedureQuery {
             return false;
         }
     }
-<<<<<<< HEAD
+
 
     @SuppressWarnings("unchecked")
     public boolean InsertProveedor(String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, int celular, String categoria) {
@@ -112,8 +110,7 @@ public class ProcedureQuery {
         }
     }
 
-=======
-<<<<<<< HEAD
+
     
     
     
@@ -164,7 +161,7 @@ public class ProcedureQuery {
         }
     }
     
-=======
+
 
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
@@ -213,6 +210,5 @@ public class ProcedureQuery {
         }
     }
 
->>>>>>> Jean
->>>>>>> Cristian
+
 }

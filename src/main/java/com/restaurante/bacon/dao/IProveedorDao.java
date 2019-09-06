@@ -16,4 +16,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IProveedorDao extends JpaRepository<Proveedor, Integer> {
     
+    Proveedor findByIdProveedor(Integer idProveedor);
+    
 }

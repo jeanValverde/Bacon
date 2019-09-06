@@ -8,6 +8,7 @@ package com.restaurante.bacon.service;
 import com.restaurante.bacon.dao.IProveedorDao;
 import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.Proveedor;
+import com.restaurante.bacon.dto.Receta;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,9 @@ public class ProveedorService {
     public List<Proveedor> listarProveedores() {
         return this.provedorDao.findAll();
 
+    }
+    
+    public Proveedor buscarProveedorById(Integer idProveedor) {
+        return this.provedorDao.findByIdProveedor(idProveedor);
     }
 }
