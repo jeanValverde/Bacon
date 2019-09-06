@@ -143,6 +143,7 @@ function validatorForms(formulario) {
             return false;
         }
     }
+    
     /*
      *
      * @param {type}

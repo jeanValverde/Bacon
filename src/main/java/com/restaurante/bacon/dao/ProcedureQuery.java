@@ -6,6 +6,7 @@
 package com.restaurante.bacon.dao;
 
 import com.restaurante.bacon.dto.CategoriaReceta;
+import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -62,12 +63,10 @@ public class ProcedureQuery {
             return false;
         }
     }
-<<<<<<< HEAD
-    
-    
+
     
     @SuppressWarnings("unchecked")
-    public boolean InsertInsumo(String nombre, String descripcion,Integer stock,Integer stockMinimo,Integer stockMaximo,String unidad) {
+    public boolean InsertInsumo(String nombre, String descripcion,BigInteger stock,BigInteger stockMinimo,BigInteger stockMaximo,String unidad,String url) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("InsertInsumo")
@@ -77,14 +76,14 @@ public class ProcedureQuery {
                     .setParameter("P_UNIDAD_MEDIDA_INSUMO", unidad)
                     .setParameter("P_MINIMO_STOCK_INSUMO", stockMinimo)
                     .setParameter("P_MAXIMO_STOCK_INSUMO", stockMaximo)
-                    .setParameter("P_FOTO_INSUMO", "https://via.placeholder.com/92x92").execute();
+                    .setParameter("P_FOTO_INSUMO", url).execute();
             return true;
         } catch (Exception ex) {
             return false;
         }
     }
     @SuppressWarnings("unchecked")
-    public boolean UpdateInsumo(Integer id,String nombre, String descripcion,Integer stock,Integer stockMinimo,Integer stockMaximo,String unidad) {
+    public boolean UpdateInsumo(Integer id,String nombre, String descripcion,BigInteger stock,BigInteger stockMinimo,BigInteger stockMaximo,String unidad,String url) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("UpdateInsumo")
@@ -95,9 +94,10 @@ public class ProcedureQuery {
                     .setParameter("P_UNIDAD_MEDIDA_INSUMO", unidad)
                     .setParameter("P_MINIMO_STOCK_INSUMO", stockMinimo)
                     .setParameter("P_MAXIMO_STOCK_INSUMO", stockMaximo)
-                    .setParameter("P_FOTO_INSUMO", "https://via.placeholder.com/92x92").execute();
+                    .setParameter("P_FOTO_INSUMO", url).execute();
             return true;
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             return false;
         }
     }
@@ -112,49 +112,123 @@ public class ProcedureQuery {
             return false;
         }
     }
-    
-=======
-
-    //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
-    public List<Receta> filtrarRecetaByNombre(String nombreReceta) {
+    public List<Insumo> filtrarInsumosByNombre(String nombreInsumo) {
         try {
-            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_RECETA.FILTRO_NOMBRE_RECETA");
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_INSUMO.FILTRO_NOMBRE_INSUMO");
 
             // Registrar los parámetros de entrada y salida
-            query.registerStoredProcedureParameter("P_NOMBRE_RECETA", String.class, ParameterMode.IN);
-            query.registerStoredProcedureParameter("P_RECETAS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+            query.registerStoredProcedureParameter("P_NOMBRE_INSUMO", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_INSUMOS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
 
             // Configuramos el valor de entrada
-            query.setParameter("P_NOMBRE_RECETA", nombreReceta);
+            query.setParameter("P_NOMBRE_INSUMO", nombreInsumo);
 
             query.execute();
 
             // Obtenemos el resultado del cursos en una lista
             List<Object[]> results = query.getResultList();
-            List<Receta> recetas = new ArrayList<Receta>();
+            List<Insumo> insumos = new ArrayList<Insumo>();
             
             // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
-                Receta receta = new Receta();
-                receta.setIdReceta(Integer.parseInt(result[0].toString()));
-                receta.setNombreReceta(result[1].toString());
-                receta.setDescripcionReceta(result[2].toString());
-                receta.setDuracionPreparacion(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
-                receta.setDisponibilidadReceta(BigInteger.valueOf(Integer.parseInt(result[4].toString())));
-                receta.setPrecioReceta(BigInteger.valueOf(Integer.parseInt(result[5].toString())));
-                receta.setCantidadPrepDiariaReceta(BigInteger.valueOf(Integer.parseInt(result[6].toString())));
-                receta.setFoto(String.valueOf(result[7].toString())); 
-                receta.setTipoReceta(result[8].toString());
-                CategoriaReceta categoria = new CategoriaReceta();
-                categoria.setIdCategoriaReceta(BigDecimal.valueOf(Integer.parseInt(result[9].toString()))); 
-                categoria.setDescripcionCategoriaReceta(result[10].toString()); 
-                categoria.setCantRecetasDia(BigInteger.valueOf(3)); 
-                receta.setIdCategoriaReceta(categoria); 
-                recetas.add(receta);
+                Insumo insumo = new Insumo();
+                insumo.setIdInsumo(Integer.parseInt(result[0].toString()));
+                insumo.setNombreInsumo(result[1].toString());
+                insumo.setDescripcionInsumo(result[2].toString());
+                insumo.setStockInsumo(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
+                insumo.setUnidadMedidaInsumo(result[4].toString());
+                insumo.setMinimoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[5].toString())));
+                insumo.setMaximoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[6].toString())));
+                insumo.setFotoInsumo(result[7].toString());
+                
+              
+                insumos.add(insumo);
             }
             
-            return recetas;
+            return insumos;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    @SuppressWarnings("unchecked")
+    public List<Insumo> filtrarInsumosByStock(BigInteger stock) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_INSUMO.FILTRO_STOCK_INSUMO");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_STOCK_INSUMO", BigInteger.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_INSUMOS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("P_STOCK_INSUMO", stock);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Insumo> insumos = new ArrayList<Insumo>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+                Insumo insumo = new Insumo();
+                insumo.setIdInsumo(Integer.parseInt(result[0].toString()));
+                insumo.setNombreInsumo(result[1].toString());
+                insumo.setDescripcionInsumo(result[2].toString());
+                insumo.setStockInsumo(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
+                insumo.setUnidadMedidaInsumo(result[4].toString());
+                insumo.setMinimoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[5].toString())));
+                insumo.setMaximoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[6].toString())));
+                insumo.setFotoInsumo(result[7].toString());
+                
+              
+                insumos.add(insumo);
+            }
+            
+            return insumos;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    @SuppressWarnings("unchecked")
+    public List<Insumo> filtrarInsumosByUnidadMedida(String unidad) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_INSUMO.FILTRO_UNIDAD_INSUMO");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_UNIDAD_INSUMO", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_INSUMOS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("P_UNIDAD_INSUMO", unidad);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Insumo> insumos = new ArrayList<Insumo>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+                Insumo insumo = new Insumo();
+                insumo.setIdInsumo(Integer.parseInt(result[0].toString()));
+                insumo.setNombreInsumo(result[1].toString());
+                insumo.setDescripcionInsumo(result[2].toString());
+                insumo.setStockInsumo(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
+                insumo.setUnidadMedidaInsumo(result[4].toString());
+                insumo.setMinimoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[5].toString())));
+                insumo.setMaximoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[6].toString())));
+                insumo.setFotoInsumo(result[7].toString());
+                
+              
+                insumos.add(insumo);
+            }
+            
+            return insumos;
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -162,5 +236,9 @@ public class ProcedureQuery {
         }
     }
 
->>>>>>> Jean
+
+
+    
+
+
 }
