@@ -38,6 +38,7 @@ com\restaurante\bacon\service\RolService.class
 com\restaurante\bacon\dto\Notificacion.class
 com\restaurante\bacon\dto\Orden.class
 com\restaurante\bacon\dto\BoletaControl.class
+com\restaurante\bacon\dto\procedure\ProcedureUpdateProveedor.class
 com\restaurante\bacon\config\WebSecurityConfig.class
 com\restaurante\bacon\BaconApplication.class
 com\restaurante\bacon\dto\Personal.class

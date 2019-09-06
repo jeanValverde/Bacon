@@ -10,6 +10,7 @@ import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.Proveedor;
 import com.restaurante.bacon.dto.Receta;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,10 +33,20 @@ public class ProveedorService {
     public boolean addProveedor(String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria) {
         return this.procedureQuery.InsertProveedor(rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
     }
+    
+    public boolean modificarProveedor(String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria){
+        return this.procedureQuery.UpdateProveedor(rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
+    }
 
     public List<Proveedor> listarProveedores() {
         return this.provedorDao.findAll();
 
+    }
+    
+    public Proveedor retornarInsumoById(Integer  idProveedor){
+        Optional<Proveedor> optinalEntity = provedorDao.findById(idProveedor);
+        Proveedor proveedor = optinalEntity.get();
+        return proveedor;
     }
     
     public Proveedor buscarProveedorById(Integer idProveedor) {

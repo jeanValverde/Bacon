@@ -275,7 +275,7 @@
 
 
 
-                                                                                <button type="submit" class="btn btn-primary mr-2">Agregar</button>
+                                                                                <button type="submit" class="btn btn-primary mr-2">Actualizar</button>
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -286,27 +286,7 @@
 
                                                                 <div class="col-md-8">
                                                                     <!---inicio fila de los filtros-->
-                                                                    <div class="row">
-                                                                        <!--inicio filtro de tipos--->
-                                                                        <div class="col-md-4 grid-margin">
-                                                                            <form action="index.html" method="post">
-                                                                                <div class="btn-group mt-2" role="group" aria-label="Basic example">
-                                                                                    <a th:href="@{/administrador_proveedor/proveedor}" class="btn btn-primary mt-4">
-                                                                                        <i class="mdi mdi-autorenew"></i>
-                                                                                    </a>
-                                                                                    <a th:href="@{/administrador_proveedor/proveedor(disponible='si')}" class="btn btn-primary mt-4">
-                                                                                        <i class="mdi mdi-checkbox-marked-circle-outline"></i>
-                                                                                    </a>
-                                                                                    <a th:href="@{/administrador_proveedor/proveedor(disponible='no')}" class="btn btn-primary mt-4">
-                                                                                        <i class="mdi mdi-close-circle-outline"></i>
-                                                                                    </a>
-
-                                                                                    <button type="submit" class="btn btn-primary mt-4">
-                                                                                        <i class="mdi mdi-account-search"></i>
-                                                                                    </button>
-                                                                                </div>
-                                                                            </form>
-                                                                        </div>
+                                                                  
                                                                         <!--fin filtro de tipos--->
                                                                         <!--inicio filtro nombre--->
 
@@ -360,7 +340,7 @@
                                                                         <div id="tablaReceta" class="col-md-12">
                                                                             <div class="card">
                                                                                 <div class="card-body">
-                                                                                    <h4 class="card-title">Recetas</h4>
+                                                                                    <h4 class="card-title">Proveedores</h4>
                                                                                     <div class="table-responsive">
                                                                                         <table class="table table-striped">
                                                                                             <thead>
