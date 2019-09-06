@@ -201,6 +201,34 @@ public class PersonalController {
         return "users/administrador/mantenedor_insumos";
 
     }
+    @RequestMapping("/buscar_por_filtro")
+    public String buscar_por_filtro(Model modelo,@RequestParam("tipoBusqueda") String tipoBusqueda,@RequestParam("filtro")String filtro) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        List<Insumo> insumos = new ArrayList<Insumo>();
+        switch(tipoBusqueda){
+            case "nombre":
+                insumos = this.insumoService.filtrarInsumosByNombre(filtro);
+                break;
+            case "stock":
+                insumos = this.insumoService.filtrarInsumosByStock(BigInteger.valueOf(Integer.parseInt(filtro)));
+                break;
+            case "unidad":
+                insumos = this.insumoService.filtrarInsumosByUnidadMedida(filtro);
+                break;
+            default:
+               insumos = this.insumoService.listarInsumos();
+        }
+        
+        //desarrollo aca 
+        modelo.addAttribute("insumos", insumos);
+        modelo.addAttribute("agregar", true);
+        modelo.addAttribute("personalSesion", personal);
+        return "users/administrador/mantenedor_insumos";
+
+    }
 
     @PostMapping("/addReceta")
     public String addReceta(Model modelo,
@@ -258,15 +286,35 @@ public class PersonalController {
     public String ingresar_insumo(Model modelo, @RequestParam("nombre") String nombre,
             @RequestParam("descripcion") String descripcion,
             @RequestParam("unidadMedida") String unidadMedida,
-            @RequestParam("stock") Integer stock,
-            @RequestParam("stockMinimo") Integer stockMinimo,
-            @RequestParam("stockMaximo") Integer stockMaximo) {
+            @RequestParam("stock") BigInteger stock,
+            @RequestParam("stockMinimo") BigInteger stockMinimo,
+            @RequestParam("stockMaximo") BigInteger stockMaximo,
+            @RequestParam("imagenInsumo") MultipartFile[] file) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-
-        this.procedureQuery.InsertInsumo(nombre, descripcion, stock, stockMinimo, stockMaximo, unidadMedida);
+        String nombreImagen = this.personalService.subirImagen(file);
+        Insumo insumo = new Insumo();
+        if (nombreImagen == null) {
+            nombreImagen = "260x162.png";
+        } else {
+            
+            insumo.setFotoInsumo(nombreImagen);
+        }
+        insumo.setNombreInsumo(nombre);
+        insumo.setDescripcionInsumo(descripcion);
+        insumo.setStockInsumo(stock);
+        insumo.setMinimoStockInsumo(stockMinimo);
+        insumo.setMaximoStockInsumo(stockMaximo);
+        insumo.setUnidadMedidaInsumo(unidadMedida);
+        
+        if(this.insumoService.ingresarInsumo(insumo)){
+            
+        }else{
+            
+        }
+        
         List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
         //desarrollo aca 
@@ -287,15 +335,37 @@ public class PersonalController {
             @RequestParam("nombre") String nombre,
             @RequestParam("descripcion") String descripcion,
             @RequestParam("unidadMedida") String unidadMedida,
-            @RequestParam("stock") Integer stock,
-            @RequestParam("stockMinimo") Integer stockMinimo,
-            @RequestParam("stockMaximo") Integer stockMaximo) {
+            @RequestParam("stock") BigInteger stock,
+            @RequestParam("stockMinimo") BigInteger stockMinimo,
+            @RequestParam("stockMaximo") BigInteger stockMaximo,
+            @RequestParam("imagenInsumo") MultipartFile[] file) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-
-        this.procedureQuery.UpdateInsumo(id, nombre, descripcion, stock, stockMinimo, stockMaximo, unidadMedida);
+        //String nombreImagen = this.personalService.subirImagen(file);
+        Insumo insumo = new Insumo();
+        /*if (nombreImagen == null) {
+            nombreImagen = "260x162.png";
+        } else {
+            
+            insumo.setFotoInsumo(nombreImagen);
+        }*/
+        
+        insumo.setIdInsumo(id);
+        insumo.setNombreInsumo(nombre);
+        insumo.setDescripcionInsumo(descripcion);
+        insumo.setStockInsumo(stock);
+        insumo.setMinimoStockInsumo(stockMinimo);
+        insumo.setMaximoStockInsumo(stockMaximo);
+        insumo.setUnidadMedidaInsumo(unidadMedida);
+        insumo.setFotoInsumo("adfbfd87-379f-4760-8771-643c689a9537.jpg");
+        
+        if(this.insumoService.modificarInsumo(insumo)){
+            
+        }else{
+            System.out.println("no modifico");
+            System.out.println("stock: "+stockMinimo);
+        }
         List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
         //desarrollo aca 
@@ -340,11 +410,10 @@ public class PersonalController {
         //sesion 
         List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
-        modelo.addAttribute("insumos", insumos);
-        //desarrollo aca 
         Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
         modelo.addAttribute("modificar", true);
         modelo.addAttribute("insumo", insumo);
+        modelo.addAttribute("insumos", insumos);
         //fin desarrollo 
         //despachos 
         //fin despacho 

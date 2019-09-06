@@ -98,6 +98,10 @@ public class PersonalService implements UserDetailsService {
             return null;
         }
     }
+   
+    public boolean comprobarImagen(){
+        return true;
+    }
 
     //busca el usuario en  la base de datos y carga la 
     //autentificación en Spring Boot Securiry dependencia

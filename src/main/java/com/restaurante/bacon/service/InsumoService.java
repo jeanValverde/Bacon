@@ -6,6 +6,7 @@
 package com.restaurante.bacon.service;
 
 import com.restaurante.bacon.dao.IInsumoDao;
+import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.Insumo;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -24,11 +25,16 @@ public class InsumoService {
     //se obtienen los metodos generados automaticamente por la interfaz
     @Autowired
     IInsumoDao insumoDao;
+    @Autowired
+    ProcedureQuery procedureQuery;
     
     //se implementan los metodos declarados en la interfaz 
    
-    public Insumo ingresarInsumo(Insumo insumo) {
-        return this.insumoDao.save(insumo);
+    public boolean ingresarInsumo(Insumo insumo) {
+        return this.procedureQuery.InsertInsumo(insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
+    }
+    public boolean modificarInsumo(Insumo insumo) {
+        return this.procedureQuery.UpdateInsumo(insumo.getIdInsumo(),insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
     }
     
     public Insumo retornarInsumoById(Integer  idInsumo){
@@ -39,6 +45,16 @@ public class InsumoService {
     public List<Insumo> listarInsumos(){
         return this.insumoDao.findAll();
     }
+     public List<Insumo> filtrarInsumosByNombre(String nombreInsumo) {
+        return this.procedureQuery.filtrarInsumosByNombre(nombreInsumo);
+    }
+     public List<Insumo> filtrarInsumosByStock(BigInteger stock) {
+        return this.procedureQuery.filtrarInsumosByStock(stock);
+    }
+     public List<Insumo> filtrarInsumosByUnidadMedida(String unidad) {
+        return this.procedureQuery.filtrarInsumosByUnidadMedida(unidad);
+    }
+   
    
     
 }
