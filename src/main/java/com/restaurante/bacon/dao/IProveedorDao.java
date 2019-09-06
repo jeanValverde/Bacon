@@ -6,6 +6,7 @@
 package com.restaurante.bacon.dao;
 
 import com.restaurante.bacon.dto.Proveedor;
+import java.math.BigDecimal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,8 +15,8 @@ import org.springframework.stereotype.Repository;
  * @author Felipe
  */
 @Repository
-public interface IProveedorDao extends JpaRepository<Proveedor, Integer> {
+public interface IProveedorDao extends JpaRepository<Proveedor, BigDecimal> {
     
-    Proveedor findByIdProveedor(Integer idProveedor);
+    Proveedor findByIdProveedor(BigDecimal idProveedor);
     
 }

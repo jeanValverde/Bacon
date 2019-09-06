@@ -9,6 +9,7 @@ import com.restaurante.bacon.dao.IProveedorDao;
 import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.Proveedor;
 import com.restaurante.bacon.dto.Receta;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +44,13 @@ public class ProveedorService {
 
     }
     
-    public Proveedor retornarInsumoById(Integer  idProveedor){
+    public Proveedor retornarInsumoById(BigDecimal  idProveedor){
         Optional<Proveedor> optinalEntity = provedorDao.findById(idProveedor);
         Proveedor proveedor = optinalEntity.get();
         return proveedor;
     }
     
-    public Proveedor buscarProveedorById(Integer idProveedor) {
+    public Proveedor buscarProveedorById(BigDecimal idProveedor) {
         return this.provedorDao.findByIdProveedor(idProveedor);
     }
 }

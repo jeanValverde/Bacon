@@ -56,7 +56,7 @@ public class ProveedorController {
     ProcedureQuery procedureQuery;
 
     @Autowired
-    ProveedorService provedorService;
+    ProveedorService proveedorService;
 
     //para ingresar una contraseña encriptada 
     @Autowired
@@ -88,7 +88,7 @@ public class ProveedorController {
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
-        proveedores = this.provedorService.listarProveedores();
+        proveedores = this.proveedorService.listarProveedores();
         //desarrollo aca 
         modelo.addAttribute("proveedores", proveedores);
         modelo.addAttribute("agregar", true);
@@ -128,7 +128,7 @@ public class ProveedorController {
         proveedor.setCelularProveedor(celularProveedor);
         proveedor.setCategoriaProveedor(categoriaProveedor);
 
-        this.provedorService.addProveedor(proveedor);
+        this.proveedorService.addProveedor(proveedor);
 
         //desarollo
         //fin desarrollo 
@@ -142,8 +142,29 @@ public class ProveedorController {
 
     }
     
+     @RequestMapping("/eliminar_proveedor")
+    public String eliminar_proveedor(Model modelo, @RequestParam("idProveedor") Integer idProveedor) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        this.procedureQuery.DeleteProveedorById(idProveedor);
+        List<Proveedor> proveedores = new ArrayList<Proveedor>();
+        proveedores = this.proveedorService.listarProveedores();
+        modelo.addAttribute("proveedores", proveedores);
+        //desarrollo aca 
+
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_proveedor";
+    }
+    
     @RequestMapping("/loadEditarProveedor")
-    public String loadEditarProveedor(Model modelo, @RequestParam("idProveedor") Integer idProveedor) {
+    public String loadEditarProveedor(Model modelo, @RequestParam("idProveedor") BigDecimal idProveedor) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
@@ -153,9 +174,9 @@ public class ProveedorController {
         
 
         
-        Proveedor proveedor = this.provedorService.buscarProveedorById(idProveedor);
+        Proveedor proveedor = this.proveedorService.buscarProveedorById(idProveedor);
 
-        List<Proveedor> proveedores = this.provedorService.listarProveedores();
+        List<Proveedor> proveedores = this.proveedorService.listarProveedores();
 
         modelo.addAttribute("provedores", proveedores);
 
@@ -173,14 +194,14 @@ public class ProveedorController {
         return "users/administrador/mantenedorReceta";
     }
     @RequestMapping("/cargar_proveedor")
-    public String cargar_proveedor(Model modelo, @RequestParam("idProveedor") Integer idProveedor) {
+    public String cargar_proveedor(Model modelo, @RequestParam("idProveedor") BigDecimal idProveedor) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
-        proveedores = this.provedorService.listarProveedores();
-        Proveedor proveedor = this.provedorService.retornarInsumoById(idProveedor);
+        proveedores = this.proveedorService.listarProveedores();
+        Proveedor proveedor = this.proveedorService.retornarInsumoById(idProveedor);
         modelo.addAttribute("modificar", true);
         modelo.addAttribute("proveedor", proveedor);
         modelo.addAttribute("proveedores", proveedores);
@@ -190,11 +211,11 @@ public class ProveedorController {
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
-        return "users/administrador/mantenedor_insumos";
+        return "users/administrador/mantenedor_proveedor";
     }
     
      @RequestMapping("/modificar_proveedor")
-    public String modificar_proveedor(Model modelo, @RequestParam("idProveedor") Integer idProveedor,
+    public String modificar_proveedor(Model modelo, @RequestParam("idProveedor") BigDecimal idProveedor,
              @RequestParam("rutProveedor") String rutProveedor,
             @RequestParam("nombreProveedor") String nombreProveedor,
             @RequestParam("direccionProveedor") String direccionProveedor,
@@ -221,14 +242,14 @@ public class ProveedorController {
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
         
-        if(this.provedorService.modificarProveedor(rutProveedor, nombreProveedor, direccionProveedor, telefonoProveedor, contactoProveedor, tipoProveedor, correoProveedor, celularProveedor, categoriaProveedor)){
+        if(this.proveedorService.modificarProveedor(rutProveedor, nombreProveedor, direccionProveedor, telefonoProveedor, contactoProveedor, tipoProveedor, correoProveedor, celularProveedor, categoriaProveedor)){
         
             
         }else{
             
         }
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
-        proveedores = this.provedorService.listarProveedores();
+        proveedores = this.proveedorService.listarProveedores();
         //desarrollo aca 
         modelo.addAttribute("agregar", true);
         modelo.addAttribute("proveedores", proveedores);

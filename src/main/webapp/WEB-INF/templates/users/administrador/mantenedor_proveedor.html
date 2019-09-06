@@ -153,17 +153,15 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-md-4 grid-margin stretch-card" th:if="${tipoForm == 'editar' }"  >
+                                                                <div th:if="${modificar}" class="col-lg-4 grid-margin stretch-card">
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <h4 class="card-title">Agregar Proveedores</h4>
-                                                                            <p class="card-description text-justify">
-                                                                                Completa estos campos para agregar un proveedor al sistema.
-                                                                            </p>
-                                                                            <form class="forms-sample" th:action="@{/administrador_proveedor/addProveedor}" method="POST" name="formProveedor" enctype="multipart/form-data">
+                                                                            <h4 class="card-title">Modificar Porveedores</h4>
+                                                                           
+                                                                           <form  th:action="@{/administrador_proveedor/modificar_proveedor}" name="form" method="post">
                                                                                 <div class="form-group">
                                                                                     <label for="rutProveedor">Rut Porveedor</label>
-                                                                                    <input type="text" class="form-control" id="rutProveedor" th:value="${proveedorEdit.rutProveedor}" name="rutProveedor" placeholder="Rut Proveedor">
+                                                                                    <input type="text" class="form-control" id="rutProveedor" th:value="${proveedor.rutProveedor}" name="rutProveedor" placeholder="Rut Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -173,7 +171,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="nombreProveedor">Nombre Proveedor</label>
-                                                                                    <input type="text" class="form-control" id="nombreProveedor" th:value="${proveedorEdit.nombreProveedor}" name="nombreProveedor" placeholder="Nombre Proveedor">
+                                                                                    <input type="text" class="form-control" id="nombreProveedor" th:value="${proveedor.nombreProveedor}" name="nombreProveedor" placeholder="Nombre Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -183,7 +181,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="direccionProveedor">Direccion Receta</label>
-                                                                                    <input type="text" class="form-control" id="direccionProveedor" th:value="${proveedorEdit.direccionProveedor}" name="direccionProveedor" placeholder="Direccion Proveedor">
+                                                                                    <input type="text" class="form-control" id="direccionProveedor" th:value="${proveedor.direccionProveedor}" name="direccionProveedor" placeholder="Direccion Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -193,7 +191,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="telefonoProveedor">Telefono Receta</label>
-                                                                                    <input type="text" class="form-control" id="telefonoProveedor" th:value="${proveedorEdit.telefonoProveedor}" name="telefonoProveedor" placeholder="Telefono Proveedor">
+                                                                                    <input type="text" class="form-control" id="telefonoProveedor" th:value="${proveedor.telefonoProveedor}" name="telefonoProveedor" placeholder="Telefono Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -203,7 +201,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="contactoProveedor">Contacto Receta</label>
-                                                                                    <input type="text" class="form-control" id="contactoProveedor" th:value="${proveedorEdit.contactoProveedor}" name="contactoProveedor" placeholder="Contacto Proveedor">
+                                                                                    <input type="text" class="form-control" id="contactoProveedor" th:value="${proveedor.contactoProveedor}" name="contactoProveedor" placeholder="Contacto Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -213,7 +211,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="tipoProveedor">Tipo Receta</label>
-                                                                                    <input type="text" class="form-control" id="tipoProveedor" th:value="${proveedorEdit.tipoProveedor}" name="tipoProveedor" placeholder="Tipo Proveedor">
+                                                                                    <input type="text" class="form-control" id="tipoProveedor" th:value="${proveedor.tipoProveedor}" name="tipoProveedor" placeholder="Tipo Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -223,7 +221,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="correoProveedor">orreo Receta</label>
-                                                                                    <input type="text" class="form-control" id="correoProveedor" th:value="${proveedorEdit.correoProveedor}" name="correoProveedor" placeholder="Correo Proveedor">
+                                                                                    <input type="text" class="form-control" id="correoProveedor" th:value="${proveedor.correoProveedor}" name="correoProveedor" placeholder="Correo Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -233,7 +231,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="celularProveedor">Celular proveedor</label>
-                                                                                    <input type="number" class="form-control" id="celularProveedor" th:value="${proveedorEdit.celularProveedor}" name="celularProveedor" placeholder="Celular Proveedor">
+                                                                                    <input type="number" class="form-control" id="celularProveedor" th:value="${proveedor.celularProveedor}" name="celularProveedor" placeholder="Celular Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -243,7 +241,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="categoriaProveedor">Categoria Porveedor</label>
-                                                                                    <input type="text" class="form-control" id="categoriaProveedor" th:value="${proveedorEdit.categoriaProveedor}" name="categoriaProveedor" placeholder="Categoria Proveedor">
+                                                                                    <input type="text" class="form-control" id="categoriaProveedor" th:value="${proveedor.categoriaProveedor}" name="categoriaProveedor" placeholder="Categoria Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -253,7 +251,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="categoriaProveedor">Categoria proveedor</label>
-                                                                                    <textarea name="categoriaProveedor" id="categoriaProveedor" th:text="${recetaEdit.categoriaProveedor}" class="form-control" rows="3" cols="3"></textarea>
+                                                                                    <textarea name="categoriaProveedor" id="categoriaProveedor" th:text="${proveedor.categoriaProveedor}" class="form-control" rows="3" cols="3"></textarea>
                                                                                     <div class="valid-feedback">
                                                                                         !Buena Descripción!
                                                                                     </div>
@@ -281,226 +279,320 @@
                                                                     </div>
                                                                 </div>
 
+                                                                <div class="col-md-8 col-xl-8 grid-margin stretch-card">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h3 class="card-title">Proveedores</h3>
+                                                                            <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
+                                                                                </li>
+                                                                            </ul>
+                                                                            <div class="tab-content" id="pills-tabContent">
+                                                                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                                                    <div class="media">
+                                                                                        <div  class="row">
+                                                                                            <div th:each="ins: ${proveedores}" class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                                                                                                <div class="card">
+                                                                                                    <div class="card-body text-center">
+                                                                                                        <div style="text-align:right">
+                                                                                                            <!--
+                                                                                                            <button type="button" class="btn btn-success btn-rounded btn-icon">
+                                                                                                                <i class="mdi mdi-lead-pencil"></i>
+                                                                                                            </button>
+                                                                                                            -->
+                                                                                                            <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                                            <!--
+                                                                                                            <button type="button" class="btn btn-danger btn-rounded btn-icon" >
+                                                                                                                <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
+                                                                                                                <i class="mdi mdi-close"></i>
+                                                                                                            </button>
+                                                                                                            -->
+                                                                                                            <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
+                                                                                                        </div>
 
+                                                                                                        <div >
 
+                                                                                                   
+                                                                                                            <h4 th:text="${ins.nombreProveedor}"></h4>
+                                                                                                            <p th:text="${ins.tipoProveedor}" class="text-muted mb-0">Tipo proveedor</p>
 
-                                                                <div class="col-md-8">
-                                                                    <!---inicio fila de los filtros-->
-                                                                  
-                                                                        <!--fin filtro de tipos--->
-                                                                        <!--inicio filtro nombre--->
+                                                                                                        </div>
+                                                                                                        <p th:text="${ins.categoriaProveedor}" class="mt-2 card-text">
+                                                                                                            Zanahoria especial sabor zanagoria
+                                                                                                        </p>
+                                                                                                        <div class="border-top pt-3">
+                                                                                                            <div class="row">
+                                                                                                                <div class="col-12">
 
-                                                                        <!--fin filtro nombre--->
-                                                                        <!--inicio vista tipos--->
-                                                                        <div class="col-md-1 grid-margin mt-4">
-                                                                            <div class="btn-group mt-2" role="group" aria-label="Basic example">
-                                                                                <button onclick="verCard()" type="button" class="btn btn-primary">
-                                                                                    <i class="mdi mdi-grid"></i>
-                                                                                </button>
-                                                                                <button onclick="verTabla()" type="button" class="btn btn-primary">
-                                                                                    <i class="mdi mdi-format-list-bulleted"></i>
-                                                                                </button>
+                                                                                                                    <p th:text="${ins.correoProveedor}" class="mt-2 card-text">Correo</p>
+                                                                                                                </div>
+                                                                                                                <div class="col-12">
+
+                                                                                                                    <p th:text="${ins.celularProveedor}" class="mt-2 card-text">Celular</p>
+                                                                                                                </div>
+                                                                                                                <div class="col-12">
+
+                                                                                                     
+                                                                                                                </div>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                                                    <div class="media">
+                                                                                        <div class="table-responsive">
+                                                                                            <table id="order-listing" class="table">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th>Order #</th>
+                                                                                                        <th>Purchased On</th>
+                                                                                                        <th>Customer</th>
+                                                                                                        <th>Ship to</th>
+                                                                                                        <th>Base Price</th>
+                                                                                                        <th>Purchased Price</th>
+                                                                                                        <th>Status</th>
+                                                                                                        <th>Actions</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tbody>
+                                                                                                        <tr th:each="ins: ${proveedores}">
+                                                                                                            <td th:text="${ins.nombreProveedor}">Oranges</td>
+                                                                                                            <td>2015/06/25</td>
+                                                                                                            <td>Tim</td>
+                                                                                                            <td>Italy</td>
+                                                                                                            <td>$6300</td>
+                                                                                                            <td>$2100</td>
+                                                                                                            <td>
+                                                                                                                <label class="badge badge-info">On-hold</label>
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <button class="btn btn-outline-primary">View</button>
+                                                                                                            </td>
+                                                                                                        </tr>
+
+                                                                                                    </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
                                                                             </div>
                                                                         </div>
-                                                                        <!--fin vista tipos--->
                                                                     </div>
-                                                                    <!---inicio fila de los filtros-->
+                                                                </div>
 
 
-                                                                    <div class="row">
 
-                                                                        <div id="cardReceta" class="card-columns">
 
-                                                                            <!--card inicio receta--->
-                                                                            <div class="card"  th:each="proveedor ${proveedor}"  >
-                                                                                <div class="card-body text-center">
-                                                                                    <div>
+                                                                
+                                                                <!---inicio fila de los filtros-->
 
-                                                                                        <h4 th:text="${proveedor.nombreProveedor}" >Nombre Proveedor</h4>
-                                                                                        <p class="text-muted mb-0"  >
-                                                                                            <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${proveedor.idProveedor}" >Primary</div>
-                                                                                            <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${proveedor.tipoProveedor}" >Tipo</div>
-                                                                                            <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${proveedor.categoriaProveedor}" >Tipo</div>
 
-                                                                                        </p>
-                                                                                    </div>
+                                                                <div class="row">
 
-                                                                                    <a th:href="@{/administrador_proveedor/loadEditarProveedor(idProveedor=${proveedor.idProveedor})}" class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</a>
-                                                                                    <a th:href="@{/administrador_proveedor/deleteProveedor(idProveedor=${proveedor.idProveedor})}" class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</a>
-                                                                                    <a th:href="@{/administrador_proveedor/proveedor(disponible='si')}" class="btn btn-info btn-sm mt-3 mb-4">Proveedor</a>
+                                                                    <div id="cardReceta" class="card-columns">
 
+                                                                        <!--card inicio receta--->
+                                                                        <div class="card"  th:each="proveedor ${proveedor}"  >
+                                                                            <div class="card-body text-center">
+                                                                                <div>
+
+                                                                                    <h4 th:text="${proveedor.nombreProveedor}" >Nombre Proveedor</h4>
+                                                                                    <p class="text-muted mb-0"  >
+                                                                                        <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${proveedor.idProveedor}" >Primary</div>
+                                                                                        <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${proveedor.tipoProveedor}" >Tipo</div>
+                                                                                        <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${proveedor.categoriaProveedor}" >Tipo</div>
+
+                                                                                    </p>
                                                                                 </div>
-                                                                            </div>
-                                                                            <!--card fin receta--->
 
+                                                                                <a th:href="@{/administrador_proveedor/loadEditarProveedor(idProveedor=${proveedor.idProveedor})}" class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</a>
+                                                                                <a th:href="@{/administrador_proveedor/deleteProveedor(idProveedor=${proveedor.idProveedor})}" class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</a>
+                                                                                <a th:href="@{/administrador_proveedor/proveedor(disponible='si')}" class="btn btn-info btn-sm mt-3 mb-4">Proveedor</a>
 
-                                                                        </div>
-
-
-                                                                        <div id="tablaReceta" class="col-md-12">
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <h4 class="card-title">Proveedores</h4>
-                                                                                    <div class="table-responsive">
-                                                                                        <table class="table table-striped">
-                                                                                            <thead>
-                                                                                                <tr  >
-                                                                                                    <th  >
-                                                                                                        Id
-                                                                                                    </th>
-                                                                                                    <th >
-                                                                                                        Rut
-                                                                                                    </th>
-                                                                                                    <th>
-                                                                                                        Nombre
-                                                                                                    </th>
-                                                                                                    <th>
-                                                                                                        Direccion 
-                                                                                                    </th>
-                                                                                                    <th>
-                                                                                                        Telefono
-                                                                                                    </th>
-                                                                                                    <th>
-                                                                                                        Contacto
-                                                                                                    </th>
-                                                                                                    <th>
-                                                                                                        Tipo
-                                                                                                    </th>
-                                                                                                    <th>
-                                                                                                        Correo
-                                                                                                    </th>
-                                                                                                    <th>
-                                                                                                        Celular
-                                                                                                    </th>
-                                                                                                    <th>
-                                                                                                        Categoria
-                                                                                                    </th>
-                                                                                                    <th>
-
-                                                                                                    </th>
-                                                                                                </tr>
-                                                                                            </thead>
-                                                                                            <tbody>
-                                                                                                <tr th:each="proveedor ${proveedores}" >
-                                                                                                    <td th:text="'#' + ${proveedor.idProveedor} ">
-                                                                                                        Id
-                                                                                                    </td>
-                                                                                                    <td th:text="'#' + ${proveedor.nombre}"   >
-                                                                                                        Nombre
-                                                                                                    </td>
-                                                                                                    <td th:text="${proveedor.direccionProveedor}" >
-                                                                                                        Direccion
-                                                                                                    </td>
-                                                                                                    <td th:text="${proveedor.telefonoProveedor}" >
-                                                                                                        Telefono
-                                                                                                    </td>
-                                                                                                    <td th:text= "${proveedor.contactoProveedor}" >
-                                                                                                        Contacto
-                                                                                                    </td >
-                                                                                                    <td th:text="${proveedor.tipoProveedor}">
-                                                                                                        Tipo
-                                                                                                    </td>
-                                                                                                    <td th:text="${proveedor.correoProveedor}">
-                                                                                                        Correo
-                                                                                                    </td>
-                                                                                                    <td th:text="${proveedor.celularProveedor}">
-                                                                                                        Celular
-                                                                                                    </td>
-                                                                                                    <td th:text="${proveedor.categoriaProveedor}">
-                                                                                                        Categoria
-                                                                                                    </td>
-
-                                                                                                    <td>
-                                                                                                        <div class="badge badge-outline-primary badge-pill" th:text="${proveedor.idProveedor}" >Primary</div>
-                                                                                                    </td>
-
-                                                                                                    <td>
-                                                                                                        <button class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</button>
-                                                                                                        <button class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</button>
-                                                                                                        <button class="btn btn-info btn-sm mt-3 mb-4">Proveedor</button>
-                                                                                                    </td>
-
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                </div>
                                                                             </div>
                                                                         </div>
-
+                                                                        <!--card fin receta--->
 
 
                                                                     </div>
+
+
+                                                                    <div id="tablaReceta" class="col-md-12">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Proveedores</h4>
+                                                                                <div class="table-responsive">
+                                                                                    <table class="table table-striped">
+                                                                                        <thead>
+                                                                                            <tr  >
+                                                                                                <th  >
+                                                                                                    Id
+                                                                                                </th>
+                                                                                                <th >
+                                                                                                    Rut
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    Nombre
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    Direccion 
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    Telefono
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    Contacto
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    Tipo
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    Correo
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    Celular
+                                                                                                </th>
+                                                                                                <th>
+                                                                                                    Categoria
+                                                                                                </th>
+                                                                                                <th>
+
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr th:each="proveedor ${proveedores}" >
+                                                                                                <td th:text="'#' + ${proveedor.idProveedor} ">
+                                                                                                    Id
+                                                                                                </td>
+                                                                                                <td th:text="'#' + ${proveedor.nombre}"   >
+                                                                                                    Nombre
+                                                                                                </td>
+                                                                                                <td th:text="${proveedor.direccionProveedor}" >
+                                                                                                    Direccion
+                                                                                                </td>
+                                                                                                <td th:text="${proveedor.telefonoProveedor}" >
+                                                                                                    Telefono
+                                                                                                </td>
+                                                                                                <td th:text= "${proveedor.contactoProveedor}" >
+                                                                                                    Contacto
+                                                                                                </td >
+                                                                                                <td th:text="${proveedor.tipoProveedor}">
+                                                                                                    Tipo
+                                                                                                </td>
+                                                                                                <td th:text="${proveedor.correoProveedor}">
+                                                                                                    Correo
+                                                                                                </td>
+                                                                                                <td th:text="${proveedor.celularProveedor}">
+                                                                                                    Celular
+                                                                                                </td>
+                                                                                                <td th:text="${proveedor.categoriaProveedor}">
+                                                                                                    Categoria
+                                                                                                </td>
+
+                                                                                                <td>
+                                                                                                    <div class="badge badge-outline-primary badge-pill" th:text="${proveedor.idProveedor}" >Primary</div>
+                                                                                                </td>
+
+                                                                                                <td>
+                                                                                                    <button class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</button>
+                                                                                                    <button class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</button>
+                                                                                                    <button class="btn btn-info btn-sm mt-3 mb-4">Proveedor</button>
+                                                                                                </td>
+
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+
 
                                                                 </div>
-                                                                <!--Form agegar-->
 
-                                                                <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
-                                                                <script th:src="@{/js/off-canvas.js}"></script>
-                                                                <script th:src="@{/js/hoverable-collapse.js}"></script>
-                                                                <script th:src="@{/js/template.js}"></script>
-                                                                <script th:src="@{/js/settings.js}"></script>
-                                                                <script th:src="@{/js/todolist.js}"></script>
-                                                                <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
-                                                                <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
-                                                                <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
-                                                                <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
-                                                                <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
-                                                                <script th:src="@{/vendors/moment/moment.min.js}"></script>
-                                                                <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
-                                                                <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
-                                                                <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
-                                                                <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
-                                                                <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
-                                                                <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
-                                                                <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
-                                                                <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
-                                                                <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
-                                                                <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
-                                                                <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
-                                                                <script th:src="@{/vendors/inputmask/phone.js}"></script>
-                                                                <!-- End plugin js for this page -->
-                                                                <!-- Custom js for this page-->
-                                                                <script th:src="@{/js/formpickers.js}"></script>
-                                                                <script th:src="@{/js/form-addons.js}"></script>
-                                                                <script th:src="@{/js/x-editable.js}"></script>
-                                                                <script th:src="@{/js/dropify.js}"></script>
-                                                                <script th:src="@{/js/dropzone.js}"></script>
-                                                                <script th:src="@{/js/jquery-file-upload.js}"></script>
-                                                                <script th:src="@{/js/formpickers.js}"></script>
-                                                                <script th:src="@{/js/form-repeater.js}"></script>
-                                                                <!-- End custom js for this page-->
-                                                                <!-- plugin js for this page -->
-                                                                <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
-                                                                <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
-                                                                <script th:src="@{/js/data-table.js}"></script>
+                                                            </div>
+                                                            <!--Form agegar-->
 
-                                                                <!--validate form--->
-                                                                <script th:src="@{/custom/formularios.js}"></script>
+                                                            <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+                                                            <script th:src="@{/js/off-canvas.js}"></script>
+                                                            <script th:src="@{/js/hoverable-collapse.js}"></script>
+                                                            <script th:src="@{/js/template.js}"></script>
+                                                            <script th:src="@{/js/settings.js}"></script>
+                                                            <script th:src="@{/js/todolist.js}"></script>
+                                                            <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+                                                            <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+                                                            <script th:src="@{/vendors/moment/moment.min.js}"></script>
+                                                            <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+                                                            <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+                                                            <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+                                                            <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+                                                            <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/phone.js}"></script>
+                                                            <!-- End plugin js for this page -->
+                                                            <!-- Custom js for this page-->
+                                                            <script th:src="@{/js/formpickers.js}"></script>
+                                                            <script th:src="@{/js/form-addons.js}"></script>
+                                                            <script th:src="@{/js/x-editable.js}"></script>
+                                                            <script th:src="@{/js/dropify.js}"></script>
+                                                            <script th:src="@{/js/dropzone.js}"></script>
+                                                            <script th:src="@{/js/jquery-file-upload.js}"></script>
+                                                            <script th:src="@{/js/formpickers.js}"></script>
+                                                            <script th:src="@{/js/form-repeater.js}"></script>
+                                                            <!-- End custom js for this page-->
+                                                            <!-- plugin js for this page -->
+                                                            <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
+                                                            <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
+                                                            <script th:src="@{/js/data-table.js}"></script>
 
-                                                                <script type="text/javascript" >
-                                                                    var formularioPassword = document.getElementsByName("formProveedor")[0];
-                                                                    validatorForms(formularioPassword);
-                                                                </script>
-                                                                <script type="text/javascript" >
-                                                                    var formularioPassword = document.getElementsByName("formProveedor")[0];
-                                                                    validatorForms(formularioPassword);
-                                                                </script>
+                                                            <!--validate form--->
+                                                            <script th:src="@{/custom/formularios.js}"></script>
 
-                                                                <script src="text/javascript">
-                                                                    dropify.dropify({
-                                                                        "defaultFile": "full path file",
-                                                                        "messages": {
-                                                                            default: 'Arrastre un archivo o haga clic aquí',
-                                                                            replace: 'Arrastre un archivo o haga clic en reemplazar',
-                                                                            remove: 'Eliminar',
-                                                                            error: 'Lo sentimos, el archivo demasiado grande'
-                                                                        }
-                                                                    });
-                                                                </script>
+                                                            <script type="text/javascript" >
+                                                                var formularioPassword = document.getElementsByName("formProveedor")[0];
+                                                                validatorForms(formularioPassword);
+                                                            </script>
+                                                            <script type="text/javascript" >
+                                                                var formularioPassword = document.getElementsByName("formProveedor")[0];
+                                                                validatorForms(formularioPassword);
+                                                            </script>
+
+                                                            <script src="text/javascript">
+                                                                dropify.dropify({
+                                                                    "defaultFile": "full path file",
+                                                                    "messages": {
+                                                                        default: 'Arrastre un archivo o haga clic aquí',
+                                                                        replace: 'Arrastre un archivo o haga clic en reemplazar',
+                                                                        remove: 'Eliminar',
+                                                                        error: 'Lo sentimos, el archivo demasiado grande'
+                                                                    }
+                                                                });
+                                                            </script>
 
 
 
-                                                                </body>
+                                                            </body>
 
-                                                                </html>
+                                                            </html>
