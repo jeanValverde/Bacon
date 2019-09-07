@@ -7,6 +7,7 @@ package com.restaurante.bacon.service;
 
 import com.restaurante.bacon.dao.IInsumoDao;
 import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dao.ProcedureQueryInsumo;
 import com.restaurante.bacon.dto.Insumo;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -26,15 +27,19 @@ public class InsumoService {
     @Autowired
     IInsumoDao insumoDao;
     @Autowired
-    ProcedureQuery procedureQuery;
+    ProcedureQueryInsumo procedureQueryInsumo;
     
     //se implementan los metodos declarados en la interfaz 
    
     public boolean ingresarInsumo(Insumo insumo) {
-        return this.procedureQuery.InsertInsumo(insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
+        return this.procedureQueryInsumo.InsertInsumo(insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
+         
     }
     public boolean modificarInsumo(Insumo insumo) {
-        return this.procedureQuery.UpdateInsumo(insumo.getIdInsumo(),insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
+        return this.procedureQueryInsumo.UpdateInsumo(insumo.getIdInsumo(),insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
+    }
+    public boolean eliminarInsumo(Integer id) {
+        return this.procedureQueryInsumo.DeleteInsumo(id);
     }
     
     public Insumo retornarInsumoById(Integer  idInsumo){
@@ -46,13 +51,13 @@ public class InsumoService {
         return this.insumoDao.findAll();
     }
      public List<Insumo> filtrarInsumosByNombre(String nombreInsumo) {
-        return this.procedureQuery.filtrarInsumosByNombre(nombreInsumo);
+        return this.procedureQueryInsumo.filtrarInsumosByNombre(nombreInsumo);
     }
      public List<Insumo> filtrarInsumosByStock(BigInteger stock) {
-        return this.procedureQuery.filtrarInsumosByStock(stock);
+        return this.procedureQueryInsumo.filtrarInsumosByStock(stock);
     }
      public List<Insumo> filtrarInsumosByUnidadMedida(String unidad) {
-        return this.procedureQuery.filtrarInsumosByUnidadMedida(unidad);
+        return this.procedureQueryInsumo.filtrarInsumosByUnidadMedida(unidad);
     }
    
    

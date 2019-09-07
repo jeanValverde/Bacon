@@ -61,12 +61,14 @@
                     <div class="content-wrapper">
                         <div class="row">
                             <div th:if="${agregar}" class="col-lg-4 grid-margin stretch-card">
+                                <input type="hidden" id="agrego" value="${agrego}"/>
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">Agregar Insumo</h4>
-                                        <form  th:action="@{/administrador/ingresar_insumo}" name="formAgregarInsumo" enctype="multipart/form-data" method="post">
+                                        <form  th:action="@{/administrador/insumo/agregar_insumo}" name="formAgregarInsumo" enctype="multipart/form-data" method="post">
                                             <div class="row">
                                                 <div class="col-lg-12" >
+                                                    
                                                     <div class="form-group">
                                                         <label for="exampleInputUsername1" >Nombre</label>
                                                         <input type="text" class="form-control" id="nombre" name="nombre"/>
@@ -119,12 +121,13 @@
                                                 <div class="col-lg-6" >
                                                     <div class="form-group">
                                                         <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
-                                                        <input type="file" class="dropify" id="foto" name="imagenInsumo"/>
+                                                        <input required type="file" class="dropify" id="foto" name="imagenInsumo"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12" style="margin-top: 30px;text-align:center">
                                                     <button type="submit" class="btn btn-success btn-rounded btn-fw">Registrar</button>
                                                 </div>
+                                                
                                             </div>
                                         </form>
                                     </div>
@@ -135,8 +138,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">Modificar Insumo</h4>
-                                        <form  th:action="@{/administrador/modificar_insumo}" name="formModificarInsumo" enctype="multipart/form-data" method="post">
+                                        <form  th:action="@{/administrador/insumo/modificar_insumo}" name="formModificarInsumo" enctype="multipart/form-data" method="post">
+                                            <input type="hidden" id="modifico" value="${modifico}"/>
                                             <div class="row">
+                                                
                                                 <div class="col-lg-12" >
                                                     <input th:value="${insumo.idInsumo}"  type="hidden" name="id"/>
                                                     <div class="form-group">
@@ -175,12 +180,15 @@
                                                 <div class="col-lg-6" >
                                                     <div class="form-group">
                                                         <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
-                                                        <input type="file" th:data-default-file="@{/uploads/}+${insumo.fotoInsumo}" class="dropify" id="imagenInsumo" name="imagenInsumo" />
+                                                        <input type="file" accept="image/png, .jpeg, .jpg, image/gif" src="@{/uploads/}+${insumo.fotoInsumo}" th:value="@{/uploads/}+${insumo.fotoInsumo}" th:data-default-file="@{/uploads/}+${insumo.fotoInsumo}" class="dropify" id="imagenInsumo" name="imagenInsumo" />
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12" style="margin-top: 30px;text-align:center">
                                                     <button type="submit" class="btn btn-success btn-rounded btn-fw">Actualizar</button>
                                                 </div>
+                                                
+                                                
                                             </div>
                                         </form>
                                     </div>
@@ -191,8 +199,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h3 class="card-title">Insumos</h3>
-                                        <form  th:action="@{/administrador/buscar_por_filtro}"  enctype="multipart/form-data" method="post">
-
+                                        <form  th:action="@{/administrador/insumo/buscar_por_filtro}"  enctype="multipart/form-data" method="post">
+                                            
+                                            <input type="hidden" id="modifico" value="${modifico}"/>
+                                            
                                             <div class="row">
                                                 <div class="col-2">
                                                     <h5 >Buscar por: </h5>
@@ -228,23 +238,20 @@
                                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                                 <div class="media">
                                                     <div  class="row">
-                                                        <div th:each="ins: ${insumos}" class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                                                        <div style="padding: 5px" th:each="ins: ${insumos}" class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
                                                             <div class="card">
                                                                 <div class="card-body text-center">
                                                                     <div style="text-align:right">
-                                                                        <!--
-                                                                        <button type="button" class="btn btn-success btn-rounded btn-icon">
-                                                                            <i class="mdi mdi-lead-pencil"></i>
-                                                                        </button>
-                                                                        -->
-                                                                        <a  th:href="@{/administrador/cargar_insumo(idInsumo=${ins.idInsumo})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
+                                                                        
+                                                                        
+                                                                        <a  th:href="@{/administrador/insumo/cargar_insumo(idInsumo=${ins.idInsumo})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
                                                                         <!--
                                                                         <button type="button" class="btn btn-danger btn-rounded btn-icon" >
                                                                             <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
                                                                             <i class="mdi mdi-close"></i>
                                                                         </button>
                                                                         -->
-                                                                        <a  th:href="@{/administrador/eliminar_insumo(idInsumo=${ins.idInsumo})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
+                                                                        <a  th:href="@{/administrador/insumo/eliminar_insumo(idInsumo=${ins.idInsumo},nombreFoto=${ins.fotoInsumo})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
                                                                     </div>
                                                                     <div >
                                                                         <img th:src="@{/uploads/}+${ins.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/>
@@ -259,15 +266,15 @@
                                                                         <div class="row">
                                                                             <div class="col-12">
 
-                                                                                <h6>Stock actual: </h6>4
+                                                                                <h6>Stock actual: </h6><label>[[${ins.stockInsumo}]]</label>
                                                                             </div>
                                                                             <div class="col-12">
 
-                                                                                <h6>Stock minimo: </h6>5
+                                                                                <h6>Stock minimo: </h6><label>[[${ins.minimoStockInsumo}]]</label>
                                                                             </div>
                                                                             <div class="col-12">
 
-                                                                                <h6>Stock maximo: </h6>6
+                                                                                <h6>Stock maximo: </h6><label>[[${ins.maximoStockInsumo}]]</label>
                                                                             </div>
 
                                                                         </div>
@@ -276,6 +283,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -284,30 +292,32 @@
                                                         <table id="order-listing" class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Order #</th>
-                                                                    <th>Purchased On</th>
-                                                                    <th>Customer</th>
-                                                                    <th>Ship to</th>
-                                                                    <th>Base Price</th>
-                                                                    <th>Purchased Price</th>
-                                                                    <th>Status</th>
-                                                                    <th>Actions</th>
+                                                                    <th>Nombre</th>
+                                                                    <th>Descripción</th>
+                                                                    <th>Unidad medida</th>
+                                                                    <th>Stock</th>
+                                                                    <th>Stock minimo</th>
+                                                                    <th>Stock maximo</th>
+                                                                    <th>Foto</th>
+                                                                    <th></th>
+                                                                    <th></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                             <tbody>
                                                                 <tr th:each="ins: ${insumos}">
-                                                                    <td th:text="${ins.nombreInsumo}">Oranges</td>
-                                                                    <td>2015/06/25</td>
-                                                                    <td>Tim</td>
-                                                                    <td>Italy</td>
-                                                                    <td>$6300</td>
-                                                                    <td>$2100</td>
+                                                                    <td th:text="${ins.nombreInsumo}"></td>
+                                                                    <td th:text="${ins.descripcionInsumo}"></td>
+                                                                    <td th:text="${ins.unidadMedidaInsumo}"></td>
+                                                                    <td th:text="${ins.stockInsumo}"></td>
+                                                                    <td th:text="${ins.minimoStockInsumo}"></td>
+                                                                    <td th:text="${ins.maximoStockInsumo}"></td>
+                                                                    <td><img th:src="@{/uploads/}+${ins.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/></td>
                                                                     <td>
-                                                                        <label class="badge badge-info">On-hold</label>
+                                                                        <a  th:href="@{/administrador/insumo/cargar_insumo(idInsumo=${ins.idInsumo})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
                                                                     </td>
                                                                     <td>
-                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                        <a  th:href="@{/administrador/insumo/eliminar_insumo(idInsumo=${ins.idInsumo},nombreFoto=${ins.fotoInsumo})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -315,6 +325,18 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <nav aria-label="Page navigation example" id="paginacion">
+                                                <ul class="pagination">
+
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                </ul>
+                                            </nav>
                                         </div>
                                     </div>
                                 </div>
@@ -370,12 +392,17 @@
         <script th:src="@{/js/jquery-file-upload.js}"></script>
         <script th:src="@{/js/formpickers.js}"></script>
         <script th:src="@{/js/form-repeater.js}"></script>
+        <script th:src="@{/js/alerts.js}"></script>
         <!-- End custom js for this page-->
         <!-- plugin js for this page -->
         <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
         <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
         <script th:src="@{/js/data-table.js}"></script>
+        <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+        <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
 
+        <script th:src="@{/js/alerts_personalizado.js}"></script>
+        <script th:src="@{/js/avgrund.js}"></script>
         <!--validate form--->
         <script th:src="@{/custom/formularios.js}"></script>
 
@@ -384,21 +411,21 @@
             validatorForms(formularioPassword);
         </script>
         <script type="text/javascript" >
+            
+            var respuestAgrega = document.getElementById("agrego").value;
+            if(respuestAgrega.toString().equals("1")){
+                showSwal('success-message','Insumo agregado!','se ha registrado el insumo exitosamente');
+            } 
+        </script>
+        
+        
+        <script type="text/javascript" >
             var formularioPassword = document.getElementsByName("formModificarInsumo")[0];
             validatorForms(formularioPassword);
         </script>
 
-        <script src="text/javascript">
-            dropify.dropify({
-                "defaultFile": "full path file",
-                "messages": {
-                    default: 'Arrastre un archivo o haga clic aquí',
-                    replace: 'Arrastre un archivo o haga clic en reemplazar',
-                    remove: 'Eliminar',
-                    error: 'Lo sentimos, el archivo demasiado grande'
-                }
-            });
-        </script>
+
+       
     </body>
 
 </html>
