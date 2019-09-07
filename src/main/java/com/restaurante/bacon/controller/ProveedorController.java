@@ -105,7 +105,7 @@ public class ProveedorController {
             @RequestParam("nombreProveedor") String nombreProveedor,
             @RequestParam("direccionProveedor") String direccionProveedor,
             @RequestParam("telefonoProveedor") String telefonoProveedor,
-            @RequestParam("contactoProveedor") String contactoProveedor,
+            @RequestParam("contactoVenta") String contactoVenta,
             @RequestParam("tipoProveedor") String tipoProveedor,
             @RequestParam("correoProveedor") String correoProveedor,
             @RequestParam("celularProveedor") Integer celularProveedor,
@@ -122,7 +122,7 @@ public class ProveedorController {
         proveedor.setNombreProveedor(nombreProveedor);
         proveedor.setDireccionProveedor(direccionProveedor);
         proveedor.setTelefonoProveedor(telefonoProveedor);
-        proveedor.setContactoVenta(contactoProveedor);
+        proveedor.setContactoVenta(contactoVenta);
         proveedor.setTipoProveedor(tipoProveedor);
         proveedor.setCorreoProveedor(correoProveedor);
         proveedor.setCelularProveedor(celularProveedor);
@@ -136,6 +136,14 @@ public class ProveedorController {
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", personal);
+        
+         List<Proveedor> proveedores = new ArrayList<Proveedor>();
+        proveedores = this.proveedorService.listarProveedores();
+        //desarrollo aca 
+        modelo.addAttribute("proveedores", proveedores);
+        modelo.addAttribute("agregar", true);
+        
+        
         //
         //cargar el html nombre
         return "users/administrador/mantenedor_proveedor";
@@ -220,7 +228,7 @@ public class ProveedorController {
             @RequestParam("nombreProveedor") String nombreProveedor,
             @RequestParam("direccionProveedor") String direccionProveedor,
             @RequestParam("telefonoProveedor") String telefonoProveedor,
-            @RequestParam("contactoProveedor") String contactoProveedor,
+            @RequestParam("contactoVenta") String contactoVenta,
             @RequestParam("tipoProveedor") String tipoProveedor,
             @RequestParam("correoProveedor") String correoProveedor,
             @RequestParam("celularProveedor") Integer celularProveedor,
@@ -235,14 +243,14 @@ public class ProveedorController {
         proveedor.setNombreProveedor(nombreProveedor);
         proveedor.setDireccionProveedor(direccionProveedor);
         proveedor.setTelefonoProveedor(telefonoProveedor);
-        proveedor.setContactoVenta(contactoProveedor);
+        proveedor.setContactoVenta(contactoVenta);
         proveedor.setTipoProveedor(tipoProveedor);
         proveedor.setCorreoProveedor(correoProveedor);
         proveedor.setCelularProveedor(celularProveedor);
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
         
-        if(this.proveedorService.modificarProveedor(rutProveedor, nombreProveedor, direccionProveedor, telefonoProveedor, contactoProveedor, tipoProveedor, correoProveedor, celularProveedor, categoriaProveedor)){
+        if(this.proveedorService.modificarProveedor(rutProveedor, nombreProveedor, direccionProveedor, telefonoProveedor, contactoVenta, tipoProveedor, correoProveedor, celularProveedor, categoriaProveedor)){
         
             
         }else{

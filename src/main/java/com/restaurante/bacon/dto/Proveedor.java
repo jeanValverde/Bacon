@@ -87,7 +87,7 @@ public class Proveedor implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "CELULAR_PROVEEDOR")
-    private long celularProveedor;
+    private Integer celularProveedor;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -117,7 +117,7 @@ public class Proveedor implements Serializable {
         this.idProveedor = idProveedor;
     }
 
-    public Proveedor(BigDecimal idProveedor, String rutProveedor, String nombreProveedor, String direccionProveedor, String telefonoProveedor, String contactoVenta, String tipoProveedor, String correoProveedor, long celularProveedor, String categoriaProveedor) {
+    public Proveedor(BigDecimal idProveedor, String rutProveedor, String nombreProveedor, String direccionProveedor, String telefonoProveedor, String contactoVenta, String tipoProveedor, String correoProveedor, Integer celularProveedor, String categoriaProveedor) {
         this.idProveedor = idProveedor;
         this.rutProveedor = rutProveedor;
         this.nombreProveedor = nombreProveedor;
@@ -198,7 +198,7 @@ public class Proveedor implements Serializable {
         return celularProveedor;
     }
 
-    public void setCelularProveedor(long celularProveedor) {
+    public void setCelularProveedor(Integer celularProveedor) {
         this.celularProveedor = celularProveedor;
     }
 
