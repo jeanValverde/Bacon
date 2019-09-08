@@ -166,6 +166,7 @@ public class ProveedorController {
         //despachos 
         //fin despacho 
         //siempre despachar esto por la sesion 
+        modelo.addAttribute("agregar", true);
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/mantenedor_proveedor";
@@ -187,15 +188,10 @@ public class ProveedorController {
         List<Proveedor> proveedores = this.proveedorService.listarProveedores();
 
         modelo.addAttribute("provedores", proveedores);
-
-        modelo.addAttribute("proveedoresEdit", proveedores);
+        modelo.addAttribute("modificar",true);
 
         modelo.addAttribute("tipoForm", "editar");
 
-        //fin desarrollo 
-        //despachos 
-        //fin despacho 
-        //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
 
@@ -223,7 +219,7 @@ public class ProveedorController {
     }
     
      @RequestMapping("/modificar_proveedor")
-    public String modificar_proveedor(Model modelo, @RequestParam("idProveedor") BigDecimal idProveedor,
+    public String modificar_proveedor(Model modelo, @RequestParam("idProveedor") Integer idProveedor,
              @RequestParam("rutProveedor") String rutProveedor,
             @RequestParam("nombreProveedor") String nombreProveedor,
             @RequestParam("direccionProveedor") String direccionProveedor,
@@ -250,7 +246,7 @@ public class ProveedorController {
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
         
-        if(this.proveedorService.modificarProveedor(rutProveedor, nombreProveedor, direccionProveedor, telefonoProveedor, contactoVenta, tipoProveedor, correoProveedor, celularProveedor, categoriaProveedor)){
+        if(this.proveedorService.modificarProveedor(idProveedor,rutProveedor, nombreProveedor, direccionProveedor, telefonoProveedor, contactoVenta, tipoProveedor, correoProveedor, celularProveedor, categoriaProveedor)){
         
             
         }else{

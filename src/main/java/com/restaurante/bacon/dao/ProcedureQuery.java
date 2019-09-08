@@ -16,6 +16,7 @@ import static com.restaurante.bacon.dto.Proveedor.P_RUT_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TIPO_PROVEEDOR;
 import com.restaurante.bacon.dto.CategoriaReceta;
+import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
 import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -96,10 +97,11 @@ public class ProcedureQuery {
         }
     }
     
-     public boolean UpdateProveedor(String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria) {
+     public boolean UpdateProveedor(Integer id,String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("UpdateProveedor")
+                    .setParameter(P_ID_PROVEEDOR, id)
                     .setParameter(P_RUT_PROVEEDOR, rut)
                     .setParameter(P_NOMBRE_PROVEEDOR, nombre)
                     .setParameter(P_DIRECCION_PROVEEDOR, direccion)

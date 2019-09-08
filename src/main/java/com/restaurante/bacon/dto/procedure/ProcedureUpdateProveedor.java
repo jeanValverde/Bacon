@@ -10,6 +10,7 @@ import static com.restaurante.bacon.dto.Proveedor.P_CELULAR_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_CONTACTO_VENTA;
 import static com.restaurante.bacon.dto.Proveedor.P_CORREO_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_DIRECCION_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_NOMBRE_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_RUT_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
@@ -37,6 +38,8 @@ import lombok.Setter;
         {
             @NamedStoredProcedureQuery(name = "UpdateProveedor", procedureName = "PACKAGE_PROVEEDOR.PR_MODIFICAR_PROVEEDOR",
                     parameters = {
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ID_PROVEEDOR, type = Integer.class)
+                        ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_RUT_PROVEEDOR, type = String.class)
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_NOMBRE_PROVEEDOR, type = String.class)
