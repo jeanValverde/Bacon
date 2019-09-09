@@ -57,10 +57,9 @@ public class BaconApplication {
 
     }
 
-<<<<<<< HEAD
     }
-=======
-}
->>>>>>> origin/Jean
+
+
+
 
 
