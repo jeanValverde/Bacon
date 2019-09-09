@@ -35,8 +35,10 @@ public class ProveedorService {
         return this.procedureQuery.InsertProveedor(rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
     }
     
+
     public boolean modificarProveedor(BigDecimal idProveedor,String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria){
         return this.procedureQuery.UpdateProveedor(idProveedor,rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
+
     }
 
     public List<Proveedor> listarProveedores() {

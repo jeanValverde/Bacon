@@ -40,6 +40,7 @@ import lombok.Setter;
             @NamedStoredProcedureQuery(name = "UpdateProveedor", procedureName = "PACKAGE_PROVEEDOR.PR_MODIFICAR_PROVEEDOR",
                     parameters = {
                         @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ID_PROVEEDOR, type = BigDecimal.class)
+
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_RUT_PROVEEDOR, type = String.class)
                         ,

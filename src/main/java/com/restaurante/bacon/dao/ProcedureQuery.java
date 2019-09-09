@@ -97,7 +97,9 @@ public class ProcedureQuery {
         }
     }
     
-     public boolean UpdateProveedor(BigDecimal idProveedor, String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria) {
+
+  
+     public boolean UpdateProveedor(BigDecimal idProveedor,String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("UpdateProveedor")
@@ -118,6 +120,7 @@ public class ProcedureQuery {
             return false;
         }
     }
+
 
     @SuppressWarnings("unchecked")
     public boolean DeleteProveedorById(Integer id) {

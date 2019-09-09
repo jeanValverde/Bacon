@@ -166,6 +166,7 @@ public class ProveedorController {
         //despachos 
         //fin despacho 
         //siempre despachar esto por la sesion 
+        modelo.addAttribute("agregar", true);
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/mantenedor_proveedor";
@@ -187,15 +188,10 @@ public class ProveedorController {
         List<Proveedor> proveedores = this.proveedorService.listarProveedores();
 
         modelo.addAttribute("provedores", proveedores);
-
-        modelo.addAttribute("proveedoresEdit", proveedores);
+        modelo.addAttribute("modificar",true);
 
         modelo.addAttribute("tipoForm", "editar");
 
-        //fin desarrollo 
-        //despachos 
-        //fin despacho 
-        //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
 
