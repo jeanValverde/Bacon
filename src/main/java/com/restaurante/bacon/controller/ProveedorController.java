@@ -237,20 +237,10 @@ public class ProveedorController {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         
-        Proveedor proveedor = new Proveedor();
-       
-       proveedor.setRutProveedor(rutProveedor);
-        proveedor.setNombreProveedor(nombreProveedor);
-        proveedor.setDireccionProveedor(direccionProveedor);
-        proveedor.setTelefonoProveedor(telefonoProveedor);
-        proveedor.setContactoVenta(contactoVenta);
-        proveedor.setTipoProveedor(tipoProveedor);
-        proveedor.setCorreoProveedor(correoProveedor);
-        proveedor.setCelularProveedor(celularProveedor);
-        proveedor.setCategoriaProveedor(categoriaProveedor);
+      
         
         
-        if(this.proveedorService.modificarProveedor(rutProveedor, nombreProveedor, direccionProveedor, telefonoProveedor, contactoVenta, tipoProveedor, correoProveedor, celularProveedor, categoriaProveedor)){
+        if(this.proveedorService.modificarProveedor(idProveedor,rutProveedor, nombreProveedor, direccionProveedor, telefonoProveedor, contactoVenta, tipoProveedor, correoProveedor, celularProveedor, categoriaProveedor)){
         
             
         }else{
