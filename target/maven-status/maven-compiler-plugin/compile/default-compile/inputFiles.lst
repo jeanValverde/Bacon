@@ -12,6 +12,7 @@ C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalProv
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IInsumoDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoProveedor.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\EgresoStock.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertMesa.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrdenada.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\RolService.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQuery.java
@@ -34,6 +35,8 @@ C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\PersonalService
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\ControlCaja.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Insumo.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\config\UserRol.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryMesa.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\MesaService.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ICategoriaRecetaDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureDeletetInsumo.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\RecetaService.java
@@ -44,8 +47,10 @@ C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\BoletaControl.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\config\WebSecurityConfig.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IRecetaDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\MesaController.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Boleta.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Mesa.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IMesaDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\exceptions\IllegalOrphanException.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\config\WebConfig.java
