@@ -14,6 +14,7 @@ _Este proyecto WEB contiene._
 * [Spring Security](https://spring.io/projects/spring-security) 
 * [Spring Data JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
 * [Project Lombok](https://mvnrepository.com/artifact/org.projectlombok/lombok)
+* [Validador HTML Bootstrap](https://github.com/jeanValverde/validarFormularioConBootstrap)
 
 ### Pre-requisitos 📋
 
@@ -30,6 +31,13 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 ```
 mvn install:install-file -Dfile=ojdbc7.jar -DgroupId=com.oracle -DartifactId=ojdbc7 -Dversion=12.1.0 -Dpackaging=jar
 ```
+
+* **En el navegador** 
+
+```
+http://localhost:8034/
+```
+
 
 Mira **Deployment** para conocer como desplegar el proyecto.
 
