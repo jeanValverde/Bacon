@@ -59,8 +59,8 @@ public class MesaController {
         
     }
     
-    @RequestMapping("/mantenedorMesas")
-    public String mantenedorMesa(Model model){
+    @RequestMapping("/mesas")
+    public String mesas(Model model){
         
         //sesion 
         UserRol user = new UserRol();
