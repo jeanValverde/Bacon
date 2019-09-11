@@ -141,16 +141,6 @@ public class Mesa implements Serializable {
         return "com.restaurante.bacon.dto.Mesa[ idMesa=" + idMesa + " ]";
     }
 
-    public void setNumeroMesa(Integer numeroMesa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setCantidadAsientosMesa(Integer cantidadAsientosMesa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void setEstadoMesa(Integer estadoMesa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
     
 }

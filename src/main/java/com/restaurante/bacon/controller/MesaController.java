@@ -11,6 +11,7 @@ import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.service.MesaService;
 import com.restaurante.bacon.service.PersonalService;
 import java.io.IOException;
+import java.math.BigInteger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,7 @@ public class MesaController {
     public String addMesa(Model model,
             @RequestParam("numeroMesa") Integer numeroMesa,
             @RequestParam("cantidadAsientosMesa") Integer cantidadAsientosMesa,
-            @RequestParam("estadoMesa") Integer estadoMesa) throws IOException{
+            @RequestParam("estadoMesa") Integer estadoMesa) {
         
         //sesion 
         UserRol user = new UserRol();
@@ -48,13 +49,16 @@ public class MesaController {
         
         Mesa mesa = new Mesa();
         
-        mesa.setNumeroMesa(numeroMesa);
-        mesa.setCantidadAsientosMesa(cantidadAsientosMesa);
-        mesa.setEstadoMesa(estadoMesa);
         
-        //this.mesaService.add(mesa);
+        mesa.setNumeroMesa(BigInteger.valueOf(numeroMesa)); 
+        mesa.setCantidadAsientosMesa(BigInteger.valueOf(cantidadAsientosMesa));
+        mesa.setEstadoMesa(BigInteger.valueOf(estadoMesa));
         
-        model.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+ 
+        this.mesaService.add(mesa);
+        
+        model.addAttribute("personalSesion", personal );
+        
         return "users/administrador/mantenedorMesa";
         
     }
