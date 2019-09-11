@@ -13,10 +13,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.restaurante.bacon.dao.IPersonalDao;
+import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dto.ControlCaja;
+import com.restaurante.bacon.dto.Rol;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import org.springframework.security.core.GrantedAuthority;
@@ -40,7 +45,8 @@ public class PersonalService implements UserDetailsService {
     //se obtienen los metodos generados automaticamente por la interfaz
     @Autowired
     IPersonalDao personalDao;
-
+    @Autowired
+    ProcedureQuery procedureQuery;
     //se implementa el metodo de la interfaz 
     public List<Personal> getAllUsuario() {
         return this.personalDao.findAll();
@@ -55,7 +61,9 @@ public class PersonalService implements UserDetailsService {
     public Personal addPersonal(Personal personal) {
         return this.personalDao.save(personal);
     }
-
+    
+//        public Personal addPersonal(String rutPersonal,String nombresPersonal,String apePaternoPersonal,String apeMaternoPersonal,Date fechaNacimientoPersonal,String celularPersonal,String correoPersonal,String contrasenaPersonal,BigInteger estadoPersonal,Collection<ControlCaja> controlCajaCollection,Rol idRol) {
+//        return this.procedureQuery
     //busca al personal de la sesión activa segun el rut 
     //elimina la contraseña para mantener la seguridad de la página 
     public Personal getPersonalSesion(String rut) {
@@ -131,5 +139,7 @@ public class PersonalService implements UserDetailsService {
         }
         return fechaDate;
     }
+    
+    
 
 }
