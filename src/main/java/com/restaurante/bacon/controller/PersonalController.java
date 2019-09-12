@@ -102,7 +102,7 @@ public class PersonalController {
         return "users/administrador/mantenedorReceta";
     }
 
-    @RequestMapping("/filtro")
+    @RequestMapping("/Recetafiltro")
     public String filtro(Model modelo, @RequestParam("nombreReceta") String nombreReceta) {
         //sesion 
         UserRol user = new UserRol();
