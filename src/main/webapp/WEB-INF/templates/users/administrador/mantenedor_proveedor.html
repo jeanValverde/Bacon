@@ -336,30 +336,34 @@
                                                                                             <table id="order-listing" class="table">
                                                                                                 <thead>
                                                                                                     <tr>
-                                                                                                        <th>Order #</th>
-                                                                                                        <th>Purchased On</th>
-                                                                                                        <th>Customer</th>
-                                                                                                        <th>Ship to</th>
-                                                                                                        <th>Base Price</th>
-                                                                                                        <th>Purchased Price</th>
-                                                                                                        <th>Status</th>
-                                                                                                        <th>Actions</th>
+                                                                                                        <th>Rut</th>
+                                                                                                        <th>Nombre</th>
+                                                                                                        <th>Direccion </th>
+                                                                                                        <th>Telefono</th>
+                                                                                                        <th>Contacto</th>
+                                                                                                        <th>Tipo</th>
+                                                                                                        <th>Correo</th>
+                                                                                                        <th>Celular</th>
+                                                                                                        <th>Categoria</th>
                                                                                                     </tr>
                                                                                                 </thead>
                                                                                                 <tbody>
                                                                                                     <tbody>
                                                                                                         <tr th:each="ins: ${proveedores}">
-                                                                                                            <td th:text="${ins.nombreProveedor}">Oranges</td>
-                                                                                                            <td>2015/06/25</td>
-                                                                                                            <td>Tim</td>
-                                                                                                            <td>Italy</td>
-                                                                                                            <td>$6300</td>
-                                                                                                            <td>$2100</td>
+                                                                                                            <td th:text="${ins.rutProveedor}"></td>
+                                                                                                            <td th:text="${ins.nombreProveedor}"></td>
+                                                                                                            <td th:text="${ins.direccionProveedor}"></td>
+                                                                                                            <td th:text="${ins.telefonoProveedor}"></td>
+                                                                                                            <td th:text="${ins.contactoVenta}"></td>
+                                                                                                            <td th:text="${ins.tipoProveedor}"></td>
+                                                                                                            <td th:text="${ins.correoProveedor}"></td>
+                                                                                                            <td th:text="${ins.celularProveedor}"></td>
+                                                                                                            <td th:text="${ins.categoriaProveedor}"></td>
                                                                                                             <td>
-                                                                                                                <label class="badge badge-info">On-hold</label>
+                                                                                                                <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
                                                                                                             </td>
                                                                                                             <td>
-                                                                                                                <button class="btn btn-outline-primary">View</button>
+                                                                                                                <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
                                                                                                             </td>
                                                                                                         </tr>
 
@@ -373,6 +377,9 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                
+                                                                </div>
+                                                                
 
 
 
@@ -381,127 +388,10 @@
                                                                 <!---inicio fila de los filtros-->
 
 
-                                                                <div class="row">
-<!--
-                                                                    <div id="cardReceta" class="card-columns">
-
-                                                                        
-                                                                        <div class="card"  th:each="proveedor ${proveedores}"  >
-                                                                            <div class="card-body text-center">
-                                                                                <div>
-
-                                                                                    <h4 th:text="${proveedor.nombreProveedor}" >Nombre Proveedor</h4>
-                                                                                    <p class="text-muted mb-0"  >
-                                                                                        <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${proveedor.idProveedor}" >Primary</div>
-                                                                                        <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${proveedor.tipoProveedor}" >Tipo</div>
-                                                                                        <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${proveedor.categoriaProveedor}" >Tipo</div>
-
-                                                                                    </p>
-                                                                                </div>
-
-                                                                                <a th:href="@{/administrador_proveedor/loadEditarProveedor(idProveedor=${proveedor.idProveedor})}" class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</a>
-                                                                                <a th:href="@{/administrador_proveedor/deleteProveedor(idProveedor=${proveedor.idProveedor})}" class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</a>
-                                                                                <a th:href="@{/administrador_proveedor/proveedor(disponible='si')}" class="btn btn-info btn-sm mt-3 mb-4">Proveedor</a>
-
-                                                                            </div>
-                                                                        </div>
-                                                                        
-                                                                        --->
+                                         
 
 
-                                                                    </div>
-
-
-                                                                    <div id="tablaReceta" class="col-md-12">
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <h4 class="card-title">Proveedores</h4>
-                                                                                <div class="table-responsive">
-                                                                                    <table class="table table-striped">
-                                                                                        <thead>
-                                                                                            <tr  >
-                                                                                                <th  >
-                                                                                                    Id
-                                                                                                </th>
-                                                                                                <th >
-                                                                                                    Rut
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    Nombre
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    Direccion 
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    Telefono
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    Contacto
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    Tipo
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    Correo
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    Celular
-                                                                                                </th>
-                                                                                                <th>
-                                                                                                    Categoria
-                                                                                                </th>
-                                                                                                <th>
-
-                                                                                                </th>
-                                                                                            </tr>
-                                                                                        </thead>
-                                                                                        <tbody>
-                                                                                            <tr th:each="proveedor ${proveedores}" >
-                                                                                                <td th:text="'#' + ${proveedor.idProveedor} ">
-                                                                                                    Id
-                                                                                                </td>
-                                                                                                <td th:text="'#' + ${proveedor.nombre}"   >
-                                                                                                    Nombre
-                                                                                                </td>
-                                                                                                <td th:text="${proveedor.direccionProveedor}" >
-                                                                                                    Direccion
-                                                                                                </td>
-                                                                                                <td th:text="${proveedor.telefonoProveedor}" >
-                                                                                                    Telefono
-                                                                                                </td>
-                                                                                                <td th:text= "${proveedor.contactoProveedor}" >
-                                                                                                    Contacto
-                                                                                                </td >
-                                                                                                <td th:text="${proveedor.tipoProveedor}">
-                                                                                                    Tipo
-                                                                                                </td>
-                                                                                                <td th:text="${proveedor.correoProveedor}">
-                                                                                                    Correo
-                                                                                                </td>
-                                                                                                <td th:text="${proveedor.celularProveedor}">
-                                                                                                    Celular
-                                                                                                </td>
-                                                                                                <td th:text="${proveedor.categoriaProveedor}">
-                                                                                                    Categoria
-                                                                                                </td>
-
-                                                                                                <td>
-                                                                                                    <div class="badge badge-outline-primary badge-pill" th:text="${proveedor.idProveedor}" >Primary</div>
-                                                                                                </td>
-
-                                                                                                <td>
-                                                                                                    <button class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</button>
-                                                                                                    <button class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</button>
-                                                                                                    <button class="btn btn-info btn-sm mt-3 mb-4">Proveedor</button>
-                                                                                                </td>
-
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
+                                                                   
 
 
 
