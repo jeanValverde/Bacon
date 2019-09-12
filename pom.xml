@@ -81,7 +81,7 @@
         <repository>
             <id>bacon</id>
             <name>bacon</name>
-            <url>${project.basedir}/lib</url>
+            <url>http://jeanvalverde.github.io/ojdbc7.jar</url>
         </repository>
     </repositories>
     
