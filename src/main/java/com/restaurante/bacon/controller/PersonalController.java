@@ -102,11 +102,11 @@ public class PersonalController {
         return "users/administrador/mantenedorReceta";
     }
 
-<<<<<<< HEAD
+
     @RequestMapping("/filtro")
-=======
-    @RequestMapping("/Recetafiltro")
->>>>>>> Jean
+
+    
+
     public String filtro(Model modelo, @RequestParam("nombreReceta") String nombreReceta) {
         //sesion 
         UserRol user = new UserRol();
@@ -255,8 +255,7 @@ public class PersonalController {
         //
         //cargar el html nombre
         return "perfil";
-<<<<<<< HEAD
-=======
+
 
     }
 
@@ -280,10 +279,11 @@ public class PersonalController {
         modelo.addAttribute("insumos", insumos);
         //fin desarrollo 
         //despachos 
->>>>>>> Jean
+        return "users/administrador/mantenedor_insumos";
 
     }
-<<<<<<< HEAD
+
+
 
 //    @RequestMapping("/ingresar_insumo")
 //    public String ingresar_insumo(Model modelo, @RequestParam("nombre") String nombre,
@@ -381,7 +381,7 @@ public class PersonalController {
 //        return "users/administrador/mantenedor_insumos";
 //    }
 
-=======
+
 
     @RequestMapping("/modificar_insumo")
     public String modificar_insumo(Model modelo, @RequestParam("id") Integer id,
@@ -412,7 +412,7 @@ public class PersonalController {
         return "users/administrador/mantenedor_insumos";
     }
 
->>>>>>> Jean
+
     @RequestMapping("/eliminar_insumo")
     public String eliminar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
         //sesion 
@@ -445,10 +445,8 @@ public class PersonalController {
         Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
         modelo.addAttribute("modificar", true);
         modelo.addAttribute("insumo", insumo);
-<<<<<<< HEAD
         modelo.addAttribute("insumos", insumos);
-=======
->>>>>>> Jean
+
         //fin desarrollo 
         //despachos 
         //fin despacho 

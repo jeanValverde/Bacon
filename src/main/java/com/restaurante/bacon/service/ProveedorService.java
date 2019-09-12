@@ -55,4 +55,8 @@ public class ProveedorService {
     public Proveedor buscarProveedorById(BigDecimal idProveedor) {
         return this.provedorDao.findByIdProveedor(idProveedor);
     }
+    
+     public List<Proveedor> filtrarProveedoresByNombre(String nombreProveedor) {
+        return this.procedureQuery.filtrarProveedorByNombre(nombreProveedor);
+    }
 }

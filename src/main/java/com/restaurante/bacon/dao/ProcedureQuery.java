@@ -16,6 +16,7 @@ import static com.restaurante.bacon.dto.Proveedor.P_RUT_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TIPO_PROVEEDOR;
 import com.restaurante.bacon.dto.CategoriaReceta;
+import com.restaurante.bacon.dto.Proveedor;
 import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
 import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
@@ -73,7 +74,7 @@ public class ProcedureQuery {
             return false;
         }
     }
-<<<<<<< HEAD
+
 
 
     @SuppressWarnings("unchecked")
@@ -136,12 +137,54 @@ public class ProcedureQuery {
             return false;
         }
     }
+    
+     @SuppressWarnings("unchecked")
+    public List<Proveedor> filtrarProveedorByNombre(String nombreProveedor) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PROVEEDOR.FILTRO_NOMBRE_PROVEEDOR");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_NOMBRE_PROVEEDOR", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_PROVEEDOR_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("P_NOMBRE_PROVEEDOR", nombreProveedor);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Proveedor> proveedores = new ArrayList<Proveedor>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+                Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                proveedor.setRutProveedor(result[1].toString());
+                proveedor.setNombreProveedor(result[2].toString());
+                proveedor.setDireccionProveedor(result[3].toString());
+                proveedor.setTelefonoProveedor(result[4].toString());
+                proveedor.setContactoVenta(result[5].toString());
+                proveedor.setTipoProveedor(result[5].toString());
+                proveedor.setCorreoProveedor(result[6].toString());
+                proveedor.setCelularProveedor(Integer.parseInt(result[7].toString()));
+                proveedor.setCategoriaProveedor(result[8].toString());
+                
+                proveedores.add(proveedor);
+            }
+            
+            return proveedores;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
 
     
     
-=======
->>>>>>> Jean
+
     
     @SuppressWarnings("unchecked")
     public boolean InsertInsumo(String nombre, String descripcion,Integer stock,Integer stockMinimo,Integer stockMaximo,String unidad) {
@@ -191,7 +234,7 @@ public class ProcedureQuery {
     }
     
 
-<<<<<<< HEAD
+
 
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
@@ -241,6 +284,5 @@ public class ProcedureQuery {
     }
 
 
-=======
->>>>>>> Jean
+
 }

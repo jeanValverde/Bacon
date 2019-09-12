@@ -256,4 +256,33 @@ public class ProveedorController {
         //
         return "users/administrador/mantenedor_proveedor";
     }
+    
+     @RequestMapping("/filtro_proveedor")
+
+    
+
+    public String filtro(Model modelo, @RequestParam("nombreProveedor") String nombreProveedor) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+        
+        modelo.addAttribute("proveedores", this.proveedorService.listarProveedores());
+
+        List<Proveedor> proveedores = this.proveedorService.filtrarProveedoresByNombre(nombreProveedor);
+
+        modelo.addAttribute("proveedores", proveedores);
+        
+
+        modelo.addAttribute("tipoForm", "agregar");
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_proveedor";
+    }
 }

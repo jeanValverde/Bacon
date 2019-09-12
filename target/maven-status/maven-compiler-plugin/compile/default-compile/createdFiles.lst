@@ -9,16 +9,11 @@ com\restaurante\bacon\dto\InsumoPedidoProveedor.class
 com\restaurante\bacon\dto\Mesa.class
 com\restaurante\bacon\service\RecetaService.class
 com\restaurante\bacon\dao\IRolDao.class
-<<<<<<< HEAD
 com\restaurante\bacon\dto\procedure\ProcedureInsertProveedor.class
 com\restaurante\bacon\dao\IRecetaDao.class
 com\restaurante\bacon\dao\IInsumoDao.class
 com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.class
 com\restaurante\bacon\dao\IProveedorDao.class
-=======
-com\restaurante\bacon\dao\IRecetaDao.class
-com\restaurante\bacon\dao\IInsumoDao.class
->>>>>>> Jean
 com\restaurante\bacon\dto\Pedido.class
 com\restaurante\bacon\dto\MedioPago.class
 com\restaurante\bacon\dto\Rol.class
@@ -51,11 +46,8 @@ com\restaurante\bacon\dto\procedure\ProcedureUpdateProveedor.class
 com\restaurante\bacon\config\WebSecurityConfig.class
 com\restaurante\bacon\BaconApplication.class
 com\restaurante\bacon\dto\Personal.class
-<<<<<<< HEAD
-com\restaurante\bacon\service\ProveedorService.class
-=======
 com\restaurante\bacon\dao\ProcedureQueryIngrediente.class
->>>>>>> Jean
+com\restaurante\bacon\service\ProveedorService.class
 com\restaurante\bacon\dto\ControlCaja.class
 com\restaurante\bacon\dto\RecetaOrdenada.class
 com\restaurante\bacon\dto\IngresoStock.class
