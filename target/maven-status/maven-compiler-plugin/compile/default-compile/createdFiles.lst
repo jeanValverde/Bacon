@@ -11,6 +11,7 @@ com\restaurante\bacon\service\RecetaService.class
 com\restaurante\bacon\dao\IRolDao.class
 com\restaurante\bacon\dao\IRecetaDao.class
 com\restaurante\bacon\dao\IInsumoDao.class
+com\restaurante\bacon\controller\PersonalInsumo.class
 com\restaurante\bacon\dto\Pedido.class
 com\restaurante\bacon\dto\MedioPago.class
 com\restaurante\bacon\dto\Rol.class
@@ -47,6 +48,7 @@ com\restaurante\bacon\exceptions\NonexistentEntityException.class
 com\restaurante\bacon\controller\CocinaController.class
 com\restaurante\bacon\dto\EstadoPedido.class
 com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.class
+com\restaurante\bacon\dao\ProcedureQueryInsumo.class
 com\restaurante\bacon\config\UserRol.class
 com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.class
 com\restaurante\bacon\dto\InsumoProveedor.class

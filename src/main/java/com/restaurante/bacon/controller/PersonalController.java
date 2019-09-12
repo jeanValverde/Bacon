@@ -186,50 +186,8 @@ public class PersonalController {
         return "users/administrador/mantenedorReceta";
     }
 
-    @RequestMapping("/mantenedor_insumos")
-    public String mantenedor_insumos(Model modelo) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        List<Insumo> insumos = new ArrayList<Insumo>();
-        insumos = this.insumoService.listarInsumos();
-        //desarrollo aca 
-        modelo.addAttribute("insumos", insumos);
-        modelo.addAttribute("agregar", true);
-        modelo.addAttribute("personalSesion", personal);
-        return "users/administrador/mantenedor_insumos";
-
-    }
-    @RequestMapping("/buscar_por_filtro")
-    public String buscar_por_filtro(Model modelo,@RequestParam("tipoBusqueda") String tipoBusqueda,@RequestParam("filtro")String filtro) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        List<Insumo> insumos = new ArrayList<Insumo>();
-        switch(tipoBusqueda){
-            case "nombre":
-                insumos = this.insumoService.filtrarInsumosByNombre(filtro);
-                break;
-            case "stock":
-                insumos = this.insumoService.filtrarInsumosByStock(BigInteger.valueOf(Integer.parseInt(filtro)));
-                break;
-            case "unidad":
-                insumos = this.insumoService.filtrarInsumosByUnidadMedida(filtro);
-                break;
-            default:
-               insumos = this.insumoService.listarInsumos();
-        }
-        
-        //desarrollo aca 
-        modelo.addAttribute("insumos", insumos);
-        modelo.addAttribute("agregar", true);
-        modelo.addAttribute("personalSesion", personal);
-        return "users/administrador/mantenedor_insumos";
-
-    }
-
+   
+  
     @PostMapping("/addReceta")
     public String addReceta(Model modelo,
             @RequestParam("nombreReceta") String nombreReceta,
@@ -374,48 +332,6 @@ public class PersonalController {
         //fin desarrollo 
         //despachos 
 
-        //fin despacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/mantenedor_insumos";
-    }
-
-    @RequestMapping("/eliminar_insumo")
-    public String eliminar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        this.procedureQuery.DeleteInsumo(idInsumo);
-        List<Insumo> insumos = new ArrayList<Insumo>();
-        insumos = this.insumoService.listarInsumos();
-        modelo.addAttribute("insumos", insumos);
-        //desarrollo aca 
-
-        //fin desarrollo 
-        //despachos 
-        //fin despacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/mantenedor_insumos";
-    }
-
-    @RequestMapping("/cargar_insumo")
-    public String cargar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        List<Insumo> insumos = new ArrayList<Insumo>();
-        insumos = this.insumoService.listarInsumos();
-        Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
-        modelo.addAttribute("modificar", true);
-        modelo.addAttribute("insumo", insumo);
-        modelo.addAttribute("insumos", insumos);
-        //fin desarrollo 
-        //despachos 
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
