@@ -81,7 +81,7 @@
         <repository>
             <id>bacon</id>
             <name>bacon</name>
-            <url>file:${project.basedir}/lib</url>
+            <url>${project.basedir}/lib</url>
         </repository>
     </repositories>
     
