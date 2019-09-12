@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.restaurante.bacon.dao.IPersonalDao;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,6 +26,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -96,6 +100,22 @@ public class PersonalService implements UserDetailsService {
             return nombreArchivo;
         } catch (Exception ex) {
             return null;
+        }
+    }
+    public boolean comprobarImagen(String nombreArchivo){
+        File f = new File(UPLOAD_DIR_IMAGEN+'/'+nombreArchivo);
+        if(f.exists()&&!f.isDirectory()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public void eliminarImagen(String nombreArchivo){
+        Path fileNamePath = Paths.get(UPLOAD_DIR_IMAGEN, nombreArchivo);
+        try {
+            Files.delete(fileNamePath);
+        } catch (IOException ex) {
+            Logger.getLogger(PersonalService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
