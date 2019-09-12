@@ -102,7 +102,11 @@ public class PersonalController {
         return "users/administrador/mantenedorReceta";
     }
 
+<<<<<<< HEAD
     @RequestMapping("/filtro")
+=======
+    @RequestMapping("/Recetafiltro")
+>>>>>>> Jean
     public String filtro(Model modelo, @RequestParam("nombreReceta") String nombreReceta) {
         //sesion 
         UserRol user = new UserRol();
@@ -251,8 +255,35 @@ public class PersonalController {
         //
         //cargar el html nombre
         return "perfil";
+<<<<<<< HEAD
+=======
 
     }
+
+    @RequestMapping("/ingresar_insumo")
+    public String ingresar_insumo(Model modelo, @RequestParam("nombre") String nombre,
+            @RequestParam("descripcion") String descripcion,
+            @RequestParam("unidadMedida") String unidadMedida,
+            @RequestParam("stock") Integer stock,
+            @RequestParam("stockMinimo") Integer stockMinimo,
+            @RequestParam("stockMaximo") Integer stockMaximo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+
+        this.procedureQuery.InsertInsumo(nombre, descripcion, stock, stockMinimo, stockMaximo, unidadMedida);
+        List<Insumo> insumos = new ArrayList<Insumo>();
+        insumos = this.insumoService.listarInsumos();
+        //desarrollo aca 
+        modelo.addAttribute("agregar", true);
+        modelo.addAttribute("insumos", insumos);
+        //fin desarrollo 
+        //despachos 
+>>>>>>> Jean
+
+    }
+<<<<<<< HEAD
 
 //    @RequestMapping("/ingresar_insumo")
 //    public String ingresar_insumo(Model modelo, @RequestParam("nombre") String nombre,
@@ -350,6 +381,38 @@ public class PersonalController {
 //        return "users/administrador/mantenedor_insumos";
 //    }
 
+=======
+
+    @RequestMapping("/modificar_insumo")
+    public String modificar_insumo(Model modelo, @RequestParam("id") Integer id,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("descripcion") String descripcion,
+            @RequestParam("unidadMedida") String unidadMedida,
+            @RequestParam("stock") Integer stock,
+            @RequestParam("stockMinimo") Integer stockMinimo,
+            @RequestParam("stockMaximo") Integer stockMaximo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+
+        this.procedureQuery.UpdateInsumo(id, nombre, descripcion, stock, stockMinimo, stockMaximo, unidadMedida);
+        List<Insumo> insumos = new ArrayList<Insumo>();
+        insumos = this.insumoService.listarInsumos();
+        //desarrollo aca 
+        modelo.addAttribute("agregar", true);
+        modelo.addAttribute("insumos", insumos);
+        //fin desarrollo 
+        //despachos 
+
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_insumos";
+    }
+
+>>>>>>> Jean
     @RequestMapping("/eliminar_insumo")
     public String eliminar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
         //sesion 
@@ -382,7 +445,10 @@ public class PersonalController {
         Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
         modelo.addAttribute("modificar", true);
         modelo.addAttribute("insumo", insumo);
+<<<<<<< HEAD
         modelo.addAttribute("insumos", insumos);
+=======
+>>>>>>> Jean
         //fin desarrollo 
         //despachos 
         //fin despacho 

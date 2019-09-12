@@ -6,12 +6,16 @@
 package com.restaurante.bacon.service;
 
 import com.restaurante.bacon.dao.ICategoriaRecetaDao;
+import com.restaurante.bacon.dao.IIngredienteDao;
 import com.restaurante.bacon.dao.IRecetaDao;
-import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dao.ProcedureQueryIngrediente;
+import com.restaurante.bacon.dao.ProcedureQueryReceta;
 import com.restaurante.bacon.dto.CategoriaReceta;
+import com.restaurante.bacon.dto.Ingrediente;
+import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.Receta;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +33,16 @@ public class RecetaService {
     ICategoriaRecetaDao categoriaReceta;
 
     @Autowired
-    ProcedureQuery procedureQuery;
+    ProcedureQueryReceta procedureQuery;
+
+    @Autowired
+    ProcedureQueryIngrediente procedureQueryIngrediente;
+
+    @Autowired
+    IIngredienteDao ingrediente;
+
+    @Autowired
+    InsumoService insumoService;
 
     public Receta add(Receta receta) {
         return this.recetaDao.save(receta);
@@ -53,6 +66,56 @@ public class RecetaService {
 
     public Receta buscarRecetaById(Integer idReceta) {
         return this.recetaDao.findByIdReceta(idReceta);
+    }
+
+    public List<Receta> filtrarRecetasByDisponibilidad(Integer disponibilidad) {
+        return this.procedureQuery.filtrarRecetaByDisponibilidad(disponibilidad);
+    }
+
+    public List<Receta> filtrarRecetasByCategoriaCocina(Integer idCategoriaReceta) {
+        return this.procedureQuery.filtrarRecetaByCategoriaCocina(idCategoriaReceta);
+    }
+
+    public List<Receta> filtrarRecetasByBar() {
+        return this.procedureQuery.filtrarRecetaByBar();
+    }
+
+    public Receta update(Receta receta) {
+        return this.recetaDao.save(receta);
+    }
+
+    public Ingrediente addIngrediente(Ingrediente ingrediente) {
+        return this.ingrediente.save(ingrediente);
+    }
+
+    public List<Ingrediente> listarIngredientesByIdReceta(Integer idReceta) {
+        return this.procedureQueryIngrediente.filtrarInsumosByIdReceta(idReceta);
+    }
+
+    public List<Insumo> listarInsumosAgregarReceta(Integer idReceta) {
+
+        List<Insumo> totalInsumos = this.insumoService.listarInsumos();
+        List<Insumo> insumos =  totalInsumos;
+        
+
+        List<Ingrediente> ingredientesUsados = this.listarIngredientesByIdReceta(idReceta);
+        List<Ingrediente> ingredientes = ingredientesUsados;
+
+        try {
+            
+            for (Insumo insumo : insumos) {
+                for (Ingrediente ingrediente1 : ingredientes) {
+                    if(insumo.getIdInsumo() == ingrediente1.getIdInsumo().getIdInsumo()){
+                        insumos.remove(insumo);
+                    }
+                }
+            }
+
+            return insumos;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return insumos;
+        }
     }
 
 }

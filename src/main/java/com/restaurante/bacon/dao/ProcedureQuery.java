@@ -73,6 +73,7 @@ public class ProcedureQuery {
             return false;
         }
     }
+<<<<<<< HEAD
 
 
     @SuppressWarnings("unchecked")
@@ -139,6 +140,8 @@ public class ProcedureQuery {
 
     
     
+=======
+>>>>>>> Jean
     
     @SuppressWarnings("unchecked")
     public boolean InsertInsumo(String nombre, String descripcion,Integer stock,Integer stockMinimo,Integer stockMaximo,String unidad) {
@@ -188,6 +191,7 @@ public class ProcedureQuery {
     }
     
 
+<<<<<<< HEAD
 
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
@@ -237,4 +241,6 @@ public class ProcedureQuery {
     }
 
 
+=======
+>>>>>>> Jean
 }
