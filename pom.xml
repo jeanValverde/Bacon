@@ -81,7 +81,7 @@
         <repository>
             <id>bacon</id>
             <name>bacon</name>
-            <url>https://validarformularioconbootstrap.jeanvalverde.now.sh/repo</url>
+            <url>file:https://validarformularioconbootstrap.jeanvalverde.now.sh/repo</url>
         </repository>
     </repositories>
     
