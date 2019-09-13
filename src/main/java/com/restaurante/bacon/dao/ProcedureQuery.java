@@ -5,6 +5,7 @@
  */
 package com.restaurante.bacon.dao;
 
+<<<<<<< HEAD
 import static com.restaurante.bacon.dto.Personal.P_ID_PERSONAL;
 import static com.restaurante.bacon.dto.Personal.P_RUT_PERSONAL;
 import static com.restaurante.bacon.dto.Personal.P_NOMBRES_PERSONAL;
@@ -18,6 +19,22 @@ import static com.restaurante.bacon.dto.Personal.P_ESTADO_PERSONAL;
 import static com.restaurante.bacon.dto.Personal.P_ID_ROL;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 
+=======
+
+import static com.restaurante.bacon.dto.Proveedor.P_CATEGORIA_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_CELULAR_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_CONTACTO_VENTA;
+import static com.restaurante.bacon.dto.Proveedor.P_CORREO_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_DIRECCION_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_NOMBRE_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_RUT_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_TIPO_PROVEEDOR;
+import com.restaurante.bacon.dto.CategoriaReceta;
+import com.restaurante.bacon.dto.Proveedor;
+import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
+import com.restaurante.bacon.dto.Receta;
+>>>>>>> Felipe
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.EntityManager;
@@ -59,12 +76,230 @@ public class ProcedureQuery {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("updatePerfilPersonal")
                     .setParameter("P_ID_PERSONAL", idPersonal)
+<<<<<<< HEAD
                     .setParameter("P_NOMBRES_PERSONAL", nombres)
                     .setParameter("P_APE_PATERNO_PERSONAL", apePaterno)
                     .setParameter("P_APE_MATERNO_PERSONAL", apeMaterno)
                     .setParameter("P_FECHA_NACIMIENTO_PERSONAL", fechaNacimiento)
                     .setParameter("P_CELULAR_PERSONAL", celular)
                     .setParameter("P_CORREO_PERSONAL", correo).execute();
+=======
+                    .setParameter("P_NOMBRE", nombres)
+                    .setParameter("P_APE_PATERNO", apePaterno)
+                    .setParameter("P_APE_MATERNO", apeMaterno)
+                    .setParameter("P_FECHA_NACIMIENTO", fechaNacimiento)
+                    .setParameter("P_CELULAR", celular)
+                    .setParameter("P_CORREO", correo).execute();
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+
+
+    @SuppressWarnings("unchecked")
+    public boolean InsertProveedor(String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("InsertProveedor")
+                    .setParameter(P_RUT_PROVEEDOR, rut)
+                    .setParameter(P_NOMBRE_PROVEEDOR, nombre)
+                    .setParameter(P_DIRECCION_PROVEEDOR, direccion)
+                    .setParameter(P_TELEFONO_PROVEEDOR, telefono)
+                    .setParameter(P_CONTACTO_VENTA, contacto)
+                    .setParameter(P_TIPO_PROVEEDOR, tipo)
+                    .setParameter(P_CORREO_PROVEEDOR, correo)
+                    .setParameter(P_CELULAR_PROVEEDOR, celular)
+                    .setParameter(P_CATEGORIA_PROVEEDOR, categoria).execute();
+
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+
+  
+     public boolean UpdateProveedor(BigDecimal idProveedor,String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("UpdateProveedor")
+                    .setParameter(P_ID_PROVEEDOR, idProveedor)
+                    .setParameter(P_RUT_PROVEEDOR, rut)
+                    .setParameter(P_NOMBRE_PROVEEDOR, nombre)
+                    .setParameter(P_DIRECCION_PROVEEDOR, direccion)
+                    .setParameter(P_TELEFONO_PROVEEDOR, telefono)
+                    .setParameter(P_CONTACTO_VENTA, contacto)
+                    .setParameter(P_TIPO_PROVEEDOR, tipo)
+                    .setParameter(P_CORREO_PROVEEDOR, correo)
+                    .setParameter(P_CELULAR_PROVEEDOR, celular)
+                    .setParameter(P_CATEGORIA_PROVEEDOR, categoria).execute();
+            
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage().toString());
+            return false;
+        }
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public boolean DeleteProveedorById(Integer id) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("DeleteProveedorById")
+                    .setParameter("P_ID_PROVEEDOR", id).execute();
+
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+     @SuppressWarnings("unchecked")
+    public List<Proveedor> filtrarProveedorByNombre(String nombreProveedor) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PROVEEDOR.FILTRO_NOMBRE_PROVEEDOR");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_NOMBRE_PROVEEDOR", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_PROVEEDOR_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("P_NOMBRE_PROVEEDOR", nombreProveedor);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Proveedor> proveedores = new ArrayList<Proveedor>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+                Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                proveedor.setRutProveedor(result[1].toString());
+                proveedor.setNombreProveedor(result[2].toString());
+                proveedor.setDireccionProveedor(result[3].toString());
+                proveedor.setTelefonoProveedor(result[4].toString());
+                proveedor.setContactoVenta(result[5].toString());
+                proveedor.setTipoProveedor(result[5].toString());
+                proveedor.setCorreoProveedor(result[6].toString());
+                proveedor.setCelularProveedor(Integer.parseInt(result[7].toString()));
+                proveedor.setCategoriaProveedor(result[8].toString());
+                
+                proveedores.add(proveedor);
+            }
+            
+            return proveedores;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public boolean DeletePersonalById (BigInteger id){
+		try{
+		em.createNamedStoredProcedureQuery("DeletePersonalById")
+		.setParameter("P_ID_PERSONAL", id).execute();
+		return true;
+		}catch (Exception ex){
+			
+			System.out.println(ex.getMessage());
+			return false;
+		}
+		
+	}
+    
+public List<Personal> ListarPersonalById (BigInteger idPersonal){
+	try{
+		StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PERSONAL.FILTRO_ID_PERSONAL");
+		
+		// Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_NOMBRE_PERSONAL", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_PERSONAL_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+	
+	            // Configuramos el valor de entrada
+            query.setParameter("P_ID_PERSONAL"), idPersonal);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Personal> personal = new ArrayList<Personal>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+
+
+            Personal personal = new Personal();
+			personal.setIdPersonal(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+			personal.setRutPersonalresult[1].toString());
+            personal.setNombrePersonal(result[2].toString());
+            personal.setDireccionPersonal(result[3].toString());
+            personal.setTelefonoPersonal(result[4].toString());
+            personal.setContactoVenta(result[5].toString());
+            personal.setTipoProveedor(result[5].toString());
+            personal.setCorreoPersonal(result[6].toString());
+            personal.setCelularPersonal(Integer.parseInt(result[7].toString()));
+            personal.setCategoriaProveedor(result[8].toString());
+
+                
+                personal.add(personal)
+            }
+            
+            return personal;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+	
+	
+	
+	
+	}
+	
+	
+	
+}
+    
+    @SuppressWarnings("unchecked")
+    public boolean InsertInsumo(String nombre, String descripcion,Integer stock,Integer stockMinimo,Integer stockMaximo,String unidad) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("InsertInsumo")
+                    .setParameter("P_NOMBRE_INSUMO", nombre)
+                    .setParameter("P_DESCRIPCION_INSUMO", descripcion)
+                    .setParameter("P_STOCK_INSUMO", stock)
+                    .setParameter("P_UNIDAD_MEDIDA_INSUMO", unidad)
+                    .setParameter("P_MINIMO_STOCK_INSUMO", stockMinimo)
+                    .setParameter("P_MAXIMO_STOCK_INSUMO", stockMaximo)
+                    .setParameter("P_FOTO_INSUMO", "https://via.placeholder.com/92x92").execute();
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+    @SuppressWarnings("unchecked")
+    public boolean UpdateInsumo(Integer id,String nombre, String descripcion,Integer stock,Integer stockMinimo,Integer stockMaximo,String unidad) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("UpdateInsumo")
+                    .setParameter("P_ID_INSUMO", id)
+                    .setParameter("P_NOMBRE_INSUMO", nombre)
+                    .setParameter("P_DESCRIPCION_INSUMO", descripcion)
+                    .setParameter("P_STOCK_INSUMO", stock)
+                    .setParameter("P_UNIDAD_MEDIDA_INSUMO", unidad)
+                    .setParameter("P_MINIMO_STOCK_INSUMO", stockMinimo)
+                    .setParameter("P_MAXIMO_STOCK_INSUMO", stockMaximo)
+                    .setParameter("P_FOTO_INSUMO", "https://via.placeholder.com/92x92").execute();
+>>>>>>> Felipe
             return true;
         } catch (Exception ex) {
             return false;
@@ -97,4 +332,79 @@ public class ProcedureQuery {
         return false;
     }
 
+
+
+    //SuppressWarnings suprime las abvertencias de tipo unchecked
+    @SuppressWarnings("unchecked")
+    public List<Receta> filtrarRecetaByNombre(String nombreReceta) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_RECETA.FILTRO_NOMBRE_RECETA");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_NOMBRE_RECETA", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_RECETAS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("P_NOMBRE_RECETA", nombreReceta);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Receta> recetas = new ArrayList<Receta>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+                Receta receta = new Receta();
+                receta.setIdReceta(Integer.parseInt(result[0].toString()));
+                receta.setNombreReceta(result[1].toString());
+                receta.setDescripcionReceta(result[2].toString());
+                receta.setDuracionPreparacion(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
+                receta.setDisponibilidadReceta(BigInteger.valueOf(Integer.parseInt(result[4].toString())));
+                receta.setPrecioReceta(BigInteger.valueOf(Integer.parseInt(result[5].toString())));
+                receta.setCantidadPrepDiariaReceta(BigInteger.valueOf(Integer.parseInt(result[6].toString())));
+                receta.setFoto(String.valueOf(result[7].toString())); 
+                receta.setTipoReceta(result[8].toString());
+                CategoriaReceta categoria = new CategoriaReceta();
+                categoria.setIdCategoriaReceta(BigDecimal.valueOf(Integer.parseInt(result[9].toString()))); 
+                categoria.setDescripcionCategoriaReceta(result[10].toString()); 
+                categoria.setCantRecetasDia(BigInteger.valueOf(3)); 
+                receta.setIdCategoriaReceta(categoria); 
+                recetas.add(receta);
+            }
+            
+            return recetas;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    
+
+
+        try {
+
+            em.createNamedStoredProcedureQuery("InsertPersonal")
+                    .setParameter(P_RUT_PERSONAL, rut)
+                    .setParameter(P_NOMBRES_PERSONAL, nombres)
+                    .setParameter(P_APE_PATERNO_PERSONAL, apePaterno)
+                    .setParameter(P_APE_MATERNO_PERSONAL, apeMaterno)
+                    .setParameter(P_FECHA_NACIMIENTO_PERSONAL, fecha_nacimiento)
+                    .setParameter(P_CELULAR_PERSONAL, celular)
+                    .setParameter(P_CORREO_PERSONAL, correo)
+                    .setParameter(P_CONTRASENA_PERSONAL, contrasena)
+                    .setParameter(P_ESTADO_PERSONAL, estado)
+                    .setParameter(P_RUT_PERSONAL, rut)
+                    .setParameter(P_ID_ROL, idRol).execute();
+
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+
+        return false;
+}    
+	
 }
+

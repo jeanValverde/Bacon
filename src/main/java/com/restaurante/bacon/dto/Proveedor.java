@@ -12,10 +12,13 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,10 +33,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "PROVEEDOR")
 public class Proveedor implements Serializable {
 
+    
+    
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
+    
+    
     @Id
     @Basic(optional = false)
+    
+     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_PROVEEDOR")
+    //declarar la secuencia 
+    @SequenceGenerator(name="SEQ_PROVEEDOR",sequenceName="SEQ_PROVEEDOR", allocationSize=1 )
     @NotNull
     @Column(name = "ID_PROVEEDOR")
     private BigDecimal idProveedor;
@@ -75,7 +87,7 @@ public class Proveedor implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "CELULAR_PROVEEDOR")
-    private long celularProveedor;
+    private Integer celularProveedor;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -86,6 +98,18 @@ public class Proveedor implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProveedor")
     private Collection<Pedido> pedidoCollection;
 
+     public static final String P_ID_PROVEEDOR = "P_ID_PROVEEDOR";
+     public static final String P_RUT_PROVEEDOR = "P_RUT_PROVEEDOR";
+     public static final String P_NOMBRE_PROVEEDOR = "P_NOMBRE_PROVEEDOR";
+     public static final String P_DIRECCION_PROVEEDOR = "P_DIRECCION_PROVEEDOR";
+     public static final String P_TELEFONO_PROVEEDOR = "P_TELEFONO_PROVEEDOR";
+     public static final String P_CONTACTO_VENTA = "P_CONTACTO_VENTA";
+     public static final String P_TIPO_PROVEEDOR = "P_TIPO_PROVEEDOR";
+     public static final String P_CORREO_PROVEEDOR = "P_CORREO_PROVEEDOR";
+     public static final String P_CELULAR_PROVEEDOR = "P_CELULAR_PROVEEDOR";
+     public static final String P_CATEGORIA_PROVEEDOR = "P_CATEGORIA_PROVEEDOR";
+     
+     
     public Proveedor() {
     }
 
@@ -93,7 +117,7 @@ public class Proveedor implements Serializable {
         this.idProveedor = idProveedor;
     }
 
-    public Proveedor(BigDecimal idProveedor, String rutProveedor, String nombreProveedor, String direccionProveedor, String telefonoProveedor, String contactoVenta, String tipoProveedor, String correoProveedor, long celularProveedor, String categoriaProveedor) {
+    public Proveedor(BigDecimal idProveedor, String rutProveedor, String nombreProveedor, String direccionProveedor, String telefonoProveedor, String contactoVenta, String tipoProveedor, String correoProveedor, Integer celularProveedor, String categoriaProveedor) {
         this.idProveedor = idProveedor;
         this.rutProveedor = rutProveedor;
         this.nombreProveedor = nombreProveedor;
@@ -174,7 +198,7 @@ public class Proveedor implements Serializable {
         return celularProveedor;
     }
 
-    public void setCelularProveedor(long celularProveedor) {
+    public void setCelularProveedor(Integer celularProveedor) {
         this.celularProveedor = celularProveedor;
     }
 

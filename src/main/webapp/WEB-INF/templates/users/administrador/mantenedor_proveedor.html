@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <title>BACON Restaurante</title>
+                <!-- base:css -->
+                <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+                    <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+                        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+                            <!-- endinject -->
+                            <!-- plugin css for this page -->
+                            <link rel="stylesheet" th:href="@{/vendors/dropify/dropify.min.css}">
+                                <link rel="stylesheet" th:href="@{/vendors/jquery-file-upload/uploadfile.css}">
+                                    <!-- End plugin css for this page -->
+                                    <!-- inject:css -->
+                                    <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+                                        <!-- endinject -->
+                                        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+                                        <!---->
+
+                                        </head>
+
+                                        <body class="sidebar-fixed">
+                                            <div class="container-scroller">
+                                                <!-- partial:../../fragments/_navbar.html -->
+                                                <nav th:replace="fragments/_navbar :: nav"></nav>
+                                                <!-- partial -->
+                                                <div class="container-fluid page-body-wrapper">
+                                                    <!-- partial:../../fragments/_settings-panel.html -->
+                                                    <div th:replace="fragments/_settings-panel :: div"></div>
+                                                    <!-- partial -->
+                                                    <!-- partial:../../fragments/_sidebar.html -->
+                                                    <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                                                    <!-- partial -->
+                                                    <div class="main-panel">
+                                                        <div class="content-wrapper">
+
+                                                            <!--Desarrollar acá-->
+
+                                                            <div class="row">
+
+                                                                <!--Form agegar-->
+                                                                <div th:if="${agregar}" class="col-md-4 grid-margin stretch-card"   >
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Agregar Proveedor</h4>
+                                                                            <p class="card-description text-justify">
+                                                                                Completa estos campos para agregar un proveedor al sistema.
+                                                                            </p>
+                                                                            <form class="forms-sample" th:action="@{/administrador_proveedor/addProveedor}" method="POST" name="formProveedor" enctype="multipart/form-data">
+                                                                                <div class="form-group">
+                                                                                    <label for="rutProveedor">Rut Proveedor</label>
+                                                                                    <input type="text" class="form-control" id="rutProveedor" name="rutProveedor" placeholder="Rut Proveedor">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un rut para el proveedor.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="nombreProveedor">Nombre Proveedor</label>
+                                                                                    <input type="text" class="form-control" id="nombreProveedor" name="nombreProveedor" placeholder="Nombre Proveedor">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un nombre para el proveedor.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="direccionProveedor">Direccion Proveedor</label>
+                                                                                    <input type="text" class="form-control" id="direccionProveedor" name="direccionProveedor" placeholder="Direccion Proveedor">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe una direccion para el proveedor.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="telefonoProveedor">Telefono Proveedor</label>
+                                                                                    <input type="text" class="form-control" id="telefonoProveedor" name="telefonoProveedor" placeholder="Telefono Proveedor">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un telefono para el proveedor.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="contactoVenta">Contacto Venta</label>
+                                                                                    <input type="text" class="form-control" id="contactoProveedor" name="contactoVenta" placeholder="Contacto Venta">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un contacto para el proveedor.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="tipoProveedor">Tipo Proveedor</label>
+                                                                                    <input type="text" class="form-control" id="tipoProveedor" name="tipoProveedor" placeholder="Tipo Proveedor">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un tipo para el proveedor.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="correoProveedor">Correo Proveedor</label>
+                                                                                    <input type="text" class="form-control" id="correoProveedor" name="correoProveedor" placeholder="Correo Proveedor">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un correo para el proveedor.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="celularProveedor">Celular Proveedor</label>
+                                                                                    <input type="number" class="form-control" id="celularProveedor" name="celularProveedor" placeholder="Categoria Proveedor">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un celular para el proveedor.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="categoriaProveedor">Categoria Proveedor</label>
+                                                                                    <input type="text" class="form-control" id="categoriaProveedor" name="categoriaProveedor" placeholder="Categoria Proveedor">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un celular para el proveedor.
+                                                                                        </div>
+                                                                                </div>
+
+                                                                                <button type="submit" class="btn btn-primary mr-2">Agregar</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+
+                                                                <div th:if="${modificar}" class="col-lg-4 grid-margin stretch-card">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Modificar Proveedores</h4>
+                                                                            
+
+                                                                            <form  th:action="@{/administrador_proveedor/modificar_proveedor}" name="form" method="post">
+                                                                                <input type="hidden" th:value="${proveedor.idProveedor}" name="idProveedor"/>
+                                                                                <div class="form-group">
+                                                                                    <label for="rutProveedor">Rut Proveedor</label>
+                                                                                    <input th:value="${proveedor.rutProveedor}"  type="text" class="form-control" name="rutProveedor"/>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe un rut para el proveedor.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="nombreProveedor">Nombre Proveedor</label>
+                                                                                    <input th:value="${proveedor.nombreProveedor}"  type="text" class="form-control" name="nombreProveedor"/>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe un nombre para el proveedor.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="direccionProveedor">Direccion Proveedor</label>
+                                                                                    <input th:value="${proveedor.direccionProveedor}"  type="text" class="form-control" name="direccionProveedor"/>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe una direccion para el proveedor.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="telefonoProveedor">Telefono Proveedor</label>
+                                                                                    <input th:value="${proveedor.telefonoProveedor}"  type="text" class="form-control" name="telefonoProveedor"/>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe un telefono para el proveedor.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="contactoVenta">Contacto Venta</label>
+                                                                                    <input th:value="${proveedor.contactoVenta}" type="text" class="form-control" name="contactoVenta"/>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe un contacto para el proveedor.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="tipoProveedor">Tipo Proveedor</label>
+                                                                                    <input  th:value="${proveedor.tipoProveedor}" type="text" class="form-control" name="tipoProveedor"/>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe un tipo para el proveedor.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="correoProveedor">Correo Proveedor</label>
+                                                                                    <input th:value="${proveedor.correoProveedor}"  type="text" class="form-control" name="correoProveedor"/>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe un correo para el proveedor.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="celularProveedor">Celular Proveedor</label>
+                                                                                    <input th:value="${proveedor.celularProveedor}" type="number" class="form-control" name="celularProveedor"/>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe un celular para el proveedor.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="categoriaProveedor">Categoria Proveedor</label>
+                                                                                    <input th:value="${proveedor.categoriaProveedor}" type="text" class="form-control" name="categoriaProveedor"/>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe una categoria para el proveedor.
+                                                                                    </div>
+                                                                                </div>
+
+
+
+                                                                                <button type="submit" class="btn btn-primary mr-2">Actualizar</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                                
+                                                              
+
+                                                                <div class="col-md-8 col-xl-8 grid-margin stretch-card">
+                                                                        
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h3 class="card-title">Proveedores</h3>
+                                                                            <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
+                                                                                </li>
+                                                                                  <form class="" th:action="@{/administrador_proveedor/filtro_proveedor}" method="GET">
+                                                                                        <div class="form-group">
+                                                                                            <div class="input-group">
+                                                                                                <input type="text" class="form-control" name="nombreProveedor" placeholder="Escribe el nombre del proveedor" aria-label="Escribe el nombre del proveedor">
+                                                                                                    <div class="input-group-append">
+                                                                                                        <button class="btn btn-sm btn-primary" type="submit">Buscar</button>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+                                                                            </ul>
+                                                                            <div class="tab-content" id="pills-tabContent">
+                                                                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                                                    <div class="media">
+                                                                                        <div  class="row">
+                                                                                            <div th:each="ins: ${proveedores}" class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                                                                                                <div class="card">
+                                                                                                    <div class="card-body text-center">
+                                                                                                        <div style="text-align:right">
+                                                                                                            <!--
+                                                                                                            <button type="button" class="btn btn-success btn-rounded btn-icon">
+                                                                                                                <i class="mdi mdi-lead-pencil"></i>
+                                                                                                            </button>
+                                                                                                            -->
+                                                                                                            <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                                            <!--
+                                                                                                            <button type="button" class="btn btn-danger btn-rounded btn-icon" >
+                                                                                                                <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
+                                                                                                                <i class="mdi mdi-close"></i>
+                                                                                                            </button>
+                                                                                                            -->
+                                                                                                            <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
+                                                                                                        </div>
+
+                                                                                                        <div >
+
+
+                                                                                                            <h4 th:text="${ins.nombreProveedor}"></h4>
+                                                                                                            <p th:text="${ins.tipoProveedor}" class="text-muted mb-0">Tipo proveedor</p>
+
+                                                                                                        </div>
+                                                                                                        <p th:text="${ins.categoriaProveedor}" class="mt-2 card-text">
+                                                                                                            Zanahoria especial sabor zanagoria
+                                                                                                        </p>
+                                                                                                        <div class="border-top pt-3">
+                                                                                                            <div class="row">
+                                                                                                                <div class="col-12">
+
+                                                                                                                    <p th:text="${ins.correoProveedor}" class="mt-2 card-text">Correo</p>
+                                                                                                                </div>
+                                                                                                                <div class="col-12">
+
+                                                                                                                    <p th:text="${ins.celularProveedor}" class="mt-2 card-text">Celular</p>
+                                                                                                                </div>
+                                                                                                                <div class="col-12">
+
+
+                                                                                                                </div>
+
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                                                    <div class="media">
+                                                                                        <div class="table-responsive">
+                                                                                            <table id="order-listing" class="table">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th>Rut</th>
+                                                                                                        <th>Nombre</th>
+                                                                                                        <th>Direccion </th>
+                                                                                                        <th>Telefono</th>
+                                                                                                        <th>Contacto</th>
+                                                                                                        <th>Tipo</th>
+                                                                                                        <th>Correo</th>
+                                                                                                        <th>Celular</th>
+                                                                                                        <th>Categoria</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tbody>
+                                                                                                        <tr th:each="ins: ${proveedores}">
+                                                                                                            <td th:text="${ins.rutProveedor}"></td>
+                                                                                                            <td th:text="${ins.nombreProveedor}"></td>
+                                                                                                            <td th:text="${ins.direccionProveedor}"></td>
+                                                                                                            <td th:text="${ins.telefonoProveedor}"></td>
+                                                                                                            <td th:text="${ins.contactoVenta}"></td>
+                                                                                                            <td th:text="${ins.tipoProveedor}"></td>
+                                                                                                            <td th:text="${ins.correoProveedor}"></td>
+                                                                                                            <td th:text="${ins.celularProveedor}"></td>
+                                                                                                            <td th:text="${ins.categoriaProveedor}"></td>
+                                                                                                            <td>
+                                                                                                                <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                                            </td>
+                                                                                                            <td>
+                                                                                                                <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
+                                                                                                            </td>
+                                                                                                        </tr>
+
+                                                                                                    </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                </div>
+                                                                
+
+
+
+
+
+                                                                <!---inicio fila de los filtros-->
+
+
+                                         
+
+
+                                                                   
+
+
+
+                                                                </div>
+
+                                                            </div>
+                                                            <!--Form agegar-->
+
+                                                            <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+                                                            <script th:src="@{/js/off-canvas.js}"></script>
+                                                            <script th:src="@{/js/hoverable-collapse.js}"></script>
+                                                            <script th:src="@{/js/template.js}"></script>
+                                                            <script th:src="@{/js/settings.js}"></script>
+                                                            <script th:src="@{/js/todolist.js}"></script>
+                                                            <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+                                                            <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+                                                            <script th:src="@{/vendors/moment/moment.min.js}"></script>
+                                                            <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+                                                            <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+                                                            <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+                                                            <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+                                                            <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+                                                            <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+                                                            <script th:src="@{/vendors/inputmask/phone.js}"></script>
+                                                            <!-- End plugin js for this page -->
+                                                            <!-- Custom js for this page-->
+                                                            <script th:src="@{/js/formpickers.js}"></script>
+                                                            <script th:src="@{/js/form-addons.js}"></script>
+                                                            <script th:src="@{/js/x-editable.js}"></script>
+                                                            <script th:src="@{/js/dropify.js}"></script>
+                                                            <script th:src="@{/js/dropzone.js}"></script>
+                                                            <script th:src="@{/js/jquery-file-upload.js}"></script>
+                                                            <script th:src="@{/js/formpickers.js}"></script>
+                                                            <script th:src="@{/js/form-repeater.js}"></script>
+                                                            <!-- End custom js for this page-->
+                                                            <!-- plugin js for this page -->
+                                                            <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
+                                                            <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
+                                                            <script th:src="@{/js/data-table.js}"></script>
+
+                                                            <!--validate form--->
+                                                            <script th:src="@{/custom/formularios.js}"></script>
+
+                                                            <script type="text/javascript" >
+                                                                var formularioPassword = document.getElementsByName("formProveedor")[0];
+                                                                validatorForms(formularioPassword);
+                                                            </script>
+                                                            <script type="text/javascript" >
+                                                                var formularioPassword = document.getElementsByName("formProveedor")[0];
+                                                                validatorForms(formularioPassword);
+                                                            </script>
+
+                                                            <script src="text/javascript">
+                                                                dropify.dropify({
+                                                                    "defaultFile": "full path file",
+                                                                    "messages": {
+                                                                        default: 'Arrastre un archivo o haga clic aquí',
+                                                                        replace: 'Arrastre un archivo o haga clic en reemplazar',
+                                                                        remove: 'Eliminar',
+                                                                        error: 'Lo sentimos, el archivo demasiado grande'
+                                                                    }
+                                                                });
+                                                            </script>
+
+
+
+                                                            </body>
+
+                                                            </html>

@@ -63,8 +63,64 @@ public class PersonalController {
         return "users/administrador/index";
     }
 
+<<<<<<< HEAD
     @RequestMapping("/mantenedor_personal")
     public String mantenedor_personal(Model modelo) {
+=======
+    @RequestMapping("/receta")
+    public String receta(Model modelo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+        modelo.addAttribute("tipoForm", "agregar");
+
+        modelo.addAttribute("recetas", this.recetaService.listar());
+
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedorReceta";
+    }
+
+
+    @RequestMapping("/filtro")
+
+    
+
+    public String filtro(Model modelo, @RequestParam("nombreReceta") String nombreReceta) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+        List<Receta> recetas = this.recetaService.filtrarRecetasByNombre(nombreReceta);
+
+        modelo.addAttribute("recetas", recetas);
+
+        modelo.addAttribute("tipoForm", "agregar");
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedorReceta";
+    }
+
+    @RequestMapping("/deleteReceta")
+    public String deleteReceta(Model modelo, @RequestParam("idReceta") Integer idReceta) {
+>>>>>>> Felipe
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
@@ -76,9 +132,38 @@ public class PersonalController {
         modelo.addAttribute("agregar", true);
         modelo.addAttribute("PersonalSesion", personal);
 
+<<<<<<< HEAD
         modelo.addAttribute("PersonalSesion", this.personalService.getPersonalSesion(user.getUsername()));
 
         return "users/administrador/mantenedor_personal";
+=======
+        receta.setTipoReceta(tipoReceta);
+        CategoriaReceta categoria = new CategoriaReceta();
+        categoria.setIdCategoriaReceta(BigDecimal.valueOf(Integer.parseInt(categoriaReceta)));
+        receta.setIdCategoriaReceta(categoria);
+
+        String nombre = this.personalService.subirImagen(file);
+
+        if (nombre == null) {
+            nombre = "foto";
+        } else {
+            receta.setFoto(nombre);
+        }
+
+        this.recetaService.add(receta);
+
+        //desarollo
+        //fin desarrollo 
+        //despacho  modelo.addAttribute(nombreDespacho, objetoAdespachar)
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", personal);
+        //
+        //cargar el html nombre
+        return "perfil";
+
+
+>>>>>>> Felipe
     }
 
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL **CAMBIAR A PORST**
@@ -108,6 +193,7 @@ public class PersonalController {
         //desarollo 
         modelo.addAttribute("Personal", personal);
         modelo.addAttribute("agregar", true);
+<<<<<<< HEAD
 
         return "users/administrador/mantenedor_personal";
     }
@@ -115,6 +201,124 @@ public class PersonalController {
      @RequestMapping("/eliminar_personal")
      public String eliminar_personal(Model modelo, @RequestParam("idPersonal")BigDecimal idPersonal ){
      //sesion
+=======
+        modelo.addAttribute("insumos", insumos);
+        //fin desarrollo 
+        //despachos 
+        return "users/administrador/mantenedor_insumos";
+
+    }
+
+
+
+//    @RequestMapping("/ingresar_insumo")
+//    public String ingresar_insumo(Model modelo, @RequestParam("nombre") String nombre,
+//            @RequestParam("descripcion") String descripcion,
+//            @RequestParam("unidadMedida") String unidadMedida,
+//            @RequestParam("stock") Integer stock,
+//            @RequestParam("stockMinimo") Integer stockMinimo,
+//            @RequestParam("stockMaximo") Integer stockMaximo,
+//            @RequestParam("imagenInsumo") MultipartFile[] file) {
+//        //sesion 
+//        UserRol user = new UserRol();
+//        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+//        //sesion 
+//        String nombreImagen = this.personalService.subirImagen(file);
+//        Insumo insumo = new Insumo();
+//        if (nombreImagen == null) {
+//            nombreImagen = "260x162.png";
+//        } else {
+//            
+//            insumo.setFotoInsumo(nombreImagen);
+//        }
+//        insumo.setNombreInsumo(nombre);
+//        insumo.setDescripcionInsumo(descripcion);
+//        insumo.setStockInsumo(stock);
+//        insumo.setMinimoStockInsumo(stockMinimo);
+//        insumo.setMaximoStockInsumo(stockMaximo);
+//        insumo.setUnidadMedidaInsumo(unidadMedida);
+//        
+//        if(this.insumoService.ingresarInsumo(insumo)){
+//            
+//        }else{
+//            
+//        }
+//        
+//        List<Insumo> insumos = new ArrayList<Insumo>();
+//        insumos = this.insumoService.listarInsumos();
+//        //desarrollo aca 
+//        modelo.addAttribute("agregar", true);
+//        modelo.addAttribute("insumos", insumos);
+//        //fin desarrollo 
+//        //despachos 
+//
+//        //fin despacho 
+//        //siempre despachar esto por la sesion 
+//        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+//        //
+//        return "users/administrador/mantenedor_insumos";
+//    }
+
+//    @RequestMapping("/modificar_insumo")
+//    public String modificar_insumo(Model modelo, @RequestParam("id") Integer id,
+//            @RequestParam("nombre") String nombre,
+//            @RequestParam("descripcion") String descripcion,
+//            @RequestParam("unidadMedida") String unidadMedida,
+//            @RequestParam("stock") Integer stock,
+//            @RequestParam("stockMinimo") Integer stockMinimo,
+//            @RequestParam("stockMaximo") Integer stockMaximo,
+//            @RequestParam("imagenInsumo") MultipartFile[] file) {
+//        //sesion 
+//        UserRol user = new UserRol();
+//        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+//        String nombreImagen = this.personalService.subirImagen(file);
+//        Insumo insumo = new Insumo();
+//        if (nombreImagen == null) {
+//            nombreImagen = "260x162.png";
+//        } else {
+//            
+//            insumo.setFotoInsumo(nombreImagen);
+//        }
+//        insumo.setIdInsumo(id);
+//        insumo.setNombreInsumo(nombre);
+//        insumo.setDescripcionInsumo(descripcion);
+//        insumo.setStockInsumo(stock);
+//        insumo.setMinimoStockInsumo(stockMinimo);
+//        insumo.setMaximoStockInsumo(stockMaximo);
+//        insumo.setUnidadMedidaInsumo(unidadMedida);
+//        
+//        if(this.insumoService.modificarInsumo(insumo)){
+//            
+//        }else{
+//            
+//        }
+//        List<Insumo> insumos = new ArrayList<Insumo>();
+//        insumos = this.insumoService.listarInsumos();
+//        //desarrollo aca 
+//        modelo.addAttribute("agregar", true);
+//        modelo.addAttribute("insumos", insumos);
+//        //fin desarrollo 
+//        //despachos 
+//
+//        //fin despacho 
+//        //siempre despachar esto por la sesion 
+//        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+//        //
+//        return "users/administrador/mantenedor_insumos";
+//    }
+
+
+
+    @RequestMapping("/modificar_insumo")
+    public String modificar_insumo(Model modelo, @RequestParam("id") Integer id,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("descripcion") String descripcion,
+            @RequestParam("unidadMedida") String unidadMedida,
+            @RequestParam("stock") Integer stock,
+            @RequestParam("stockMinimo") Integer stockMinimo,
+            @RequestParam("stockMaximo") Integer stockMaximo) {
+        //sesion 
+>>>>>>> Felipe
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
      //sesion
@@ -125,6 +329,7 @@ public class PersonalController {
         
   
         modelo.addAttribute("agregar", true);
+<<<<<<< HEAD
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
          
          return "users/administrador/mantenedor_personal";
@@ -165,3 +370,98 @@ public class PersonalController {
 //        //siempre despachar esto por la sesion 
 //        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
+=======
+        modelo.addAttribute("insumos", insumos);
+        //fin desarrollo 
+        //despachos 
+
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_insumos";
+    }
+
+
+    @RequestMapping("/eliminar_insumo")
+    public String eliminar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        this.procedureQuery.DeleteInsumo(idInsumo);
+        List<Insumo> insumos = new ArrayList<Insumo>();
+        insumos = this.insumoService.listarInsumos();
+        modelo.addAttribute("insumos", insumos);
+        //desarrollo aca 
+
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_insumos";
+    }
+
+    @RequestMapping("/cargar_insumo")
+    public String cargar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        List<Insumo> insumos = new ArrayList<Insumo>();
+        insumos = this.insumoService.listarInsumos();
+        Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
+        modelo.addAttribute("modificar", true);
+        modelo.addAttribute("insumo", insumo);
+        modelo.addAttribute("insumos", insumos);
+
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_insumos";
+    }
+
+    //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL CAMBIAR A PORST
+    @RequestMapping("/add")
+    public String add(Model modelo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarollo 
+        Personal person = new Personal();
+
+        //person.setIdPersonal(BigDecimal.valueOf(5));
+        person.setRutPersonal("17.347.762-6");
+        person.setNombresPersonal("Diego Alejandro");
+        person.setApePaternoPersonal("León");
+        person.setApeMaternoPersonal("Plaza");
+        person.setFechaNacimientoPersonal(new Date());
+        person.setCelularPersonal("954714587");
+        person.setCorreoPersonal("diego.leon@gmail.com");
+        person.setContrasenaPersonal(encoder.encode("123"));
+        person.setEstadoPersonal(BigInteger.valueOf(1));
+
+        Rol rol = new Rol();
+        rol.setIdRol(BigDecimal.valueOf(2));
+
+        person.setIdRol(rol);
+
+        this.personalService.addPersonal(person);
+
+        //fin desarrollo 
+        //despacho 
+        //fin despacacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/index";
+    }
+
+}
+>>>>>>> Felipe

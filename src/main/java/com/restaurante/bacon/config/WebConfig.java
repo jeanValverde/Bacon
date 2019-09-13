@@ -38,4 +38,6 @@ public class WebConfig implements WebMvcConfigurer {
                         "classpath:/static/vendors/",
                         "classpath:/static/custom/");
     }
+    
+    //hola
 }

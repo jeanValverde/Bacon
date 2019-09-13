@@ -48,9 +48,31 @@ public class PersonalService implements UserDetailsService {
     @Autowired
     ProcedureQuery procedureQuery;
     //se implementa el metodo de la interfaz 
+	
+	public Personal addPersonal (Personal personal){
+		return this.personalDao.save(personal);
+		
+	}
+	
+	public boolean addPersonal (String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, date fechaNacimientoPersonal, String celularPersonal,String correoPersonal, String contrasenaPersonal, BigInteger estadoPersonal, String idRol ){
+		return this.procedureQuery.InsertPersonal(rutPersonal, nombresPersonal, apePaternoPersonal, apeMaternoPersonal, fechaNacimientoPersonal,celularPersonal, correoPersonal, contrasenaPersonal, estadoPersonal,idRol)
+		
+	}
+	
+	public boolean ModificarPersonal (BigDecimal idPersonal, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo){
+		
+		return this.procedureQuery.updatePerfilPersonal(idPersonal, nombres, apePaterno, apeMaterno,fechaNacimiento,celular,correo)
+	}
+	
+
     public List<Personal> getAllUsuario() {
         return this.personalDao.findAll();
     }
+	
+	public void deletePersonalByID(BigInteger id){
+		
+		this.personalDao.deletePersonalByID(id);
+	}
 
     //se implementan los metodos de la interfaz 
     public Personal findByRut(String rut) {
@@ -59,8 +81,11 @@ public class PersonalService implements UserDetailsService {
 
     //se implementan los metodos de la interfaz 
     public Personal addPersonal(Personal personal) {
-        return this.personalDao.save(personal);
+		        return this.personalDao.save(personal);
     }
+	
+	
+	
     
 //        public Personal addPersonal(String rutPersonal,String nombresPersonal,String apePaternoPersonal,String apeMaternoPersonal,Date fechaNacimientoPersonal,String celularPersonal,String correoPersonal,String contrasenaPersonal,BigInteger estadoPersonal,Collection<ControlCaja> controlCajaCollection,Rol idRol) {
 //        return this.procedureQuery
