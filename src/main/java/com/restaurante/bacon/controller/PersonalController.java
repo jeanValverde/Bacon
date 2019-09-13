@@ -90,6 +90,10 @@ public class PersonalController {
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
         modelo.addAttribute("tipoForm", "agregar");
+        
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 0 );
+        //fin mensajes 
 
         modelo.addAttribute("recetas", this.recetaService.listar());
 
@@ -117,6 +121,11 @@ public class PersonalController {
         modelo.addAttribute("recetas", recetas);
 
         modelo.addAttribute("tipoForm", "agregar");
+        
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 0 );
+        //fin mensajes 
+        
         //fin desarrollo 
         //despachos 
         //fin despacho 
@@ -145,7 +154,13 @@ public class PersonalController {
         modelo.addAttribute("tipoForm", "agregar");
         //fin desarrollo 
         //despachos 
-
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 1 );
+        modelo.addAttribute("nombreMensaje", "Información");
+        modelo.addAttribute("mensaje", "Receta Eliminada");
+        //puede ser success - info - danger - warning
+        modelo.addAttribute("tipoMensaje", "success");
+        //fin mensajes 
         //desarrollo aca 
         //fin desarrollo 
         //despachos 
@@ -176,6 +191,10 @@ public class PersonalController {
 
         modelo.addAttribute("tipoForm", "editar");
 
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 0 );
+        //fin mensajes 
+        
         //fin desarrollo 
         //despachos 
         //fin despacho 
@@ -227,7 +246,21 @@ public class PersonalController {
         }
 
         this.recetaService.add(receta);
+        
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 1 );
+        modelo.addAttribute("nombreMensaje", "Información");
+        modelo.addAttribute("mensaje", "Receta agregada");
+        //puede ser success - info - danger - warning
+        modelo.addAttribute("tipoMensaje", "success");
+        //fin mensajes 
+        
+        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
+        modelo.addAttribute("tipoForm", "agregar");
+        
+        modelo.addAttribute("recetas", this.recetaService.listar());
+        
         //desarollo
         //fin desarrollo 
         //despacho  modelo.addAttribute(nombreDespacho, objetoAdespachar)
@@ -236,7 +269,7 @@ public class PersonalController {
         modelo.addAttribute("personalSesion", personal);
         //
         //cargar el html nombre
-        return "perfil";
+        return "users/administrador/mantenedorReceta";
 
     }
 

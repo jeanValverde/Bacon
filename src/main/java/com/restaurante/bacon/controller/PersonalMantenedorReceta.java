@@ -56,6 +56,10 @@ public class PersonalMantenedorReceta {
 
         modelo.addAttribute("recetas", this.recetaService.filtrarRecetasByDisponibilidad(disponibilidad));
 
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 0);
+        //fin mensajes 
+
         //fin desarrollo 
         //despachos 
         //fin despacho 
@@ -82,6 +86,10 @@ public class PersonalMantenedorReceta {
         } else {
             modelo.addAttribute("recetas", this.recetaService.filtrarRecetasByCategoriaCocina(idCategoriaReceta));
         }
+
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 0);
+        //fin mensajes 
 
         //fin desarrollo 
         //despachos 
@@ -116,18 +124,25 @@ public class PersonalMantenedorReceta {
         receta.setDuracionPreparacion(BigInteger.valueOf(duracionReceta));
         receta.setPrecioReceta(BigInteger.valueOf(precioReceta));
         receta.setCantidadPrepDiariaReceta(BigInteger.valueOf(cantidadReceta));
+        
         receta.setTipoReceta(tipoReceta);
-        CategoriaReceta categoria = new CategoriaReceta();
-        categoria.setIdCategoriaReceta(BigDecimal.valueOf(Integer.parseInt(categoriaReceta)));
-        receta.setIdCategoriaReceta(categoria);
+        Integer cate = Integer.parseInt(categoriaReceta);
+        
+        if ( cate != 0 ) {
+            CategoriaReceta categoria = new CategoriaReceta();
+            categoria.setIdCategoriaReceta(BigDecimal.valueOf(Integer.parseInt(categoriaReceta)));
+            receta.setIdCategoriaReceta(categoria);
+        }
 
-        if (file[0].getOriginalFilename() != receta.getFoto()) {
-            //falta borrar imagen
-            String nombre = this.personalService.subirImagen(file);
-            if (nombre == null) {
-                nombre = "foto";
-            } else {
-                receta.setFoto(nombre);
+        if (!file[0].isEmpty()) {
+            if (file[0].getOriginalFilename() != receta.getFoto()) {
+                //falta borrar imagen
+                String nombre = this.personalService.subirImagen(file);
+                if (nombre == null) {
+                    nombre = "foto";
+                } else {
+                    receta.setFoto(nombre);
+                }
             }
         }
 
@@ -138,6 +153,14 @@ public class PersonalMantenedorReceta {
         modelo.addAttribute("recetas", this.recetaService.listar());
 
         modelo.addAttribute("tipoForm", "agregar");
+
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 1);
+        modelo.addAttribute("nombreMensaje", "Información");
+        modelo.addAttribute("mensaje", "Receta Editada Correctamente");
+        //puede ser success - info - danger - warning
+        modelo.addAttribute("tipoMensaje", "success");
+        //fin mensajes 
 
         //fin desarrollo 
         //despachos 
@@ -158,13 +181,11 @@ public class PersonalMantenedorReceta {
         //desarrollo aca 
         Receta receta = this.recetaService.buscarRecetaById(idReceta);
 
-        
         //buscar los insumos para la receta 
-        
         modelo.addAttribute("ingredientes", this.recetaService.listarIngredientesByIdReceta(idReceta));
-        
+
         modelo.addAttribute("receta", receta);
-        
+
         modelo.addAttribute("tipo", "misInsumos");
 
         //fin desarrollo 
@@ -185,7 +206,7 @@ public class PersonalMantenedorReceta {
         //desarrollo aca 
         Receta receta = this.recetaService.buscarRecetaById(idReceta);
 
-        modelo.addAttribute("insumos", this.recetaService.listarInsumosAgregarReceta(idReceta)); 
+        modelo.addAttribute("insumos", this.recetaService.listarInsumosAgregarReceta(idReceta));
 
         modelo.addAttribute("tipo", "agregar");
 
@@ -241,4 +262,106 @@ public class PersonalMantenedorReceta {
         return "users/administrador/matenedor_receta_insumo";
     }
 
+    @RequestMapping("/insumoName")
+    public String buscarInsumos(Model modelo, @RequestParam("idReceta") Integer idReceta, @RequestParam("nombre") String nombre) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+        Receta receta = this.recetaService.buscarRecetaById(idReceta);
+
+        modelo.addAttribute("insumos", this.insumoService.filtrarInsumosByNombre(nombre));
+
+        modelo.addAttribute("tipo", "agregar");
+
+        modelo.addAttribute("receta", receta);
+
+        //buscar los insumos para la receta 
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/matenedor_receta_insumo";
+    }
+    
+    //editarIngrediente
+    @RequestMapping("/editarIngrediente")
+    public String editarIngrediente(Model modelo,
+            @RequestParam("idReceta") Integer idReceta,
+            @RequestParam("idIngrediente") Integer idIngrediente,
+            @RequestParam("cantidad") double cantidad, 
+            @RequestParam("idInsumo") Integer idInsumo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+
+        //desarrollo aca 
+        Receta receta = this.recetaService.buscarRecetaById(idReceta);
+
+        Ingrediente ingrediente = new Ingrediente();
+        
+        ingrediente.setIdIngrediente(idIngrediente); 
+        ingrediente.setCantidad(cantidad); 
+        ingrediente.setIdReceta(receta); 
+        
+        Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
+        
+        ingrediente.setIdInsumo(insumo);
+
+        this.recetaService.editarIngrediente(ingrediente);
+
+        //cargar insumos
+        modelo.addAttribute("ingredientes", this.recetaService.listarIngredientesByIdReceta(idReceta));
+
+        modelo.addAttribute("tipo", "misInsumos");
+
+        modelo.addAttribute("receta", receta);
+
+        //buscar los insumos para la receta 
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/matenedor_receta_insumo";
+    }
+    
+    
+     @RequestMapping("/deleteIngrediente")
+    public String deleteIngrediente(Model modelo, @RequestParam("idReceta") Integer idReceta, 
+            @RequestParam("idIngrediente") Integer idIngrediente) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+
+        //desarrollo aca 
+        Receta receta = this.recetaService.buscarRecetaById(idReceta);
+
+        //borrar ingrediente
+        
+        this.recetaService.deleteIngrediente(idIngrediente); 
+        
+        //buscar los insumos para la receta 
+        modelo.addAttribute("ingredientes", this.recetaService.listarIngredientesByIdReceta(idReceta));
+
+        modelo.addAttribute("receta", receta);
+
+        modelo.addAttribute("tipo", "misInsumos");
+
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/matenedor_receta_insumo";
+    }
+    
+    
 }

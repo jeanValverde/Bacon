@@ -55,14 +55,15 @@
                                                     <img th:src="@{/uploads/}+${receta.foto}" class="img-lg rounded" alt="profile image">
                                                     <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
                                                         <h6 class="mb-0" th:text="${receta.nombreReceta}" >Nombre de la Receta</h6>
+                                                        <br/>
                                                         <p class="mb-0 text-success font-weight-bold" th:text="'$' + ${receta.precioReceta}" >$2321</p>
                                                     </div>
                                                     <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
                                                         <h6 class="mb-0">Disponible</h6>
                                                         <br />
-                                                        <p class="mb-0 text-success font-weight-bold ml-3">
-                                                        <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-outline-info"><i class="mdi mdi-check"></i></div>
-                                                        <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-outline-info"><i class="mdi mdi-close"></i></div>
+                                                        <p class="mb-0 text-success font-weight-bold">
+                                                        <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-outline-info ml-3"><i class="mdi mdi-check"></i></div>
+                                                        <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-outline-info ml-3"><i class="mdi mdi-close"></i></div>
                                                         </p>
                                                     </div>
                                                     <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
@@ -72,7 +73,7 @@
                                                         <div class="badge badge-primary" th:text="${receta.cantidadPrepDiariaReceta} + ' Estimación ventas'" >23 Estimación ventas</div>
                                                         <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
                                                         <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '1' }" >Bar</div>
-                                                        <div class="badge badge-primary" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" >Categoría</div>
+                                                        <div class="badge badge-primary" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" th:if="${receta.tipoReceta == '0'}" >Categoría</div>
                                                         </p>
                                                     </div>
                                                     <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
@@ -95,10 +96,11 @@
                                     <div class="col-md-10 grid-margin stretch-card">
                                         <div class="card">
                                             <div class="card-body">
-                                                <form class="" action="index.html" method="post">
+                                                <form class="" th:action="@{/administrador/recetaInsumos/insumoName}" method="get">
                                                     <div class="form-group">
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" placeholder="Escribe el nombre del insumo" aria-label="Escribe el nombre de la receta">
+                                                            <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
+                                                            <input type="text" class="form-control" name="nombre" placeholder="Escribe el nombre del insumo" aria-label="Escribe el nombre de la receta">
                                                             <div class="input-group-append">
                                                                 <button class="btn btn-sm btn-primary" type="submit">Buscar</button>
                                                             </div>
@@ -158,13 +160,13 @@
                                                 Aenean commodo ligula eget dolor. Lorem
                                             </p>
                                             <br />
-                                            <form class="forms-sample" th:action="@{/administrador/recetaInsumos/addRecetaInsumo}"  method="POST" th:name="'form-' + ${insumo.idInsumo}"  >
+                                            <form class="forms-sample" th:action="@{/administrador/recetaInsumos/addRecetaInsumo}"  method="POST" th:name="'form-card-' + ${insumo.idInsumo}"  >
                                                 <input type="hidden" name="idInsumo" th:value="${insumo.idInsumo}" />
                                                 <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
                                                 <div class="form-group row">
                                                     <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
                                                     <div class="col-sm-8">
-                                                        <input type="number" step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
+                                                        <input required="" type="number" step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
@@ -175,7 +177,7 @@
 
 
                                     <div class="card" th:if="${tipo == 'misInsumos' }"  th:each="ingrediente: ${ingredientes}"   >
-                                        <input type="hidden" name="idIngrediente" th:value="${ingrediente.idIngrediente}" />
+
                                         <div class="card-body text-center">
                                             <div>
                                                 <img th:src="@{/uploads/}+${ingrediente.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image">
@@ -186,15 +188,18 @@
                                                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
                                                 Aenean commodo ligula eget dolor. Lorem
                                             </p>
-                                            <form class="forms-sample">
+                                            <form class="forms-sample" th:action="@{/administrador/recetaInsumos/editarIngrediente}"  method="POST" >
+                                                <input type="hidden" name="idIngrediente" th:value="${ingrediente.idIngrediente}" />
+                                                <input type="hidden" name="idInsumo" th:value="${ingrediente.idInsumo.idInsumo}" />
+                                                <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
                                                 <div class="form-group row">
                                                     <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
                                                     <div class="col-sm-9">
-                                                        <input type="number" class="form-control" th:value="${ingrediente.cantidad}"  id="cantidadInsumo" placeholder="Cantidad">
+                                                        <input required="" type="number" step="any" name="cantidad" class="form-control" th:value="${ingrediente.cantidad}"  id="cantidadInsumo" placeholder="Cantidad">
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
-                                                <a   class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</a>
+                                                <a th:href="@{/administrador/recetaInsumos/deleteIngrediente(idReceta=${receta.idReceta}, idIngrediente=${ingrediente.idIngrediente})}"  class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</a>
                                             </form>
                                         </div>
                                     </div>
@@ -203,7 +208,8 @@
                             </div>
 
 
-                            <div id="tablaIndumos" class="col-md-12" style="">
+                            <!--inicio table insumos no agregados--->
+                            <div id="tablaIndumos" class="col-md-12" style="" th:if="${tipo == 'agregar' }"  >
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">Recetas</h4>
@@ -215,97 +221,46 @@
                                                             Foto
                                                         </th>
                                                         <th>
-                                                            Nombre Receta
+                                                            ID
                                                         </th>
                                                         <th>
-                                                            Duración Preparación
+                                                            Nombre Insumo
                                                         </th>
                                                         <th>
-                                                            Precio Receta
+                                                            Descripción
                                                         </th>
                                                         <th>
-                                                            Estimación Diaria
-                                                        </th>
-                                                        <th>
-                                                            Tipo
-                                                        </th>
-                                                        <th>
-                                                            Categoría
-                                                        </th>
-                                                        <th>
-                                                            Disponible
+                                                            Agregar Cantidad
                                                         </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
+                                                    <tr th:each="insumo: ${insumos}"  >
                                                         <td class="py-1">
-                                                            <img src="https://via.placeholder.com/36x36" alt="image">
+                                                            <img th:src="@{/uploads/}+${insumo.fotoInsumo}"  alt="image">
                                                         </td>
-                                                        <td>
+                                                        <td th:text="${insumo.idInsumo}"   >
+                                                            Herman Beck
+                                                        </td>
+                                                        <td th:text="${insumo.nombreInsumo}" >
+                                                            Herman Beck
+                                                        </td>
+                                                        <td th:text="${insumo.descripcionInsumo}" >
                                                             Herman Beck
                                                         </td>
                                                         <td>
-                                                            Herman Beck
-                                                        </td>
-                                                        <td>
-                                                            $ 77.99
-                                                        </td>
-                                                        <td>
-                                                            Herman Beck
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-outline-primary">Primary</div>
-                                                        </td>
-                                                        <td>
-                                                            <label class="badge badge-danger">Pending</label>
-                                                        </td>
-                                                        <th>
-                                                            <form class="forms-sample">
+                                                            <form class="forms-sample" th:action="@{/administrador/recetaInsumos/addRecetaInsumo}"  method="POST" th:name="'form-' + ${insumo.idInsumo}" >
+                                                                <input type="hidden" name="idInsumo" th:value="${insumo.idInsumo}" />
+                                                                <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
                                                                 <div style="float: left; padding:0px;" class="form-group row">
                                                                     <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
                                                                     <div class="col-sm-9">
-                                                                        <input type="number" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
+                                                                        <input required="" type="number" step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
                                                                     </div>
                                                                 </div> &nbsp;
-                                                                <button class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
-                                                                <button class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</button>
+                                                                <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
                                                             </form>
-                                                        </th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="py-1">
-                                                            <img src="https://via.placeholder.com/36x36" alt="image">
                                                         </td>
-                                                        <td>
-                                                            Herman Beck
-                                                        </td>
-                                                        <td>
-                                                            Herman Beck
-                                                        </td>
-                                                        <td>
-                                                            $ 77.99
-                                                        </td>
-                                                        <td>
-                                                            Herman Beck
-                                                        </td>
-                                                        <td>
-                                                            <div class="badge badge-outline-primary">Primary</div>
-                                                        </td>
-                                                        <td>
-                                                            <label class="badge badge-danger">Pending</label>
-                                                        </td>
-                                                        <th>
-                                                            <form class="forms-sample">
-                                                                <div style="float: left; padding:0px;" class="form-group row">
-                                                                    <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
-                                                                    <div class="col-sm-9">
-                                                                        <input type="number" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
-                                                                    </div>
-                                                                </div> &nbsp;
-                                                                <button class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
-                                                            </form>
-                                                        </th>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -313,6 +268,71 @@
                                     </div>
                                 </div>
                             </div>
+                            <!--fin table insumos no agregados--->
+
+                            <!--inicio table mis insumos--->
+                            <div id="tablaIndumos" class="col-md-12" style="" th:if="${tipo == 'misInsumos' }" >
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Recetas</h4>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Foto
+                                                        </th>
+                                                        <th>
+                                                            ID
+                                                        </th>
+                                                        <th>
+                                                            Nombre Insumo
+                                                        </th>
+                                                        <th>
+                                                            Descripción
+                                                        </th>
+                                                        <th>
+                                                            Agregar Cantidad
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="ingrediente: ${ingredientes}" >
+                                                        <td class="py-1">
+                                                            <img th:src="@{/uploads/}+${ingrediente.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                                        </td>
+                                                        <td th:text="${ingrediente.idInsumo.idInsumo}"  >
+                                                            Herman Beck
+                                                        </td>
+                                                        <td th:text="${ingrediente.idInsumo.nombreInsumo}"  >
+                                                            Herman Beck
+                                                        </td>
+                                                        <td th:text="${ingrediente.idInsumo.descripcionInsumo}" >
+                                                            $ 77.99
+                                                        </td>
+                                                        <td>
+                                                            <form th:name="'form-table-' + ${ingrediente.idInsumo.idInsumo}" class="forms-sample" th:action="@{/administrador/recetaInsumos/editarIngrediente}"  method="POST" >
+                                                                <input type="hidden" name="idIngrediente" th:value="${ingrediente.idIngrediente}" />
+                                                                <input type="hidden" name="idInsumo" th:value="${ingrediente.idInsumo.idInsumo}" />
+                                                                <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
+                                                                <div style="float: left; padding:0px;" class="form-group row">
+                                                                    <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
+                                                                    <div class="col-sm-9">
+                                                                        <input required=""  type="number"  step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
+                                                                    </div>
+                                                                </div> &nbsp;
+                                                                <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
+                                                                <a th:href="@{/administrador/recetaInsumos/deleteIngrediente(idReceta=${receta.idReceta}, idIngrediente=${ingrediente.idIngrediente})}"  class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</a>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--fin table mis insumos--->
 
                         </div>
 
@@ -359,7 +379,7 @@
             tabla.style.display = "none";
             tabla.style.visibility = "hidden";
 
-           
+
             function verCard() {
                 var tabla = document.getElementById("tablaIndumos");
                 tabla.style.display = "none";
@@ -379,6 +399,10 @@
             }
         </script>
 
+     
+        
+        
+        
     </body>
 
 </html>
