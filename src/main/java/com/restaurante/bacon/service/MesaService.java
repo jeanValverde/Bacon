@@ -8,6 +8,8 @@ package com.restaurante.bacon.service;
 import com.restaurante.bacon.dao.IMesaDao;
 import com.restaurante.bacon.dao.ProcedureQueryMesa;
 import com.restaurante.bacon.dto.Mesa;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,22 +19,38 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MesaService {
-    
+
     @Autowired
     IMesaDao mesaDao;
-    
+
     @Autowired
     ProcedureQueryMesa procedureQuery;
-    
+
 //    public boolean add(Integer numero, Integer cantidadAsientos, Integer estado){
 //        return this.procedureQuery.InsertMesa(numero, cantidadAsientos, estado);
 //    }
-    
-    
-    public Mesa add(Mesa mesa){
+    public Mesa add(Mesa mesa) {
         return this.mesaDao.save(mesa);
     }
-    
-    
-    
+
+    public boolean editarMesa(Mesa mesa) {
+        return this.procedureQuery.UpdateMesa(mesa.getIdMesa(), mesa.getNumeroMesa(), mesa.getCantidadAsientosMesa(), mesa.getEstadoMesa());
+    }
+
+    public Mesa retornarMesaById(Integer idMesa) {
+        Optional<Mesa> optinalEntity = mesaDao.findById(idMesa);
+        Mesa mesa = optinalEntity.get();
+        return mesa;
+    }
+
+    public List<Mesa> listarMesa() {
+        return this.mesaDao.findAll();
+    }
+
+    public Mesa eliminarMesa(Integer idMesa) {
+        Mesa mesa = mesaDao.findByIdMesa(idMesa);
+        mesaDao.deleteById(idMesa);
+        return mesa;
+    }
+
 }

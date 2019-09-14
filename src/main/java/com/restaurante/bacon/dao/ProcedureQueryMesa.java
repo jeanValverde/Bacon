@@ -5,6 +5,7 @@
  */
 package com.restaurante.bacon.dao;
 
+import java.math.BigInteger;
 import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +21,7 @@ public class ProcedureQueryMesa {
     @Autowired
     private EntityManager em;
     
+    //SuppressWarnings suprime las abvertencias de tipo unchecked
    @SuppressWarnings("unchecked")
    public boolean InsertMesa(Integer numero, Integer cantidadAsientos, Integer estado){
        try {
@@ -31,6 +33,22 @@ public class ProcedureQueryMesa {
            return true;
        } catch (Exception ex){
            ex.printStackTrace();
+           return false;
+       }
+   }
+   
+   @SuppressWarnings("unchecked")
+   public boolean UpdateMesa(Integer id, BigInteger numero, BigInteger cantidadAsientos, BigInteger estado){
+       try {
+           //si no se realiza el procedimiento adecuadamente cae en una exeption 
+           em.createNamedStoredProcedureQuery("UpdateMesa")
+                   .setParameter("P_ID_MESA", id)
+                   .setParameter("P_NUMERO_MESA", numero)
+                   .setParameter("P_CANTIDAD_ASIENTOS_MESA", cantidadAsientos)
+                   .setParameter("P_ESTADO_MESA", estado).execute();
+           return true;
+       } catch (Exception ex){
+           System.out.println(ex.getMessage());
            return false;
        }
    }
