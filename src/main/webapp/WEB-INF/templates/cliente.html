@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}" />
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+            <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}"/>
+            <!-- endinject -->
+            <!-- plugin css for this page -->
+            <!-- End plugin css for this page -->
+            <!-- inject:css -->
+            <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}"/>
+            <!-- endinject -->
+            <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+    </head>
+
+    <body class="sidebar-fixed"><div class="container-scroller">
+            <div class="container-fluid page-body-wrapper full-page-wrapper">
+                <div class="content-wrapper d-flex align-items-stretch auth auth-img-bg">
+                    <div class="row flex-grow">
+                        <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                            <div class="auth-form-transparent text-left p-3">
+                                <div class="brand-logo">
+                                    <img src="../../../../images/logo.svg" alt="logo">
+                                </div>
+                                <h4></h4>
+                                <h6 class="font-weight-light">Escribe un nombre para recocerte y el número de mesa que pediste</h6>
+                                <form class="pt-3"  method="post" th:action="@{/cliente/ingresar}"  >
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail">Nombre</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control form-control-lg " id="exampleInputEmail" placeholder="Nombre/Alias">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword">Número de Mesa</label>
+                                        <div class="input-group">
+                                            <select class="form-control form-control-lg" id="exampleFormControlSelect1">
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="my-3">
+                                        <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" type="submit" >Listo Para Comer</button>
+                                        
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 login-half-bg d-flex flex-row" th:style="'background-image: url(' + @{/images/clienteCerdo.png} + ')' ">
+
+
+
+                            <p class="text-white font-weight-medium text-center flex-grow align-self-end">Copyright &copy; 2019.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+
+        <!--validate form--->
+        <script th:src="@{/custom/loginform.js}"></script>
+
+    </body>
+
+</html>
