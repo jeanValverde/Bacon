@@ -158,7 +158,14 @@ public class ProveedorController {
         proveedor.setCelularProveedor(celularProveedor);
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
-        this.proveedorService.ingresarProveedor(proveedor);
+        if (this.proveedorService.ingresarProveedor(proveedor)) {
+             modelo.addAttribute("registroAgregar",1);
+        }else{
+            modelo.addAttribute("registroAgregar",0);
+        }
+       
+        
+        
 
         //desarollo
         //fin desarrollo 
@@ -274,10 +281,14 @@ public class ProveedorController {
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
         if (this.proveedorService.modificarProveedor(proveedor)) {
-            
-        } else {
-            
+             
+             modelo.addAttribute("modificarProveedor",1);
+        }else{
+            modelo.addAttribute("modificarProveedor",0);
         }
+       
+            
+        
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
         proveedores = this.proveedorService.listarProveedores();
         //desarrollo aca 
