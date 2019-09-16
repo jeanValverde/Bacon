@@ -36,6 +36,18 @@
           className: "btn btn-primary"
         }
       })
+      } else if (type === 'warning-message') {
+      swal({
+        title: titulo,
+        text: texto,
+        icon: 'warning',
+        button: {
+          text: "Continuar",
+          value: true,
+          visible: true,
+          className: "btn btn-primary"
+        }
+      })
 
     } else if (type === 'auto-close') {
       swal({

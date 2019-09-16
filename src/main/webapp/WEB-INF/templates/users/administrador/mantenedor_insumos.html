@@ -61,7 +61,7 @@
                     <div class="content-wrapper">
                         <div class="row">
                             <div th:if="${agregar}" class="col-lg-4 grid-margin stretch-card">
-                                <input type="hidden" id="agrego" value="${agrego}"/>
+                                <input type="hidden" id="agrego" th:value="${agrego}"/>
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">Agregar Insumo</h4>
@@ -72,16 +72,17 @@
                                                     <div class="form-group">
                                                         <label for="exampleInputUsername1" >Nombre</label>
                                                         <input type="text" class="form-control" id="nombre" name="nombre"/>
-                                                        <div class="invalid-feedback">
-                                                            Ingrese un nombre
-                                                        </div>
+                                                        
                                                     </div>
-                                                    <div class="form-group">
+                                                    <div id="nombre-mensaje1"  class="invalid-feedback">
+                                                            Ingrese el nombre del insumo.
+                                                    </div>
+                                                    <div class="form-group is-invalid">
                                                         <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
                                                         <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
-                                                        <div class="invalid-feedback">
-                                                            Ingrese una descripción
-                                                        </div>
+                                                    </div>
+                                                    <div id="descripcion-mensaje1"  class="invalid-feedback">
+                                                            Ingrese una descripción para el insumo.
                                                     </div>
                                                     <div class="form-group">
                                                         <label style="margin-top: 20px" for="exampleInputUsername1">Unidad de medida</label>
@@ -90,38 +91,56 @@
                                                             <option value="Kilos">Kilos</option>
                                                             <option value="Litros">Litros</option>
                                                         </select>
-                                                        <div class="invalid-feedback">
-                                                            Seleccione el tipo de unidad
-                                                        </div>
+                                                    </div>
+                                                    <div id="unidad-mensaje1"  class="invalid-feedback">
+                                                            Seleccione el tipo de unidad de medida.
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6" >
-                                                    <div class="form-group">
-                                                        <label  style="margin-top: 20px" for="exampleInputUsername1">Stock</label>
-                                                        <input min="1" max="2000" type="number" class="form-control" id="stock" name="stock"/>
-                                                        <div class="invalid-feedback">
-                                                            Ingrese el stock actual
-                                                        </div>
+                                                <div class="col-lg-12" >
+                                                    <div class="form-group" id="form-group-stock">
+                                                        <label  style="margin-top: 20px" for="exampleInputUsername1">Stock actual</label>
+                                                        <input type="number" class="form-control"  id="stock" name="stock"/>
+                                                    </div>
+                                                    <div id="stock-mensaje1"  class="invalid-feedback">
+                                                            Ingrese el stock actual.
+                                                    </div>
+                                                    <div id="stock-mensaje2"  class="invalid-feedback">
+                                                            Debe ser mayor o igual a 0.
                                                     </div>
                                                     <div class="form-group">
                                                         <label style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
-                                                        <input type="number" class="form-control" id="stockMinimo" name="stockMinimo"/>
-                                                        <div class="invalid-feedback">
-                                                            Ingrese el stock minimo
-                                                        </div>
+                                                        <input type="number" class="form-control"  id="stockMinimo" name="stockMinimo"/>
+                                                        
                                                     </div>
+                                                    <div id="stockMin-mensaje1" class="invalid-feedback">
+                                                            Ingrese el stock minimo.
+                                                    </div>
+                                                    <div id="stockMin-mensaje2"  class="invalid-feedback">
+                                                            Debe ser mayor a 0.
+                                                    </div>
+                                                    <div id="stockMin-mensaje3"  class="invalid-feedback">
+                                                            Debe ser menor o igual al stock actual.
+                                                    </div>
+                                                    
                                                     <div class="form-group">
                                                         <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
-                                                        <input type="number" class="form-control" id="stockMaximo" name="stockMaximo"/>
-                                                        <div class="invalid-feedback">
-                                                            Ingrese el stock maximo
-                                                        </div>
+                                                        <input type="number" class="form-control"  id="stockMaximo" name="stockMaximo"/>
                                                     </div>
+                                                    <div id="stockMax-mensaje1"  class="invalid-feedback">
+                                                            Ingrese el stock Maximo
+                                                    </div>
+                                                    <div id="stockMax-mensaje2"  class="invalid-feedback">
+                                                            Debe ser mayor o igual al stock actual.
+                                                    </div>
+                                                    
                                                 </div>
-                                                <div class="col-lg-6" >
+                                                <div class="col-lg-12" >
                                                     <div class="form-group">
                                                         <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
-                                                        <input required type="file" class="dropify" id="foto" name="imagenInsumo"/>
+                                                        <input type="file" class="dropify" id="foto" name="imagenInsumo"/>
+                                                    </div>
+                                                    <div id="foto-mensaje1"  class="invalid-feedback">
+                                                            Ingrese una foto para el insumo
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12" style="margin-top: 30px;text-align:center">
@@ -148,9 +167,15 @@
                                                         <label for="exampleInputUsername1" >Nombre</label>
                                                         <input th:value="${insumo.nombreInsumo}"  type="text" class="form-control" id="nombre" name="nombre"/>
                                                     </div>
+                                                    <div id="nombre-mensaje1"  class="invalid-feedback">
+                                                            Ingrese el nombre del insumo.
+                                                    </div>
                                                     <div class="form-group">
                                                         <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
                                                         <textarea class="form-control" id="descripcion" name="descripcion">[[${insumo.descripcionInsumo}]]</textarea>
+                                                    </div>
+                                                    <div id="descripcion-mensaje1"  class="invalid-feedback">
+                                                            Ingrese una descripción para el insumo.
                                                     </div>
                                                     <div class="form-group">   
                                                         <div class="form-group">  
@@ -158,30 +183,57 @@
                                                             <select class="form-control form-control-lg" id="unidadMedida" name="unidadMedida">
                                                                 <option th:selected="${insumo.unidadMedidaInsumo} == Kilos" value="Kilos">Kilos</option>
                                                                 <option th:selected="${insumo.unidadMedidaInsumo} == Litros" value="Litros">Litros</option>
-
                                                             </select>
                                                         </div>
                                                     </div>
+                                                    <div id="unidad-mensaje1"  class="invalid-feedback">
+                                                            Seleccione el tipo de unidad de medida.
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-6" >
-                                                    <div class="form-group">
+                                                    <div class="form-group is-valid">
                                                         <label  style="margin-top: 20px" for="exampleInputUsername1">Stock</label>
                                                         <input th:value="${insumo.stockInsumo}" type="number" class="form-control" id="stock" name="stock"/>
                                                     </div>
+                                                    <div id="stock-mensaje1"  class="invalid-feedback">
+                                                            Ingrese el stock actual.
+                                                    </div>
+                                                    <div id="stock-mensaje2"  class="invalid-feedback">
+                                                            Debe ser mayor o igual a 0.
+                                                    </div>
                                                     <div class="form-group">
                                                         <label  style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
-                                                        <input th:value="${insumo.minimoStockInsumo}" type="number" class="form-control" id="stockMinimo" name="stockMinimo"/>
+                                                        <input th:value="${insumo.minimoStockInsumo}" type="number" class="form-control" id="stockMinimo" name="stockMinimo" onkeydown=""/>
+                                                    </div>
+                                                    <div id="stockMin-mensaje1" class="invalid-feedback">
+                                                            Ingrese el stock minimo.
+                                                    </div>
+                                                    <div id="stockMin-mensaje2"  class="invalid-feedback">
+                                                            Debe ser mayor a 0.
+                                                    </div>
+                                                    <div id="stockMin-mensaje3"  class="invalid-feedback">
+                                                            Debe ser menor o igual al stock actual.
                                                     </div>
                                                     <div class="form-group">
                                                         <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
                                                         <input th:value="${insumo.maximoStockInsumo}" type="number" class="form-control" id="stockMaximo" name="stockMaximo"/>
                                                     </div>
+                                                    <div id="stockMax-mensaje1"  class="invalid-feedback">
+                                                            Ingrese el stock Maximo
+                                                    </div>
+                                                    <div id="stockMax-mensaje2"  class="invalid-feedback">
+                                                            Debe ser mayor o igual al stock actual.
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-6" >
+                                                    <input type="text" id="fotoValor" th:value="@{/uploads/}+${insumo.fotoInsumo}"/>
                                                     <div class="form-group">
                                                         <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
-                                                        <input type="file" accept="image/png, .jpeg, .jpg, image/gif" src="@{/uploads/}+${insumo.fotoInsumo}" th:value="@{/uploads/}+${insumo.fotoInsumo}" th:data-default-file="@{/uploads/}+${insumo.fotoInsumo}" class="dropify" id="imagenInsumo" name="imagenInsumo" />
+                                                        <input type="file" accept="image/png, .jpeg, .jpg, image/gif" th:src="@{/uploads/}+${insumo.fotoInsumo}" th:value="@{/uploads/}+${insumo.fotoInsumo}" th:data-default-file="@{/uploads/}+${insumo.fotoInsumo}" class="dropify" id="foto" name="imagenInsumo" />
                                                         
+                                                    </div>
+                                                     <div id="foto-mensaje1"  class="invalid-feedback">
+                                                            Ingrese una foto para el insumo
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-12" style="margin-top: 30px;text-align:center">
@@ -404,18 +456,21 @@
         <script th:src="@{/js/alerts_personalizado.js}"></script>
         <script th:src="@{/js/avgrund.js}"></script>
         <!--validate form--->
-        <script th:src="@{/custom/formularios.js}"></script>
+        <script th:src="@{/custom/formulario-insumo.js}"></script>
 
         <script type="text/javascript" >
             var formularioPassword = document.getElementsByName("formAgregarInsumo")[0];
             validatorForms(formularioPassword);
         </script>
         <script type="text/javascript" >
-            
             var respuestAgrega = document.getElementById("agrego").value;
-            if(respuestAgrega.toString().equals("1")){
+            if(respuestAgrega === "1"){
                 showSwal('success-message','Insumo agregado!','se ha registrado el insumo exitosamente');
-            } 
+            }else if (respuestAgrega === "0" ){
+                showSwal('warning-message','Error!',"No se ha podido agregar el insumo");
+            }
+            
+            
         </script>
         
         
