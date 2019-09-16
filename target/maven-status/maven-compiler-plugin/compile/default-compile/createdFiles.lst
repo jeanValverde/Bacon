@@ -9,17 +9,12 @@ com\restaurante\bacon\dto\InsumoPedidoProveedor.class
 com\restaurante\bacon\dto\Mesa.class
 com\restaurante\bacon\service\RecetaService.class
 com\restaurante\bacon\dao\IRolDao.class
-<<<<<<< HEAD
 com\restaurante\bacon\dto\procedure\ProcedureInsertProveedor.class
 com\restaurante\bacon\dao\IRecetaDao.class
 com\restaurante\bacon\dao\IInsumoDao.class
+com\restaurante\bacon\controller\PersonalInsumo.class
 com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.class
 com\restaurante\bacon\dao\IProveedorDao.class
-=======
-com\restaurante\bacon\dao\IRecetaDao.class
-com\restaurante\bacon\dao\IInsumoDao.class
-com\restaurante\bacon\controller\PersonalInsumo.class
->>>>>>> Cristian
 com\restaurante\bacon\dto\Pedido.class
 com\restaurante\bacon\dto\MedioPago.class
 com\restaurante\bacon\dto\Rol.class

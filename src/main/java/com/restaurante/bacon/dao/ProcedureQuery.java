@@ -16,12 +16,12 @@ import static com.restaurante.bacon.dto.Proveedor.P_RUT_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TIPO_PROVEEDOR;
 import com.restaurante.bacon.dto.CategoriaReceta;
-<<<<<<< HEAD
+
 import com.restaurante.bacon.dto.Proveedor;
 import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
-=======
+
 import com.restaurante.bacon.dto.Insumo;
->>>>>>> Cristian
+
 import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -78,7 +78,7 @@ public class ProcedureQuery {
             return false;
         }
     }
-<<<<<<< HEAD
+
 
 
 
@@ -130,11 +130,11 @@ public class ProcedureQuery {
 
 
     @SuppressWarnings("unchecked")
-    public boolean DeleteProveedorById(Integer id) {
+    public boolean DeleteProveedorById(Integer idProveedor) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("DeleteProveedorById")
-                    .setParameter("P_ID_PROVEEDOR", id).execute();
+                    .setParameter("P_ID_PROVEEDOR", idProveedor).execute();
 
             return true;
         } catch (Exception ex) {
@@ -142,9 +142,9 @@ public class ProcedureQuery {
             return false;
         }
     }
-    
-     @SuppressWarnings("unchecked")
-    public List<Proveedor> filtrarProveedorByNombre(String nombreProveedor) {
+    //Filtro nombre proveedor
+    @SuppressWarnings("unchecked")
+    public List<Proveedor> filtrarProveedoresByNombre(String nombreProveedor) {
         try {
             StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PROVEEDOR.FILTRO_NOMBRE_PROVEEDOR");
 
@@ -170,11 +170,103 @@ public class ProcedureQuery {
                 proveedor.setDireccionProveedor(result[3].toString());
                 proveedor.setTelefonoProveedor(result[4].toString());
                 proveedor.setContactoVenta(result[5].toString());
-                proveedor.setTipoProveedor(result[5].toString());
-                proveedor.setCorreoProveedor(result[6].toString());
-                proveedor.setCelularProveedor(Integer.parseInt(result[7].toString()));
-                proveedor.setCategoriaProveedor(result[8].toString());
+                proveedor.setTipoProveedor(result[6].toString());
+                proveedor.setCorreoProveedor(result[7].toString());
+                proveedor.setCelularProveedor(Integer.parseInt(result[8].toString()));
+                proveedor.setCategoriaProveedor(result[9].toString());
+               
                 
+              
+                proveedores.add(proveedor);
+            }
+            
+            return proveedores;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+    //filtro por Rut
+     @SuppressWarnings("unchecked")
+    public List<Proveedor> filtrarProveedorByRut(String rut) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PROVEEDOR.FILTRO_RUT_PROVEEDOR");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_RUT_PROVEEDOR", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_PROVEEDOR_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("P_RUT_PROVEEDOR", rut);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Proveedor> proveedores = new ArrayList<Proveedor>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+               Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                proveedor.setRutProveedor(result[1].toString());
+                proveedor.setNombreProveedor(result[2].toString());
+                proveedor.setDireccionProveedor(result[3].toString());
+                proveedor.setTelefonoProveedor(result[4].toString());
+                proveedor.setContactoVenta(result[5].toString());
+                proveedor.setTipoProveedor(result[6].toString());
+                proveedor.setCorreoProveedor(result[7].toString());
+                proveedor.setCelularProveedor(Integer.parseInt(result[8].toString()));
+                proveedor.setCategoriaProveedor(result[9].toString());
+                
+              
+                proveedores.add(proveedor);
+            }
+            
+            return proveedores;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
+       //filtro por Categoria
+     @SuppressWarnings("unchecked")
+    public List<Proveedor> filtrarProveedorByCategoria(String categoria) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PROVEEDOR.FILTRO_CATEGORIA_PROVEEDOR");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_CATEGORIA_PROVEEDOR", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_PROVEEDOR_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("P_CATEGORIA_PROVEEDOR", categoria);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Proveedor> proveedores = new ArrayList<Proveedor>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+               Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                proveedor.setRutProveedor(result[1].toString());
+                proveedor.setNombreProveedor(result[2].toString());
+                proveedor.setDireccionProveedor(result[3].toString());
+                proveedor.setTelefonoProveedor(result[4].toString());
+                proveedor.setContactoVenta(result[5].toString());
+                proveedor.setTipoProveedor(result[6].toString());
+                proveedor.setCorreoProveedor(result[7].toString());
+                proveedor.setCelularProveedor(Integer.parseInt(result[8].toString()));
+                proveedor.setCategoriaProveedor(result[9].toString());
+                
+              
                 proveedores.add(proveedor);
             }
             
@@ -290,7 +382,5 @@ public class ProcedureQuery {
 
 
 
-=======
 
->>>>>>> Cristian
 }

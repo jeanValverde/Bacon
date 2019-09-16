@@ -194,7 +194,7 @@ public class Proveedor implements Serializable {
         this.correoProveedor = correoProveedor;
     }
 
-    public long getCelularProveedor() {
+    public Integer getCelularProveedor() {
         return celularProveedor;
     }
 

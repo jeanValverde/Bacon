@@ -36,7 +36,6 @@ import org.springframework.web.multipart.MultipartFile;
  *
  * @author jean
  */
-
 @RequestMapping("/administrador_proveedor")
 @Controller
 public class ProveedorController {
@@ -44,24 +43,24 @@ public class ProveedorController {
     //acceder a CRUB y más del personal 
     @Autowired
     PersonalService personalService;
-
+    
     @Autowired
     RecetaService recetaService;
-
+    
     public static String UPLOAD_DIR_IMAGEN = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
-
+    
     @Autowired
     InsumoService insumoService;
     @Autowired
     ProcedureQuery procedureQuery;
-
+    
     @Autowired
     ProveedorService proveedorService;
 
     //para ingresar una contraseña encriptada 
     @Autowired
     private BCryptPasswordEncoder encoder;
-
+    
     @RequestMapping("/index")
     public String prueba(Model modelo) {
         //sesion 
@@ -96,9 +95,40 @@ public class ProveedorController {
         
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         return "users/administrador/mantenedor_proveedor";
-
+        
     }
+    
+    @RequestMapping("/buscar_por_filtro")
+    public String buscar_por_filtro(Model modelo, @RequestParam("tipoBusqueda") String tipoBusqueda, @RequestParam("filtro") String filtro) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        
+        List<Proveedor> proveedores = new ArrayList<Proveedor>();
+        switch (tipoBusqueda) {
+            case "nombre":
+                proveedores = this.proveedorService.filtrarProveedoresByNombre(filtro);
+                break;
+            case "rut":
+                proveedores = this.proveedorService.filtrarProveedoresByRut(filtro);
+                break;
+            case "categoria":
+                proveedores = this.proveedorService.filtrarProveedoresByCategoria(filtro);
+                break;
+            default:
+                proveedores = this.proveedorService.listarProveedores();
+        }
+        
+           modelo.addAttribute("proveedores", proveedores);
+        modelo.addAttribute("agregar", true);
+        modelo.addAttribute("personalSesion", personal);
 
+        //
+        //cargar el html nombre
+        return "users/administrador/mantenedor_proveedor";
+    }
+    
     @PostMapping("/addProveedor")
     public String addProveedor(Model modelo,
             @RequestParam("rutProveedor") String rutProveedor,
@@ -117,7 +147,7 @@ public class ProveedorController {
         //sesion 
 
         Proveedor proveedor = new Proveedor();
-
+        
         proveedor.setRutProveedor(rutProveedor);
         proveedor.setNombreProveedor(nombreProveedor);
         proveedor.setDireccionProveedor(direccionProveedor);
@@ -127,8 +157,8 @@ public class ProveedorController {
         proveedor.setCorreoProveedor(correoProveedor);
         proveedor.setCelularProveedor(celularProveedor);
         proveedor.setCategoriaProveedor(categoriaProveedor);
-
-        this.proveedorService.addProveedor(proveedor);
+        
+        this.proveedorService.ingresarProveedor(proveedor);
 
         //desarollo
         //fin desarrollo 
@@ -137,20 +167,19 @@ public class ProveedorController {
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", personal);
         
-         List<Proveedor> proveedores = new ArrayList<Proveedor>();
+        List<Proveedor> proveedores = new ArrayList<Proveedor>();
         proveedores = this.proveedorService.listarProveedores();
         //desarrollo aca 
         modelo.addAttribute("proveedores", proveedores);
         modelo.addAttribute("agregar", true);
-        
-        
+
         //
         //cargar el html nombre
         return "users/administrador/mantenedor_proveedor";
-
+        
     }
     
-     @RequestMapping("/eliminar_proveedor")
+    @RequestMapping("/eliminar_proveedor")
     public String eliminar_proveedor(Model modelo, @RequestParam("idProveedor") Integer idProveedor) {
         //sesion 
         UserRol user = new UserRol();
@@ -180,23 +209,21 @@ public class ProveedorController {
         //sesion 
         //desarrollo aca 
 
-        
-
-        
         Proveedor proveedor = this.proveedorService.buscarProveedorById(idProveedor);
-
+        
         List<Proveedor> proveedores = this.proveedorService.listarProveedores();
-
+        
         modelo.addAttribute("provedores", proveedores);
-        modelo.addAttribute("modificar",true);
-
+        modelo.addAttribute("modificar", true);
+        
         modelo.addAttribute("tipoForm", "editar");
-
+        
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
 
         return "users/administrador/mantenedorReceta";
     }
+
     @RequestMapping("/cargar_proveedor")
     public String cargar_proveedor(Model modelo, @RequestParam("idProveedor") BigDecimal idProveedor) {
         //sesion 
@@ -218,9 +245,9 @@ public class ProveedorController {
         return "users/administrador/mantenedor_proveedor";
     }
     
-     @RequestMapping("/modificar_proveedor")
+    @RequestMapping("/modificar_proveedor")
     public String modificar_proveedor(Model modelo, @RequestParam("idProveedor") BigDecimal idProveedor,
-             @RequestParam("rutProveedor") String rutProveedor,
+            @RequestParam("rutProveedor") String rutProveedor,
             @RequestParam("nombreProveedor") String nombreProveedor,
             @RequestParam("direccionProveedor") String direccionProveedor,
             @RequestParam("telefonoProveedor") String telefonoProveedor,
@@ -233,13 +260,22 @@ public class ProveedorController {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         
-      
+        Proveedor proveedor = new Proveedor();
         
+        proveedor.setIdProveedor(idProveedor);
+        proveedor.setRutProveedor(rutProveedor);
+        proveedor.setNombreProveedor(nombreProveedor);
+        proveedor.setDireccionProveedor(direccionProveedor);
+        proveedor.setTelefonoProveedor(telefonoProveedor);
+        proveedor.setContactoVenta(contactoVenta);
+        proveedor.setTipoProveedor(tipoProveedor);
+        proveedor.setCorreoProveedor(correoProveedor);
+        proveedor.setCelularProveedor(celularProveedor);
+        proveedor.setCategoriaProveedor(categoriaProveedor);
         
-        if(this.proveedorService.modificarProveedor(idProveedor,rutProveedor, nombreProveedor, direccionProveedor, telefonoProveedor, contactoVenta, tipoProveedor, correoProveedor, celularProveedor, categoriaProveedor)){
-        
+        if (this.proveedorService.modificarProveedor(proveedor)) {
             
-        }else{
+        } else {
             
         }
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
@@ -257,9 +293,7 @@ public class ProveedorController {
         return "users/administrador/mantenedor_proveedor";
     }
     
-    
-    
-     @RequestMapping("/filtro_proveedor")
+    @RequestMapping("/filtro_proveedor")
     public String filtro(Model modelo, @RequestParam("nombreProveedor") String nombreProveedor) {
         //sesion 
         UserRol user = new UserRol();
@@ -267,14 +301,12 @@ public class ProveedorController {
         //sesion 
         //desarrollo aca 
 
-        
         modelo.addAttribute("proveedores", this.proveedorService.listarProveedores());
-
+        
         List<Proveedor> proveedores = this.proveedorService.filtrarProveedoresByNombre(nombreProveedor);
-
+        
         modelo.addAttribute("proveedores", proveedores);
         
-
         modelo.addAttribute("tipoForm", "agregar");
         //fin desarrollo 
         //despachos 

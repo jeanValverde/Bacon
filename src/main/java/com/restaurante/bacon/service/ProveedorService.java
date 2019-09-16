@@ -27,19 +27,25 @@ public class ProveedorService {
     @Autowired
     ProcedureQuery procedureQuery;
 
-    public Proveedor addProveedor(Proveedor proveedor) {
-        return this.provedorDao.save(proveedor);
-    }
-
-    public boolean addProveedor(String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria) {
-        return this.procedureQuery.InsertProveedor(rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
+   
+    public boolean ingresarProveedor(Proveedor proveedor) {
+        return this.procedureQuery.InsertProveedor(proveedor.getRutProveedor(), proveedor.getNombreProveedor(), proveedor.getDireccionProveedor(), proveedor.getTelefonoProveedor(), proveedor.getContactoVenta(), proveedor.getTipoProveedor(),proveedor.getCorreoProveedor(),proveedor.getCelularProveedor(),proveedor.getCategoriaProveedor());
+         
     }
     
-
-    public boolean modificarProveedor(BigDecimal idProveedor,String rut, String nombre, String direccion, String telefono, String contacto, String tipo, String correo, Integer celular, String categoria){
-        return this.procedureQuery.UpdateProveedor(idProveedor,rut, nombre, direccion, telefono, contacto, tipo, correo, celular, categoria);
-
+     public boolean modificarProveedor(Proveedor proveedor) {
+        return this.procedureQuery.UpdateProveedor(proveedor.getIdProveedor(),proveedor.getRutProveedor(), proveedor.getNombreProveedor(), proveedor.getDireccionProveedor(), proveedor.getTelefonoProveedor(), proveedor.getContactoVenta(), proveedor.getTipoProveedor(),proveedor.getCorreoProveedor(),proveedor.getCelularProveedor(),proveedor.getCategoriaProveedor());
+         
     }
+     
+      public boolean eliminarProveedor(Integer idProveedor) {
+        return this.procedureQuery.DeleteProveedorById(idProveedor);
+    }
+
+   
+    
+
+   
 
     public List<Proveedor> listarProveedores() {
         return this.provedorDao.findAll();
@@ -55,8 +61,22 @@ public class ProveedorService {
     public Proveedor buscarProveedorById(BigDecimal idProveedor) {
         return this.provedorDao.findByIdProveedor(idProveedor);
     }
-    
+    //Filtro por nombre
      public List<Proveedor> filtrarProveedoresByNombre(String nombreProveedor) {
-        return this.procedureQuery.filtrarProveedorByNombre(nombreProveedor);
+        return this.procedureQuery.filtrarProveedoresByNombre(nombreProveedor);
     }
+     
+     //Filtro por Rut
+     
+      public List<Proveedor> filtrarProveedoresByRut(String rut) {
+        return this.procedureQuery.filtrarProveedorByRut(rut);
+    }
+      
+    //Filtro por categoria
+   
+     public List<Proveedor> filtrarProveedoresByCategoria(String categoria) {
+        return this.procedureQuery.filtrarProveedorByCategoria(categoria);
+    }
+     
+     
 }
