@@ -6,6 +6,7 @@
 package com.restaurante.bacon.dto.procedure;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedStoredProcedureQueries;
@@ -34,13 +35,13 @@ import lombok.Setter;
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_DESCRIPCION_INSUMO", type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_STOCK_INSUMO", type = Integer.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_STOCK_INSUMO", type = BigInteger.class)
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_UNIDAD_MEDIDA_INSUMO", type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MINIMO_STOCK_INSUMO", type = Integer.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MINIMO_STOCK_INSUMO", type = BigInteger.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MAXIMO_STOCK_INSUMO", type = Integer.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_MAXIMO_STOCK_INSUMO", type = BigInteger.class)
                         ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FOTO_INSUMO", type = String.class)
                     }

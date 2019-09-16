@@ -14,82 +14,21 @@ function validatorForms(formulario) {
      * @param {Elements} rut
      * @returns Void - Cambia el valor del input del RUT por formato xx.xxx.xxx-x
      */
-    function formato_rut(rut)
-    {
-        rut.value = rut.value.replace(/[.-]/g, '')
-                .replace(/^(\d{1,2})(\d{3})(\d{3})(\w{1})$/, '$1.$2.$3-$4')
-    }
+
     /*
      *
      * @param {Elemnts} RUT
      * @returns TRUE (El rut ingresado es valido) / FALSE (El  rut es invalido)
      */
-    function valida_Rut(Objeto) {
-        var tmpstr = "";
-        var intlargo = Objeto.value;
-        if (intlargo.length > 0) {
-            crut = Objeto.value;
-            largo = crut.length;
-            if (largo < 2) {
-                Objeto.setCustomValidity('Rut inválido corto');
-                //Objeto.focus();
-                return false;
-            }
-            for (i = 0; i < crut.length; i++) {
-                if (crut.charAt(i) != ' ' && crut.charAt(i) != '.' && crut.charAt(i) != '-')
-                {
-                    tmpstr = tmpstr + crut.charAt(i);
-                }
-            }
-            rut = tmpstr;
-            crut = tmpstr;
-            largo = crut.length;
-            if (largo > 2) {
-                rut = crut.substring(0, largo - 1);
-            } else {
-                rut = crut.charAt(0);
-            }
-            dv = crut.charAt(largo - 1);
-            if (rut == null || dv == null) {
-                return 0;
-            }
-            ;
-            var dvr = '0';
-            suma = 0;
-            mul = 2;
-            for (i = rut.length - 1; i >= 0; i--)
-            {
-                suma = suma + rut.charAt(i) * mul;
-                if (mul == 7) {
-                    mul = 2;
-                } else {
-                    mul++;
-                }
-            }
-            res = suma % 11;
-            if (res == 1) {
-                dvr = 'k';
-            } else if (res == 0) {
-                dvr = '0';
-            } else {
-                dvi = 11 - res;
-                dvr = dvi + "";
-            }
-            if (dvr != dv.toLowerCase()) {
-                Objeto.setCustomValidity("El Rut Ingreso es Invalido");
-                Objeto.focus();
-                return false;
-            } else {
-                Objeto.setCustomValidity('');
-                return true;
-            }
-        }
-    }
+
     /*
      *
      * @param Elements elemento
      * @returns TRUE (correo valido) / FALSE (Correo invalido)
      */
+    function valida_Rut(Objeto) {
+
+    }
     function validarEmail(elemento) {
         var texto = document.getElementById(elemento.id).value;
         var regex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
@@ -254,7 +193,7 @@ function validatorForms(formulario) {
     function validarInputFile(elemento) {
         var filePath = elemento.value;
         var allowedExtensions = /(.jpg|.jpeg|.png|.gif)$/i;
-        if (elemento.value !== null || elemento.value !=="" ) {
+        if (elemento.value !== null || elemento.value !== "") {
             if (!allowedExtensions.exec(filePath)) {
                 elemento.value = '';
                 return false;
@@ -270,7 +209,7 @@ function validatorForms(formulario) {
                 return true;
             }
         } else {
-             return false;
+            return false;
         }
     }
 
@@ -280,109 +219,143 @@ function validatorForms(formulario) {
      * @returns  void / Validar y recorrer input pot input y validarlos
      */
     var validar = function (e) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             //tipo email validador
-            if (formulario.elements[i].type == "email") {
-                //validar
-                if (validarEmail(formulario.elements[i])) {
-                    formulario.elements[i].setAttribute("class", "form-control is-valid");
-                } else {
-                    formulario.elements[i].setAttribute("class", "form-control is-invalid");
-                    e.preventDefault(e);
-                }
-            }
-            //validar Rut
-            if (formulario.elements[i].type == "text") {
-                //validar vacios
+            if (formulario.elements[i].id == "nombre") {
                 if (validarVacio(formulario.elements[i])) {
+                    document.getElementById("nombre-mensaje1").setAttribute("style", "display: display");
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
-                    //validar rut
-                    //Solo cambiar el id por el id del rut de tu formulario
-                    if (formulario.elements[i].id == "rut") {
-                        if (valida_Rut(formulario.elements[i])) {
-                            formulario.elements[i].setAttribute("class", "form-control is-valid");
-                            formato_rut(formulario.elements[i]);
-                        } else {
-                            formulario.elements[i].setAttribute("class", "form-control is-invalid");
-                            e.preventDefault(e);
-                        }
-                    }
                 } else {
+                    document.getElementById("nombre-mensaje1").setAttribute("style", "display: block");
                     formulario.elements[i].setAttribute("class", "form-control is-invalid");
                     e.preventDefault(e);
                 }
             }
-            //validar password
-            if (formulario.elements[i].type == "password") {
-                //validar si cumple con una contraseña segura
-                if (validarPassword(formulario.elements[i])) {
+            if (formulario.elements[i].id == "descripcion") {
+                if (validarVacio(formulario.elements[i])) {
+                    document.getElementById("descripcion-mensaje1").setAttribute("style", "display: display");
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
-                    validar_igual_password(e);
                 } else {
+                    document.getElementById("descripcion-mensaje1").setAttribute("style", "display: block");
                     formulario.elements[i].setAttribute("class", "form-control is-invalid");
                     e.preventDefault(e);
                 }
             }
-            //validar radios
-            if (formulario.elements[i].type == "radio") {
-                //validar los radio button
-                if (validarRadio()) {
-                    formulario.elements[i].setAttribute("class", "custom-control-input is-valid");
-                } else {
-                    formulario.elements[i].setAttribute("class", "custom-control-input is-invalid");
-                    e.preventDefault(e);
-                }
-            }
-            //validar Checkbox
-            if (formulario.elements[i].type == "checkbox") {
-                if (validadCheckbox(formulario.elements[i])) {
-                    formulario.elements[i].setAttribute("class", "custom-control-input is-valid");
-                } else {
-                    formulario.elements[i].setAttribute("class", "custom-control-input is-invalid");
-                    e.preventDefault(e);
-                }
-            }
-            //validar select-one
-            if (formulario.elements[i].type == "select-one") {
+            if (formulario.elements[i].id == "unidadMedida") {
                 if (validarSelectOne(i)) {
+                    document.getElementById("unidad-mensaje1").setAttribute("style", "display: display");
                     formulario.elements[i].setAttribute("class", "custom-select is-valid");
                 } else {
+                    document.getElementById("unidad-mensaje1").setAttribute("style", "display: block");
                     formulario.elements[i].setAttribute("class", "custom-select is-invalid");
                     e.preventDefault(e);
                 }
             }
-            //validar textarea
-            if (formulario.elements[i].type == "textarea") {
-                //validar vacios
-                if (validarVacio(formulario.elements[i])) {
-                    formulario.elements[i].setAttribute("class", "form-control is-valid");
-                } else {
-                    formulario.elements[i].setAttribute("class", "form-control is-invalid");
-                    e.preventDefault(e);
-                }
-            }
-            //validar number
-            if (formulario.elements[i].type == "number") {
-                //validar datos numeros
+
+            if (formulario.elements[i].id == "stock") {
+                document.getElementById("stock-mensaje1").setAttribute("style", "display: display");
                 if (validarSiNumero(formulario.elements[i])) {
+                    var stock = new Number(formulario.elements[i].value);
+                    document.getElementById("stock-mensaje2").setAttribute("style", "display: display");
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
+                    if (stock < 0) {
+                        document.getElementById("stock-mensaje2").setAttribute("style", "display: block");
+                        formulario.elements[i].setAttribute("class", "form-control is-invalid");
+                        e.preventDefault(e);
+                    }
                 } else {
                     formulario.elements[i].setAttribute("class", "form-control is-invalid");
+                    document.getElementById("stock-mensaje1").setAttribute("style", "display: block");
                     e.preventDefault(e);
                 }
             }
-            //validar file
-            if (formulario.elements[i].type == "file") {
-                //validar ruta absoluta
+
+
+
+
+
+
+            if (formulario.elements[i].id == "stockMinimo") {
+                document.getElementById("stockMin-mensaje1").setAttribute("style", "display: display");
+                if (validarSiNumero(formulario.elements[i])) {
+                    var stockMin = new Number(formulario.elements[i].value);
+                    var stock = new Number(formulario.elements["stock"].value);
+                    formulario.elements[i].setAttribute("class", "form-control is-valid");
+                    document.getElementById("stockMin-mensaje2").setAttribute("style", "display: display");
+                    document.getElementById("stockMin-mensaje3").setAttribute("style", "display: display");
+                    if (stockMin > stock) {
+                        formulario.elements[i].setAttribute("class", "form-control is-invalid");
+                        document.getElementById("stockMin-mensaje3").setAttribute("style", "display: block");
+                        e.preventDefault(e);
+                    } else if (stockMin < 0) {
+                        formulario.elements[i].setAttribute("class", "form-control is-invalid");
+                        document.getElementById("stockMin-mensaje2").setAttribute("style", "display: block");
+                        e.preventDefault(e);
+                    }
+                } else {
+                    formulario.elements[i].setAttribute("class", "form-control is-invalid");
+                    document.getElementById("stockMin-mensaje1").setAttribute("style", "display: block");
+                    e.preventDefault(e);
+                }
+            }
+            if (formulario.elements[i].id == "stockMaximo") {
+                document.getElementById("stockMax-mensaje1").setAttribute("style", "display: display");       
+                if (validarSiNumero(formulario.elements[i])) {
+                    var stockMax = new Number(formulario.elements[i].value);
+                    var stock = new Number(formulario.elements["stock"].value);
+                    formulario.elements[i].setAttribute("class", "form-control is-valid");
+                    document.getElementById("stockMax-mensaje2").setAttribute("style", "display: display");
+                    
+                    if (stockMax < stock) {
+                        formulario.elements[i].setAttribute("class", "form-control is-invalid");
+                        document.getElementById("stockMax-mensaje2").setAttribute("style", "display: block");
+                        e.preventDefault(e);
+                    }
+                } else {
+                    formulario.elements[i].setAttribute("class", "form-control is-invalid");
+                    document.getElementById("stockMax-mensaje1").setAttribute("style", "display: block");
+                    e.preventDefault(e);
+                }
+            }
+            if (formulario.elements[i].id == "foto") {
+                    
                 if (validarInputFile(formulario.elements[i])) {
+                    document.getElementById("foto-mensaje1").setAttribute("style", "display: display");
                     formulario.elements[i].setAttribute("class", "custom-file-input is-valid");
                 } else {
+                    
                     formulario.elements[i].setAttribute("class", "custom-file-input is-invalid");
+                    document.getElementById("foto-mensaje1").setAttribute("style", "display: block");
                     e.preventDefault(e);
                 }
             }
+
+            //validar rut
+            //Solo cambiar el id por el id del rut de tu formulario
+
+
+
+
         }
     };
+
+
     //cada vez que cambia algún input
     formulario.addEventListener("change", validar);
     //Evento de envio de formulario

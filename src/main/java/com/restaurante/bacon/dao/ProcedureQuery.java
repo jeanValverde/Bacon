@@ -16,8 +16,12 @@ import static com.restaurante.bacon.dto.Proveedor.P_RUT_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TIPO_PROVEEDOR;
 import com.restaurante.bacon.dto.CategoriaReceta;
+<<<<<<< HEAD
 import com.restaurante.bacon.dto.Proveedor;
 import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
+=======
+import com.restaurante.bacon.dto.Insumo;
+>>>>>>> Cristian
 import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -74,6 +78,7 @@ public class ProcedureQuery {
             return false;
         }
     }
+<<<<<<< HEAD
 
 
 
@@ -285,4 +290,7 @@ public class ProcedureQuery {
 
 
 
+=======
+
+>>>>>>> Cristian
 }
