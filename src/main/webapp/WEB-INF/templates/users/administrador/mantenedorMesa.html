@@ -70,37 +70,40 @@
                                             Completa estos campos para agregar una mesa al sistema
                                         </p>
                                         <form class="forms-sample" th:action="@{/administrador/mesa/agregar}" method="POST" name="formMesa">
+                                            <input type="hidden" id="registroAgregar" th:value="${registroAgregar}"/>
                                             <div class="form-group">
                                                 <label for="numeroMesa">Numero Mesa</label>
                                                 <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa">
-                                                <div class="valid-feedback">
-                                                    !Listo!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Escribe un numero para la mesa.
-                                                </div>
+
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeNumeroMesa1">
+                                                Escribe un numero para la mesa.
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeNumeroMesa2">
+                                                Debe ser mayor a 0
                                             </div>
                                             <div class="form-group">
                                                 <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
                                                 <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa">
-                                                <div class="valid-feedback">
-                                                    !Listo!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Escribe la cantidad de asientos de la mesa.
-                                                </div>
+                                                
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
+                                                Escribe un numero para la mesa.
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeCantidadAsientosMesa2">
+                                                Debe ser mayor a 0
                                             </div>
                                             <div class="form-group">
 
                                                 <label for="estadoMesa">Estado Mesa</label>
-                                                <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="estadoMesa">
-                                                    <option value="0">Selectione</option>
+                                                <select class="form-control form-control-lg" id="estadoMesa" name="estadoMesa">
+                                                    <option value="select">Selectione</option>
                                                     <option value="1">Habilitada</option>
                                                     <option value="2">Deshabilitada</option>
                                                 </select>
-
-
-
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeEstadoMesa1">
+                                                Elija un Estado.
                                             </div>
 
                                             <button type="submit" class="btn btn-primary mr-2">Agregar</button>
@@ -122,22 +125,24 @@
                                             <div class="form-group">
                                                 <label for="numeroMesa">Numero Mesa</label>
                                                 <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa" th:value="${mesa.numeroMesa}">
-                                                <div class="valid-feedback">
-                                                    !Listo!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Escribe un numero para la mesa.
-                                                </div>
+                                                
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeNumeroMesa1">
+                                                Escribe un numero para la mesa.
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeNumeroMesa2">
+                                                Debe ser mayor a 0
                                             </div>
                                             <div class="form-group">
                                                 <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
                                                 <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa" th:value="${mesa.cantidadAsientosMesa}">
-                                                <div class="valid-feedback">
-                                                    !Listo!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Escribe la cantidad de asientos de la mesa.
-                                                </div>
+                                                
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
+                                                Escribe un numero para la mesa.
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeCantidadAsientosMesa2">
+                                                Debe ser mayor a 0
                                             </div>
                                             <div class="form-group">
 
@@ -154,14 +159,14 @@
                                 </div>
                             </div>
                             <!--Form Editar-->
-                            
+
                             <!--Form Listar-->
 
                             <div class="col-md-8 col-xl-8 grid-margin stretch-card">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h3 class="card-title">Insumos</h3>
-                                        <form  th:action="@{/administrador/insumo/buscar_por_filtro}"  enctype="multipart/form-data" method="post">
+                                        <h3 class="card-title">Mesas</h3>
+                                        <form  th:action="@{/administrador/mesa/buscar_por_filtro}" method="post">
 
                                             <input type="hidden" id="modifico" value="${modifico}"/>
 
@@ -170,15 +175,17 @@
                                                     <h5 >Buscar por: </h5>
                                                 </div>
                                                 <div class="col-4">
-                                                    <select class="btn btn-success dropdown-toggle"  name="tipoBusqueda">
-                                                        <option value="nombre">Nombre insumo</option>
-                                                        <option value="stock">Stock Actual</option>
-                                                        <option value="unidad">Unidad de medida</option>
+                                                    <select class="btn btn-success dropdown-toggle"  name="tipoBusqueda" id="tipoBusqueda" onchange="myFunction()">
+                                                        <option value="numero">Numero de Mesa</option>
+                                                        <option value="asientos">Cantidad de Asientos</option>
+                                                        <option value="habilitada">Habilitada</option>
+                                                        <option value="deshabilitada">Deshabilitada</option>
                                                     </select>
                                                 </div>
+
                                                 <div class="col-md-6">
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" name="filtro" aria-label="Escribe el nombre de la receta">
+                                                        <input type="number" class="form-control" id="filtro" name="filtro" aria-label="Escribe el nombre de la mesa">
                                                         <div class="input-group-append">
                                                             <button class="btn btn-sm btn-success" type="submit">Buscar</button>
                                                         </div>
@@ -352,7 +359,36 @@
         <script th:src="@{/js/data-table.js}"></script>
 
         <!--validate form--->
-        <script th:src="@{/custom/formulario.js}"></script>
+        <script th:src="@{/custom/formularioMesa.js}"></script>
+        
+        <script type="text/javascript" >
+            var formularioPassword = document.getElementsByName("formMesa")[0];
+            validatorForms(formularioPassword);
+        </script>
+        <script type="text/javascript">
+            var registroAgregar = document.getElementById("registroAgregar").value;
+            if (registroAgregar === "1") {
+                alert("Se registro la mesa correctamente");
+            } else if (registroAgregar === "0") {
+
+            }
+        </script>
+        <script type="text/javascript">
+            function myFunction() {
+
+                var estado = document.getElementById("tipoBusqueda").value;
+
+                if (estado === "habilitada") {
+                    document.getElementById("filtro").readOnly = true;
+                } else if (estado === "deshabilitada") {
+                    document.getElementById("filtro").readOnly = true;
+                } else if (estado === "numero") {
+                    document.getElementById("filtro").readOnly = false;
+                } else if (estado === "asientos") {
+                    document.getElementById("filtro").readOnly = false;
+                }
+            }
+        </script>
     </body>
 
 </html>

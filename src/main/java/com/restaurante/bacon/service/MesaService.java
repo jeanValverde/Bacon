@@ -8,6 +8,7 @@ package com.restaurante.bacon.service;
 import com.restaurante.bacon.dao.IMesaDao;
 import com.restaurante.bacon.dao.ProcedureQueryMesa;
 import com.restaurante.bacon.dto.Mesa;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,18 @@ public class MesaService {
         Mesa mesa = mesaDao.findByIdMesa(idMesa);
         mesaDao.deleteById(idMesa);
         return mesa;
+    }
+    
+    public List<Mesa> filtrarRecetaByNumero(BigInteger numeroMesa) {
+        return this.procedureQuery.filtrarRecetaByNumero(numeroMesa);
+    }
+    
+    public List<Mesa> filtrarRecetaByAsientos(BigInteger cantidadAsientosMesa) {
+        return this.procedureQuery.filtrarRecetaByAsientos(cantidadAsientosMesa);
+    }
+    
+    public List<Mesa> filtrarRecetaByEstado(BigInteger estadoMesa) {
+        return this.procedureQuery.filtrarRecetaByEstado(estadoMesa);
     }
 
 }

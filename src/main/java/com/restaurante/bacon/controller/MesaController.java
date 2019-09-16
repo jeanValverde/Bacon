@@ -55,7 +55,11 @@ public class MesaController {
         mesa.setCantidadAsientosMesa(BigInteger.valueOf(cantidadAsientosMesa));
         mesa.setEstadoMesa(BigInteger.valueOf(estadoMesa));
 
-        this.mesaService.add(mesa);
+        if (this.mesaService.add(mesa) != null) {
+            model.addAttribute("registroAgregar", 1);
+        } else {
+            model.addAttribute("registroAgregar", 0);
+        }
 
         List<Mesa> mesas = new ArrayList<Mesa>();
         mesas = this.mesaService.listarMesa();
@@ -142,6 +146,41 @@ public class MesaController {
         //siempre despachar esto por la sesion 
         model.addAttribute("personalSesion", personal);
         //
+        return "users/administrador/mantenedorMesa";
+    }
+
+    @RequestMapping("/buscar_por_filtro")
+    public String buscar_por_filtro(Model model, @RequestParam("tipoBusqueda") String tipoBusqueda, @RequestParam("filtro") String filtro) {
+        //sesion
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+
+        List<Mesa> mesas = new ArrayList<Mesa>();
+        switch (tipoBusqueda) {
+            case "numero":
+                mesas = this.mesaService.filtrarRecetaByNumero(BigInteger.valueOf(Integer.parseInt(filtro)));
+                break;
+            case "asientos":
+                mesas = this.mesaService.filtrarRecetaByAsientos(BigInteger.valueOf(Integer.parseInt(filtro)));
+                break;
+            case "habilitada":
+                mesas = this.mesaService.filtrarRecetaByEstado(BigInteger.valueOf(1));
+                break;
+            case "deshabilitada":
+                mesas = this.mesaService.filtrarRecetaByEstado(BigInteger.valueOf(2));
+                break;
+
+            //    mesas = this.mesaService.filtrarRecetaByEstado(BigInteger.valueOf(Integer.parseInt(filtro)));
+            default:
+                mesas = this.mesaService.listarMesa();
+        }
+
+        //desarrollo aca
+        model.addAttribute("mesas", mesas);
+        model.addAttribute("agregarMesa", true);
+
+        model.addAttribute("personalSesion", personal);
         return "users/administrador/mantenedorMesa";
     }
 
