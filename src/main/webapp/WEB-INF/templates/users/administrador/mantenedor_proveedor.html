@@ -56,7 +56,7 @@
                                                                                 Completa estos campos para agregar un proveedor al sistema.
                                                                             </p>
                                                                             <form class="forms-sample" th:action="@{/administrador_proveedor/addProveedor}" method="POST" name="formProveedor" enctype="multipart/form-data">
-                                                                                <input type="hidden" name="registroAgregar" id="registroAgregar" th:value="${registroAgregar}" />
+                                                                                <input type="hidden" name="agrego" id="agrego" th:value="${agrego}" />
                                                                                 <div class="form-group">
                                                                                     <label for="rutProveedor">Rut Proveedor</label>
                                                                                     <input type="text" class="form-control" id="rutProveedor" name="rutProveedor" placeholder="Rut Proveedor">
@@ -186,6 +186,7 @@
 
                                                                             <form  th:action="@{/administrador_proveedor/modificar_proveedor}" name="form" method="post">
                                                                                 <input type="hidden" th:value="${proveedor.idProveedor}" id="modificarProveedor" name="idProveedor"/>
+                                                                                <input type="hidden" id="modifico" value="${modifico}"/>
                                                                                 <div class="form-group">
                                                                                     <label for="rutProveedor">Rut Proveedor</label>
                                                                                     <input th:value="${proveedor.rutProveedor}"  type="text" class="form-control" name="rutProveedor"/>
@@ -276,6 +277,7 @@
                                                                                         Escribe una categoria para el proveedor.
                                                                                     </div>
                                                                                 </div>
+                                                                                
 
 
 
@@ -460,7 +462,6 @@
 
                                                     </div>
                                                     <!--Form agegar-->
-
                                                     <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
                                                     <script th:src="@{/js/off-canvas.js}"></script>
                                                     <script th:src="@{/js/hoverable-collapse.js}"></script>
@@ -495,62 +496,55 @@
                                                     <script th:src="@{/js/jquery-file-upload.js}"></script>
                                                     <script th:src="@{/js/formpickers.js}"></script>
                                                     <script th:src="@{/js/form-repeater.js}"></script>
+                                                    <script th:src="@{/js/alerts.js}"></script>
                                                     <!-- End custom js for this page-->
                                                     <!-- plugin js for this page -->
                                                     <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
                                                     <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
                                                     <script th:src="@{/js/data-table.js}"></script>
+                                                    <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+                                                    <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+
+                                                    <script th:src="@{/js/alerts_personalizado.js}"></script>
+                                                    <script th:src="@{/js/avgrund.js}"></script>
 
                                                     <!--validate form--->
                                                     <script th:src="@{/custom/formulario-proveedor.js}"></script>
+
 
                                                     <script type="text/javascript" >
                                                         var formularioPassword = document.getElementsByName("formProveedor")[0];
                                                         validatorForms(formularioPassword);
                                                     </script>
 
-                                                    <!--   <script type="text/javascript" >
-                                                           var respuestAgrega = document.getElementById("registroAgregarProveedor").value;
-                                                           if (respuestAgrega === "1") {
-                                                               showSwal('success-message', 'Proveedor agregado!', 'se ha registrado el proveedor exitosamente');
-                                                           } else if (respuestAgrega === "0") {
-                                                               showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
-                                                           }
-                                                       </script> -->
-                                                    <script type="text/javascript" th:if="${isMensaje == 1}" >
-                                                        /*
-                                                         * $.toast({
-                                                         heading: '[[${nombreMensaje}]]',
-                                                         text: '[[${mensaje}]]',
-                                                         icon: '[[${tipoMensaje}]]',
-                                                         loader: true, // Change it to false to disable loader
-                                                         loaderBg: '#9EC600', // To change the background
-                                                         position: 'top-right'
-                                                         })
-                                                         * 
-                                                         * **/
-
-                                                        showSwal('[[${tipoMensaje}]]-message', '[[${nombreMensaje}]]', '[[${mensaje}]]');
+                                                    <script type="text/javascript" >
+                                                        var respuestAgrega = document.getElementById("agrego").value;
+                                                        
+                                                        if (respuestAgrega === "1") {
+                                                            showSwal('success-message', 'Proveedor agregado!', 'se ha registrado el proveedor exitosamente');
+                                                        } else if (respuestAgrega === "0") {
+                                                            showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
+                                                        }
+                                                    </script> 
+                                                    
+                                                     <script type="text/javascript" >
+                                                        var respuestModifica = document.getElementById("modifico").value;
+                                                        
+                                                        if (respuestModifica === "1") {
+                                                            showSwal('success-message', 'Proveedor modificado!', 'se ha modificado el proveedor exitosamente');
+                                                        } else if (respuestModifica === "0") {
+                                                            showSwal('warning-message', 'Error!', "No se ha podido modificar el proveedor");
+                                                        }
+                                                    </script> 
 
 
-                                                    </script>
+                                                    
 
 
 
 
 
 
-                                                    <script src="text/javascript">
-                                                       dropify.dropify({
-                                                           "defaultFile": "full path file",
-                                                           "messages": {
-                                                               default: 'Arrastre un archivo o haga clic aquí',
-                                                               replace: 'Arrastre un archivo o haga clic en reemplazar',
-                                                               remove: 'Eliminar',
-                                                               error: 'Lo sentimos, el archivo demasiado grande'
-                                                           }
-                                                       });
-                                                    </script>
 
 
 
