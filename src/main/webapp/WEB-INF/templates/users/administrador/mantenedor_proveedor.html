@@ -185,8 +185,8 @@
 
 
                                                                             <form  th:action="@{/administrador_proveedor/modificar_proveedor}" name="form" method="post">
-                                                                                <input type="hidden" th:value="${proveedor.idProveedor}" id="modificarProveedor" name="idProveedor"/>
-                                                                                <input type="hidden" id="modifico" value="${modifico}"/>
+                                                                                <input type="hidden" value="${modifico}" th:value="${proveedor.idProveedor}" id="modificarProveedor" name="idProveedor"/>
+                                                                               <input type="hidden" id="modifico" value="${modifico}"/>
                                                                                 <div class="form-group">
                                                                                     <label for="rutProveedor">Rut Proveedor</label>
                                                                                     <input th:value="${proveedor.rutProveedor}"  type="text" class="form-control" name="rutProveedor"/>
@@ -277,7 +277,7 @@
                                                                                         Escribe una categoria para el proveedor.
                                                                                     </div>
                                                                                 </div>
-                                                                                
+                                                                                <input type="hidden" id="modifico" value="${modifico}"/>
 
 
 
