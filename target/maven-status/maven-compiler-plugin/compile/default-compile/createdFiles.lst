@@ -39,6 +39,7 @@ com\restaurante\bacon\service\RolService.class
 com\restaurante\bacon\dto\Notificacion.class
 com\restaurante\bacon\dto\Orden.class
 com\restaurante\bacon\dto\BoletaControl.class
+com\restaurante\bacon\dto\procedure\ProcedureUpdateMesa.class
 com\restaurante\bacon\dto\procedure\ProcedureInsertMesa.class
 com\restaurante\bacon\config\WebSecurityConfig.class
 com\restaurante\bacon\BaconApplication.class
