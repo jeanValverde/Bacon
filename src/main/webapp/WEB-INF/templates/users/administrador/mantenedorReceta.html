@@ -243,11 +243,8 @@
                                             <div class="form-group is-valid">
                                                 <label for="imagenReceta">Imagen de la Receta</label>
                                                 <input type="file" name="imagenReceta" id="dropify" class="dropify" th:data-default-file="@{/uploads/}+${recetaEdit.foto}" />
-                                                <div class="valid-feedback">
-                                                    !Listo!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
+                                                <div id="foto-mensaje1"  class="invalid-feedback">
+                                                        Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary mr-2">Editar</button>
