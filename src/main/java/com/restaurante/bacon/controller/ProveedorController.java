@@ -158,11 +158,16 @@ public class ProveedorController {
         proveedor.setCelularProveedor(celularProveedor);
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
-        if (this.proveedorService.ingresarProveedor(proveedor)) {
-             modelo.addAttribute("registroAgregarProveedor",1);
-        }else{
-            modelo.addAttribute("registroAgregarProveedor",0);
-        }
+        this.proveedorService.ingresarProveedor(proveedor);
+            
+         ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 1 );
+        modelo.addAttribute("nombreMensaje", "Información");
+        modelo.addAttribute("mensaje", "Receta agregada");
+        //puede ser success - info - danger - warning
+        modelo.addAttribute("tipoMensaje", "success");
+        //fin mensajes 
+
        
         
         
