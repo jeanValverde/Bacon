@@ -5,19 +5,19 @@
     <head>
 
         <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>BACON Restaurante</title>
         <!-- base:css -->
-        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
-        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}"/>
         <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
         <!-- endinject -->
         <!-- plugin css for this page -->
-          <link rel="stylesheet" href="@{/vendors/flag-icon-css/css/flag-icon.min.css}" />
+        <link rel="stylesheet" href="@{/vendors/flag-icon-css/css/flag-icon.min.css}" />
         <!-- End plugin css for this page -->
         <!-- inject:css -->
-        <link rel="stylesheet" type="text/css" th:href="@{/css/horizontal-layout-light/style.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/horizontal-layout-light/style.css}"/>
         <!-- endinject -->
         <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
 
@@ -39,13 +39,16 @@
                         </div>
                         <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
 
+                            <!---este boton solo debe estar cuando no se tiene ninguna orden emitida--->
                             <ul class="navbar-nav navbar-nav-right">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" href="#">
+                                    <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" th:href="@{/}">
                                         <i class="mdi mdi-logout-variant"></i>
                                     </a>
                                 </li>
                             </ul>
+                            <!------>
+                            
                             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
                                 <span class="mdi mdi-menu"></span>
                             </button>
