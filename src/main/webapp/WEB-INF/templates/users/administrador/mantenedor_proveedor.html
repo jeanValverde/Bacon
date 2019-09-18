@@ -114,10 +114,15 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="tipoProveedor">Tipo Proveedor</label>
-                                                                                    <input type="text" class="form-control" id="tipoProveedor" name="tipoProveedor" placeholder="Tipo Proveedor">
+                                                                                    <select type="text" class="form-control" id="tipoProveedor" name="tipoProveedor" placeholder="Tipo Proveedor">
+                                                                                        <option value="select">Seleccione</option>
+                                                                                        <option value="particular">Particular</option>
+                                                                                        <option value="empresa">Empresa</option>
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
+                                                                                        
+                                                                                    </select>
 
                                                                                 </div>
                                                                                 <div id="mensajeTipo" class="invalid-feedback">
@@ -136,7 +141,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="celularProveedor">Celular Proveedor</label>
-                                                                                    <input type="number" class="form-control" id="celularProveedor" name="celularProveedor" placeholder="Categoria Proveedor">
+                                                                                    <input type="number" class="form-control" id="celularProveedor" name="celularProveedor" placeholder="Celular Proveedor">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -145,14 +150,23 @@
                                                                                 <div id="mensajeCelular" class="invalid-feedback">
                                                                                     Escribe un celular para el proveedor.
                                                                                 </div>
+
+                                                                                
                                                                                 <div class="form-group">
                                                                                     <label for="categoriaProveedor">Categoria Proveedor</label>
-                                                                                    <input type="text" class="form-control" id="categoriaProveedor" name="categoriaProveedor" placeholder="Categoria Proveedor">
+                                                                                    <select class="form-control" id="categoriaProveedor" name="categoriaProveedor" placeholder="Categoria Proveedor">
+                                                                                            <option value="select">Seleccione</option>
+                                                                                            <option value="esporadico">Esporádico</option>
+                                                                                        <option value="Regular">Regular</option>
                                                                                         <div class="valid-feedback">
-                                                                                            !Listo!
-                                                                                        </div>
+                                                                                        !Listo!
+                                                                                    </div>
+
+                                                                                    </select>
+                                                                                    
 
                                                                                 </div>
+
                                                                                 <div id="mensajeCategoria" class="invalid-feedback">
                                                                                     Escribe una categoria para el proveedor.
                                                                                 </div>
@@ -329,14 +343,14 @@
                                                                                                                 <i class="mdi mdi-lead-pencil"></i>
                                                                                                             </button>
                                                                                                             -->
-                                                                                                            <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                                            <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
                                                                                                             <!--
                                                                                                             <button type="button" class="btn btn-danger btn-rounded btn-icon" >
                                                                                                                 <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
                                                                                                                 <i class="mdi mdi-close"></i>
                                                                                                             </button>
                                                                                                             -->
-                                                                                                            <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
+                                                                                                            <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
                                                                                                         </div>
 
                                                                                                         <div >
@@ -407,10 +421,10 @@
                                                                                                             <td th:text="${ins.celularProveedor}"></td>
                                                                                                             <td th:text="${ins.categoriaProveedor}"></td>
                                                                                                             <td>
-                                                                                                                <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success btn-rounded btn-icon"><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                                                <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
                                                                                                             </td>
                                                                                                             <td>
-                                                                                                                <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger btn-rounded btn-icon"><i class="mdi mdi-close"></i></a>
+                                                                                                                <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
                                                                                                             </td>
                                                                                                         </tr>
 
@@ -503,7 +517,7 @@
                                                         }
                                                     </script>
 
-                                                   
+
 
 
                                                     <script src="text/javascript">
