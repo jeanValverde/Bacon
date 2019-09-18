@@ -132,14 +132,11 @@
                                             <div class="form-group">
                                                 <label for="imagenReceta">Imagen de la Receta</label>
                                                 <input  type="file" name="imagenReceta" id="dropify" class="dropify"  />
-                                                <div class="valid-feedback">
-                                                    !Listo!
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
-                                                </div>
-
                                             </div>
+                                            <div id="foto-mensaje1"  class="invalid-feedback">
+                                                        Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
+                                            </div>
+                                            <br/>
                                             <button type="submit" class="btn btn-primary mr-2">Agregar</button>
                                         </form>
                                     </div>
@@ -243,10 +240,11 @@
                                             <div class="form-group is-valid">
                                                 <label for="imagenReceta">Imagen de la Receta</label>
                                                 <input type="file" name="imagenReceta" id="dropify" class="dropify" th:data-default-file="@{/uploads/}+${recetaEdit.foto}" />
-                                                <div id="foto-mensaje1"  class="invalid-feedback">
-                                                        Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
-                                                </div>
                                             </div>
+                                            <div id="foto-mensaje1"  class="invalid-feedback">
+                                                        Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
+                                            </div>
+                                            <br/>
                                             <button type="submit" class="btn btn-primary mr-2">Editar</button>
                                             <a th:href="@{/administrador/receta}"   class="btn btn-warning mr-2">Cancelar</a>
                                         </form>
@@ -480,6 +478,9 @@
         <script th:src="@{/vendors/jquery-toast-plugin/jquery.toast.min.js}"></script>
         <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
         <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+        
+        <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+        <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
         <!-- End plugin js for this page -->
         <!-- Custom js for this page-->
         <script th:src="@{/js/dropify.js}"></script>
@@ -488,6 +489,11 @@
         <script th:src="@{/js/form-repeater.js}"></script>
         <script th:src="@{/custom/formularios.js}"></script>
         <script th:src="@{/custom/formulariosEditFile.js}"></script>
+        
+        <script th:src="@{/js/alerts.js}"></script>
+        <script th:src="@{/js/avgrund.js}"></script>
+        
+        
 
         <!-- End custom js for this page-->
 
