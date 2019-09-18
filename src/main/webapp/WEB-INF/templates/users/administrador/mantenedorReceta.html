@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+
+    
+   
+
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <title>BACON Restaurante</title>
+                <!-- base:css -->
+                <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+                    <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+                        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+                            <!-- endinject -->
+                            <!-- plugin css for this page -->
+                            <link rel="stylesheet" th:href="@{/vendors/dropify/dropify.min.css}">
+                                <link rel="stylesheet" th:href="@{/vendors/jquery-file-upload/uploadfile.css}">
+                                    <!-- End plugin css for this page -->
+                                    <!-- inject:css -->
+                                    <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+                                        <!-- endinject -->
+                                        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+                                        <!---->
+
+                                        </head>
+
+                                        <body class="sidebar-fixed">
+                                            <div class="container-scroller">
+                                                <!-- partial:../../fragments/_navbar.html -->
+                                                <nav th:replace="fragments/_navbar :: nav"></nav>
+                                                <!-- partial -->
+                                                <div class="container-fluid page-body-wrapper">
+                                                    <!-- partial:../../fragments/_settings-panel.html -->
+                                                    <div th:replace="fragments/_settings-panel :: div"></div>
+                                                    <!-- partial -->
+                                                    <!-- partial:../../fragments/_sidebar.html -->
+                                                    <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                                                    <!-- partial -->
+                                                    <div class="main-panel">
+                                                        <div class="content-wrapper">
+
+                                                            <!--Desarrollar acá-->
+
+                                                            <div class="row">
+
+                                                                <!--Form agegar-->
+                                                                <div class="col-md-4 grid-margin stretch-card" th:if="${tipoForm == 'agregar' }"  >
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Agregar Recetas</h4>
+                                                                            <p class="card-description text-justify">
+                                                                                Completa estos campos para agregar una receta al sistema, recuerda usar
+                                                                                una imagen actualizada y lo más real al producto.
+                                                                            </p>
+                                                                            <form class="forms-sample" th:action="@{/administrador/addReceta}" method="POST" name="formReceta" enctype="multipart/form-data">
+                                                                                <div class="form-group">
+                                                                                    <label for="nombreReceta">Nombre Receta</label>
+                                                                                    <input type="text" class="form-control" id="nombreReceta" name="nombreReceta" placeholder="Nombre Receta">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un nombre para la receta.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="descripcionReceta">Descripción de la Receta</label>
+                                                                                    <textarea name="descripcionReceta" id="descripcionReceta" class="form-control" rows="3" cols="3"></textarea>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Buena Descripción!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Una Descripción es obligatoria. Es la carta de presentación para el cliente.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="duracionReceta">Duración de Preparación</label>
+                                                                                    <input type="number" class="form-control" name="duracionReceta" id="duracionReceta" placeholder="120">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Buen tiempo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Recuerda que el formato es solo números y en minutos, ejemplo: 130
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="precioReceta">Precio de la Receta</label>
+                                                                                    <input type="number" class="form-control" name="precioReceta" id="precioReceta" placeholder="7800">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Buen precio!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            El precio tiene que ser númerico
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="cantidadReceta">Cantidad de Preparación</label>
+                                                                                    <br />
+                                                                                    <small class="text-info">Es una estimación de cuantas preparaciones se hacen en un día.</small>
+                                                                                    <input type="number" class="form-control" name="cantidadReceta" id="cantidadReceta" placeholder="120">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            La cantidad es una estimación que defines tú.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-check">
+                                                                                            <label class="form-check-label">
+                                                                                                <input type="radio" th:value="0" class="form-check-input" onchange="agregarCategoria()" name="tipoReceta" id="tipoReceta" checked="">
+                                                                                                    Cocina
+                                                                                                    <i class="input-helper"></i></label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-check">
+                                                                                            <label class="form-check-label">
+                                                                                                <input type="radio" th:value="1" onchange="deleteCategoria()" class="form-check-input" name="tipoReceta" id="tipoRecetaBar">
+                                                                                                    Bar
+                                                                                                    <i class="input-helper"></i></label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group" id="categoriaReceta">
+                                                                                    <label for="categoriaReceta">Categoría Cocina</label>
+                                                                                    <select  name="categoriaReceta" class="form-control" id="categoriaReceta">
+                                                                                        <option th:each="categoria: ${categoriasReceta}"  th:value="${categoria.idCategoriaReceta}" th:text="${categoria.descripcionCategoriaReceta}" ></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="imagenReceta">Imagen de la Receta</label>
+                                                                                    <input type="file" name="imagenReceta" id="validatedCustomFile" class="dropify"  />
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <button type="submit" class="btn btn-primary mr-2">Agregar</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Form agegar-->
+
+
+                                                                <!--Form editar-->
+                                                                <div class="col-md-4 grid-margin stretch-card" th:if="${tipoForm == 'editar' }"  >
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Editar Recetas</h4>
+                                                                            <p class="card-description text-justify">
+                                                                                Completa estos campos para agregar una receta al sistema, recuerda usar
+                                                                                una imagen actualizada y lo más real al producto.
+                                                                            </p>
+                                                                            <form class="forms-sample" th:action="@{/administrador/recetaInsumos/editarReceta}" method="POST" name="formReceta" enctype="multipart/form-data">
+                                                                                <input type="hidden" name="idReceta" th:value="${recetaEdit.idReceta}" />
+                                                                                <div class="form-group">
+                                                                                    <label for="nombreReceta">Nombre Receta</label>
+                                                                                    <input type="text" class="form-control" id="nombreReceta" th:value="${recetaEdit.nombreReceta}" name="nombreReceta" placeholder="Nombre Receta">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Escribe un nombre para la receta.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="descripcionReceta">Descripción de la Receta</label>
+                                                                                    <textarea name="descripcionReceta" id="descripcionReceta" th:text="${recetaEdit.descripcionReceta}" class="form-control" rows="3" cols="3"></textarea>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Buena Descripción!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Una Descripción es obligatoria. Es la carta de presentación para el cliente.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="duracionReceta">Duración de Preparación</label>
+                                                                                    <input type="number" class="form-control" name="duracionReceta" th:value="${recetaEdit.duracionPreparacion}" id="duracionReceta" placeholder="120">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Buen tiempo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Recuerda que el formato es solo números y en minutos, ejemplo: 130
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="precioReceta">Precio de la Receta</label>
+                                                                                    <input type="number" class="form-control" name="precioReceta" th:value="${recetaEdit.precioReceta}" id="precioReceta" placeholder="7800">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Buen precio!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            El precio tiene que ser númerico
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label for="cantidadReceta">Cantidad de Preparación</label>
+                                                                                    <br />
+                                                                                    <small class="text-info">Es una estimación de cuantas preparaciones se hacen en un día.</small>
+                                                                                    <input type="number" class="form-control" name="cantidadReceta" th:value="${recetaEdit.cantidadPrepDiariaReceta}"  id="cantidadReceta" placeholder="120">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            La cantidad es una estimación que defines tú.
+                                                                                        </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-check">
+                                                                                            <label class="form-check-label">
+                                                                                                <input type="radio" th:value="0" class="form-check-input"  onchange="agregarCategoria()" name="tipoReceta" id="tipoReceta" th:checked="${recetaEdit.tipoReceta == '0'}"/>
+                                                                                                Cocina
+                                                                                                <i class="input-helper"></i></label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-check">
+                                                                                            <label class="form-check-label">
+                                                                                                <input type="radio" th:value="1" onchange="deleteCategoria()" class="form-check-input" name="tipoReceta" id="tipoRecetaBar" th:checked="${recetaEdit.tipoReceta == '1'}" />
+                                                                                                Bar
+                                                                                                <i class="input-helper"></i></label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group" id="categoriaReceta" th:if="${recetaEdit.tipoReceta == '0'}"  >
+                                                                                    <label for="categoriaReceta">Categoría Cocina</label>
+                                                                                    <select  name="categoriaReceta" class="form-control" id="categoriaReceta">
+                                                                                        <option th:each="categoria: ${categoriasReceta}"  th:selected="${recetaEdit.idCategoriaReceta.idCategoriaReceta == categoria.idCategoriaReceta}"  th:value="${categoria.idCategoriaReceta}" th:text="${categoria.descripcionCategoriaReceta}" ></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group" id="categoriaReceta" th:if="${recetaEdit.tipoReceta == '1'}"  >
+                                                                                </div>
+                                                                                <div class="form-group is-valid">
+                                                                                    <label for="imagenReceta">Imagen de la Receta</label>
+                                                                                    <input type="file" name="imagenReceta" id="validatedCustomFile" class="dropify" th:data-default-file="@{/uploads/}+${recetaEdit.foto}" />
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <button type="submit" class="btn btn-primary mr-2">Editar</button>
+                                                                                <a th:href="@{/administrador/receta}"   class="btn btn-warning mr-2">Cancelar</a>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!--Form editar-->
+
+                                                                <div class="col-md-8">
+                                                                    <!---inicio fila de los filtros-->
+                                                                    <div class="row">
+                                                                        <!--inicio filtro de tipos--->
+                                                                        <div class="col-md-4 grid-margin">
+                                                                            <form th:action="@{/administrador/recetaInsumos/filtroCategoria}" method="post">
+                                                                                <div class="btn-group mt-2" role="group" aria-label="Basic example">
+                                                                                    <a th:href="@{/administrador/receta}" class="btn btn-primary mt-4">
+                                                                                        <i class="mdi mdi-autorenew"></i>
+                                                                                    </a>
+                                                                                    <a th:href="@{/administrador/recetaInsumos/filtroDisponibilidad(disponibilidad='1')}" class="btn btn-primary mt-4">
+                                                                                        <i class="mdi mdi-checkbox-marked-circle-outline"></i>
+                                                                                    </a>
+                                                                                    <a th:href="@{/administrador/recetaInsumos/filtroDisponibilidad(disponibilidad='0')}" class="btn btn-primary mt-4">
+                                                                                        <i class="mdi mdi-close-circle-outline"></i>
+                                                                                    </a>
+                                                                                    <select class="form-control mt-4" id="exampleFormControlSelect1" name="idCategoriaReceta" >
+                                                                                        <option th:each="categoria: ${categoriasReceta}"  th:value="${categoria.idCategoriaReceta}" th:text="${categoria.descripcionCategoriaReceta}" ></option>
+                                                                                        <option value="-1">Bar</option>
+                                                                                    </select>
+                                                                                    <button type="submit" class="btn btn-primary mt-4">
+                                                                                        <i class="mdi mdi-account-search"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                        <!--fin filtro de tipos--->
+                                                                        <!--inicio filtro nombre--->
+                                                                        <div class="col-md-7 grid-margin stretch-card">
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <form class="" th:action="@{/administrador/Recetafiltro}" method="GET">
+                                                                                        <div class="form-group">
+                                                                                            <div class="input-group">
+                                                                                                <input type="text" class="form-control" name="nombreReceta" placeholder="Escribe el nombre de la receta" aria-label="Escribe el nombre de la receta">
+                                                                                                    <div class="input-group-append">
+                                                                                                        <button class="btn btn-sm btn-primary" type="submit">Buscar</button>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--fin filtro nombre--->
+                                                                        <!--inicio vista tipos--->
+                                                                        <div class="col-md-1 grid-margin mt-4">
+                                                                            <div class="btn-group mt-2" role="group" aria-label="Basic example">
+                                                                                <button onclick="verCard()" type="button" class="btn btn-primary">
+                                                                                    <i class="mdi mdi-grid"></i>
+                                                                                </button>
+                                                                                <button onclick="verTabla()" type="button" class="btn btn-primary">
+                                                                                    <i class="mdi mdi-format-list-bulleted"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--fin vista tipos--->
+                                                                    </div>
+                                                                    <!---inicio fila de los filtros-->
+
+
+                                                                    <div class="row">
+
+                                                                        <div id="cardReceta" class="card-columns">
+
+                                                                            <!--card inicio receta--->
+                                                                            <div class="card"  th:each="receta: ${recetas}"  >
+                                                                                <div class="card-body text-center">
+                                                                                    <div>
+                                                                                        <img th:src="@{/uploads/}+${receta.foto}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                                                                            <h4 th:text="${receta.nombreReceta}" >Nombre Receta</h4>
+                                                                                            <p class="text-muted mb-0"  >
+                                                                                                <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${receta.idReceta}" >id receta</div>
+                                                                                                <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
+                                                                                                <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '1' }" >Bar</div>
+                                                                                                <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0'}" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" >Categoria</div>
+                                                                                                <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-outline-info"><i class="mdi mdi-check"></i></div>
+                                                                                                <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-outline-info"><i class="mdi mdi-close"></i></div>
+                                                                                            </p>
+                                                                                    </div>
+                                                                                    <p class="mt-2 card-text" th:text="${receta.descripcionReceta}" >
+                                                                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                                                                        Aenean commodo ligula eget dolor. Lorem
+                                                                                    </p>
+                                                                                    <a th:href="@{/administrador/loadEditarReceta(idReceta=${receta.idReceta})}" class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</a>
+                                                                                    <a th:href="@{/administrador/deleteReceta(idReceta=${receta.idReceta})}" class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</a>
+                                                                                    <a th:href="@{/administrador/recetaInsumos/ingredientesReceta(idReceta=${receta.idReceta})}" class="btn btn-info btn-sm mt-3 mb-4">Insumos</a>
+                                                                                    <div class="border-top pt-3">
+                                                                                        <div class="row">
+                                                                                            <div class="col-4">
+                                                                                                <h6 th:text="${receta.duracionPreparacion} + ' min'" >5896</h6>
+                                                                                                <p>Duración Preparación</p>
+                                                                                            </div>
+                                                                                            <div class="col-4">
+                                                                                                <h6 th:text="'$' + ${receta.precioReceta}" >1596</h6>
+                                                                                                <p>Precio Receta</p>
+                                                                                            </div>
+                                                                                            <div class="col-4">
+                                                                                                <h6 th:text="${receta.cantidadPrepDiariaReceta}" >7896</h6>
+                                                                                                <p>Estimación Diaria</p>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!--card fin receta--->
+                                                                        </div>
+
+
+                                                                        <img src="https://vivanda.vteximg.com.br/arquivos/ids/178947-1000-1000/120930.jpg?v=636978561154000000" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                        <h4 th:text="${ins.nombreInsumo}"></h4>
+                                                                        <p th:text="${ins.unidadMedidaInsumo}" class="text-muted mb-0">Unidad: Kilos</p>
+
+
+                                                                    </div>
+                                                                    <p th:text="${ins.descripcionInsumo}" class="mt-2 card-text">
+                                                                        Zanahoria especial sabor zanagoria
+                                                                    </p>
+                                                                    <div class="border-top pt-3">
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+
+                                                                                <h6>Stock actual: </h6>4
+
+                                                                        <div id="tablaReceta" class="col-md-12">
+                                                                            <div class="card">
+                                                                                <div class="card-body">
+                                                                                    <h4 class="card-title">Recetas</h4>
+                                                                                    <div class="table-responsive">
+                                                                                        <table class="table table-striped">
+                                                                                            <thead>
+                                                                                                <tr  >
+                                                                                                    <th  >
+                                                                                                        Foto
+                                                                                                    </th>
+                                                                                                    <th >
+                                                                                                        ID
+                                                                                                    </th>
+                                                                                                    <th>
+                                                                                                        Nombre
+                                                                                                    </th>
+                                                                                                    <th>
+                                                                                                        Duración (min)
+                                                                                                    </th>
+                                                                                                    <th>
+                                                                                                        Precio
+                                                                                                    </th>
+                                                                                                    <th>
+                                                                                                        Estimación Día
+                                                                                                    </th>
+                                                                                                    <th>
+                                                                                                        Tipo
+                                                                                                    </th>
+                                                                                                    <th>
+                                                                                                        Categoría
+                                                                                                    </th>
+                                                                                                    <th>
+                                                                                                        Disponible
+                                                                                                    </th>
+                                                                                                    <th>
+
+                                                                                                    </th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+                                                                                                <tr th:each="receta: ${recetas}" >
+                                                                                                    <td class="py-1">
+                                                                                                        <img th:src="@{/uploads/}+${receta.foto}" alt="image">
+                                                                                                    </td>
+                                                                                                    <td th:text="'#' + ${receta.idReceta}"   >
+                                                                                                        ID
+                                                                                                    </td>
+                                                                                                    <td th:text="${receta.nombreReceta}" >
+                                                                                                        nombre
+                                                                                                    </td>
+                                                                                                    <td th:text="${receta.duracionPreparacion} + ' min'" >
+                                                                                                        duración
+                                                                                                    </td>
+                                                                                                    <td th:text="'$' + ${receta.precioReceta}" >
+                                                                                                        precio
+                                                                                                    </td >
+                                                                                                    <td th:text="${receta.cantidadPrepDiariaReceta}">
+                                                                                                        Estimación
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
+                                                                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '1' }" >Bar</div>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0'}" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" >Primary</div>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-outline-info"><i class="mdi mdi-check"></i></div>
+                                                                                                        <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-outline-info"><i class="mdi mdi-close"></i></div>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <button class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</button>
+                                                                                                        <button class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</button>
+                                                                                                        <button class="btn btn-info btn-sm mt-3 mb-4">Insumos</button>
+                                                                                                    </td>
+
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+>>>>>>> Jean
+                                                                            </div>
+                                                                            <div class="col-12">
+
+                                                                                <h6>Stock minimo: </h6>5
+                                                                            </div>
+                                                                            <div class="col-12">
+
+                                                                                <h6>Stock maximo: </h6>6
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <div class="media">
+                                                    <div class="table-responsive">
+                                                        <table id="order-listing" class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Order #</th>
+                                                                    <th>Purchased On</th>
+                                                                    <th>Customer</th>
+                                                                    <th>Ship to</th>
+                                                                    <th>Base Price</th>
+                                                                    <th>Purchased Price</th>
+                                                                    <th>Status</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tbody>
+                                                                <tr th:each="ins: ${insumos}">
+                                                                    <td th:text="${ins.nombreInsumo}">Oranges</td>
+                                                                    <td>2015/06/25</td>
+                                                                    <td>Tim</td>
+                                                                    <td>Italy</td>
+                                                                    <td>$6300</td>
+                                                                    <td>$2100</td>
+                                                                    <td>
+                                                                        <label class="badge badge-info">On-hold</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+<<<<<<< HEAD
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+
+                        <!--Desarrollar acá-->
+
+
+
+
+                        <!--final-->
+
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+        <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+        <script th:src="@{/vendors/moment/moment.min.js}"></script>
+        <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+        <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+        <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+        <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+        <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+        <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+        <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+        <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+        <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-addons.js}"></script>
+        <script th:src="@{/js/x-editable.js}"></script>
+        <script th:src="@{/js/dropify.js}"></script>
+        <script th:src="@{/js/dropzone.js}"></script>
+        <script th:src="@{/js/jquery-file-upload.js}"></script>
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-repeater.js}"></script>
+        <!-- End custom js for this page-->
+        <!-- plugin js for this page -->
+        <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
+        <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
+        <script th:src="@{/js/data-table.js}"></script>
+
+        <!--validate form--->
+        <script th:src="@{/custom/formulario.js}"></script>
+    </body>
+
+</html>/html>
+=======
+
+                                            <!-- container-scroller -->
+                                            <!-- base:js -->
+                                            <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+                                            <!-- endinject -->
+                                            <!-- Plugin js for this page-->
+                                            <!-- End plugin js for this page-->
+                                            <!-- inject:js -->
+                                            <script th:src="@{/js/off-canvas.js}"></script>
+                                            <script th:src="@{/js/hoverable-collapse.js}"></script>
+                                            <script th:src="@{/js/template.js}"></script>
+                                            <script th:src="@{/js/settings.js}"></script>
+                                            <script th:src="@{/js/todolist.js}"></script>
+                                            <!-- endinject -->
+                                            <!-- plugin js for this page -->
+                                            <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+                                            <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+                                            <!-- End plugin js for this page -->
+                                            <!-- Custom js for this page-->
+                                            <script th:src="@{/js/dropify.js}"></script>
+                                            <script th:src="@{/js/jquery-file-upload.js}"></script>
+                                            <script th:src="@{/js/formpickers.js}"></script>
+                                            <script th:src="@{/js/form-repeater.js}"></script>
+                                            <script th:src="@{/custom/formularios.js}"></script>
+                                            <!-- End custom js for this page-->
+
+                                            <script type="text/javascript">
+                                                var tabla = document.getElementById("tablaReceta");
+                                                tabla.style.display = "none";
+                                                tabla.style.visibility = "hidden";
+
+                                                function deleteCategoria() {
+                                                    var check = document.getElementById("categoriaReceta");
+                                                    check.style.display = "none";
+                                                    check.style.visibility = "hidden";
+                                                }
+
+                                                function agregarCategoria() {
+                                                    var check = document.getElementById("categoriaReceta");
+                                                    check.style.display = "";
+                                                    check.style.visibility = "";
+                                                }
+
+                                                function verCard() {
+                                                    var tabla = document.getElementById("tablaReceta");
+                                                    tabla.style.display = "none";
+                                                    tabla.style.visibility = "hidden";
+                                                    var cards = document.getElementById("cardReceta");
+                                                    cards.style.display = "";
+                                                    cards.style.visibility = "";
+                                                }
+
+                                                function verTabla() {
+                                                    var cards = document.getElementById("cardReceta");
+                                                    cards.style.display = "none";
+                                                    cards.style.visibility = "hidden";
+                                                    var tabla = document.getElementById("tablaReceta");
+                                                    tabla.style.display = "";
+                                                    tabla.style.visibility = "";
+                                                }
+                                            </script>
+
+
+                                            <script type="text/javascript" >
+                                                var formularioPassword = document.getElementsByName("formReceta")[0];
+                                                validatorForms(formularioPassword);
+                                            </script>
+
+                                            <script src="text/javascript">
+                                                $('.dropify').dropify({
+                                                    messages: {
+                                                        'default': 'Agrega una foto',
+                                                        'replace': 'Reemplaza el archivo',
+                                                        'remove': 'Eliminar',
+                                                        'error': 'Ooops, Algo malo paso.'
+                                                    }
+                                                });
+                                            </script>
+
+
+                                        </body>
+
+                                        </html>
+>>>>>>> Jean

@@ -11,11 +11,14 @@ import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,13 +35,17 @@ public class Ingrediente implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
+        //declarar que el id se usa con una secuencia 
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_INGREDI")
+    //declarar la secuencia 
+    @SequenceGenerator(name="SEQ_INGREDI",sequenceName="SEQ_INGREDIENTE", allocationSize=1 )
     @NotNull
     @Column(name = "ID_INGREDIENTE")
-    private BigDecimal idIngrediente;
+    private Integer idIngrediente;
     @Basic(optional = false)
     @NotNull
     @Column(name = "CANTIDAD")
-    private BigInteger cantidad;
+    private double cantidad;
     @JoinColumn(name = "ID_INSUMO", referencedColumnName = "ID_INSUMO")
     @ManyToOne(optional = false)
     private Insumo idInsumo;
@@ -49,28 +56,28 @@ public class Ingrediente implements Serializable {
     public Ingrediente() {
     }
 
-    public Ingrediente(BigDecimal idIngrediente) {
+    public Ingrediente(Integer idIngrediente) {
         this.idIngrediente = idIngrediente;
     }
 
-    public Ingrediente(BigDecimal idIngrediente, BigInteger cantidad) {
+    public Ingrediente(Integer idIngrediente, double cantidad) {
         this.idIngrediente = idIngrediente;
         this.cantidad = cantidad;
     }
 
-    public BigDecimal getIdIngrediente() {
+    public Integer getIdIngrediente() {
         return idIngrediente;
     }
 
-    public void setIdIngrediente(BigDecimal idIngrediente) {
+    public void setIdIngrediente(Integer idIngrediente) {
         this.idIngrediente = idIngrediente;
     }
 
-    public BigInteger getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(BigInteger cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 
