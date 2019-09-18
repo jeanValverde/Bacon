@@ -561,7 +561,8 @@
 
 
         <script type="text/javascript" th:if="${isMensaje == 1}" >
-            $.toast({
+            /*
+             * $.toast({
                 heading: '[[${nombreMensaje}]]',
                 text: '[[${mensaje}]]',
                 icon: '[[${tipoMensaje}]]',
@@ -569,6 +570,12 @@
                 loaderBg: '#9EC600', // To change the background
                 position: 'top-right'
             })
+             * 
+             * **/
+            
+                showSwal('[[${tipoMensaje}]]-message', '[[${nombreMensaje}]]', '[[${mensaje}]]');
+            
+            
         </script>
 
 
