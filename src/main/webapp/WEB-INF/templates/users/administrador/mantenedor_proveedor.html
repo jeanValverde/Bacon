@@ -509,13 +509,30 @@
                                                         validatorForms(formularioPassword);
                                                     </script>
 
-                                                    <script type="text/javascript" >
-                                                        var respuestAgrega = document.getElementById("registroAgregarProveedor").value;
-                                                        if (respuestAgrega === "1") {
-                                                            showSwal('success-message', 'Proveedor agregado!', 'se ha registrado el proveedor exitosamente');
-                                                        } else if (respuestAgrega === "0") {
-                                                            showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
-                                                        }
+                                                    <!--   <script type="text/javascript" >
+                                                           var respuestAgrega = document.getElementById("registroAgregarProveedor").value;
+                                                           if (respuestAgrega === "1") {
+                                                               showSwal('success-message', 'Proveedor agregado!', 'se ha registrado el proveedor exitosamente');
+                                                           } else if (respuestAgrega === "0") {
+                                                               showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
+                                                           }
+                                                       </script> -->
+                                                    <script type="text/javascript" th:if="${isMensaje == 1}" >
+                                                        /*
+                                                         * $.toast({
+                                                         heading: '[[${nombreMensaje}]]',
+                                                         text: '[[${mensaje}]]',
+                                                         icon: '[[${tipoMensaje}]]',
+                                                         loader: true, // Change it to false to disable loader
+                                                         loaderBg: '#9EC600', // To change the background
+                                                         position: 'top-right'
+                                                         })
+                                                         * 
+                                                         * **/
+
+                                                        showSwal('[[${tipoMensaje}]]-message', '[[${nombreMensaje}]]', '[[${mensaje}]]');
+
+
                                                     </script>
 
 
@@ -524,15 +541,15 @@
 
 
                                                     <script src="text/javascript">
-                                                        dropify.dropify({
-                                                            "defaultFile": "full path file",
-                                                            "messages": {
-                                                                default: 'Arrastre un archivo o haga clic aquí',
-                                                                replace: 'Arrastre un archivo o haga clic en reemplazar',
-                                                                remove: 'Eliminar',
-                                                                error: 'Lo sentimos, el archivo demasiado grande'
-                                                            }
-                                                        });
+                                                       dropify.dropify({
+                                                           "defaultFile": "full path file",
+                                                           "messages": {
+                                                               default: 'Arrastre un archivo o haga clic aquí',
+                                                               replace: 'Arrastre un archivo o haga clic en reemplazar',
+                                                               remove: 'Eliminar',
+                                                               error: 'Lo sentimos, el archivo demasiado grande'
+                                                           }
+                                                       });
                                                     </script>
 
 
