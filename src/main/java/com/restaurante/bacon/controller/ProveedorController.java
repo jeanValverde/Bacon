@@ -159,9 +159,9 @@ public class ProveedorController {
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
         if (this.proveedorService.ingresarProveedor(proveedor)) {
-             modelo.addAttribute("registroAgregar",1);
+             modelo.addAttribute("registroAgregarProveedor",1);
         }else{
-            modelo.addAttribute("registroAgregar",0);
+            modelo.addAttribute("registroAgregarProveedor",0);
         }
        
         

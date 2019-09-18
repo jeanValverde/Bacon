@@ -121,7 +121,7 @@
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
-                                                                                        
+
                                                                                     </select>
 
                                                                                 </div>
@@ -151,19 +151,19 @@
                                                                                     Escribe un celular para el proveedor.
                                                                                 </div>
 
-                                                                                
+
                                                                                 <div class="form-group">
                                                                                     <label for="categoriaProveedor">Categoria Proveedor</label>
                                                                                     <select class="form-control" id="categoriaProveedor" name="categoriaProveedor" placeholder="Categoria Proveedor">
-                                                                                            <option value="select">Seleccione</option>
-                                                                                            <option value="esporadico">Esporádico</option>
+                                                                                        <option value="select">Seleccione</option>
+                                                                                        <option value="esporadico">Esporádico</option>
                                                                                         <option value="Regular">Regular</option>
                                                                                         <div class="valid-feedback">
-                                                                                        !Listo!
-                                                                                    </div>
+                                                                                            !Listo!
+                                                                                        </div>
 
                                                                                     </select>
-                                                                                    
+
 
                                                                                 </div>
 
@@ -510,12 +510,15 @@
                                                     </script>
 
                                                     <script type="text/javascript" >
-                                                        var registroAgregar = document.getElementById("registroAgregar").value;
-                                                        if (registroAgregar === "1") {
-                                                            alert("Proveedor agregado correctamente");
-
+                                                        var respuestAgrega = document.getElementById("registroAgregarProveedor").value;
+                                                        if (respuestAgrega === "1") {
+                                                            showSwal('success-message', 'Proveedor agregado!', 'se ha registrado el proveedor exitosamente');
+                                                        } else if (respuestAgrega === "0") {
+                                                            showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
                                                         }
                                                     </script>
+
+
 
 
 
