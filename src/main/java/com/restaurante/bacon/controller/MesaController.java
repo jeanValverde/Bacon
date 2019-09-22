@@ -90,8 +90,14 @@ public class MesaController {
         mesa.setNumeroMesa(numeroMesa);
         mesa.setCantidadAsientosMesa(cantidadAsientosMesa);
         mesa.setEstadoMesa(estadoMesa);
+        
+        if (this.mesaService.editarMesa(mesa)) {
+            model.addAttribute("${mesa.idMesa}", 1);
+        } else {
+            model.addAttribute("${mesa.idMesa}", 0);
+        }
 
-        this.mesaService.editarMesa(mesa);
+      //  this.mesaService.editarMesa(mesa);
 
         List<Mesa> mesas = new ArrayList<Mesa>();
         mesas = this.mesaService.listarMesa();

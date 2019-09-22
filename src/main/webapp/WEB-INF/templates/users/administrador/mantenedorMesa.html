@@ -85,7 +85,7 @@
                                             <div class="form-group">
                                                 <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
                                                 <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa">
-                                                
+
                                             </div>
                                             <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
                                                 Escribe un numero para la mesa.
@@ -121,11 +121,11 @@
                                             Completa estos campos para modificar una mesa al sistema
                                         </p>
                                         <form class="forms-sample" th:action="@{/administrador/mesa/modificar}" method="POST" name="formMesa">
-                                            <input type="hidden" name="idMesa" th:value="${mesa.idMesa}">
+                                            <input type="hidden" id="idMesa" name="idMesa" th:value="${mesa.idMesa}">
                                             <div class="form-group">
                                                 <label for="numeroMesa">Numero Mesa</label>
                                                 <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa" th:value="${mesa.numeroMesa}">
-                                                
+
                                             </div>
                                             <div class="invalid-feedback" id="mensajeNumeroMesa1">
                                                 Escribe un numero para la mesa.
@@ -136,7 +136,7 @@
                                             <div class="form-group">
                                                 <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
                                                 <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa" th:value="${mesa.cantidadAsientosMesa}">
-                                                
+
                                             </div>
                                             <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
                                                 Escribe un numero para la mesa.
@@ -207,7 +207,7 @@
                                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                                 <div class="media">
                                                     <div  class="row">
-                                                        <div style="padding: 5px" th:each="mes: ${mesas}" class="col-md-6 grid-margin grid-margin-md-0 stretch-card">
+                                                        <div style="padding: 10px"  th:each="mes: ${mesas}" class="card">
                                                             <div class="card">
                                                                 <div class="card-body text-center">
                                                                     <div style="text-align:right">
@@ -228,7 +228,9 @@
                                                                     </div>
                                                                     <div >
                                                                         <h6>Cantidad de Asientos: </h6>
-                                                                        <p th:text="${mes.cantidadAsientosMesa}" class="text-muted mb-0">Cantidad de asientos</p>
+                                                                        <h4
+                                                                            <p th:text="${mes.cantidadAsientosMesa}" class="text-muted mb-0">Cantidad de asientos</p>
+                                                                        </h4>
                                                                     </div>
 
                                                                     <div th:if="${mes.estadoMesa} == 1">
@@ -360,7 +362,7 @@
 
         <!--validate form--->
         <script th:src="@{/custom/formularioMesa.js}"></script>
-        
+
         <script type="text/javascript" >
             var formularioPassword = document.getElementsByName("formMesa")[0];
             validatorForms(formularioPassword);
@@ -373,6 +375,15 @@
 
             }
         </script>
+        <script type="text/javascript">
+            var idMesa = document.getElementById("${mesa.idMesa}").value;
+            if (idMesa === "1") {
+                alert("Se modifico la mesa correctamente");
+            } else if (idMesa === "0") {
+
+            }
+        </script>
+
         <script type="text/javascript">
             function myFunction() {
 
