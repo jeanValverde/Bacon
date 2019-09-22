@@ -255,7 +255,7 @@
                                                                                         No te olvides de seleccionar al menos una opción.
                                                                                     </div>
                                                                                 </div>
-                                                                                 <div class="form-group">
+                                                                                <div class="form-group">
                                                                                     <label for="exampleInputEmail1">Correo electrónico</label>
                                                                                     <input th:value="${proveedor.correoProveedor}" type="email" class="form-control" name="correoProveedor" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electrónico">
                                                                                         <small id="emailHelp" class="form-text text-muted">Escribe un correo electrónico valido.</small>
@@ -266,7 +266,7 @@
                                                                                             No es un correo electrónico
                                                                                         </div>
                                                                                 </div>
-                                                                                  <div class="form-group">
+                                                                                <div class="form-group">
                                                                                     <label for="celularProveedor">Celular</label>
                                                                                     <input th:value="${proveedor.celularProveedor}" type="number" class="form-control" name="celularProveedor"  id="numeroExample1" aria-describedby="Numero" placeholder="Numero">
                                                                                         <small id="numeroHelp" class="form-text text-muted">Escribe solo números.</small>
@@ -277,7 +277,7 @@
                                                                                             El texto no es un número.
                                                                                         </div>
                                                                                 </div>
-                                                                                     <div class="form-group">
+                                                                                <div class="form-group">
                                                                                     <select th:value="${proveedor.categoriaProveedor}" id="selectExample1" name="categoriaProveedor" class="custom-select" required>
                                                                                         <option value="select">seleccióne</option>
                                                                                         <option value="esporadico">Esporádico</option>
@@ -312,7 +312,7 @@
 
                                                                             <form  th:action="@{/administrador_proveedor/buscar_por_filtro}"  enctype="multipart/form-data" method="post">
 
-                                                                                
+
 
                                                                                 <div class="row">
                                                                                     <div class="col-2">
@@ -352,6 +352,7 @@
                                                                                     <div class="media">
                                                                                         <div  class="row">
                                                                                             <div th:each="ins: ${proveedores}" class="card">
+                                                                                                <input type="hidden" name="elimino" id="agrego" th:value="${elimino}" />
                                                                                                 <div class="card">
                                                                                                     <div class="card-body text-center">
                                                                                                         <div style="text-align:right">
@@ -549,6 +550,16 @@
                                                             showSwal('success-message', 'Proveedor modificado!', 'se ha modificado el proveedor exitosamente');
                                                         } else if (respuestModifica === "0") {
                                                             showSwal('warning-message', 'Error!', "No se ha podido modificar el proveedor");
+                                                        }
+                                                    </script> 
+
+                                                    <script type="text/javascript" >
+                                                        var respuestElimina = document.getElementById("elimino").value;
+
+                                                        if (respuestElimina === "1") {
+                                                            showSwal('success-message', 'Proveedor eliminado!', 'se ha eliminado el proveedor exitosamente');
+                                                        } else if (respuestModifica === "0") {
+                                                            showSwal('warning-message', 'Error!', "No se ha podido eliminar el proveedor");
                                                         }
                                                     </script> 
 

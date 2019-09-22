@@ -197,7 +197,12 @@ public class ProveedorController {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        this.procedureQuery.DeleteProveedorById(idProveedor);
+        if (this.procedureQuery.DeleteProveedorById(idProveedor)) {
+            modelo.addAttribute("elimino",1);
+        }else{
+            modelo.addAttribute("alimino",0);
+        }
+        
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
         proveedores = this.proveedorService.listarProveedores();
         modelo.addAttribute("proveedores", proveedores);
