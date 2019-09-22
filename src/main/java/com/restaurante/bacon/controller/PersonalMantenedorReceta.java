@@ -16,6 +16,7 @@ import com.restaurante.bacon.service.PersonalService;
 import com.restaurante.bacon.service.RecetaService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -363,5 +364,33 @@ public class PersonalMantenedorReceta {
         return "users/administrador/matenedor_receta_insumo";
     }
     
+     @RequestMapping("/Recetafiltro")
+    public String filtro(Model modelo, @RequestParam("nombreReceta") String nombreReceta) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+        List<Receta> recetas = this.recetaService.filtrarRecetasByNombre(nombreReceta);
+
+        modelo.addAttribute("recetas", recetas);
+
+        modelo.addAttribute("tipoForm", "agregar");
+        
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 0 );
+        //fin mensajes 
+        
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedorReceta";
+    }
     
 }
