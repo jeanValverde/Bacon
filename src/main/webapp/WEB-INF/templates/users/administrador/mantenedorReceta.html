@@ -13,15 +13,15 @@
         <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}"/>
         <!-- endinject -->
         <!-- plugin css for this page -->
-        <link rel="stylesheet" th:href="@{/vendors/jquery-toast-plugin/jquery.toast.min.css}">
-            <link rel="stylesheet" th:href="@{/vendors/dropify/dropify.min.css}"/>
-            <link rel="stylesheet" th:href="@{/vendors/jquery-file-upload/uploadfile.css}"/>
-            <!-- End plugin css for this page -->
-            <!-- inject:css -->
-            <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}"/>
-            <!-- endinject -->
-            <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
-            <!---->
+        <link rel="stylesheet" th:href="@{/vendors/jquery-toast-plugin/jquery.toast.min.css}"/>
+        <link rel="stylesheet" th:href="@{/vendors/dropify/dropify.min.css}"/>
+        <link rel="stylesheet" th:href="@{/vendors/jquery-file-upload/uploadfile.css}"/>
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}"/>
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+        <!---->
     </head>
 
     <body class="sidebar-fixed">
@@ -134,7 +134,7 @@
                                                 <input  type="file" name="imagenReceta" id="dropify" class="dropify"  />
                                             </div>
                                             <div id="foto-mensaje1"  class="invalid-feedback">
-                                                        Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
+                                                Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
                                             </div>
                                             <br/>
                                             <button type="submit" class="btn btn-primary mr-2">Agregar</button>
@@ -242,7 +242,7 @@
                                                 <input type="file" name="imagenReceta" id="dropify" class="dropify" th:data-default-file="@{/uploads/}+${recetaEdit.foto}" />
                                             </div>
                                             <div id="foto-mensaje1"  class="invalid-feedback">
-                                                        Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
+                                                Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
                                             </div>
                                             <br/>
                                             <button type="submit" class="btn btn-primary mr-2">Editar</button>
@@ -478,7 +478,7 @@
         <script th:src="@{/vendors/jquery-toast-plugin/jquery.toast.min.js}"></script>
         <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
         <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
-        
+
         <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
         <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
         <!-- End plugin js for this page -->
@@ -489,11 +489,11 @@
         <script th:src="@{/js/form-repeater.js}"></script>
         <script th:src="@{/custom/formularios.js}"></script>
         <script th:src="@{/custom/formulariosEditFile.js}"></script>
-        
+
         <script th:src="@{/js/alerts.js}"></script>
         <script th:src="@{/js/avgrund.js}"></script>
         <script th:src="@{/js/alerts_personalizado.js}"></script>
-        
+
 
         <!-- End custom js for this page-->
 
@@ -501,13 +501,13 @@
             var tabla = document.getElementById("tablaReceta");
             tabla.style.display = "none";
             tabla.style.visibility = "hidden";
-            
-            
+
+
             function deleteCategoria() {
                 var check = document.getElementById("categoriaReceta");
                 check.style.display = "none";
                 check.style.visibility = "hidden";
-                
+
                 var categoriaRecetaBar = document.getElementById("categoriaRecetaBar");
                 categoriaRecetaBar.style.display = "";
                 categoriaRecetaBar.style.visibility = "";
@@ -517,11 +517,11 @@
                 var check = document.getElementById("categoriaReceta");
                 check.style.display = "";
                 check.style.visibility = "";
-                
+
                 var categoriaRecetaBar = document.getElementById("categoriaRecetaBar");
                 categoriaRecetaBar.style.display = "none";
                 categoriaRecetaBar.style.visibility = "hidden";
-                
+
             }
 
             function verCard() {
@@ -542,8 +542,8 @@
                 tabla.style.visibility = "";
             }
         </script>
-        
-        
+
+
 
 
         <script type="text/javascript" th:if="${tipoForm == 'agregar' }"  >
@@ -554,32 +554,33 @@
         <script type="text/javascript" th:if="${tipoForm == 'editar' }"  >
             var formulario = document.getElementsByName("formReceta")[0];
             validatorFormsEditFile(formulario);
-            
-            var inputCategoria 
-            
+
+            var inputCategoria
+
         </script>
 
 
         <script type="text/javascript" th:if="${isMensaje == 1}" >
             /*
              * $.toast({
-                heading: '[[${nombreMensaje}]]',
-                text: '[[${mensaje}]]',
-                icon: '[[${tipoMensaje}]]',
-                loader: true, // Change it to false to disable loader
-                loaderBg: '#9EC600', // To change the background
-                position: 'top-right'
-            })
+             heading: '[[${nombreMensaje}]]',
+             text: '[[${mensaje}]]',
+             icon: '[[${tipoMensaje}]]',
+             loader: true, // Change it to false to disable loader
+             loaderBg: '#9EC600', // To change the background
+             position: 'top-right'
+             })
              * 
              * **/
-            
-                showSwal('[[${tipoMensaje}]]-message', '[[${nombreMensaje}]]', '[[${mensaje}]]');
-            
-            
+
+            showSwal('[[${tipoMensaje}]]-message', '[[${nombreMensaje}]]', '[[${mensaje}]]');
+
+
         </script>
 
 
-     
+
+
 
 
 
