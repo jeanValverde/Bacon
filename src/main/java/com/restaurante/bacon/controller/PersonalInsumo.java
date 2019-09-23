@@ -92,7 +92,11 @@ public class PersonalInsumo {
                 insumos = this.insumoService.filtrarInsumosByNombre(filtro);
                 break;
             case "stock":
+                if(filtro.equals("")||filtro==null){
                 insumos = this.insumoService.filtrarInsumosByStock(BigInteger.valueOf(Integer.parseInt(filtro)));
+                }else{
+                    insumos = this.insumoService.listarInsumos();
+                }
                 break;
             case "unidad":
                 insumos = this.insumoService.filtrarInsumosByUnidadMedida(filtro);
