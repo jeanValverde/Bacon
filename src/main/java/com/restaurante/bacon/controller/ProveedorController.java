@@ -89,8 +89,11 @@ public class ProveedorController {
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
         proveedores = this.proveedorService.listarProveedores();
         //desarrollo aca 
+        
+        
         modelo.addAttribute("proveedores", proveedores);
         modelo.addAttribute("agregar", true);
+        
         modelo.addAttribute("personalSesion", personal);
         
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
@@ -159,10 +162,13 @@ public class ProveedorController {
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
         
+        
         if (this.proveedorService.ingresarProveedor(proveedor)) {
-                modelo.addAttribute("agrego", 1);
+               modelo.addAttribute("tipoRespuesta", "agregar");
+                modelo.addAttribute("respuesta", 1);
             } else {
-               modelo.addAttribute("agrego", 0);
+               modelo.addAttribute("tipoRespuesta", "agregar");
+                modelo.addAttribute("respuesta", 0);
             }
             
          
@@ -198,9 +204,11 @@ public class ProveedorController {
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
         if (this.procedureQuery.DeleteProveedorById(idProveedor)) {
-            modelo.addAttribute("elimino",1);
+            modelo.addAttribute("tipoRespuesta", "eliminar");
+                modelo.addAttribute("respuesta", 1);
         }else{
-            modelo.addAttribute("alimino",0);
+            modelo.addAttribute("tipoRespuesta", "eliminar");
+                modelo.addAttribute("respuesta", 0);
         }
         
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
@@ -292,9 +300,11 @@ public class ProveedorController {
         
         if (this.proveedorService.modificarProveedor(proveedor)) {
              
-             modelo.addAttribute("modifico",1);
+             modelo.addAttribute("tipoRespuesta", "modificar");
+                modelo.addAttribute("respuesta", 1);
         }else{
-            modelo.addAttribute("modifico",0);
+            modelo.addAttribute("tipoRespuesta", "modificar");
+                modelo.addAttribute("respuesta", 0);
         }
        
             

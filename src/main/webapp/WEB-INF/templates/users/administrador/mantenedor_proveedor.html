@@ -182,9 +182,10 @@
                                                                             <h4 class="card-title">Modificar Proveedores</h4>
 
 
-                                                                            <form  th:action="@{/administrador_proveedor/modificar_proveedor}" name="form" method="post">
+                                                                            <form  th:action="@{/administrador_proveedor/modificar_proveedor}" name="formEditar" method="post">
+                                                                             
                                                                                 <input type="hidden" th:value="${proveedor.idProveedor}" id="modificarProveedor" name="idProveedor"/>
-                                                                                <input type="hidden" id="modifico" value="${modifico}"/>
+                                                                                
                                                                                 <div class="form-group">
                                                                                     <label for="rut">Rut Proveedor</label>
                                                                                     <input th:value="${proveedor.rutProveedor}" type="text" class="form-control" name="rutProveedor"  id="rut" aria-describedby="rut chileno" placeholder="Rut">
@@ -241,10 +242,11 @@
                                                                                         </div>
                                                                                 </div>
                                                                                 <div class="form-group">
-                                                                                    <select th:value="${proveedor.tipoProveedor}" id="selectExample1" name="tipoProveedor" class="custom-select" required>
-                                                                                        <option value="select">seleccióne</option>
-                                                                                        <option value="particular">Particular</option>
-                                                                                        <option value="empresa">Empresa</option>
+                                                                                    <label for="tipoProveedor">Tipo</label>
+                                                                                    <select id="selectExample1" name="tipoProveedor" class="custom-select" required>
+                                                                                        <option th:selected="${proveedor.tipoProveedor == particular}" value="particular">Particular</option>
+                                                                                        <option th:selected="${proveedor.tipoProveedor == empresa}" value="empresa">Empresa</option>
+                                                                                        
 
                                                                                     </select>
                                                                                     <small id="selectHelp" class="form-text text-muted">Selecciona al menos una opción.</small>
@@ -278,10 +280,11 @@
                                                                                         </div>
                                                                                 </div>
                                                                                 <div class="form-group">
-                                                                                    <select th:value="${proveedor.categoriaProveedor}" id="selectExample1" name="categoriaProveedor" class="custom-select" required>
-                                                                                        <option value="select">seleccióne</option>
-                                                                                        <option value="esporadico">Esporádico</option>
-                                                                                        <option value="regular">Regular</option>
+                                                                                    <label for="categoriaProveedor">Categoria</label>
+                                                                                    <select  id="selectExample1" name="categoriaProveedor" class="custom-select" required>
+                                                                                        <option th:selected="${proveedor.categoriaProveedor == esporadico}" value="esporadico">Espóradico</option>
+                                                                                        <option th:selected="${proveedor.categoriaProveedor}== regular" value="regular">Regular</option>
+                                                                                        
 
                                                                                     </select>
                                                                                     <small id="selectHelp" class="form-text text-muted">Selecciona al menos una opción.</small>
@@ -292,7 +295,7 @@
                                                                                         No te olvides de seleccionar al menos una opción.
                                                                                     </div>
                                                                                 </div>
-                                                                                <input type="hidden" id="modifico" value="${modifico}"/>
+                                           
 
 
 
@@ -349,9 +352,9 @@
                                                                             </ul>
                                                                             <div class="tab-content" id="pills-tabContent">
                                                                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                                                    <div class="media">
+                                                                                    
                                                                                         <div  class="row">
-                                                                                            <div th:each="ins: ${proveedores}" class="card">
+                                                                                            <div th:each="ins: ${proveedores}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
                                                                                                 <input type="hidden" name="elimino" id="agrego" th:value="${elimino}" />
                                                                                                 <div class="card">
                                                                                                     <div class="card-body text-center">
@@ -407,7 +410,7 @@
                                                                                             </div>
 
                                                                                         </div>
-                                                                                    </div>
+                                                                                    
                                                                                 </div>
                                                                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                                                                     <div class="media">
@@ -526,42 +529,63 @@
 
                                                     <!--validate form--->
                                                     <script th:src="@{/custom/formularios.js}"></script>
+                                                    
+                                                    <script th:inline="javascript">
+
+                                                        var tipoRespuesta = [[${tipoRespuesta}]];
+                                                        var respuesta = [[${respuesta}]];
+                                                        if (tipoRespuesta !== null) {
+                                                            switch (tipoRespuesta) {
+                                                                case 'agregar' :
+                                                                    if (respuesta === 1) {
+                                                                         showSwal('success-message', 'Proveedor agregado!', 'se ha registrado el proveedor exitosamente');
+                                                                    } else if (respuesta === 0) {
+                                                                        showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
+                                                                    }
+                                                                    break;
+                                                                case 'modificar' :
+                                                                    if (respuesta === 1) {
+                                                                        showSwal('success-message', 'Proveedor modificado!', 'se ha registrado el proveedor exitosamente');
+                                                                    } else if (respuesta === 0) {
+                                                                       showSwal('warning-message', 'Error!', "No se ha podido modificar el proveedor");
+                                                                    }
+                                                                    break;
+                                                                case 'eliminar' :
+                                                                    if (respuesta === 1) {
+                                                                        showSwal('success-message', 'Proveedor eliminado!', 'se ha eliminado el proveedor exitosamente');
+                                                                    } else if (respuesta === 0) {
+                                                                       showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
+                                                                    }
+                                                                    break;
+                                                            }
+                                                        }
+
+
+
+                                                    </script>
 
 
                                                     <script type="text/javascript" >
                                                         var formularioPassword = document.getElementsByName("formProveedor")[0];
                                                         validatorForms(formularioPassword);
                                                     </script>
-
+                                                    
                                                     <script type="text/javascript" >
-                                                        var respuestAgrega = document.getElementById("agrego").value;
+                                                        var formularioPassword = document.getElementsByName("formEditar")[0];
+                                                        validatorForms(formularioPassword);
+                                                    </script>
+                                                    
+                                                   
 
-                                                        if (respuestAgrega === "1") {
-                                                            showSwal('success-message', 'Proveedor agregado!', 'se ha registrado el proveedor exitosamente');
-                                                        } else if (respuestAgrega === "0") {
-                                                            showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
-                                                        }
-                                                    </script> 
 
-                                                    <script type="text/javascript" >
-                                                        var respuestModifica = document.getElementById("modifico").value;
 
-                                                        if (respuestModifica === "1") {
-                                                            showSwal('success-message', 'Proveedor modificado!', 'se ha modificado el proveedor exitosamente');
-                                                        } else if (respuestModifica === "0") {
-                                                            showSwal('warning-message', 'Error!', "No se ha podido modificar el proveedor");
-                                                        }
-                                                    </script> 
+       
 
-                                                    <script type="text/javascript" >
-                                                        var respuestElimina = document.getElementById("elimino").value;
+                                                   
+                                                    
+                                                    
 
-                                                        if (respuestElimina === "1") {
-                                                            showSwal('success-message', 'Proveedor eliminado!', 'se ha eliminado el proveedor exitosamente');
-                                                        } else if (respuestModifica === "0") {
-                                                            showSwal('warning-message', 'Error!', "No se ha podido eliminar el proveedor");
-                                                        }
-                                                    </script> 
+          
 
 
 
