@@ -11,9 +11,10 @@ import com.restaurante.bacon.dto.Ingrediente;
 import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.dto.Receta;
-import com.restaurante.bacon.service.InsumoService;
+//import com.restaurante.bacon.service.InsumoService;
 import com.restaurante.bacon.service.PersonalService;
 import com.restaurante.bacon.service.RecetaService;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class PersonalMantenedorReceta {
     RecetaService recetaService;
 
     @Autowired
-    InsumoService insumoService;
+//    InsumoService insumoService;
 
     @RequestMapping("/filtroDisponibilidad")
     public String filtroDisponibilidad(Model modelo, @RequestParam("disponibilidad") Integer disponibilidad) {
@@ -102,7 +103,7 @@ public class PersonalMantenedorReceta {
             @RequestParam("cantidadReceta") Integer cantidadReceta,
             @RequestParam("tipoReceta") String tipoReceta,
             @RequestParam("categoriaReceta") String categoriaReceta,
-            @RequestParam("imagenReceta") MultipartFile[] file) {
+            @RequestParam("imagenReceta") MultipartFile[] file) throws IOException {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
@@ -201,44 +202,44 @@ public class PersonalMantenedorReceta {
         return "users/administrador/matenedor_receta_insumo";
     }
 
-    @RequestMapping("/addRecetaInsumo")
-    public String addRecetaInsumo(Model modelo,
-            @RequestParam("idReceta") Integer idReceta,
-            @RequestParam("idInsumo") Integer idInsumo,
-            @RequestParam("cantidad") double cantidad) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-
-        //desarrollo aca 
-        Receta receta = this.recetaService.buscarRecetaById(idReceta);
-
-        Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
-
-        Ingrediente ingrediente = new Ingrediente();
-
-        ingrediente.setIdReceta(receta);
-        ingrediente.setIdInsumo(insumo);
-        ingrediente.setCantidad(cantidad);
-
-        this.recetaService.addIngrediente(ingrediente);
-
-        //cargar insumos
-        modelo.addAttribute("ingredientes", this.recetaService.listarIngredientesByIdReceta(idReceta));
-
-        modelo.addAttribute("tipo", "misInsumos");
-
-        modelo.addAttribute("receta", receta);
-
-        //buscar los insumos para la receta 
-        //fin desarrollo 
-        //despachos 
-        //fin despacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/matenedor_receta_insumo";
-    }
+//    @RequestMapping("/addRecetaInsumo")
+//    public String addRecetaInsumo(Model modelo,
+//            @RequestParam("idReceta") Integer idReceta,
+//            @RequestParam("idInsumo") Integer idInsumo,
+//            @RequestParam("cantidad") double cantidad) {
+//        //sesion 
+//        UserRol user = new UserRol();
+//        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+//        //sesion 
+//
+//        //desarrollo aca 
+//        Receta receta = this.recetaService.buscarRecetaById(idReceta);
+//
+//        Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
+//
+//        Ingrediente ingrediente = new Ingrediente();
+//
+//        ingrediente.setIdReceta(receta);
+//        ingrediente.setIdInsumo(insumo);
+//        ingrediente.setCantidad(cantidad);
+//
+//        this.recetaService.addIngrediente(ingrediente);
+//
+//        //cargar insumos
+//        modelo.addAttribute("ingredientes", this.recetaService.listarIngredientesByIdReceta(idReceta));
+//
+//        modelo.addAttribute("tipo", "misInsumos");
+//
+//        modelo.addAttribute("receta", receta);
+//
+//        //buscar los insumos para la receta 
+//        //fin desarrollo 
+//        //despachos 
+//        //fin despacho 
+//        //siempre despachar esto por la sesion 
+//        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+//        //
+//        return "users/administrador/matenedor_receta_insumo";
+//    }
 
 }

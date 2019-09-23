@@ -5,6 +5,7 @@
  */
 package com.restaurante.bacon.service;
 
+import static com.restaurante.bacon.controller.ProveedorController.UPLOAD_DIR_IMAGEN;
 import com.restaurante.bacon.dto.Personal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,16 @@ import com.restaurante.bacon.dao.IPersonalDao;
 import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.ControlCaja;
 import com.restaurante.bacon.dto.Rol;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import java.io.File;
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,9 +34,13 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.UUID;
+import java.util.logging.Level;
+import org.jboss.logging.Logger;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -54,14 +68,14 @@ public class PersonalService implements UserDetailsService {
 		
 	}
 	
-	public boolean addPersonal (String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, date fechaNacimientoPersonal, String celularPersonal,String correoPersonal, String contrasenaPersonal, BigInteger estadoPersonal, String idRol ){
-		return this.procedureQuery.InsertPersonal(rutPersonal, nombresPersonal, apePaternoPersonal, apeMaternoPersonal, fechaNacimientoPersonal,celularPersonal, correoPersonal, contrasenaPersonal, estadoPersonal,idRol)
+	public boolean addPersonal (String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal,String correoPersonal, String contrasenaPersonal, String estadoPersonal, String idRol ){
+		return this.procedureQuery.InsertPersonal(rutPersonal, nombresPersonal, apePaternoPersonal, apeMaternoPersonal, fechaNacimientoPersonal,celularPersonal, correoPersonal, contrasenaPersonal, estadoPersonal,idRol);
 		
 	}
 	
 	public boolean ModificarPersonal (BigDecimal idPersonal, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo){
 		
-		return this.procedureQuery.updatePerfilPersonal(idPersonal, nombres, apePaterno, apeMaterno,fechaNacimiento,celular,correo)
+		return this.procedureQuery.updatePerfilPersonal(idPersonal, nombres, apePaterno, apeMaterno,fechaNacimiento,celular,correo);
 	}
 	
 
@@ -69,9 +83,9 @@ public class PersonalService implements UserDetailsService {
         return this.personalDao.findAll();
     }
 	
-	public void deletePersonalByID(BigInteger id){
+	public void deletePersonalByID(int id){
 		
-		this.personalDao.deletePersonalByID(id);
+		this.personalDao.deleteById(id);
 	}
 
     //se implementan los metodos de la interfaz 
@@ -80,10 +94,7 @@ public class PersonalService implements UserDetailsService {
     }
 
     //se implementan los metodos de la interfaz 
-    public Personal addPersonal(Personal personal) {
-		        return this.personalDao.save(personal);
-    }
-	
+
 	
 	
     
@@ -165,6 +176,87 @@ public class PersonalService implements UserDetailsService {
         return fechaDate;
     }
     
+    public String subirImagen (MultipartFile[] file ) throws IOException{
+         
+        try{
+        
+        StringBuilder filename = new StringBuilder();
+          
+         String nombreArchivo = file[0].getOriginalFilename();
+         
+         String extencion ="";
+         int index = nombreArchivo.lastIndexOf('.');
+         if (index == -1) {
+             
+            extencion ="";
+        }else{
+         extencion =nombreArchivo.substring(index+1);
+         }
+         
+         UUID uuid = UUID.randomUUID();
+                 
+          nombreArchivo= uuid.toString() + "." + extencion;
+         Path fileNamePath = Paths.get(UPLOAD_DIR_IMAGEN, nombreArchivo);
+         
+         filename.append(nombreArchivo);
+         
+         Files.write(fileNamePath, file[0].getBytes());
+         return nombreArchivo;
+        }catch(Exception ex){
+        return null;
+        
+        } 
+            
+    }    
+    public boolean comprobarimagen (String nombreArchivo){
+     File f = new File(UPLOAD_DIR_IMAGEN, nombreArchivo);
+        if (f.exists() && !f.isDirectory()) {
+            return true;
+        }else{
+        return false;
+        }
+    
+    }
+    
+    
+    public void eliminarimagen (String nombreArchivo){
+      Path fileNamePath = Paths.get(UPLOAD_DIR_IMAGEN, nombreArchivo);
+      try  {
+        Files.delete(fileNamePath);
+      
+      }catch(IOException ex){
+//                Logger.getLogger(PersonalService.class.getName()).log(Level.SEVERE,null, ex);
+      }
+    
+     }
     
 
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
 }
+    
+
+
