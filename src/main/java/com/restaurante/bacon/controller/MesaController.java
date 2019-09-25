@@ -51,17 +51,34 @@ public class MesaController {
 
         Mesa mesa = new Mesa();
 
+        List<Mesa> mesas = new ArrayList<Mesa>();
+//        mesas = this.mesaService.listarMesa();
+
         mesa.setNumeroMesa(BigInteger.valueOf(numeroMesa));
         mesa.setCantidadAsientosMesa(BigInteger.valueOf(cantidadAsientosMesa));
         mesa.setEstadoMesa(BigInteger.valueOf(estadoMesa));
 
-        if (this.mesaService.add(mesa) != null) {
-            model.addAttribute("registroAgregar", 1);
-        } else {
-            model.addAttribute("registroAgregar", 0);
+        boolean seRepite = false;
+        for (int i = 0; i < mesas.size(); i++) {
+            if (BigInteger.valueOf(numeroMesa) == mesas.get(i).getNumeroMesa()) {
+                seRepite = true;
+            }
         }
 
-        List<Mesa> mesas = new ArrayList<Mesa>();
+        if (!seRepite) {
+            if (this.mesaService.add(mesa) != null) {
+                model.addAttribute("tipoRespuesta", "agregar");
+                model.addAttribute("respuesta", 1);
+            } else {
+                model.addAttribute("tipoRespuesta", "agregar");
+                model.addAttribute("respuesta", 0);
+            }
+        } else {
+            model.addAttribute("tipoRespuesta", "agregar");
+            model.addAttribute("respuesta", 0);
+        }
+
+        
         mesas = this.mesaService.listarMesa();
 
         model.addAttribute("personalSesion", personal);
@@ -90,15 +107,16 @@ public class MesaController {
         mesa.setNumeroMesa(numeroMesa);
         mesa.setCantidadAsientosMesa(cantidadAsientosMesa);
         mesa.setEstadoMesa(estadoMesa);
-        
+
         if (this.mesaService.editarMesa(mesa)) {
-            model.addAttribute("${mesa.idMesa}", 1);
+            model.addAttribute("tipoRespuesta", "modificar");
+            model.addAttribute("respuesta", 1);
         } else {
-            model.addAttribute("${mesa.idMesa}", 0);
+            model.addAttribute("tipoRespuesta", "modificar");
+            model.addAttribute("respuesta", 0);
         }
 
-      //  this.mesaService.editarMesa(mesa);
-
+        //  this.mesaService.editarMesa(mesa);
         List<Mesa> mesas = new ArrayList<Mesa>();
         mesas = this.mesaService.listarMesa();
 
@@ -119,7 +137,13 @@ public class MesaController {
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
 
-        this.mesaService.eliminarMesa(idMesa);
+        if (this.mesaService.eliminarMesa(idMesa) != null) {
+            model.addAttribute("tipoRespuesta", "eliminar");
+            model.addAttribute("respuesta", 1);
+        } else {
+            model.addAttribute("tipoRespuesta", "eliminar");
+            model.addAttribute("respuesta", 0);
+        }
 
         List<Mesa> mesas = new ArrayList<Mesa>();
         mesas = this.mesaService.listarMesa();

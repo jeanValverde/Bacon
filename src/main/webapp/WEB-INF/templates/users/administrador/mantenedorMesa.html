@@ -72,15 +72,15 @@
                                         <form class="forms-sample" th:action="@{/administrador/mesa/agregar}" method="POST" name="formMesa">
                                             <input type="hidden" id="registroAgregar" th:value="${registroAgregar}"/>
                                             <div class="form-group">
-                                                <label for="numeroMesa">Numero Mesa</label>
+                                                <label for="numeroMesa">Número Mesa</label>
                                                 <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa">
 
                                             </div>
                                             <div class="invalid-feedback" id="mensajeNumeroMesa1">
-                                                Escribe un numero para la mesa.
+                                                Escribe un número para la mesa.
                                             </div>
                                             <div class="invalid-feedback" id="mensajeNumeroMesa2">
-                                                Debe ser mayor a 0
+                                                El número de la mesa debe ser mayor a 0
                                             </div>
                                             <div class="form-group">
                                                 <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
@@ -88,22 +88,22 @@
 
                                             </div>
                                             <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
-                                                Escribe un numero para la mesa.
+                                                Escribe la cantidad de asientos de la mesa.
                                             </div>
                                             <div class="invalid-feedback" id="mensajeCantidadAsientosMesa2">
-                                                Debe ser mayor a 0
+                                                Debe ingresar una cantidad valida de asientos
                                             </div>
                                             <div class="form-group">
 
                                                 <label for="estadoMesa">Estado Mesa</label>
                                                 <select class="form-control form-control-lg" id="estadoMesa" name="estadoMesa">
-                                                    <option value="select">Selectione</option>
+                                                    <option value="select">Seleccione</option>
                                                     <option value="1">Habilitada</option>
                                                     <option value="2">Deshabilitada</option>
                                                 </select>
                                             </div>
                                             <div class="invalid-feedback" id="mensajeEstadoMesa1">
-                                                Elija un Estado.
+                                                Elija un Estado de la mesa.
                                             </div>
 
                                             <button type="submit" class="btn btn-primary mr-2">Agregar</button>
@@ -131,7 +131,7 @@
                                                 Escribe un numero para la mesa.
                                             </div>
                                             <div class="invalid-feedback" id="mensajeNumeroMesa2">
-                                                Debe ser mayor a 0
+                                                El número de la mesa debe ser mayor a 0
                                             </div>
                                             <div class="form-group">
                                                 <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
@@ -139,7 +139,7 @@
 
                                             </div>
                                             <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
-                                                Escribe un numero para la mesa.
+                                               Debe ingresar una cantidad valida de asientos
                                             </div>
                                             <div class="invalid-feedback" id="mensajeCantidadAsientosMesa2">
                                                 Debe ser mayor a 0
@@ -363,25 +363,43 @@
         <!--validate form--->
         <script th:src="@{/custom/formularioMesa.js}"></script>
 
+        <script th:inline="javascript">
+
+            var tipoRespuesta = [[${tipoRespuesta}]];
+                    var respuesta = [[${respuesta}]];
+                    if (tipoRespuesta !== null) {
+                switch (tipoRespuesta) {
+                    case 'agregar' :
+                        if (respuesta === 1) {
+                            alert("Mesa agregada correctamente");
+                        } else if (respuesta === 0) {
+                            alert("No se ha podido agregar la mesa");
+                        }
+                        break;
+                    case 'modificar' :
+                        if (respuesta === 1) {
+                            alert("Mesa modificada correctamente");
+                        } else if (respuesta === 0) {
+                            alert("No se ha podido modificar la mesa");
+                        }
+                        break;
+                    case 'eliminar' :
+                        if (respuesta === 1) {
+                            alert("Mesa eliminada correctamente");
+                        } else if (respuesta === 0) {
+                            alert("No se ha podido eliminar la mesa");
+                        }
+                        break;
+                }
+            }
+
+
+
+        </script>
+
         <script type="text/javascript" >
             var formularioPassword = document.getElementsByName("formMesa")[0];
             validatorForms(formularioPassword);
-        </script>
-        <script type="text/javascript">
-            var registroAgregar = document.getElementById("registroAgregar").value;
-            if (registroAgregar === "1") {
-                alert("Se registro la mesa correctamente");
-            } else if (registroAgregar === "0") {
-
-            }
-        </script>
-        <script type="text/javascript">
-            var idMesa = document.getElementById("${mesa.idMesa}").value;
-            if (idMesa === "1") {
-                alert("Se modifico la mesa correctamente");
-            } else if (idMesa === "0") {
-
-            }
         </script>
 
         <script type="text/javascript">
