@@ -181,7 +181,7 @@ public class ProveedorController {
                modelo.addAttribute("tipoRespuesta", "agregar");
                 modelo.addAttribute("respuesta", 0);
         }}else{
-            modelo.addAttribute("tipoRespuesta","agregar");
+            modelo.addAttribute("tipoRespuesta","error");
             modelo.addAttribute("respuesta" ,0);
         }
             

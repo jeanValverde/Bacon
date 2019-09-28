@@ -183,9 +183,9 @@
 
 
                                                                             <form  th:action="@{/administrador_proveedor/modificar_proveedor}" name="formEditar" method="post">
-                                                                             
+
                                                                                 <input type="hidden" th:value="${proveedor.idProveedor}" id="modificarProveedor" name="idProveedor"/>
-                                                                                
+
                                                                                 <div class="form-group">
                                                                                     <label for="rut">Rut Proveedor</label>
                                                                                     <input th:value="${proveedor.rutProveedor}" type="text" class="form-control" name="rutProveedor"  id="rut" aria-describedby="rut chileno" placeholder="Rut">
@@ -246,7 +246,7 @@
                                                                                     <select id="selectExample1" name="tipoProveedor" class="custom-select" required>
                                                                                         <option th:selected="${proveedor.tipoProveedor == particular}" value="particular">Particular</option>
                                                                                         <option th:selected="${proveedor.tipoProveedor == empresa}" value="empresa">Empresa</option>
-                                                                                        
+
 
                                                                                     </select>
                                                                                     <small id="selectHelp" class="form-text text-muted">Selecciona al menos una opción.</small>
@@ -284,7 +284,7 @@
                                                                                     <select  id="selectExample1" name="categoriaProveedor" class="custom-select" required>
                                                                                         <option th:selected="${proveedor.categoriaProveedor == esporadico}" value="esporadico">Espóradico</option>
                                                                                         <option th:selected="${proveedor.categoriaProveedor}== regular" value="regular">Regular</option>
-                                                                                        
+
 
                                                                                     </select>
                                                                                     <small id="selectHelp" class="form-text text-muted">Selecciona al menos una opción.</small>
@@ -295,7 +295,7 @@
                                                                                         No te olvides de seleccionar al menos una opción.
                                                                                     </div>
                                                                                 </div>
-                                           
+
 
 
 
@@ -352,65 +352,65 @@
                                                                             </ul>
                                                                             <div class="tab-content" id="pills-tabContent">
                                                                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                                                    
-                                                                                        <div  class="row">
-                                                                                            <div th:each="ins: ${proveedores}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
-                                                                                                <input type="hidden" name="elimino" id="agrego" th:value="${elimino}" />
-                                                                                                <div class="card">
-                                                                                                    <div class="card-body text-center">
-                                                                                                        <div style="text-align:right">
-                                                                                                            <!--
-                                                                                                            <button type="button" class="btn btn-success btn-rounded btn-icon">
-                                                                                                                <i class="mdi mdi-lead-pencil"></i>
-                                                                                                            </button>
-                                                                                                            -->
-                                                                                                            <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
-                                                                                                            <!--
-                                                                                                            <button type="button" class="btn btn-danger btn-rounded btn-icon" >
-                                                                                                                <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
-                                                                                                                <i class="mdi mdi-close"></i>
-                                                                                                            </button>
-                                                                                                            -->
-                                                                                                            <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
-                                                                                                        </div>
 
-                                                                                                        <div >
+                                                                                    <div  class="row">
+                                                                                        <div th:each="ins: ${proveedores}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
+                                                                                            <input type="hidden" name="elimino" id="agrego" th:value="${elimino}" />
+                                                                                            <div class="card">
+                                                                                                <div class="card-body text-center">
+                                                                                                    <div style="text-align:right">
+                                                                                                        <!--
+                                                                                                        <button type="button" class="btn btn-success btn-rounded btn-icon">
+                                                                                                            <i class="mdi mdi-lead-pencil"></i>
+                                                                                                        </button>
+                                                                                                        -->
+                                                                                                        <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                                        <!--
+                                                                                                        <button type="button" class="btn btn-danger btn-rounded btn-icon" >
+                                                                                                            <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
+                                                                                                            <i class="mdi mdi-close"></i>
+                                                                                                        </button>
+                                                                                                        -->
+                                                                                                        <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
+                                                                                                    </div>
 
-
-                                                                                                            <h4 th:text="${ins.nombreProveedor}"></h4>
-                                                                                                            <h6>Tipo proveedor:</h6>
-                                                                                                            <p th:text="${ins.tipoProveedor}" class="text-muted mb-0">Tipo proveedor</p>
-
-                                                                                                        </div>
-                                                                                                        <h6>Categoria</h6>
-                                                                                                        <p th:text="${ins.categoriaProveedor}" class="mt-2 card-text">
-
-                                                                                                        </p>
-                                                                                                        <div class="border-top pt-3">
-                                                                                                            <div class="row">
-                                                                                                                <div class="col-12">
-                                                                                                                    <h6>Correo:</h6>
-
-                                                                                                                    <p th:text="${ins.correoProveedor}" class="mt-2 card-text">Correo</p>
-                                                                                                                </div>
-                                                                                                                <div class="col-12">
-                                                                                                                    <h6>Celular:</h6>
-
-                                                                                                                    <p th:text="${ins.celularProveedor}" class="mt-2 card-text">Celular</p>
-                                                                                                                </div>
-                                                                                                                <div class="col-12">
+                                                                                                    <div >
 
 
-                                                                                                                </div>
+                                                                                                        <h4 th:text="${ins.nombreProveedor}"></h4>
+                                                                                                        <h6>Tipo proveedor:</h6>
+                                                                                                        <p th:text="${ins.tipoProveedor}" class="text-muted mb-0">Tipo proveedor</p>
+
+                                                                                                    </div>
+                                                                                                    <h6>Categoria</h6>
+                                                                                                    <p th:text="${ins.categoriaProveedor}" class="mt-2 card-text">
+
+                                                                                                    </p>
+                                                                                                    <div class="border-top pt-3">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-12">
+                                                                                                                <h6>Correo:</h6>
+
+                                                                                                                <p th:text="${ins.correoProveedor}" class="mt-2 card-text">Correo</p>
+                                                                                                            </div>
+                                                                                                            <div class="col-12">
+                                                                                                                <h6>Celular:</h6>
+
+                                                                                                                <p th:text="${ins.celularProveedor}" class="mt-2 card-text">Celular</p>
+                                                                                                            </div>
+                                                                                                            <div class="col-12">
+
 
                                                                                                             </div>
+
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
-
                                                                                         </div>
-                                                                                    
+
+                                                                                    </div>
+
                                                                                 </div>
                                                                                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                                                                     <div class="media">
@@ -530,15 +530,21 @@
                                                     <!--validate form--->
                                                     <script th:src="@{/custom/formularios.js}"></script>
                                                     
+                                                    
+
                                                     <script th:inline="javascript">
 
-                                                        var tipoRespuesta = [[${tipoRespuesta}]];
-                                                        var respuesta = [[${respuesta}]];
+                                                        var tipoRespuesta = [[${tipoRespuesta
+                                                        }
+                                                        ]];
+                                                                var respuesta = [[${respuesta
+                                                                  }
+                                                                ]];
                                                         if (tipoRespuesta !== null) {
                                                             switch (tipoRespuesta) {
                                                                 case 'agregar' :
                                                                     if (respuesta === 1) {
-                                                                         showSwal('success-message', 'Proveedor agregado!', 'se ha registrado el proveedor exitosamente');
+                                                                        showSwal('success-message', 'Proveedor agregado!', 'se ha registrado el proveedor exitosamente');
                                                                     } else if (respuesta === 0) {
                                                                         showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
                                                                     }
@@ -547,16 +553,24 @@
                                                                     if (respuesta === 1) {
                                                                         showSwal('success-message', 'Proveedor modificado!', 'se ha registrado el proveedor exitosamente');
                                                                     } else if (respuesta === 0) {
-                                                                       showSwal('warning-message', 'Error!', "No se ha podido modificar el proveedor");
+                                                                        showSwal('warning-message', 'Error!', "No se ha podido modificar el proveedor");
                                                                     }
                                                                     break;
                                                                 case 'eliminar' :
+                                                                    
                                                                     if (respuesta === 1) {
                                                                         showSwal('success-message', 'Proveedor eliminado!', 'se ha eliminado el proveedor exitosamente');
                                                                     } else if (respuesta === 0) {
-                                                                       showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
+                                                                        showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
                                                                     }
+
+
                                                                     break;
+                                                                case 'error' :
+                                                                    if (respuesta === 0) {
+                                                                        showSwal('warning-message', 'Error!', "No se pudo ingresar el proveedor ya que el rut ingresado ya existe");
+
+                                                                    }
                                                             }
                                                         }
 
@@ -569,23 +583,23 @@
                                                         var formularioPassword = document.getElementsByName("formProveedor")[0];
                                                         validatorForms(formularioPassword);
                                                     </script>
-                                                    
+
                                                     <script type="text/javascript" >
                                                         var formularioPassword = document.getElementsByName("formEditar")[0];
                                                         validatorForms(formularioPassword);
                                                     </script>
-                                                    
-                                                   
 
 
 
-       
 
-                                                   
-                                                    
-                                                    
 
-          
+
+
+
+
+
+
+
 
 
 
