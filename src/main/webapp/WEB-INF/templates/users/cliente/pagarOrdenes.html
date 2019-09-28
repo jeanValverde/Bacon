@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <link rel="stylesheet" href="@{/vendors/flag-icon-css/css/flag-icon.min.css}" />
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/horizontal-layout-light/style.css}"/>
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!---->
+
+    </head>
+
+    <body>
+
+        <div class="container-scroller">
+            <!-- partial:partials/_horizontal-navbar.html -->
+            <div class="horizontal-menu">
+
+                <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                    <div class="container">
+                        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                            <a class="navbar-brand brand-logo" href="index.html"><img th:src="@{/images/clienteCerdo.png}" alt="logo" /></a>
+                            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo" /></a>
+                        </div>
+                        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+
+                            <!---este boton solo debe estar cuando no se tiene ninguna orden emitida--->
+                            <ul class="navbar-nav navbar-nav-right">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" th:href="@{/}">
+                                        <i class="mdi mdi-logout-variant"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!------>
+
+                            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                                <span class="mdi mdi-menu"></span>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+
+                <nav class="bottom-navbar">
+                    <div class="container">
+                        <ul class="nav page-navigation">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">
+                                    <i class="mdi mdi-help-circle-outline menu-icon"></i>
+                                    <span class="menu-title">Solicitar Asistencia</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="pages/widgets/widgets.html">
+                                    <i class="mdi mdi-cart-plus menu-icon"></i>
+                                    <span class="menu-title">Agregar Orden</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="pages/widgets/widgets.html">
+                                    <i class="mdi mdi-shopping menu-icon"></i>
+                                    <span class="menu-title">Mis Ordenes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/documentation/documentation.html" class="nav-link">
+                                    <i class="mdi mdi-cash-multiple menu-icon"></i>
+                                    <span class="menu-title">Pagar</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+            <!-- partial -->
+            
+
+                            <a class='btn btn-primary btn-lg flotante' href='#' > Finalizar </a>
+                        </div>
+
+
+
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:partials/_footer.html -->
+                    <footer class="footer">
+                        <div class="w-100 clearfix">
+                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2019.</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Creado con <i class="mdi mdi-heart-outline text-danger"></i> por el <a href="https://github.com/jeanValverde/Bacon" target="_black" >Team</a></span>
+                        </div>
+                    </footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+        <style type="text/css" >
+            .flotante {
+                display:scroll;
+                position: fixed;
+                bottom: 2%;
+                right: 20%;
+            }
+
+            .activeTipo{
+                color: rgb(255, 255, 255);
+                background-color: rgb(98, 1, 237);
+                border-color: rgb(98, 1, 237);
+            }
+        </style>
+
+        <script type="text/javascript" >
+
+            var tipoUno = document.getElementById('tipoUno');
+            var tipoDos = document.getElementById('tipoDos');
+            var tipoTres = document.getElementById('tipoTres');
+            var tipoCuatro = document.getElementById('tipoCuatro');
+            var tipoMenosUno = document.getElementById('tipoMenosUno');
+
+            var tipoActivo = '[[${tipo}]]';
+
+            switch (tipoActivo) {
+                case '1':
+                    tipoUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                    break;
+                case '2':
+                    tipoDos.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                    break;
+                case '3':
+                    tipoTres.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                    break;
+                case '4':
+                    tipoCuatro.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                    break;
+                case '-1':
+                    tipoMenosUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                    break;
+                default:
+                    break;
+            }
+
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
+
+        <script type="text/javascript" >
+
+            function d(idReceta) {
+
+                var input = document.getElementById('pedido-' + idReceta);
+
+                if (input.value < 1 || input.value == null || input.value == 0) {
+                    input.setAttribute("class", "form-control is-invalid");
+                } else {
+                    input.setAttribute("class", "form-control is-valid");
+                    Swal.fire({
+                        title: '¿Está seguro que desea pedir esta receta?',
+                        text: "Si pide esta receta solo podra anularlo solicitando asistencia en botón superior izquierdo de la pantalla",
+                        type: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '!Si, Pedir!'
+                    }).then((result) => {
+                        if (result.value) {
+                            location.href = "/administrador/deleteReceta?idReceta=" + idReceta;
+                        }
+                    })
+                }
+
+
+            }
+
+        </script>
+    </body>
+
+</html>

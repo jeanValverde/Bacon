@@ -36,9 +36,9 @@ public class Ingrediente implements Serializable {
     @Id
     @Basic(optional = false)
         //declarar que el id se usa con una secuencia 
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_INGREDI")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_INGREDI_RECETA")
     //declarar la secuencia 
-    @SequenceGenerator(name="SEQ_INGREDI",sequenceName="SEQ_INGREDIENTE", allocationSize=1 )
+    @SequenceGenerator(name="SEQ_INGREDI_RECETA",sequenceName="SEQ_INGREDIENTE", allocationSize=1 )
     @NotNull
     @Column(name = "ID_INGREDIENTE")
     private Integer idIngrediente;

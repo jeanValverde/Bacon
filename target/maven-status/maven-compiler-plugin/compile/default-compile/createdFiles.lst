@@ -14,9 +14,11 @@ com\restaurante\bacon\dao\IRecetaDao.class
 com\restaurante\bacon\dao\IInsumoDao.class
 com\restaurante\bacon\controller\PersonalInsumo.class
 com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.class
+com\restaurante\bacon\controller\ClienteIngresarController.class
 com\restaurante\bacon\dao\IProveedorDao.class
 com\restaurante\bacon\dto\Pedido.class
 com\restaurante\bacon\dto\MedioPago.class
+com\restaurante\bacon\controller\ClientePedirOrdenController.class
 com\restaurante\bacon\dto\Rol.class
 com\restaurante\bacon\service\PersonalService.class
 com\restaurante\bacon\dto\Receta.class

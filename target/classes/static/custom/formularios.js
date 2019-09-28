@@ -376,8 +376,10 @@ function validatorForms(formulario) {
                 //validar ruta absoluta
                 if (validarInputFile(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "custom-file-input is-valid");
+                    document.getElementById("foto-mensaje1").setAttribute("style", "display: display");
                 } else {
                     formulario.elements[i].setAttribute("class", "custom-file-input is-invalid");
+                    document.getElementById("foto-mensaje1").setAttribute("style", "display: block");
                     e.preventDefault(e);
                 }
             }

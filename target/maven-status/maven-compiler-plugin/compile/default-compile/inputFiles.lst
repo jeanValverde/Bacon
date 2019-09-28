@@ -1,3 +1,4 @@
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\ClienteIngresarController.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\exceptions\NonexistentEntityException.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoCliente.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Ingrediente.java
@@ -15,6 +16,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\Proced
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IProveedorDao.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\ClientePedirOrdenController.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\IndexController.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryIngrediente.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
