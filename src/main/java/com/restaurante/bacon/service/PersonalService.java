@@ -5,7 +5,7 @@
  */
 package com.restaurante.bacon.service;
 
-import static com.restaurante.bacon.controller.ProveedorController.UPLOAD_DIR_IMAGEN;
+//import static com.restaurante.bacon.controller.ProveedorController.UPLOAD_DIR_IMAGEN;
 import com.restaurante.bacon.dto.Personal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -176,57 +176,57 @@ public class PersonalService implements UserDetailsService {
         return fechaDate;
     }
     
-    public String subirImagen (MultipartFile[] file ) throws IOException{
-         
-        try{
-        
-        StringBuilder filename = new StringBuilder();
-          
-         String nombreArchivo = file[0].getOriginalFilename();
-         
-         String extencion ="";
-         int index = nombreArchivo.lastIndexOf('.');
-         if (index == -1) {
-             
-            extencion ="";
-        }else{
-         extencion =nombreArchivo.substring(index+1);
-         }
-         
-         UUID uuid = UUID.randomUUID();
-                 
-          nombreArchivo= uuid.toString() + "." + extencion;
-         Path fileNamePath = Paths.get(UPLOAD_DIR_IMAGEN, nombreArchivo);
-         
-         filename.append(nombreArchivo);
-         
-         Files.write(fileNamePath, file[0].getBytes());
-         return nombreArchivo;
-        }catch(Exception ex){
-        return null;
-        
-        } 
-            
-    }    
-    public boolean comprobarimagen (String nombreArchivo){
-     File f = new File(UPLOAD_DIR_IMAGEN, nombreArchivo);
-        if (f.exists() && !f.isDirectory()) {
-            return true;
-        }else{
-        return false;
-        }
-    
-    }
-    
-    
-    public void eliminarimagen (String nombreArchivo){
-      Path fileNamePath = Paths.get(UPLOAD_DIR_IMAGEN, nombreArchivo);
-      try  {
-        Files.delete(fileNamePath);
-      
-      }catch(IOException ex){
-//                Logger.getLogger(PersonalService.class.getName()).log(Level.SEVERE,null, ex);
-      }
+//    public String subirImagen (MultipartFile[] file ) throws IOException{
+//         
+//        try{
+//        
+//        StringBuilder filename = new StringBuilder();
+//          
+//         String nombreArchivo = file[0].getOriginalFilename();
+//         
+//         String extencion ="";
+//         int index = nombreArchivo.lastIndexOf('.');
+//         if (index == -1) {
+//             
+//            extencion ="";
+//        }else{
+//         extencion =nombreArchivo.substring(index+1);
+//         }
+//         
+//         UUID uuid = UUID.randomUUID();
+//                 
+//          nombreArchivo= uuid.toString() + "." + extencion;
+//         Path fileNamePath = Paths.get(UPLOAD_DIR_IMAGEN, nombreArchivo);
+//         
+//         filename.append(nombreArchivo);
+//         
+//         Files.write(fileNamePath, file[0].getBytes());
+//         return nombreArchivo;
+//        }catch(Exception ex){
+//        return null;
+//        
+//        } 
+//            
+//    }    
+//    public boolean comprobarimagen (String nombreArchivo){
+//     File f = new File(UPLOAD_DIR_IMAGEN, nombreArchivo);
+//        if (f.exists() && !f.isDirectory()) {
+//            return true;
+//        }else{
+//        return false;
+//        }
+//    
+//    }
+//    
+//    
+//    public void eliminarimagen (String nombreArchivo){
+//      Path fileNamePath = Paths.get(UPLOAD_DIR_IMAGEN, nombreArchivo);
+//      try  {
+//        Files.delete(fileNamePath);
+//      
+//      }catch(IOException ex){
+////                Logger.getLogger(PersonalService.class.getName()).log(Level.SEVERE,null, ex);
+//      }
     
      }
     
@@ -256,7 +256,7 @@ public class PersonalService implements UserDetailsService {
 
 
 
-}
+
     
 
 
