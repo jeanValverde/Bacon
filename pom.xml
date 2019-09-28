@@ -18,6 +18,8 @@
         <java.version>1.8</java.version>
     </properties>
     
+    
+    
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -65,12 +67,18 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        
+        
+
+        
            
         
         
     </dependencies>
 
     <build>
+        
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -86,7 +94,7 @@
         </repository>
     </repositories>
     
-    
+
 
     
     
