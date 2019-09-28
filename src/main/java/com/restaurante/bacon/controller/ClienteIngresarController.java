@@ -5,6 +5,9 @@
  */
 package com.restaurante.bacon.controller;
 
+import com.restaurante.bacon.dto.Receta;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,11 +33,25 @@ public class ClienteIngresarController {
         //aca se registra
        
         
-        sesion.setAttribute("sesionCliente", "idCliente");
+        sesion.setAttribute("sesionCliente", "ic");
         
        
         
-        //
+        
+        
+        
+        //esto es para las ordenes NO TOCAR PORFIS 
+        
+        Map<Receta , Integer  > recetasCocina = new HashMap();
+        Map<Receta , Integer > recetasBar = new HashMap();
+        
+        sesion.setAttribute("ordenesCocina", recetasCocina);
+        
+        sesion.setAttribute("orden", false);
+        
+        sesion.setAttribute("ordenesBar", recetasBar);
+        
+        //hasta aca 
         
         //
         return new ModelAndView("redirect:/cliente/pedirOrden/?tipo=2");

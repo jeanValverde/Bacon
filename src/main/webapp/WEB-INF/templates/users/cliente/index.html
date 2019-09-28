@@ -156,8 +156,11 @@
                                         </div>
                                         <p class="mt-2 card-text" th:text="${receta.descripcionReceta}" >
                                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                            Aenean commodo ligula eget dolor. Lorem
+                                            Aenean commodo ligula eget dolor. Lorem 
                                         </p>
+                                        <button type="button" data-toggle="modal" th:onclick="'detalle( ' + ${receta.idReceta} + ')'" data-target="#exampleModal-3" class="btn btn-outline-primary btn-fw">Detalle Ingredientes</button>
+                                        <br/>
+                                        <br/>
                                         <div class="border-top pt-3">
                                             <div class="row">
                                                 <div class="col-6">
@@ -179,7 +182,7 @@
 
                                             </div>
                                         </div>
-                                        <button th:onclick="'d(' + ${receta.idReceta} + ')'" type="button" class="btn btn-primary btn-lg btn-block">
+                                        <button th:onclick="'d(' + ${receta.idReceta} + ',' +  ${receta.cantidadPrepDiariaReceta}  + ')'" type="button" class="btn btn-primary btn-lg btn-block">
                                             <i class="mdi mdi-check-all"></i>                      
                                             Pedir
                                         </button>
@@ -187,8 +190,55 @@
                                 </div>
                                 <!--card fin receta--->
                             </div>
+                            <div class="modal fade" id="exampleModal-3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel-3">Ingredientes</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div  class="modal-body" >
+                                            <div id="loader" class="template-demo">
+                                                <div class="square-box-loader">
+                                                    <div class="square-box-loader-container">
+                                                        <div class="square-box-loader-corner-top"></div>
+                                                        <div class="square-box-loader-corner-bottom"></div>
+                                                    </div>
+                                                    <div class="square-box-loader-square"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">Listo</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <a class='btn btn-primary btn-lg flotante' href='#' > Finalizar </a>
+                            <a th:if="${orden == true}" class='btn btn-primary btn-lg flotante' data-toggle="modal" data-target="#exampleModal" href='#' > Finalizar </a>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display: none;">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Modal body text goes here.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success">Submit</button>
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
 
@@ -278,33 +328,73 @@
 
         <script type="text/javascript" >
 
-            function d(idReceta) {
+            function d(idReceta, cantidad) {
 
                 var input = document.getElementById('pedido-' + idReceta);
 
                 if (input.value < 1 || input.value == null || input.value == 0) {
                     input.setAttribute("class", "form-control is-invalid");
+
                 } else {
-                    input.setAttribute("class", "form-control is-valid");
-                    Swal.fire({
-                        title: '¿Está seguro que desea pedir esta receta?',
-                        text: "Si pide esta receta solo podra anularlo solicitando asistencia en botón superior izquierdo de la pantalla",
-                        type: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: '!Si, Pedir!'
-                    }).then((result) => {
-                        if (result.value) {
-                            location.href = "/administrador/deleteReceta?idReceta=" + idReceta;
-                        }
-                    })
+                    if (input.value > cantidad) {
+                        input.setAttribute("class", "form-control is-invalid");
+                    } else {
+                        input.setAttribute("class", "form-control is-valid");
+                        Swal.fire({
+                            title: '¿Está seguro que desea pedir esta receta?',
+                            text: "Si pide esta receta solo podra anularlo solicitando asistencia en botón superior izquierdo de la pantalla",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '!Si, Pedir!'
+                        }).then((result) => {
+                            if (result.value) {
+                                location.href = "/cliente/pedirOrden/agregarRecetaOrden?idReceta=" + idReceta + "&cantidad=" + input.value;
+                            }
+                        })
+                    }
                 }
-
-
             }
 
         </script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="text/javascript" >
+            function detalle(idReceta) {
+
+                document.getElementById("loader").innerHTML = "<div class='square-box-loader'><div class='square-box-loader-container'><div class='square-box-loader-corner-top'></div> <div class='square-box-loader-corner-bottom'></div></div><div class='square-box-loader-square'></div></div>";
+
+                //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
+
+                axios.get('http://localhost:8034/cliente/pedirOrden/detalleReceta?idReceta=' + idReceta)
+                        .then(function (response) {
+                            console.log(response.data);
+                            console.log(response.data.length);
+                            if (response.data != null) {
+                                document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre del ingrediente</th><th class='text-right'>Cantidad por porción (En Kilogramos)</th></tr></thead><tbody id='contenidoDetalleReceta' ></tbody></table></div>";
+                            }
+                            if (response.data.length != 0) {
+                                var contenido = "";
+                                for (var i = 0; i < response.data.length; i++) {
+                                    contenido += "<tr> <td class='pl-0'> " + response.data[i].idInsumo.descripcionInsumo + " </td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'> " + response.data[i].cantidad + " </div></td></tr>";
+                                }
+                                document.getElementById('contenidoDetalleReceta').innerHTML = contenido;
+                            } else {
+                                document.getElementById('loader').innerHTML = '<div class="alert alert-danger" >Sin ingredientes disponibles</div>';
+                            }
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                            document.getElementById("loader").innerHTML = '<div class="alert alert-danger" >Error</div>';
+                        })
+                        .finally(function () {
+                            // always executed
+                        });
+            }
+        </script>
+
     </body>
 
 </html>
