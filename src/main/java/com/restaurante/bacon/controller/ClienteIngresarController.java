@@ -5,10 +5,12 @@
  */
 package com.restaurante.bacon.controller;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -18,12 +20,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ClienteIngresarController {
     
+    
+    
+    
+    
     @PostMapping("/ingresar")
-    public String prueba(Model modelo) {
+    public ModelAndView prueba(Model modelo, HttpSession sesion) {
       
+        //aca se registra
+       
+        
+        sesion.setAttribute("sesionCliente", "idCliente");
+        
+       
         
         //
-        return "users/cliente/index";
+        
+        //
+        return new ModelAndView("redirect:/cliente/pedirOrden/?tipo=2");
     }
+    
+    
+    
+    
+    
     
 }
