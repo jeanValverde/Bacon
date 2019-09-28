@@ -37,7 +37,11 @@
         <link rel="stylesheet" type="text/css" th:href="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
 
+
+
         <link rel="stylesheet" type="text/css" th:href="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.css}">
+
+
         <!-- endinject -->
         <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
 
@@ -73,7 +77,7 @@
                                             <input type="hidden" id="registroAgregar" th:value="${registroAgregar}"/>
                                             <div class="form-group">
                                                 <label for="numeroMesa">Número Mesa</label>
-                                                <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa">
+                                                <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa" min="1">
 
                                             </div>
                                             <div class="invalid-feedback" id="mensajeNumeroMesa1">
@@ -84,7 +88,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
-                                                <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa">
+                                                <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa" min="0" max="10">
 
                                             </div>
                                             <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
@@ -124,7 +128,7 @@
                                             <input type="hidden" id="idMesa" name="idMesa" th:value="${mesa.idMesa}">
                                             <div class="form-group">
                                                 <label for="numeroMesa">Numero Mesa</label>
-                                                <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa" th:value="${mesa.numeroMesa}">
+                                                <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa" th:value="${mesa.numeroMesa}" min="1">
 
                                             </div>
                                             <div class="invalid-feedback" id="mensajeNumeroMesa1">
@@ -135,11 +139,11 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
-                                                <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa" th:value="${mesa.cantidadAsientosMesa}">
+                                                <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa" th:value="${mesa.cantidadAsientosMesa}" min="0" max="10">
 
                                             </div>
                                             <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
-                                               Debe ingresar una cantidad valida de asientos
+                                                Debe ingresar una cantidad valida de asientos
                                             </div>
                                             <div class="invalid-feedback" id="mensajeCantidadAsientosMesa2">
                                                 Debe ser mayor a 0
@@ -344,6 +348,9 @@
         <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
         <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
         <script th:src="@{/vendors/inputmask/phone.js}"></script>
+
+
+
         <!-- End plugin js for this page -->
         <!-- Custom js for this page-->
         <script th:src="@{/js/formpickers.js}"></script>
@@ -354,44 +361,50 @@
         <script th:src="@{/js/jquery-file-upload.js}"></script>
         <script th:src="@{/js/formpickers.js}"></script>
         <script th:src="@{/js/form-repeater.js}"></script>
+
+        <script src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+        <script src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+        <script src="@{/js/alerts_personalizado.js}"></script>
+        <script src="@{/js/avgrund.js}"></script>
         <!-- End custom js for this page-->
         <!-- plugin js for this page -->
-        <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
-        <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
-        <script th:src="@{/js/data-table.js}"></script>
+
 
         <!--validate form--->
         <script th:src="@{/custom/formularioMesa.js}"></script>
 
+
+
+
         <script th:inline="javascript">
 
-            var tipoRespuesta = [[${tipoRespuesta}]];
-                    var respuesta = [[${respuesta}]];
-                    if (tipoRespuesta !== null) {
-                switch (tipoRespuesta) {
-                    case 'agregar' :
-                        if (respuesta === 1) {
-                            alert("Mesa agregada correctamente");
-                        } else if (respuesta === 0) {
-                            alert("No se ha podido agregar la mesa");
-                        }
-                        break;
-                    case 'modificar' :
-                        if (respuesta === 1) {
-                            alert("Mesa modificada correctamente");
-                        } else if (respuesta === 0) {
-                            alert("No se ha podido modificar la mesa");
-                        }
-                        break;
-                    case 'eliminar' :
-                        if (respuesta === 1) {
-                            alert("Mesa eliminada correctamente");
-                        } else if (respuesta === 0) {
-                            alert("No se ha podido eliminar la mesa");
-                        }
-                        break;
-                }
-            }
+                                                        var tipoRespuesta = [[${tipoRespuesta}]];
+                                                                var respuesta = [[${respuesta}]];
+                                                                if (tipoRespuesta !== null) {
+                                                            switch (tipoRespuesta) {
+                                                                case 'agregar' :
+                                                                    if (respuesta === 1) {
+                                                                        alert("Mesa modificada correctamente");
+                                                                    } else if (respuesta === 0) {
+                                                                        alert("No se ha podido modificar la mesa");
+                                                                    }
+                                                                    break;
+                                                                case 'modificar' :
+                                                                    if (respuesta === 1) {
+                                                                        alert("Mesa modificada correctamente");
+                                                                    } else if (respuesta === 0) {
+                                                                        alert("No se ha podido modificar la mesa");
+                                                                    }
+                                                                    break;
+                                                                case 'eliminar' :
+                                                                    if (respuesta === 1) {
+                                                                        alert("Mesa eliminada correctamente");
+                                                                    } else if (respuesta === 0) {
+                                                                        alert("No se ha podido eliminar la mesa");
+                                                                    }
+                                                                    break;
+                                                            }
+                                                        }
 
 
 

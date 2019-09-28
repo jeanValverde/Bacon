@@ -52,7 +52,7 @@ public class MesaController {
         Mesa mesa = new Mesa();
 
         List<Mesa> mesas = new ArrayList<Mesa>();
-//        mesas = this.mesaService.listarMesa();
+        mesas = this.mesaService.listarMesa();
 
         mesa.setNumeroMesa(BigInteger.valueOf(numeroMesa));
         mesa.setCantidadAsientosMesa(BigInteger.valueOf(cantidadAsientosMesa));
@@ -78,7 +78,6 @@ public class MesaController {
             model.addAttribute("respuesta", 0);
         }
 
-        
         mesas = this.mesaService.listarMesa();
 
         model.addAttribute("personalSesion", personal);
@@ -92,7 +91,7 @@ public class MesaController {
     @PostMapping("/modificar")
     public String modificarMesa(Model model,
             @RequestParam("idMesa") Integer idMesa,
-            @RequestParam("numeroMesa") BigInteger numeroMesa,
+            @RequestParam("numeroMesa") Integer numeroMesa,
             @RequestParam("cantidadAsientosMesa") BigInteger cantidadAsientosMesa,
             @RequestParam("estadoMesa") BigInteger estadoMesa) {
 
@@ -103,21 +102,34 @@ public class MesaController {
 
         Mesa mesa = new Mesa();
 
+        List<Mesa> mesas = new ArrayList<Mesa>();
+        mesas = this.mesaService.listarMesa();
+
         mesa.setIdMesa(idMesa);
-        mesa.setNumeroMesa(numeroMesa);
+        mesa.setNumeroMesa(BigInteger.valueOf(numeroMesa));
         mesa.setCantidadAsientosMesa(cantidadAsientosMesa);
         mesa.setEstadoMesa(estadoMesa);
 
-        if (this.mesaService.editarMesa(mesa)) {
-            model.addAttribute("tipoRespuesta", "modificar");
-            model.addAttribute("respuesta", 1);
+        boolean seRepite = false;
+        for (int i = 0; i < mesas.size(); i++) {
+            if (BigInteger.valueOf(numeroMesa) == mesas.get(i).getNumeroMesa()) {
+                seRepite = true;
+            }
+        }
+        if (!seRepite) {
+            if (this.mesaService.editarMesa(mesa)) {
+                model.addAttribute("tipoRespuesta", "modificar");
+                model.addAttribute("respuesta", 1);
+            } else {
+                model.addAttribute("tipoRespuesta", "modificar");
+                model.addAttribute("respuesta", 0);
+            }
         } else {
             model.addAttribute("tipoRespuesta", "modificar");
             model.addAttribute("respuesta", 0);
         }
 
         //  this.mesaService.editarMesa(mesa);
-        List<Mesa> mesas = new ArrayList<Mesa>();
         mesas = this.mesaService.listarMesa();
 
         model.addAttribute("personalSesion", personal);
@@ -187,13 +199,28 @@ public class MesaController {
         //sesion 
 
         List<Mesa> mesas = new ArrayList<Mesa>();
+
         switch (tipoBusqueda) {
             case "numero":
-                mesas = this.mesaService.filtrarRecetaByNumero(BigInteger.valueOf(Integer.parseInt(filtro)));
+                if (!filtro.equals("")) {
+                    mesas = this.mesaService.filtrarRecetaByNumero(BigInteger.valueOf(Integer.parseInt(filtro)));
+
+                } else {
+                    mesas = this.mesaService.listarMesa();
+
+                }
                 break;
+
             case "asientos":
-                mesas = this.mesaService.filtrarRecetaByAsientos(BigInteger.valueOf(Integer.parseInt(filtro)));
+                if (!filtro.equals("")) {
+                    mesas = this.mesaService.filtrarRecetaByAsientos(BigInteger.valueOf(Integer.parseInt(filtro)));
+
+                } else {
+                    mesas = this.mesaService.listarMesa();
+
+                }
                 break;
+
             case "habilitada":
                 mesas = this.mesaService.filtrarRecetaByEstado(BigInteger.valueOf(1));
                 break;
