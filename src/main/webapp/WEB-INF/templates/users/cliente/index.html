@@ -168,7 +168,7 @@
                                                     <p>Duración Preparación</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <h6 th:text="'$' + ${receta.precioReceta}" >1596</h6>
+                                                    <h6 th:id="'precio-todo-' + ${receta.idReceta}" class="numberToFormat" th:text="${receta.precioReceta}" >1596</h6>
                                                     <p>Precio Receta</p>
                                                 </div>
                                             </div>
@@ -344,6 +344,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <button type="submit" name="button" class="btn btn-primary">Confirmar pedidos</button>
+                                                                    <button  type="button" class="btn btn-outline-primary btn-fw">Total: $</button>
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -521,11 +522,11 @@
 
         <script type="text/javascript" >
 
-            finalizar(0, 'contenidoFinalizar');
+            finalizar(0, 'contenidoFinalizar', false);
 
-            finalizar(1, 'contenidoFinalizarBar');
+            finalizar(1, 'contenidoFinalizarBar', true);
 
-            function finalizar(tipo, carga) {
+            function finalizar(tipo, carga, isCarga) {
 
                 document.getElementById("loader").innerHTML = "<div class='square-box-loader'><div class='square-box-loader-container'><div class='square-box-loader-corner-top'></div> <div class='square-box-loader-corner-bottom'></div></div><div class='square-box-loader-square'></div></div>";
 
@@ -544,16 +545,19 @@
                                     categoria = "Fría"
                                 }
                                 contenido += "<tr id='borrar-" + response.data[i].receta.idReceta + "' ><td class='py-1 pl-0'><div class='d-flex align-items-center'> <img src='http://localhost:8034/uploads/" + response.data[i].receta.foto + "' alt='profile'> "
-                                        + "<div class='ml-3'><p class='mb-0'> " + response.data[i].receta.nombreReceta + " </p></div> "
-                                        + "</div></td><td class='numberToFormat' > " + response.data[i].receta.precioReceta + " </td> <td> <div class='badge badge-outline-primary'> " + categoria + " </div> </td> "
-                                        + "<td><div id='cantidad-" + response.data[i].receta.idReceta + "'  class='badge badge-pill badge-primary ml-3'>" + response.data[i].cantidad + "</div> </td> <td><div class='badge badge-outline-primary'>" + response.data[i].precioTotal + "</div> "
-                                        + "</td> <td> <div class='btn-group role='group' aria-label='Basic example'> <button onclick=' restar( " + response.data[i].receta.idReceta + " ) ' type='button' class='btn btn-primary'> "
-                                        + "<i class='mdi mdi-minus'></i></button> <button onclick='sumar( " + response.data[i].receta.idReceta + " , " + response.data[i].receta.cantidadPrepDiariaReceta + " )' type='button' class='btn btn-primary'> <i class='mdi mdi-plus'></i> "
+                                        + "<div class='ml-3'><p class='mb-0'>" + response.data[i].receta.nombreReceta + "</p></div> "
+                                        + "</div></td><td class='numberToFormatFinalizar' id='precio-finalizar-cocina-" + response.data[i].receta.idReceta + "' > " + response.data[i].receta.precioReceta + " </td> <td> <div class='badge badge-outline-primary'> " + categoria + " </div> </td> "
+                                        + "<td><div id='cantidad-" + response.data[i].receta.idReceta + "'  class='badge badge-pill badge-primary ml-3'>" + response.data[i].cantidad + "</div> </td> <td><div class='badge badge-outline-primary numberToFormatFinalizar' id='total-finalizar-cocina-" + response.data[i].receta.idReceta + "' >" + response.data[i].precioTotal + "</div> "
+                                        + "</td> <td> <div class='btn-group role='group' aria-label='Basic example'> <button onclick=' restar( " + response.data[i].receta.idReceta + " , " + response.data[i].receta.precioReceta + " ) ' type='button' class='btn btn-primary'> "
+                                        + "<i class='mdi mdi-minus'></i></button> <button onclick='sumar( " + response.data[i].receta.idReceta + " , " + response.data[i].receta.cantidadPrepDiariaReceta + " , " + response.data[i].receta.precioReceta + " )' type='button' class='btn btn-primary'> <i class='mdi mdi-plus'></i> "
                                         + "</button> <button onclick='borrar( " + response.data[i].receta.idReceta + " )' type='button' class='btn btn-primary'>  <i class='mdi mdi-close-circle-outline'></i> </button></div> </td> </tr>";
 
                             }
 
                             document.getElementById(carga).innerHTML = contenido;
+                            if (isCarga) {
+                                formatNumbers('finalizar');
+                            }
                         })
                         .catch(function (error) {
                             // handle error
@@ -561,10 +565,11 @@
                         })
                         .finally(function () {
                             // always executed
+
                         });
             }
 
-            function sumar(idReceta, limite) {
+            function sumar(idReceta, limite, precio) {
                 var valorCantidad = document.getElementById('cantidad-' + idReceta).innerHTML;
 
                 var integer = parseInt(valorCantidad, 10);
@@ -578,10 +583,17 @@
                 } else {
                     console.log(cantidad);
                     document.getElementById('cantidad-' + idReceta).innerHTML = cantidad;
+
+                    var precioBase = parseInt(precio, 10);
+
+                    var precioNuevo = precioBase * cantidad;
+
+                    document.getElementById('total-finalizar-cocina-' + idReceta).innerHTML = dar_formato(precioNuevo);
+
                 }
             }
 
-            function restar(idReceta) {
+            function restar(idReceta, precio) {
                 var valorCantidad = document.getElementById('cantidad-' + idReceta).innerHTML;
 
                 var integer = parseInt(valorCantidad, 10);
@@ -592,6 +604,12 @@
                     mensaje('No puede ser menor a (1)');
                 } else {
                     document.getElementById('cantidad-' + idReceta).innerHTML = cantidad;
+
+                    var precioBase = parseInt(precio, 10);
+
+                    var precioNuevo = precioBase * cantidad;
+
+                    document.getElementById('total-finalizar-cocina-' + idReceta).innerHTML = dar_formato(precioNuevo);
                 }
             }
 
@@ -612,6 +630,9 @@
 
             }
 
+            function calularTotal() {
+                //funcion para calcular el total
+            }
             function mensaje(mensaje) {
                 Swal.fire({
                     type: 'error',
@@ -621,12 +642,73 @@
             }
 
 
+            function dar_formato(num) {
 
-            function formatNumbers() {
-                var numberFormats = document.getElementsByClassName('numberToFormat');
-                
-                console.log(numberFormats.length);
+                var cadena = "";
+                var aux;
+
+                var cont = 1, m, k;
+
+                if (num < 0)
+                    aux = 1;
+                else
+                    aux = 0;
+
+                num = num.toString();
+
+                for (m = num.length - 1; m >= 0; m--) {
+
+                    cadena = num.charAt(m) + cadena;
+
+                    if (cont % 3 == 0 && m > aux)
+                        cadena = "." + cadena;
+                    else
+                        cadena = cadena;
+
+                    if (cont == 3)
+                        cont = 1;
+                    else
+                        cont++;
+
+                }
+
+                cadena = cadena.replace(/.,/, ",");
+
+                return cadena;
+
             }
+
+            function formatNumbers(tipo) {
+
+                if (tipo == 'todo') {
+                    var elements = document.getElementsByClassName('numberToFormat');
+                    for (var i = 0; i < elements.length; i++) {
+                        var valor = elements[i].innerHTML.trim();
+                        if (tipo == 'todo') {
+                            document.getElementById(elements[i].id).innerHTML = "$" + dar_formato(valor);
+                        } else {
+                            document.getElementById(elements[i].id).innerHTML = dar_formato(valor);
+                        }
+
+                        //elements[i].innerHTML = ;
+                    }
+                } else {
+                    var elements = document.getElementsByClassName('numberToFormatFinalizar');
+                    for (var i = 0; i < elements.length; i++) {
+                        var valor = elements[i].innerHTML.trim();
+                        if (tipo == 'todo') {
+                            document.getElementById(elements[i].id).innerHTML = "$" + dar_formato(valor);
+                        } else {
+                            document.getElementById(elements[i].id).innerHTML = dar_formato(valor);
+                        }
+
+                        //elements[i].innerHTML = ;
+                    }
+                }
+
+            }
+
+            formatNumbers('todo');
 
         </script>
 
