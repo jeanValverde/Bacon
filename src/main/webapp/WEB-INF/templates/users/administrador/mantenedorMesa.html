@@ -127,7 +127,7 @@
                                         <form class="forms-sample" th:action="@{/administrador/mesa/modificar}" method="POST" name="formMesa">
                                             <input type="hidden" id="idMesa" name="idMesa" th:value="${mesa.idMesa}">
                                             <div class="form-group">
-                                                <label for="numeroMesa">Numero Mesa</label>
+                                                <label for="numeroMesa">Número Mesa</label>
                                                 <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa" th:value="${mesa.numeroMesa}" min="1">
 
                                             </div>
@@ -180,7 +180,7 @@
                                                 </div>
                                                 <div class="col-4">
                                                     <select class="btn btn-success dropdown-toggle"  name="tipoBusqueda" id="tipoBusqueda" onchange="myFunction()">
-                                                        <option value="numero">Numero de Mesa</option>
+                                                        <option value="numero">Número de Mesa</option>
                                                         <option value="asientos">Cantidad de Asientos</option>
                                                         <option value="habilitada">Habilitada</option>
                                                         <option value="deshabilitada">Deshabilitada</option>
@@ -227,7 +227,7 @@
                                                                         <a  th:href="@{/administrador/mesa/eliminar (idMesa=${mes.idMesa})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
                                                                     </div>
                                                                     <div >
-                                                                        <h6>Numero de Mesa: </h6>
+                                                                        <h6>Número de Mesa: </h6>
                                                                         <h4 th:text="${mes.numeroMesa}"></h4>
                                                                     </div>
                                                                     <div >
@@ -261,7 +261,7 @@
                                                         <table id="order-listing" class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Numero de Mesa</th>
+                                                                    <th>Número de Mesa</th>
                                                                     <th>Cantidad de asientos</th>
                                                                     <th>Estado de la Mesa</th>
                                                                     <th></th>
@@ -384,9 +384,9 @@
                                                             switch (tipoRespuesta) {
                                                                 case 'agregar' :
                                                                     if (respuesta === 1) {
-                                                                        alert("Mesa modificada correctamente");
+                                                                        alert("Mesa Agregada correctamente");
                                                                     } else if (respuesta === 0) {
-                                                                        alert("No se ha podido modificar la mesa");
+                                                                        alert("No se ha podido agregar la mesa");
                                                                     }
                                                                     break;
                                                                 case 'modificar' :
