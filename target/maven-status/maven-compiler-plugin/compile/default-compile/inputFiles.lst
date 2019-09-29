@@ -1,14 +1,18 @@
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IIngredienteDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Receta.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\exceptions\NonexistentEntityException.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalController.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryInsumo.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdateMesa.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Cliente.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Notificacion.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrden.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\CocinaController.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IPersonalDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\BaconApplication.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryIngrediente.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalProveedorInsumo.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IInsumoDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoProveedor.java
@@ -16,8 +20,10 @@ C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\EgresoStock.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertMesa.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrdenada.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\RolService.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalInsumo.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQuery.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\InsumoService.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\ClientePedirOrdenController.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Personal.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java
@@ -30,6 +36,7 @@ C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Orden.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoOrden.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProveedor.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\IngresoStock.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\ClienteIngresarController.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Proveedor.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryReceta.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\PersonalService.java
@@ -55,4 +62,5 @@ C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IMesaDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\exceptions\IllegalOrphanException.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\config\WebConfig.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalMantenedorReceta.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\exceptions\PreexistingEntityException.java
