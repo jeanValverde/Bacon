@@ -9,6 +9,7 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\CategoriaReceta.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Insumo.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Orden.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrden.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryReceta.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Ingrediente.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\IndexController.java
@@ -42,6 +43,7 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\ClienteIngresarController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\PersonalController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\ClientePedirOrdenController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\PersonalProveedorInsumo.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQuery.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProveedor.java

@@ -5,13 +5,13 @@
  */
 package com.restaurante.bacon.controller;
 
+import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Ingrediente;
-import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.Receta;
+import com.restaurante.bacon.dto.RecetaOrden;
 import com.restaurante.bacon.service.InsumoService;
 import com.restaurante.bacon.service.RecetaService;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -31,49 +31,49 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/cliente/pedirOrden")
 @Controller
 public class ClientePedirOrdenController {
-
+    
     @Autowired
     RecetaService recetaService;
-
+    
     @Autowired
     InsumoService insumoService;
-
+    
     @RequestMapping("/")
     public String index(Model modelo, HttpSession sesion, @RequestParam("tipo") Integer idCategoriaReceta) {
-
+        
         modelo.addAttribute("cliente", sesion.getAttribute("sesionCliente"));
-
+        
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
-
+        
         modelo.addAttribute("tipo", idCategoriaReceta);
         
         modelo.addAttribute("orden", sesion.getAttribute("orden"));
-
+        
         if (idCategoriaReceta == -1) {
             modelo.addAttribute("recetas", this.recetaService.filtrarRecetasByBar());
         } else {
             modelo.addAttribute("recetas", this.recetaService.filtrarRecetasByCategoriaCocina(idCategoriaReceta));
         }
-
+        
         return "users/cliente/index";
     }
-
+    
     @RequestMapping("/detalleReceta")
     public ResponseEntity detalle(Model modelo, HttpSession sesion, @RequestParam("idReceta") Integer idReceta) {
-
+        
         List<Ingrediente> ingredientes = this.recetaService.listarIngredientesByIdReceta(idReceta);
-
+        
         return new ResponseEntity(ingredientes, HttpStatus.OK);
     }
-
+    
     @RequestMapping("/agregarRecetaOrden")
     public ModelAndView cargarRecetaOrden(Model modelo, HttpSession sesion, @RequestParam("idReceta") Integer idReceta, @RequestParam("cantidad") Integer cantidad) {
-
+        
         Receta receta = this.recetaService.buscarRecetaById(idReceta);
-
+        
         Map<Receta, Integer> recetasCocina = (Map<Receta, Integer>) sesion.getAttribute("ordenesCocina");
         Map<Receta, Integer> recetasBar = (Map<Receta, Integer>) sesion.getAttribute("ordenesBar");
-
+        
         Integer tipo = Integer.parseInt(receta.getTipoReceta());
 
         //cocina = 0 ; bar = 1
@@ -82,41 +82,82 @@ public class ClientePedirOrdenController {
         } else {
             recetasBar.put(receta, cantidad);
         }
-
+        
         sesion.setAttribute("orden", true);
         
         sesion.setAttribute("ordenesCocina", recetasCocina);
-
+        
         sesion.setAttribute("ordenesBar", recetasBar);
-
+        
         return new ModelAndView("redirect:/cliente/pedirOrden/?tipo=2");
     }
-
+    
     @RequestMapping("/finalizar")
-    public ResponseEntity finalizar(Model modelo, HttpSession sesion) {
-
+    public ResponseEntity finalizar(Model modelo, HttpSession sesion, @RequestParam("tipo") Integer tipo) {
+        
         Map<Receta, Integer> recetasCocina = (Map<Receta, Integer>) sesion.getAttribute("ordenesCocina");
         Map<Receta, Integer> recetasBar = (Map<Receta, Integer>) sesion.getAttribute("ordenesBar");
-
-        String contenido = "";
         
-        String dato =  "{ { cantidad='' , { datoReceta=2 , datoReceta=4  } }  } ,  {    }";
+        List<RecetaOrden> recetasPedidas = new ArrayList<RecetaOrden>();
 
-        for (Map.Entry<Receta, Integer> ordenes : recetasCocina.entrySet()) {
-            
-            Integer cantidadPedida = ordenes.getValue();
-            
-            Receta recetaPedida =  ordenes.getKey();
-            
-            String ordenCocinas = " { cantidad:" +   cantidadPedida +  " , { idReceta:"  + recetaPedida.getIdReceta()  + " } } ";
-            
-            contenido += ordenCocinas;
-            
+        //cocina = 0 ; bar = 1
+        if (tipo == 0) {
+            for (Map.Entry<Receta, Integer> ordenes : recetasCocina.entrySet()) {
+                
+                RecetaOrden recetaOrden = new RecetaOrden();
+                
+                recetaOrden.setCantidad(ordenes.getValue());
+                
+                Receta receta = new Receta();
+                
+                receta.setIdReceta(ordenes.getKey().getIdReceta());
+                receta.setNombreReceta(ordenes.getKey().getNombreReceta());
+                receta.setFoto(ordenes.getKey().getFoto());
+                receta.setPrecioReceta(ordenes.getKey().getPrecioReceta());
+                receta.setCantidadPrepDiariaReceta(ordenes.getKey().getCantidadPrepDiariaReceta());
+                CategoriaReceta categoriaReceta = new CategoriaReceta();
+                
+                categoriaReceta.setDescripcionCategoriaReceta(ordenes.getKey().getIdCategoriaReceta().getDescripcionCategoriaReceta());
+                
+                receta.setIdCategoriaReceta(categoriaReceta);
+                
+                recetaOrden.setReceta(receta);
+                recetaOrden.setTipo(tipo); 
+                
+                Integer precio = ordenes.getValue() * Integer.parseInt(ordenes.getKey().getPrecioReceta().toString());
+                recetaOrden.setPrecioTotal(precio);
+                recetasPedidas.add(recetaOrden);
+            }
+        } else {
+            for (Map.Entry<Receta, Integer> ordenes : recetasBar.entrySet()) {
+                
+                RecetaOrden recetaOrden = new RecetaOrden();
+                
+                recetaOrden.setCantidad(ordenes.getValue());
+                
+                Receta receta = new Receta();
+                
+                receta.setIdReceta(ordenes.getKey().getIdReceta());
+                receta.setNombreReceta(ordenes.getKey().getNombreReceta());
+                receta.setFoto(ordenes.getKey().getFoto());
+                receta.setPrecioReceta(ordenes.getKey().getPrecioReceta());
+                receta.setCantidadPrepDiariaReceta(ordenes.getKey().getCantidadPrepDiariaReceta());
+                CategoriaReceta categoriaReceta = new CategoriaReceta();
+                
+                categoriaReceta.setDescripcionCategoriaReceta(ordenes.getKey().getIdCategoriaReceta().getDescripcionCategoriaReceta());
+                
+                receta.setIdCategoriaReceta(categoriaReceta);
+                
+                recetaOrden.setReceta(receta);
+                recetaOrden.setTipo(tipo); 
+                
+                Integer precio = ordenes.getValue() * Integer.parseInt(ordenes.getKey().getPrecioReceta().toString());
+                recetaOrden.setPrecioTotal(precio);
+                recetasPedidas.add(recetaOrden);
+            }
         }
-
-        String json = "[ " + contenido + " ]";
-
-        return new ResponseEntity(json, HttpStatus.OK);
+        
+        return new ResponseEntity(recetasPedidas, HttpStatus.OK);
     }
-
+    
 }

@@ -45,7 +45,11 @@ public class ClienteIngresarController {
         Map<Receta , Integer  > recetasCocina = new HashMap();
         Map<Receta , Integer > recetasBar = new HashMap();
         
+        
+        
         sesion.setAttribute("ordenesCocina", recetasCocina);
+        
+      
         
         sesion.setAttribute("orden", false);
         
