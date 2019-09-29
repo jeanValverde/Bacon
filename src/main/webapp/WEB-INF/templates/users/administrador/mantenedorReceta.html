@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="es">
 
     <head>
 
         <!-- Required meta tags -->
         <meta charset="utf-8">
+
+    
+   
+
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
                 <title>BACON Restaurante</title>
                 <!-- base:css -->
@@ -149,8 +152,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <!--Form agegar-->
-                                                                
-                                                                
+
+
                                                                 <!--Form editar-->
                                                                 <div class="col-md-4 grid-margin stretch-card" th:if="${tipoForm == 'editar' }"  >
                                                                     <div class="card">
@@ -160,7 +163,8 @@
                                                                                 Completa estos campos para agregar una receta al sistema, recuerda usar
                                                                                 una imagen actualizada y lo más real al producto.
                                                                             </p>
-                                                                            <form class="forms-sample" th:action="@{/administrador/addReceta}" method="POST" name="formReceta" enctype="multipart/form-data">
+                                                                            <form class="forms-sample" th:action="@{/administrador/recetaInsumos/editarReceta}" method="POST" name="formReceta" enctype="multipart/form-data">
+                                                                                <input type="hidden" name="idReceta" th:value="${recetaEdit.idReceta}" />
                                                                                 <div class="form-group">
                                                                                     <label for="nombreReceta">Nombre Receta</label>
                                                                                     <input type="text" class="form-control" id="nombreReceta" th:value="${recetaEdit.nombreReceta}" name="nombreReceta" placeholder="Nombre Receta">
@@ -217,27 +221,29 @@
                                                                                     <div class="col-sm-6">
                                                                                         <div class="form-check">
                                                                                             <label class="form-check-label">
-                                                                                                <input type="radio" th:value="0" class="form-check-input"  onchange="agregarCategoria()" name="tipoReceta" id="tipoReceta" th:checked="${recetaEdit.tipoReceta == '1'}"/>
-                                                                                                    Cocina
-                                                                                                    <i class="input-helper"></i></label>
+                                                                                                <input type="radio" th:value="0" class="form-check-input"  onchange="agregarCategoria()" name="tipoReceta" id="tipoReceta" th:checked="${recetaEdit.tipoReceta == '0'}"/>
+                                                                                                Cocina
+                                                                                                <i class="input-helper"></i></label>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="col-sm-6">
                                                                                         <div class="form-check">
                                                                                             <label class="form-check-label">
-                                                                                                <input type="radio" th:value="1" onchange="deleteCategoria()" class="form-check-input" name="tipoReceta" id="tipoRecetaBar" th:checked="${recetaEdit.tipoReceta == '0'}" />
-                                                                                                    Bar
-                                                                                                    <i class="input-helper"></i></label>
+                                                                                                <input type="radio" th:value="1" onchange="deleteCategoria()" class="form-check-input" name="tipoReceta" id="tipoRecetaBar" th:checked="${recetaEdit.tipoReceta == '1'}" />
+                                                                                                Bar
+                                                                                                <i class="input-helper"></i></label>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="form-group" id="categoriaReceta">
+                                                                                <div class="form-group" id="categoriaReceta" th:if="${recetaEdit.tipoReceta == '0'}"  >
                                                                                     <label for="categoriaReceta">Categoría Cocina</label>
                                                                                     <select  name="categoriaReceta" class="form-control" id="categoriaReceta">
                                                                                         <option th:each="categoria: ${categoriasReceta}"  th:selected="${recetaEdit.idCategoriaReceta.idCategoriaReceta == categoria.idCategoriaReceta}"  th:value="${categoria.idCategoriaReceta}" th:text="${categoria.descripcionCategoriaReceta}" ></option>
                                                                                     </select>
                                                                                 </div>
-                                                                                <div class="form-group">
+                                                                                <div class="form-group" id="categoriaReceta" th:if="${recetaEdit.tipoReceta == '1'}"  >
+                                                                                </div>
+                                                                                <div class="form-group is-valid">
                                                                                     <label for="imagenReceta">Imagen de la Receta</label>
                                                                                     <input type="file" name="imagenReceta" id="validatedCustomFile" class="dropify" th:data-default-file="@{/uploads/}+${recetaEdit.foto}" />
                                                                                     <div class="valid-feedback">
@@ -246,9 +252,9 @@
                                                                                     <div class="invalid-feedback">
                                                                                         Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
                                                                                     </div>
-
                                                                                 </div>
-                                                                                <button type="submit" class="btn btn-primary mr-2">Agregar</button>
+                                                                                <button type="submit" class="btn btn-primary mr-2">Editar</button>
+                                                                                <a th:href="@{/administrador/receta}"   class="btn btn-warning mr-2">Cancelar</a>
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -260,18 +266,18 @@
                                                                     <div class="row">
                                                                         <!--inicio filtro de tipos--->
                                                                         <div class="col-md-4 grid-margin">
-                                                                            <form action="index.html" method="post">
+                                                                            <form th:action="@{/administrador/recetaInsumos/filtroCategoria}" method="post">
                                                                                 <div class="btn-group mt-2" role="group" aria-label="Basic example">
                                                                                     <a th:href="@{/administrador/receta}" class="btn btn-primary mt-4">
                                                                                         <i class="mdi mdi-autorenew"></i>
                                                                                     </a>
-                                                                                    <a th:href="@{/administrador/receta(disponible='si')}" class="btn btn-primary mt-4">
+                                                                                    <a th:href="@{/administrador/recetaInsumos/filtroDisponibilidad(disponibilidad='1')}" class="btn btn-primary mt-4">
                                                                                         <i class="mdi mdi-checkbox-marked-circle-outline"></i>
                                                                                     </a>
-                                                                                    <a th:href="@{/administrador/receta(disponible='no')}" class="btn btn-primary mt-4">
+                                                                                    <a th:href="@{/administrador/recetaInsumos/filtroDisponibilidad(disponibilidad='0')}" class="btn btn-primary mt-4">
                                                                                         <i class="mdi mdi-close-circle-outline"></i>
                                                                                     </a>
-                                                                                    <select class="form-control mt-4" id="exampleFormControlSelect1">
+                                                                                    <select class="form-control mt-4" id="exampleFormControlSelect1" name="idCategoriaReceta" >
                                                                                         <option th:each="categoria: ${categoriasReceta}"  th:value="${categoria.idCategoriaReceta}" th:text="${categoria.descripcionCategoriaReceta}" ></option>
                                                                                         <option value="-1">Bar</option>
                                                                                     </select>
@@ -286,7 +292,7 @@
                                                                         <div class="col-md-7 grid-margin stretch-card">
                                                                             <div class="card">
                                                                                 <div class="card-body">
-                                                                                    <form class="" th:action="@{/administrador/filtro}" method="GET">
+                                                                                    <form class="" th:action="@{/administrador/Recetafiltro}" method="GET">
                                                                                         <div class="form-group">
                                                                                             <div class="input-group">
                                                                                                 <input type="text" class="form-control" name="nombreReceta" placeholder="Escribe el nombre de la receta" aria-label="Escribe el nombre de la receta">
@@ -327,10 +333,10 @@
                                                                                         <img th:src="@{/uploads/}+${receta.foto}" class="img-lg rounded-circle mb-2" alt="profile image">
                                                                                             <h4 th:text="${receta.nombreReceta}" >Nombre Receta</h4>
                                                                                             <p class="text-muted mb-0"  >
-                                                                                                <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${receta.idReceta}" >Primary</div>
-                                                                                                <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '1' }" >Cocina</div>
-                                                                                                <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0' }" >Bar</div>
-                                                                                                <div class="badge badge-outline-primary badge-pill" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" >Primary</div>
+                                                                                                <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${receta.idReceta}" >id receta</div>
+                                                                                                <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
+                                                                                                <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '1' }" >Bar</div>
+                                                                                                <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0'}" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" >Categoria</div>
                                                                                                 <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-outline-info"><i class="mdi mdi-check"></i></div>
                                                                                                 <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-outline-info"><i class="mdi mdi-close"></i></div>
                                                                                             </p>
@@ -341,7 +347,7 @@
                                                                                     </p>
                                                                                     <a th:href="@{/administrador/loadEditarReceta(idReceta=${receta.idReceta})}" class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</a>
                                                                                     <a th:href="@{/administrador/deleteReceta(idReceta=${receta.idReceta})}" class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</a>
-                                                                                    <a th:href="@{/administrador/receta(disponible='si')}" class="btn btn-info btn-sm mt-3 mb-4">Insumos</a>
+                                                                                    <a th:href="@{/administrador/recetaInsumos/ingredientesReceta(idReceta=${receta.idReceta})}" class="btn btn-info btn-sm mt-3 mb-4">Insumos</a>
                                                                                     <div class="border-top pt-3">
                                                                                         <div class="row">
                                                                                             <div class="col-4">
@@ -361,10 +367,23 @@
                                                                                 </div>
                                                                             </div>
                                                                             <!--card fin receta--->
-
-
                                                                         </div>
 
+
+                                                                        <img src="https://vivanda.vteximg.com.br/arquivos/ids/178947-1000-1000/120930.jpg?v=636978561154000000" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                        <h4 th:text="${ins.nombreInsumo}"></h4>
+                                                                        <p th:text="${ins.unidadMedidaInsumo}" class="text-muted mb-0">Unidad: Kilos</p>
+
+
+                                                                    </div>
+                                                                    <p th:text="${ins.descripcionInsumo}" class="mt-2 card-text">
+                                                                        Zanahoria especial sabor zanagoria
+                                                                    </p>
+                                                                    <div class="border-top pt-3">
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+
+                                                                                <h6>Stock actual: </h6>4
 
                                                                         <div id="tablaReceta" class="col-md-12">
                                                                             <div class="card">
@@ -427,11 +446,11 @@
                                                                                                         Estimación
                                                                                                     </td>
                                                                                                     <td>
-                                                                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == 1 }" >Cocina</div>
-                                                                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == 0 }" >Bar</div>
+                                                                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
+                                                                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '1' }" >Bar</div>
                                                                                                     </td>
                                                                                                     <td>
-                                                                                                        <div class="badge badge-outline-primary badge-pill" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" >Primary</div>
+                                                                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0'}" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" >Primary</div>
                                                                                                     </td>
                                                                                                     <td>
                                                                                                         <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-outline-info"><i class="mdi mdi-check"></i></div>
@@ -448,38 +467,161 @@
                                                                                         </table>
                                                                                     </div>
                                                                                 </div>
+>>>>>>> Jean
                                                                             </div>
+                                                                            <div class="col-12">
+
+                                                                                <h6>Stock minimo: </h6>5
+                                                                            </div>
+                                                                            <div class="col-12">
+
+                                                                                <h6>Stock maximo: </h6>6
+                                                                            </div>
+
                                                                         </div>
-
-
-
                                                                     </div>
-
                                                                 </div>
-
-
-
-
-
-
-
-
                                                             </div>
-
-
-                                                            <!--final-->
-
                                                         </div>
-                                                        <!-- content-wrapper ends -->
-                                                        <!-- partial:../../fragments/_footer.html -->
-                                                        <footer th:replace="fragments/_footer :: footer"></footer>
-                                                        <!-- partial -->
+
                                                     </div>
-                                                    <!-- main-panel ends -->
                                                 </div>
-                                                <!-- page-body-wrapper ends -->
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <div class="media">
+                                                    <div class="table-responsive">
+                                                        <table id="order-listing" class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Order #</th>
+                                                                    <th>Purchased On</th>
+                                                                    <th>Customer</th>
+                                                                    <th>Ship to</th>
+                                                                    <th>Base Price</th>
+                                                                    <th>Purchased Price</th>
+                                                                    <th>Status</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tbody>
+                                                                <tr th:each="ins: ${insumos}">
+                                                                    <td th:text="${ins.nombreInsumo}">Oranges</td>
+                                                                    <td>2015/06/25</td>
+                                                                    <td>Tim</td>
+                                                                    <td>Italy</td>
+                                                                    <td>$6300</td>
+                                                                    <td>$2100</td>
+                                                                    <td>
+                                                                        <label class="badge badge-info">On-hold</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button class="btn btn-outline-primary">View</button>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
                                             </div>
 
+<<<<<<< HEAD
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+
+                        <!--Desarrollar acá-->
+
+
+
+
+                        <!--final-->
+
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+        <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+        <script th:src="@{/vendors/moment/moment.min.js}"></script>
+        <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+        <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+        <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+        <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+        <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+        <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+        <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+        <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+        <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-addons.js}"></script>
+        <script th:src="@{/js/x-editable.js}"></script>
+        <script th:src="@{/js/dropify.js}"></script>
+        <script th:src="@{/js/dropzone.js}"></script>
+        <script th:src="@{/js/jquery-file-upload.js}"></script>
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-repeater.js}"></script>
+        <!-- End custom js for this page-->
+        <!-- plugin js for this page -->
+        <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
+        <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
+        <script th:src="@{/js/data-table.js}"></script>
+
+        <!--validate form--->
+        <script th:src="@{/custom/formulario.js}"></script>
+    </body>
+
+</html>/html>
+=======
 
                                             <!-- container-scroller -->
                                             <!-- base:js -->
@@ -549,13 +691,12 @@
                                             </script>
 
                                             <script src="text/javascript">
-                                                dropify.dropify({
-                                                    "defaultFile": "full path file",
-                                                    "messages": {
-                                                        default: 'Arrastre un archivo o haga clic aquí',
-                                                        replace: 'Arrastre un archivo o haga clic en reemplazar',
-                                                        remove: 'Eliminar',
-                                                        error: 'Lo sentimos, el archivo demasiado grande'
+                                                $('.dropify').dropify({
+                                                    messages: {
+                                                        'default': 'Agrega una foto',
+                                                        'replace': 'Reemplaza el archivo',
+                                                        'remove': 'Eliminar',
+                                                        'error': 'Ooops, Algo malo paso.'
                                                     }
                                                 });
                                             </script>
@@ -564,3 +705,4 @@
                                         </body>
 
                                         </html>
+>>>>>>> Jean

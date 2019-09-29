@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-1to10.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-horizontal.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-movie.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-pill.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-reversed.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-square.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bootstrap-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/css-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/examples.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{//vendors/jquery-bar-rating/fontawesome-stars-o.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/fontawesome-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-asColorPicker/css/asColorPicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/x-editable/bootstrap-editable.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/dropify/dropify.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-file-upload/uploadfile.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-tags-input/jquery.tagsinput.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.css}">
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!-- plugin css for this page -->
+        <!--<link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-toast-plugin/jquery.toast.min.css}">-->
+        <!-- End plugin css for this page -->
+        <!---->
+
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../fragments/_navbar.html -->
+            <nav th:replace="fragments/_navbar :: nav"></nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../fragments/_settings-panel.html -->
+                <div th:replace="fragments/_settings-panel :: div"></div>
+                <!-- partial -->
+                <!-- partial:../../fragments/_sidebar.html -->
+                <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div class="row">
+
+
+                            <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
+                            <div class="col-md-12 col-xl-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedores</h3>
+                                        <form  th:action="@{/administrador/pedidoInsumo/buscar_insumos_proveedor}"  enctype="multipart/form-data" method="post">
+
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h5 >Buscar proveedor: </h5>
+                                                </div>
+                                                <div class="col-10" style="text-align: left">
+                                                    <div class="input-group">
+                                                        <select class="btn btn-success dropdown-toggle"  name="proveedor">
+                                                            <option value="select">Seleccione proveedor</option>
+                                                            <option th:each="proveedor : ${proveedores}"  th:value="${proveedor.idProveedor}" th:utext="${proveedor.nombreProveedor}"></option>
+                                                        </select>
+                                                        <button class="btn btn-sm btn-success" type="submit">Buscar</button>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xl-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Insumos</h3>
+
+                                        <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                                                <div  class="row">
+                                                    <div style="padding: 5px" th:each="ins: ${insumos}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
+                                                        <div class="card">
+                                                            <div class="card-body text-center">
+                                                                <div style="text-align:right">
+
+
+                                                                    <a  th:href="@{/administrador/insumo/cargar_insumo(idInsumo=${ins.idInsumo})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
+
+                                                                    <a  th:href="@{/administrador/insumo/eliminar_insumo(idInsumo=${ins.idInsumo},nombreFoto=${ins.fotoInsumo})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
+                                                                </div>
+                                                                <div >
+                                                                    <img th:src="@{/uploads/}+${ins.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                    <h4 th:text="${ins.nombreInsumo}"></h4>
+                                                                    <p th:text="${ins.unidadMedidaInsumo}" class="text-muted mb-0">Unidad: Kilos</p>
+
+                                                                </div>
+                                                                <p th:text="${ins.descripcionInsumo}" class="mt-2 card-text">
+                                                                    Zanahoria especial sabor zanagoria
+                                                                </p>
+                                                                <div class="border-top pt-3">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+
+                                                                            <h6>Stock actual: </h6><label>[[${ins.stockInsumo}]]</label>
+                                                                        </div>
+                                                                        <div class="col-12">
+
+                                                                            <h6>Stock minimo: </h6><label>[[${ins.minimoStockInsumo}]]</label>
+                                                                        </div>
+                                                                        <div class="col-12">
+
+                                                                            <h6>Stock maximo: </h6><label>[[${ins.maximoStockInsumo}]]</label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <div class="media">
+                                                    <div class="table-responsive">
+                                                        <table id="order-listing" class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Nombre</th>
+                                                                    <th>Descripción</th>
+                                                                    <th>Unidad medida</th>
+                                                                    <th>Stock</th>
+                                                                    <th>Stock minimo</th>
+                                                                    <th>Stock maximo</th>
+                                                                    <th>Foto</th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tbody>
+                                                                <tr th:each="ins: ${insumos}">
+                                                                    <td th:text="${ins.nombreInsumo}"></td>
+                                                                    <td th:text="${ins.descripcionInsumo}"></td>
+                                                                    <td th:text="${ins.unidadMedidaInsumo}"></td>
+                                                                    <td th:text="${ins.stockInsumo}"></td>
+                                                                    <td th:text="${ins.minimoStockInsumo}"></td>
+                                                                    <td th:text="${ins.maximoStockInsumo}"></td>
+                                                                    <td><img th:src="@{/uploads/}+${ins.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/></td>
+                                                                    <td>
+                                                                        <a  th:href="@{/administrador/insumo/cargar_insumo(idInsumo=${ins.idInsumo})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <a  th:href="@{/administrador/insumo/eliminar_insumo(idInsumo=${ins.idInsumo},nombreFoto=${ins.fotoInsumo})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <nav aria-label="Page navigation example" id="paginacion">
+                                                <ul class="pagination">
+
+                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Desarrollar acá-->
+                        <!--final-->
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+        <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+        <script th:src="@{/vendors/moment/moment.min.js}"></script>
+        <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+        <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+        <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+        <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+        <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+        <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+        <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+        <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+        <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-addons.js}"></script>
+        <script th:src="@{/js/x-editable.js}"></script>
+        <script th:src="@{/js/dropify.js}"></script>
+        <script th:src="@{/js/dropzone.js}"></script>
+        <script th:src="@{/js/jquery-file-upload.js}"></script>
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-repeater.js}"></script>
+        <script th:src="@{/js/alerts.js}"></script>
+        <!-- End custom js for this page-->
+        <!-- plugin js for this page -->
+        <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
+        <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
+        <script th:src="@{/js/data-table.js}"></script>
+        <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+        <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+
+        <script th:src="@{/js/alerts_personalizado.js}"></script>
+        <script th:src="@{/js/avgrund.js}"></script>
+        <!--validate form--->
+        <script th:src="@{/custom/formulario-insumo.js}"></script>
+
+
+
+        <!--
+        <script th:src="@{/vendors/jquery-toast-plugin/jquery.toast.min.js}"></script>
+        
+        <script th:src="@{/js/toastDemo.js}"></script>
+        <script th:src="@{/js/desktop-notification.js}"></script>-->
+        <script type="text/javascript" >
+            document.getElementById("div-modificar-foto").setAttribute("style", "display: none");
+
+            function ocultarFoto(myRadio) {
+
+
+                if (myRadio.value == "si") {
+
+                    document.getElementById("div-modificar-foto").setAttribute("style", "display: none");
+                } else if (myRadio.value == "no") {
+                    document.getElementById("div-modificar-foto").setAttribute("style", "display: block");
+
+                }
+
+            }
+        </script>
+        <script th:inline="javascript">
+
+
+            var tipoRespuesta = [[${tipoRespuesta}
+            ]];
+                    var respuesta = [[${respuesta}
+                    ]];
+            if (tipoRespuesta !== null) {
+                switch (tipoRespuesta) {
+                    case 'agregar' :
+                        if (respuesta === 1) {
+                            showSwal('success-message', 'Insumo agregado!', 'se ha registrado el insumo exitosamente');
+                        } else if (respuesta === 0) {
+                            showSwal('warning-message', 'Error!', "No se ha podido agregar el insumo");
+                        }
+                        break;
+                    case 'modificar' :
+                        if (respuesta === 1) {
+                            showSwal('success-message', 'Insumo modificado!', 'se ha registrado el insumo exitosamente');
+                        } else if (respuesta === 0) {
+                            showSwal('warning-message', 'Error!', "No se ha podido modificar el insumo");
+                        }
+                        break;
+                    case 'eliminar' :
+                        if (respuesta === 1) {
+                            showSwal('success-message', 'Insumo eliminado!', 'se ha eliminado el insumo exitosamente');
+                        } else if (respuesta === 0) {
+                            showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
+                        }
+                        break;
+                }
+            }
+
+
+
+        </script>
+        <script type="text/javascript" >
+            var formularioPassword = document.getElementsByName("formAgregarInsumo")[0];
+            validatorForms(formularioPassword);
+        </script>
+
+
+
+        <script type="text/javascript" >
+            var formularioPassword = document.getElementsByName("formModificarInsumo")[0];
+            validatorForms(formularioPassword);
+        </script>
+
+
+
+    </body>
+
+</html>

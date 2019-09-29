@@ -8,10 +8,12 @@ package com.restaurante.bacon.controller;
 import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.service.PersonalService;
+import com.restaurante.bacon.service.RecetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -20,31 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/administrador/proveedorInsumo")
 @Controller
 public class PersonalProveedorInsumo {
-    
-     //Acceder a metodos CRUB y más de presonal 
-    @Autowired
-    PersonalService personalService;
-    
-    
-     @RequestMapping("/index")
-    public String prueba(Model modelo) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        
-        //desarrollo aca 
-        
-        
-        
-   
-        //fin desarrollo 
-        //despachos 
-        
-        //fin despacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/cocina/index";
-    }
+
+
 }

@@ -41,4 +41,6 @@ public class WebConfig implements WebMvcConfigurer {
                         "classpath:/static/custom/",
                         "classpath:/static/uploads/");
     }
+    
+    //hola
 }

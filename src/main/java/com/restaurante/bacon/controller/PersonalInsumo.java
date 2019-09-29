@@ -66,9 +66,7 @@ public class PersonalInsumo {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        if(this.personalService.comprobarImagen("adfbfd87-379f-4760-8771-643c689a9537.jpg")){
-            System.out.println("existe la imagen qla");
-        }
+        
         List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
         //desarrollo aca 
@@ -92,7 +90,7 @@ public class PersonalInsumo {
                 insumos = this.insumoService.filtrarInsumosByNombre(filtro);
                 break;
             case "stock":
-                if(filtro.equals("")||filtro==null){
+                if(!filtro.equals("")){
                 insumos = this.insumoService.filtrarInsumosByStock(BigInteger.valueOf(Integer.parseInt(filtro)));
                 }else{
                     insumos = this.insumoService.listarInsumos();
