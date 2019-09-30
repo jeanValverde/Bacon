@@ -216,6 +216,8 @@ public class ProveedorController {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        
+        
         //sesion 
         if (this.procedureQuery.DeleteProveedorById(idProveedor)) {
             modelo.addAttribute("tipoRespuesta", "eliminar");

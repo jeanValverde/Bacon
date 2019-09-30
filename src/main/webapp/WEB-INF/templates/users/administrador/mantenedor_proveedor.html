@@ -371,7 +371,26 @@
                                                                                                             <i class="mdi mdi-close"></i>
                                                                                                         </button>
                                                                                                         -->
-                                                                                                        <a href="#" th:onclick="'d(' + ${proveedor.idProveedor} + ')'"   class="btn btn-danger "><i class="mdi mdi-close"></i></a>
+                                                                                                        <button type="button" class="btn btn-danger " data-toggle="modal"  th:attr="data-target='#modal'+${ins.idProveedor }" ><i class="mdi mdi-close"></i></button>
+                                                                                                        <div class="modal fade" th:id="'modal' + ${ins.idProveedor}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                                                                            <div class="modal-dialog modal-sm" role="document">
+                                                                                                                <div class="modal-content">
+                                                                                                                    <div class="modal-header">
+                                                                                                                        <h5 class="modal-title" id="exampleModalLabel-3">Eliminar Proveedor</h5>
+                                                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                                                        </button>
+                                                                                                                    </div>
+                                                                                                                    <div class="modal-body" id="pruebaModal">
+                                                                                                                        <p >¿Seguro que desea eliminar el proveedor?</p>
+                                                                                                                    </div>
+                                                                                                                    <div class="modal-footer">
+                                                                                                                        <a id="btn-eliminar" th:href="@{/administrador_proveedor/eliminar_proveedor(idProveedor=${ins.idProveedor})}" class="btn btn-danger ">Eliminar</a>
+                                                                                                                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
                                                                                                     </div>
 
                                                                                                     <div >
@@ -445,7 +464,7 @@
                                                                                                                 <a  th:href="@{/administrador_proveedor/cargar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
                                                                                                             </td>
                                                                                                             <td>
-                                                                                                                <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
+                                                                                                                <a  th:href="@{/administrador_proveedor/eliminar_proveedor?(idProveedor=${ins.idProveedor})}"  class="btn btn-danger"><i class="mdi mdi-close"></i></a>
                                                                                                             </td>
                                                                                                         </tr>
 
@@ -577,6 +596,19 @@
 
                                                     </script>
 
+
+
+
+                                                    <script type="text/javascript" >
+                                                        var formularioPassword = document.getElementsByName("formProveedor")[0];
+                                                        validatorForms(formularioPassword);
+                                                    </script>
+
+                                                    <script type="text/javascript" >
+                                                        var formularioPassword = document.getElementsByName("formEditar")[0];
+                                                        validatorForms(formularioPassword);
+                                                    </script>
+
                                                     <script type="text/javascript" >
 
                                                         function d(idProveedor) {
@@ -596,17 +628,6 @@
                                                         })
                                                         }
 
-                                                    </script>
-
-
-                                                    <script type="text/javascript" >
-                                                        var formularioPassword = document.getElementsByName("formProveedor")[0];
-                                                        validatorForms(formularioPassword);
-                                                    </script>
-
-                                                    <script type="text/javascript" >
-                                                        var formularioPassword = document.getElementsByName("formEditar")[0];
-                                                        validatorForms(formularioPassword);
                                                     </script>
 
 

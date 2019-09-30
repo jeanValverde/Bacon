@@ -13,12 +13,15 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -37,6 +40,9 @@ public class Orden implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
+    
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEC_ORD")
+    @SequenceGenerator(name = "SEC_ORD", sequenceName = "SEC_ORDEN", allocationSize = 1)
     @NotNull
     @Column(name = "ID_ORDEN")
     private BigDecimal idOrden;

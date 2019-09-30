@@ -13,12 +13,14 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Personal.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IRecetaDao.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\CocinaController.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdateProveedor.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IPagarOrdenDao.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IProveedorDao.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\ClientePedirOrdenController.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\IndexController.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryIngrediente.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\PagarOrdenController.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertProveedor.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IInsumoDao.java
@@ -47,6 +49,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryRe
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Receta.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertInsumo.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\service\PagarOrdenService.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalProveedorInsumo.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Orden.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.java
