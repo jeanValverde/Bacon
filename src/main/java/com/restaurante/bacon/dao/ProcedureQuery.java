@@ -31,6 +31,7 @@ import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.dto.Proveedor;
 import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
 import com.restaurante.bacon.dto.Receta;
+import com.restaurante.bacon.dto.Rol;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -71,17 +72,22 @@ public class ProcedureQuery {
 
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
-    public boolean updatePerfilPersonal(BigDecimal idPersonal, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo) {
+    public boolean modificarPersonal(BigDecimal idPersonal,String rut, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo, String contrasena, BigInteger estado,Rol idRol) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
-            em.createNamedStoredProcedureQuery("updatePerfilPersonal")
-                    .setParameter("P_ID_PERSONAL", idPersonal)
-                    .setParameter("P_NOMBRES_PERSONAL", nombres)
-                    .setParameter("P_APE_PATERNO_PERSONAL", apePaterno)
-                    .setParameter("P_APE_MATERNO_PERSONAL", apeMaterno)
-                    .setParameter("P_FECHA_NACIMIENTO_PERSONAL", fechaNacimiento)
-                    .setParameter("P_CELULAR_PERSONAL", celular)
-                    .setParameter("P_CORREO_PERSONAL", correo).execute();
+            em.createNamedStoredProcedureQuery("modificarPersonal")
+                    .setParameter(P_ID_PERSONAL, idPersonal)
+                    .setParameter(P_RUT_PERSONAL, rut)
+                    .setParameter(P_NOMBRES_PERSONAL, nombres)
+                    .setParameter(P_APE_PATERNO_PERSONAL, apePaterno)
+                    .setParameter(P_APE_MATERNO_PERSONAL, apeMaterno)
+                    .setParameter(P_FECHA_NACIMIENTO_PERSONAL, fechaNacimiento)
+                    .setParameter(P_CELULAR_PERSONAL, celular)
+                    .setParameter(P_CORREO_PERSONAL, correo)
+                    .setParameter(P_CONTRASENA_PERSONAL, contrasena)
+                    .setParameter(P_ESTADO_PERSONAL, estado)
+                    .setParameter(P_RUT_PERSONAL, rut)
+                    .setParameter(P_ID_ROL, idRol).execute();
 
             return true;
         } catch (Exception ex) {
@@ -243,10 +249,12 @@ public class ProcedureQuery {
 //            return false;
 //        }
 //    }
-
+    Rol r= new Rol();
+    
         @SuppressWarnings("unchecked")
-        public boolean InsertPersonal(String rut, String nombres, String apePaterno, String apeMaterno, Date fecha_nacimiento, String celular, String correo, String contrasena, String estado, String idRol) {
+        public boolean InsertPersonal(String rut, String nombres, String apePaterno, String apeMaterno, Date fecha_nacimiento, String celular, String correo, String contrasena, BigInteger estado,Rol idRol) {
         try {
+
 
             em.createNamedStoredProcedureQuery("InsertPersonal")
                     .setParameter(P_RUT_PERSONAL, rut)
@@ -268,6 +276,10 @@ public class ProcedureQuery {
         }
 
         return false;
+    }
+
+    public void updatePerfilPersonal(BigDecimal idPersonal, String nombre, String paterno, String materno, Date FechaNacimiento, String celular, String correo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

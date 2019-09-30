@@ -63,19 +63,17 @@ public class PersonalService implements UserDetailsService {
     ProcedureQuery procedureQuery;
     //se implementa el metodo de la interfaz 
 	
-	public Personal addPersonal (Personal personal){
-		return this.personalDao.save(personal);
-		
-	}
+    public boolean addPersonal(Personal personal) {
+        return this.procedureQuery.InsertPersonal(personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(), personal.getContrasenaPersonal(), personal.getEstadoPersonal(), personal.getIdRol());
+         
+    }
+    
 	
-	public boolean addPersonal (String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal,String correoPersonal, String contrasenaPersonal, String estadoPersonal, String idRol ){
-		return this.procedureQuery.InsertPersonal(rutPersonal, nombresPersonal, apePaternoPersonal, apeMaternoPersonal, fechaNacimientoPersonal,celularPersonal, correoPersonal, contrasenaPersonal, estadoPersonal,idRol);
-		
-	}
+
 	
-	public boolean ModificarPersonal (BigDecimal idPersonal, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo){
+	public boolean ModificarPersonal (Personal personal) {
 		
-		return this.procedureQuery.updatePerfilPersonal(idPersonal, nombres, apePaterno, apeMaterno,fechaNacimiento,celular,correo);
+		return this.procedureQuery.modificarPersonal(personal.getIdPersonal(),personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(), personal.getContrasenaPersonal(), personal.getEstadoPersonal(), personal.getIdRol());
 	}
 	
 
