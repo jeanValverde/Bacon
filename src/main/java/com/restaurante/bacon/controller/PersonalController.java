@@ -26,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -95,9 +96,9 @@ public class PersonalController {
 
     
     
-    
+
         @PostMapping("/addPersonal")
-    public String addPersonal(Model modelo,
+          public String addPersonal(Model modelo,
             @RequestParam("rutPersonal") String rutPersonal,
             @RequestParam("nombresPersonal") String nombresPersonal,
             @RequestParam("apepaterno") String apepaterno,
