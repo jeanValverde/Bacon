@@ -35,6 +35,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ICategoriaReceta
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Boleta.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\service\RolService.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalMantenedorReceta.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryOrden.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\exceptions\PreexistingEntityException.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalInsumo.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.java

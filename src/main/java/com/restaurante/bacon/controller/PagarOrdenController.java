@@ -5,9 +5,7 @@
  */
 package com.restaurante.bacon.controller;
 
-import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dto.Orden;
-import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.service.PagarOrdenService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -22,20 +20,25 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author Felipe
  */
-
+@RequestMapping("/cliente/pagar")
+@Controller
 public class PagarOrdenController {
     
     @Autowired
     PagarOrdenService pagarOrdenService;
     
-    
-        @RequestMapping("/mantenedor_pagarOrden")
-    public String cargar_insumo(Model modelo, @RequestParam("idOrden") BigDecimal idOrden) {
+  
+     
+    @RequestMapping("/pagar_ordenes")
+    public String pagarOrdenes(Model modelo, @RequestParam("idOrden") BigDecimal idOrden) {
      
         //sesion 
+        
+       
+        
         List<Orden> ordenes = new ArrayList<Orden>();
         ordenes = this.pagarOrdenService.listarOrdenes();
-        Orden orden = this.pagarOrdenService.retornarOrdenById(idOrden);
+   
         
    
         //fin desarrollo 
