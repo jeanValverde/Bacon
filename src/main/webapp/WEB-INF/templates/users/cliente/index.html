@@ -229,7 +229,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <div class="col-12 grid-margin stretch-card d-none d-md-flex">
+                                            <div class="col-12 grid-margin stretch-card d-none d-md-flex" style="margin-bottom: 0px;">
                                                 <div class="">
                                                     <div class="">
                                                         <h4 class="card-title">Confirma las recetas de cocina y bar que se seleccionaron para continuar con la orden</h4>
@@ -339,12 +339,13 @@
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
-                                                                            <!---borrar--->
                                                                             </p>
                                                                         </div>
                                                                     </div>
                                                                     <button type="submit" name="button" class="btn btn-primary">Confirmar pedidos</button>
-                                                                    <button  type="button" class="btn btn-outline-primary btn-fw">Total: $</button>
+                                                                    <button id="totalOrden"  type="button" class="btn btn-outline-primary btn-fw">Total: $</button>
+                                                                    <br/><br/>
+                                                                    <input type="text" class="form-control form-control-lg" placeholder="Escribe una observación para la orden" aria-label="Escribe una observación para la orden" style="margin-bottom: 0px;">
                                                                 </form>
                                                             </div>
                                                         </div>
@@ -535,7 +536,7 @@
                 axios.get('http://localhost:8034/cliente/pedirOrden/finalizar?tipo=' + tipo)
                         .then(function (response) {
                             console.log(response);
-
+                            var precioTotalOrden = 0;
                             var contenido = "";
                             for (var i = 0; i < response.data.length; i++) {
                                 var categoria = "";
@@ -550,9 +551,17 @@
                                         + "<td><div id='cantidad-" + response.data[i].receta.idReceta + "'  class='badge badge-pill badge-primary ml-3'>" + response.data[i].cantidad + "</div> </td> <td><div class='badge badge-outline-primary numberToFormatFinalizar' id='total-finalizar-cocina-" + response.data[i].receta.idReceta + "' >" + response.data[i].precioTotal + "</div> "
                                         + "</td> <td> <div class='btn-group role='group' aria-label='Basic example'> <button onclick=' restar( " + response.data[i].receta.idReceta + " , " + response.data[i].receta.precioReceta + " ) ' type='button' class='btn btn-primary'> "
                                         + "<i class='mdi mdi-minus'></i></button> <button onclick='sumar( " + response.data[i].receta.idReceta + " , " + response.data[i].receta.cantidadPrepDiariaReceta + " , " + response.data[i].receta.precioReceta + " )' type='button' class='btn btn-primary'> <i class='mdi mdi-plus'></i> "
-                                        + "</button> <button onclick='borrar( " + response.data[i].receta.idReceta + " )' type='button' class='btn btn-primary'>  <i class='mdi mdi-close-circle-outline'></i> </button></div> </td> </tr>";
-
+                                        + "</button> <button onclick='borrar( " + response.data[i].receta.idReceta + " , " + response.data[i].receta.precioReceta + " )' type='button' class='btn btn-primary'>  <i class='mdi mdi-close-circle-outline'></i> </button></div> </td> </tr>";
+                                precioTotalOrden = precioTotalOrden + response.data[i].precioTotal;
                             }
+
+                            if (tipo == 0) {
+                                sessionStorage.setItem('valorCocina', precioTotalOrden);
+                            } else {
+                                sessionStorage.setItem('valorBar', precioTotalOrden);
+                            }
+
+                            calularTotal();
 
                             document.getElementById(carga).innerHTML = contenido;
                             if (isCarga) {
@@ -572,11 +581,14 @@
             function sumar(idReceta, limite, precio) {
                 var valorCantidad = document.getElementById('cantidad-' + idReceta).innerHTML;
 
+
                 var integer = parseInt(valorCantidad, 10);
 
                 var lim = parseInt(limite, 10);
 
                 var cantidad = integer + 1;
+
+                var valorActual = integer * precio;
 
                 if (cantidad > limite) {
                     mensaje('No puedes superar la máxima cantidad de stock (' + limite + ')');
@@ -590,6 +602,18 @@
 
                     document.getElementById('total-finalizar-cocina-' + idReceta).innerHTML = dar_formato(precioNuevo);
 
+                    var totalOrden = sessionStorage.getItem('TOTAL_ORDEN');
+
+                    totalOrden = parseInt(totalOrden, 10);
+
+                    totalOrden = totalOrden - valorActual;
+
+                    totalOrden = totalOrden + precioNuevo;
+
+                    document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(totalOrden);
+
+                    sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
+
                 }
             }
 
@@ -599,6 +623,8 @@
                 var integer = parseInt(valorCantidad, 10);
 
                 var cantidad = integer - 1;
+
+                var valorActual = integer * precio;
 
                 if (cantidad < 1) {
                     mensaje('No puede ser menor a (1)');
@@ -610,10 +636,24 @@
                     var precioNuevo = precioBase * cantidad;
 
                     document.getElementById('total-finalizar-cocina-' + idReceta).innerHTML = dar_formato(precioNuevo);
+
+                    var totalOrden = sessionStorage.getItem('TOTAL_ORDEN');
+
+                    totalOrden = parseInt(totalOrden, 10);
+
+                    totalOrden = totalOrden - valorActual;
+
+                    totalOrden = totalOrden + precioNuevo;
+
+                    document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(totalOrden);
+
+                    sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
+
+
                 }
             }
 
-            function borrar(idReceta) {
+            function borrar(idReceta, precio) {
                 Swal.fire({
                     title: '¿Está seguro que desea eliminar esta receta de su pedido?',
                     text: "Si selecciona eliminar debe confirmar el pedido una vez eliminada la recera",
@@ -624,7 +664,25 @@
                     confirmButtonText: '!Si, Eliminar!'
                 }).then((result) => {
                     if (result.value) {
+                        var valorCantidad = document.getElementById('cantidad-' + idReceta).innerHTML;
                         var borrar = document.getElementById('borrar-' + idReceta).remove();
+                        var cantidadBorrada = parseInt(valorCantidad, 10);
+
+                        var valorActual = parseInt(precio, 10);
+                        //5000
+                        //2 2000 
+                        var totalDescuento = valorActual * cantidadBorrada;
+                        //4000
+                        var totalOrden = sessionStorage.getItem('TOTAL_ORDEN');
+                        //5000
+                        totalOrden = parseInt(totalOrden, 10);
+
+                        totalOrden = totalOrden - totalDescuento;
+                        //4000 - 5000 = 1000
+                        document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(totalOrden);
+
+                        sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
+
                     }
                 })
 
@@ -632,6 +690,16 @@
 
             function calularTotal() {
                 //funcion para calcular el total
+                var cocina = sessionStorage.getItem('valorCocina');
+                var valorCocina = parseInt(cocina, 10);
+                var bar = sessionStorage.getItem('valorBar');
+                var valorBar = parseInt(bar, 10);
+                var total = valorCocina + valorBar;
+
+                document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(total);
+
+                sessionStorage.setItem('TOTAL_ORDEN', total);
+
             }
             function mensaje(mensaje) {
                 Swal.fire({
