@@ -9,10 +9,12 @@ import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.Insumo;
+import com.restaurante.bacon.dto.InsumoPedido;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.dto.Proveedor;
 import com.restaurante.bacon.dto.Receta;
 import com.restaurante.bacon.dto.Rol;
+import com.restaurante.bacon.service.InsumoPedidoService;
 import com.restaurante.bacon.service.PersonalService;
 import com.restaurante.bacon.service.RecetaService;
 import java.io.IOException;
@@ -50,7 +52,8 @@ public class PersonalPedidoInsumo {
 
     @Autowired
     RecetaService recetaService;
-
+    @Autowired
+    InsumoPedidoService insumoPedidoService;
     public static String UPLOAD_DIR_IMAGEN = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
 
     @Autowired
@@ -73,8 +76,11 @@ public class PersonalPedidoInsumo {
        
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
         proveedores = this.proveedorService.listarProveedores();
-        //desarrollo aca 
+        List<InsumoPedido>insumos_pedidos = new ArrayList<InsumoPedido>();
+        insumos_pedidos = this.insumoPedidoService.listarInsumosPedidos();
         modelo.addAttribute("proveedores", proveedores);
+        //desarrollo aca 
+        modelo.addAttribute("insumos_pedidos", insumos_pedidos);
         modelo.addAttribute("personalSesion", personal);
         return "users/administrador/pedido_proveedor";
 

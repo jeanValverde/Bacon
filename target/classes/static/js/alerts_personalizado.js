@@ -82,7 +82,7 @@
             closeModal: true,
           },
           confirm: {
-            text: "OK",
+            text: "Eliminar",
             value: true,
             visible: true,
             className: "btn btn-primary",

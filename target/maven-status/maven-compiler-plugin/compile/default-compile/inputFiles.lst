@@ -3,6 +3,7 @@ C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurant
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertProveedor.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\controller\ClientePedirOrdenController.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\EgresoStock.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IIngredienteDao.java
@@ -27,10 +28,12 @@ C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurant
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryInsumo.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\controller\ClienteIngresarController.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\BoletaControl.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalController.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IProveedorDao.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Proveedor.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalPedidoInsumo.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Boleta.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\controller\ProveedorController.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Cliente.java
@@ -50,6 +53,7 @@ C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurant
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\service\ProveedorService.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProveedor.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Personal.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrden.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\config\WebSecurityConfig.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryReceta.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Ingrediente.java

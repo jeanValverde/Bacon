@@ -109,42 +109,25 @@
                                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
                                                 <div  class="row">
-                                                    <div style="padding: 5px" th:each="ins: ${insumos}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
+                                                    <div style="padding: 5px" th:each="ins_pe: ${insumos_pedidos}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
                                                         <div class="card">
                                                             <div class="card-body text-center">
-                                                                <div style="text-align:right">
+                                                                <div class="form-check form-check-flat form-check-success">
+                                                                    <label class="form-check-label">
+                                                                        <input type="checkbox" class="form-check-input">
 
-
-                                                                    <a  th:href="@{/administrador/insumo/cargar_insumo(idInsumo=${ins.idInsumo})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
-
-                                                                    <a  th:href="@{/administrador/insumo/eliminar_insumo(idInsumo=${ins.idInsumo},nombreFoto=${ins.fotoInsumo})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
+                                                                    </label>
                                                                 </div>
                                                                 <div >
-                                                                    <img th:src="@{/uploads/}+${ins.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/>
-                                                                    <h4 th:text="${ins.nombreInsumo}"></h4>
-                                                                    <p th:text="${ins.unidadMedidaInsumo}" class="text-muted mb-0">Unidad: Kilos</p>
+                                                                    <img th:src="@{/uploads/}+${ins_pe.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                    <h4 th:text="${ins_pe.idInsumo.nombreInsumo}"></h4>
+                                                                    <p th:text="${ins_pe.idInsumo.unidadMedidaInsumo}" class="text-muted mb-0"></p>
+                                                                    <p th:text="${ins_pe.cantidadInsumo}" class="text-muted mb-0"></p>
 
                                                                 </div>
-                                                                <p th:text="${ins.descripcionInsumo}" class="mt-2 card-text">
-                                                                    Zanahoria especial sabor zanagoria
-                                                                </p>
-                                                                <div class="border-top pt-3">
-                                                                    <div class="row">
-                                                                        <div class="col-12">
 
-                                                                            <h6>Stock actual: </h6><label>[[${ins.stockInsumo}]]</label>
-                                                                        </div>
-                                                                        <div class="col-12">
 
-                                                                            <h6>Stock minimo: </h6><label>[[${ins.minimoStockInsumo}]]</label>
-                                                                        </div>
-                                                                        <div class="col-12">
 
-                                                                            <h6>Stock maximo: </h6><label>[[${ins.maximoStockInsumo}]]</label>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -283,53 +266,85 @@
         
         <script th:src="@{/js/toastDemo.js}"></script>
         <script th:src="@{/js/desktop-notification.js}"></script>-->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="text/javascript" >
+            function agregarInsumoPedido(idReceta) {
+
+            document.getElementById("loader").innerHTML = "<div class='square-box-loader'><div class='square-box-loader-container'><div class='square-box-loader-corner-top'></div> <div class='square-box-loader-corner-bottom'></div></div><div class='square-box-loader-square'></div></div>";
+            //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
+
+            axios.get('http://localhost:8034/cliente/pedirOrden/detalleReceta?idReceta=' + idReceta)
+                    .then(function (response) {
+                    console.log(response);
+                    if (response.data != null) {
+                    document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre del ingrediente</th><th class='text-right'>Cantidad por porción (En Kilogramos)</th></tr></thead><tbody id='contenidoDetalleReceta' ></tbody></table></div>";
+                    }
+                    if (response.data.length != 0) {
+                    var contenido = "";
+                    for (var i = 0; i < response.data.length; i++) {
+                    contenido += "<tr> <td class='pl-0'> " + response.data[i].idInsumo.descripcionInsumo + " </td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'> " + response.data[i].cantidad + " </div></td></tr>";
+                    }
+                    document.getElementById('contenidoDetalleReceta').innerHTML = contenido;
+                    } else {
+                    document.getElementById('loader').innerHTML = '<div class="alert alert-danger" >Sin ingredientes disponibles</div>';
+                    }
+                    })
+                    .catch(function (error) {
+                    // handle error
+                    document.getElementById("loader").innerHTML = '<div class="alert alert-danger" >Error</div>';
+                    })
+                    .finally(function () {
+                    // always executed
+                    });
+            }
+        </script>
         <script type="text/javascript" >
             document.getElementById("div-modificar-foto").setAttribute("style", "display: none");
-
             function ocultarFoto(myRadio) {
 
 
-                if (myRadio.value == "si") {
+            if (myRadio.value == "si") {
 
-                    document.getElementById("div-modificar-foto").setAttribute("style", "display: none");
-                } else if (myRadio.value == "no") {
-                    document.getElementById("div-modificar-foto").setAttribute("style", "display: block");
-
-                }
+            document.getElementById("div-modificar-foto").setAttribute("style", "display: none");
+            } else if (myRadio.value == "no") {
+            document.getElementById("div-modificar-foto").setAttribute("style", "display: block");
+            }
 
             }
         </script>
         <script th:inline="javascript">
 
 
-            var tipoRespuesta = [[${tipoRespuesta}
+            var tipoRespuesta = [[${tipoRespuesta
+            }
             ]];
-                    var respuesta = [[${respuesta}
-                    ]];
+            var respuesta = [[${respuesta
+            }
+            ]];
             if (tipoRespuesta !== null) {
-                switch (tipoRespuesta) {
-                    case 'agregar' :
-                        if (respuesta === 1) {
-                            showSwal('success-message', 'Insumo agregado!', 'se ha registrado el insumo exitosamente');
-                        } else if (respuesta === 0) {
-                            showSwal('warning-message', 'Error!', "No se ha podido agregar el insumo");
-                        }
-                        break;
-                    case 'modificar' :
-                        if (respuesta === 1) {
-                            showSwal('success-message', 'Insumo modificado!', 'se ha registrado el insumo exitosamente');
-                        } else if (respuesta === 0) {
-                            showSwal('warning-message', 'Error!', "No se ha podido modificar el insumo");
-                        }
-                        break;
-                    case 'eliminar' :
-                        if (respuesta === 1) {
-                            showSwal('success-message', 'Insumo eliminado!', 'se ha eliminado el insumo exitosamente');
-                        } else if (respuesta === 0) {
-                            showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
-                        }
-                        break;
-                }
+            switch (tipoRespuesta) {
+            case 'agregar' :
+                    if (respuesta === 1) {
+            showSwal('success-message', 'Insumo agregado!', 'se ha registrado el insumo exitosamente');
+            } else if (respuesta === 0) {
+            showSwal('warning-message', 'Error!', "No se ha podido agregar el insumo");
+            }
+            break;
+            case 'modificar' :
+                    if (respuesta === 1) {
+            showSwal('success-message', 'Insumo modificado!', 'se ha registrado el insumo exitosamente');
+            } else if (respuesta === 0) {
+            showSwal('warning-message', 'Error!', "No se ha podido modificar el insumo");
+            }
+            break;
+            case 'eliminar' :
+                    if (respuesta === 1) {
+            showSwal('success-message', 'Insumo eliminado!', 'se ha eliminado el insumo exitosamente');
+            } else if (respuesta === 0) {
+            showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
+            }
+            break;
+            }
             }
 
 
