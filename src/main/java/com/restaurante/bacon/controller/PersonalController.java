@@ -100,8 +100,8 @@ public class PersonalController {
     public String addPersonal(Model modelo,
             @RequestParam("rutPersonal") String rutPersonal,
             @RequestParam("nombresPersonal") String nombresPersonal,
-            @RequestParam("apepaterno") String apepaterno,
-            @RequestParam("apematerno") String apematerno,
+            @RequestParam("apepaternopersonal") String apepaternopersonal,
+            @RequestParam("apematernopersonal") String apematernopersonal,
             @RequestParam("fechaNacimiento") Date fechaNacimiento,
             @RequestParam("telefonoPersonal") String telefonoPersonal,
             @RequestParam("correopersonal") String correopersonal,
@@ -118,8 +118,8 @@ public class PersonalController {
 
         personal1.setRutPersonal(rutPersonal);
         personal1.setNombresPersonal(nombresPersonal);
-        personal1.setApePaternoPersonal(apepaterno);
-        personal1.setApeMaternoPersonal(apematerno);
+        personal1.setApePaternoPersonal(apepaternopersonal);
+        personal1.setApeMaternoPersonal(apematernopersonal);
         personal1.setFechaNacimientoPersonal(fechaNacimiento);
         personal1.setCelularPersonal(telefonoPersonal);
         personal1.setCorreoPersonal(correopersonal);
