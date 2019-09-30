@@ -1,5 +1,6 @@
 com\restaurante\bacon\dto\Cliente.class
 com\restaurante\bacon\dto\Ingrediente.class
+com\restaurante\bacon\dao\ProcedureQueryCliente.class
 com\restaurante\bacon\dto\procedure\ProcedureDeletetInsumo.class
 com\restaurante\bacon\dto\CategoriaReceta.class
 com\restaurante\bacon\exceptions\IllegalOrphanException.class
@@ -64,3 +65,4 @@ com\restaurante\bacon\dto\RecetaOrden.class
 com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.class
 com\restaurante\bacon\dto\InsumoProveedor.class
 com\restaurante\bacon\dao\ProcedureQueryMesa.class
+com\restaurante\bacon\dao\IClienteDao.class

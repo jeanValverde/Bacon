@@ -42,7 +42,7 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_CLIENTE")
-    private BigDecimal idCliente;
+    private Integer idCliente;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -70,21 +70,21 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(BigDecimal idCliente) {
+    public Cliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
-    public Cliente(BigDecimal idCliente, String nombre, Date fechaIngreso) {
+    public Cliente(Integer idCliente, String nombre, Date fechaIngreso) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.fechaIngreso = fechaIngreso;
     }
 
-    public BigDecimal getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(BigDecimal idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 

@@ -224,7 +224,27 @@
                                                                             <i class="mdi mdi-close"></i>
                                                                         </button>
                                                                         -->
-                                                                        <a  th:href="@{/administrador/mesa/eliminar (idMesa=${mes.idMesa})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
+                                                                        
+                                                                    <button type="button" class="btn btn-danger " data-toggle="modal"  th:attr="data-target='#modal'+${mes.idMesa }" ><i class="mdi mdi-close"></i></button>
+                                                                    <div class="modal fade" th:id="'modal' + ${mes.idMesa}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel-3">Eliminar insumo</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body" id="pruebaModal">
+                                                                                    <p >¿Seguro que desea eliminar el insumo?</p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a id="btn-eliminar" th:href="@{/administrador/mesa/eliminar (idMesa=${mes.idMesa})}" class="btn btn-danger ">Eliminar</a>
+                                                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                     </div>
                                                                     <div >
                                                                         <h6>Número de Mesa: </h6>
@@ -279,7 +299,26 @@
                                                                         <a  th:href="@{/administrador/mesa/cargar_mesa (idMesa=${mes.idMesa})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
                                                                     </td>
                                                                     <td>
-                                                                        <a  th:href="@{/administrador/mesa/eliminar (idMesa=${mes.idMesa})}" class="btn btn-danger "><i class="mdi mdi-close"></i></a>
+                                                                        <button type="button" class="btn btn-danger " data-toggle="modal"  th:attr="data-target='#modal'+${mes.idMesa }" ><i class="mdi mdi-close"></i></button>
+                                                                    <div class="modal fade" th:id="'modal2' + ${mes.idMesa}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel-3">Eliminar insumo</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body" id="pruebaModal">
+                                                                                    <p >¿Seguro que desea eliminar el insumo?</p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a id="btn-eliminar" th:href="@{/administrador/mesa/eliminar (idMesa=${mes.idMesa})}" class="btn btn-danger ">Eliminar</a>
+                                                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -366,6 +405,7 @@
         <script src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
         <script src="@{/js/alerts_personalizado.js}"></script>
         <script src="@{/js/avgrund.js}"></script>
+        <script src="@{/js/modal-demo.js}"></script>
         <!-- End custom js for this page-->
         <!-- plugin js for this page -->
 
@@ -378,33 +418,33 @@
 
         <script th:inline="javascript">
 
-                                                        var tipoRespuesta = [[${tipoRespuesta}]];
-                                                                var respuesta = [[${respuesta}]];
-                                                                if (tipoRespuesta !== null) {
-                                                            switch (tipoRespuesta) {
-                                                                case 'agregar' :
-                                                                    if (respuesta === 1) {
-                                                                        alert("Mesa Agregada correctamente");
-                                                                    } else if (respuesta === 0) {
-                                                                        alert("No se ha podido agregar la mesa");
-                                                                    }
-                                                                    break;
-                                                                case 'modificar' :
-                                                                    if (respuesta === 1) {
-                                                                        alert("Mesa modificada correctamente");
-                                                                    } else if (respuesta === 0) {
-                                                                        alert("No se ha podido modificar la mesa");
-                                                                    }
-                                                                    break;
-                                                                case 'eliminar' :
-                                                                    if (respuesta === 1) {
-                                                                        alert("Mesa eliminada correctamente");
-                                                                    } else if (respuesta === 0) {
-                                                                        alert("No se ha podido eliminar la mesa");
-                                                                    }
-                                                                    break;
-                                                            }
-                                                        }
+            var tipoRespuesta = [[${tipoRespuesta}]];
+            var respuesta = [[${respuesta}]];
+            if (tipoRespuesta !== null) {
+            switch (tipoRespuesta) {
+            case 'agregar' :
+            if (respuesta === 1) {
+            alert("Mesa Agregada correctamente");
+            } else if (respuesta === 0) {
+            alert("No se ha podido agregar la mesa");
+            }
+            break;
+            case 'modificar' :
+            if (respuesta === 1) {
+            alert("Mesa modificada correctamente");
+            } else if (respuesta === 0) {
+            alert("No se ha podido modificar la mesa");
+            }
+            break;
+            case 'eliminar' :
+            if (respuesta === 1) {
+            alert("Mesa eliminada correctamente");
+            } else if (respuesta === 0) {
+            alert("No se ha podido eliminar la mesa");
+            }
+            break;
+            }
+            }
 
 
 
@@ -418,17 +458,17 @@
         <script type="text/javascript">
             function myFunction() {
 
-                var estado = document.getElementById("tipoBusqueda").value;
+            var estado = document.getElementById("tipoBusqueda").value;
 
-                if (estado === "habilitada") {
-                    document.getElementById("filtro").readOnly = true;
-                } else if (estado === "deshabilitada") {
-                    document.getElementById("filtro").readOnly = true;
-                } else if (estado === "numero") {
-                    document.getElementById("filtro").readOnly = false;
-                } else if (estado === "asientos") {
-                    document.getElementById("filtro").readOnly = false;
-                }
+            if (estado === "habilitada") {
+            document.getElementById("filtro").readOnly = true;
+            } else if (estado === "deshabilitada") {
+            document.getElementById("filtro").readOnly = true;
+            } else if (estado === "numero") {
+            document.getElementById("filtro").readOnly = false;
+            } else if (estado === "asientos") {
+            document.getElementById("filtro").readOnly = false;
+            }
             }
         </script>
     </body>
