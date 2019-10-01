@@ -56,5 +56,6 @@ com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.class
 com\restaurante\bacon\dao\ProcedureQueryInsumo.class
 com\restaurante\bacon\config\UserRol.class
 com\restaurante\bacon\dto\RecetaOrden.class
+com\restaurante\bacon\dao\IOrdenCocina.class
 com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.class
 com\restaurante\bacon\dto\InsumoProveedor.class
