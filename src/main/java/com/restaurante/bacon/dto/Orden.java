@@ -8,22 +8,21 @@ package com.restaurante.bacon.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,6 +36,10 @@ public class Orden implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
+      //declarar que el id se usa con una secuencia 
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ORDEN")
+    //declarar la secuencia 
+    @SequenceGenerator(name="SEQ_ORDEN",sequenceName="SEQ_ORDEN", allocationSize=1 )
     @NotNull
     @Column(name = "ID_ORDEN")
     private BigDecimal idOrden;
@@ -64,14 +67,14 @@ public class Orden implements Serializable {
     @Size(max = 250)
     @Column(name = "MOTIVO_ANULACION")
     private String motivoAnulacion;
+    @Column(name = "TIPO_ORDEN")
+    private Short tipoOrden;
     @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE")
     @ManyToOne(optional = false)
     private Cliente idCliente;
     @JoinColumn(name = "ID_ESTADO_ORDEN", referencedColumnName = "ID_ESTADO_ORDEN")
     @ManyToOne(optional = false)
     private EstadoOrden idEstadoOrden;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrden")
-    private Collection<RecetaOrdenada> recetaOrdenadaCollection;
 
     public Orden() {
     }
@@ -145,6 +148,14 @@ public class Orden implements Serializable {
         this.motivoAnulacion = motivoAnulacion;
     }
 
+    public Short getTipoOrden() {
+        return tipoOrden;
+    }
+
+    public void setTipoOrden(Short tipoOrden) {
+        this.tipoOrden = tipoOrden;
+    }
+
     public Cliente getIdCliente() {
         return idCliente;
     }
@@ -159,15 +170,6 @@ public class Orden implements Serializable {
 
     public void setIdEstadoOrden(EstadoOrden idEstadoOrden) {
         this.idEstadoOrden = idEstadoOrden;
-    }
-
-    @XmlTransient
-    public Collection<RecetaOrdenada> getRecetaOrdenadaCollection() {
-        return recetaOrdenadaCollection;
-    }
-
-    public void setRecetaOrdenadaCollection(Collection<RecetaOrdenada> recetaOrdenadaCollection) {
-        this.recetaOrdenadaCollection = recetaOrdenadaCollection;
     }
 
     @Override
@@ -190,5 +192,9 @@ public class Orden implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "com.restaurante.bacon.dto.Orden[ idOrden=" + idOrden + " ]";
+    }
     
 }
