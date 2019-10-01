@@ -30,6 +30,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "ESTADO_ORDEN")
 public class EstadoOrden implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "DESCRIPCION_ESTADO_ORDEN")
+    private String descripcionEstadoOrden;
+
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
@@ -37,11 +43,6 @@ public class EstadoOrden implements Serializable {
     @NotNull
     @Column(name = "ID_ESTADO_ORDEN")
     private BigDecimal idEstadoOrden;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 1)
-    @Column(name = "DESCRIPCION_ESTADO_ORDEN")
-    private String descripcionEstadoOrden;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEstadoOrden")
     private Collection<Orden> ordenCollection;
 
@@ -101,6 +102,8 @@ public class EstadoOrden implements Serializable {
         }
         return true;
     }
+
+   
 
     
 }
