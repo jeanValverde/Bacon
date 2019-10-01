@@ -78,7 +78,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" th:href="@{/cliente/pagar}">
+                                <a class="nav-link" th:href="@{/cliente/pagar/pagar_ordenes}">
                                     <i class="mdi mdi-cash-multiple menu-icon"></i>
                                     <span class="menu-title">Pagar</span></a>
                             </li>
@@ -156,8 +156,11 @@
                                         </div>
                                         <p class="mt-2 card-text" th:text="${receta.descripcionReceta}" >
                                             Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                            Aenean commodo ligula eget dolor. Lorem
+                                            Aenean commodo ligula eget dolor. Lorem 
                                         </p>
+                                        <button type="button" data-toggle="modal" th:onclick="'detalle( ' + ${receta.idReceta} + ')'" data-target="#exampleModal-3" class="btn btn-outline-primary btn-fw">Detalle Ingredientes</button>
+                                        <br/>
+                                        <br/>
                                         <div class="border-top pt-3">
                                             <div class="row">
                                                 <div class="col-6">
@@ -165,7 +168,7 @@
                                                     <p>Duración Preparación</p>
                                                 </div>
                                                 <div class="col-6">
-                                                    <h6 th:text="'$' + ${receta.precioReceta}" >1596</h6>
+                                                    <h6 th:id="'precio-todo-' + ${receta.idReceta}" class="numberToFormat" th:text="${receta.precioReceta}" >1596</h6>
                                                     <p>Precio Receta</p>
                                                 </div>
                                             </div>
@@ -179,7 +182,7 @@
 
                                             </div>
                                         </div>
-                                        <button th:onclick="'d(' + ${receta.idReceta} + ')'" type="button" class="btn btn-primary btn-lg btn-block">
+                                        <button th:onclick="'d(' + ${receta.idReceta} + ',' +  ${receta.cantidadPrepDiariaReceta}  + ')'" type="button" class="btn btn-primary btn-lg btn-block">
                                             <i class="mdi mdi-check-all"></i>                      
                                             Pedir
                                         </button>
@@ -187,8 +190,178 @@
                                 </div>
                                 <!--card fin receta--->
                             </div>
+                            <div class="modal fade" id="exampleModal-3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" style="display: none;" aria-hidden="true">
+                                <div class="modal-dialog modal-xl" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel-3">Ingredientes</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div  class="modal-body" >
+                                            <div id="loader" class="template-demo">
+                                                <div class="square-box-loader">
+                                                    <div class="square-box-loader-container">
+                                                        <div class="square-box-loader-corner-top"></div>
+                                                        <div class="square-box-loader-corner-bottom"></div>
+                                                    </div>
+                                                    <div class="square-box-loader-square"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light" data-dismiss="modal">Listo</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <a class='btn btn-primary btn-lg flotante' href='#' > Finalizar </a>
+                            <a th:if="${orden == true}" class='btn btn-primary btn-lg flotante' data-toggle="modal" data-target="#finalizar" href='#' > Finalizar </a>
+
+                            <div class="modal fade" id="finalizar" tabindex="-1" role="dialog" aria-labelledby="finalizar" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Finalizar</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="col-12 grid-margin stretch-card d-none d-md-flex" style="margin-bottom: 0px;">
+                                                <div class="">
+                                                    <div class="">
+                                                        <h4 class="card-title">Confirma las recetas de cocina y bar que se seleccionaron para continuar con la orden</h4>
+                                                        <p class="card-description">Para seguir seleccionando recetas presiona <code>cancelar</code>
+                                                            <br /><br />
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <ul class="nav nav-tabs nav-tabs-vertical-custom" role="tablist" style="height: 450px">
+                                                                    <li class="nav-item" style="height: 50%">
+                                                                        <a class="nav-link active text-center" id="home-tab-custom" style="border: 0px" data-toggle="tab" href="#home-3" role="tab" aria-controls="home-3" aria-selected="true">
+                                                                            <h1 class="display-1 mt-4">Cocina</h1>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="nav-item">
+                                                                        <a class="nav-link text-center" id="profile-tab-custom" style="border-bottom: 0px;" data-toggle="tab" href="#profile-3" role="tab" aria-controls="profile-3" aria-selected="false">
+                                                                            <h1 class="display-1 mt-4">Bar</h1>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="col-9 col-lg-9">
+                                                                <form class="" action="index.html" method="post">
+                                                                    <div class="tab-content tab-content-vertical tab-content-vertical-custom" style="height: 415px">
+                                                                        <div class="tab-pane fade active show" id="home-3" role="tabpanel" aria-labelledby="home-tab-custom">
+                                                                            <div class="d-flex mt-4">
+                                                                            </div>
+                                                                            <p class="mt-4">
+                                                                                Verifica que las recetas que quieres, la cantidad, precio y total. (Para cambiar la cantidad a pedir puedes seleccionar "+" o "-" según lo que desees)
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                <br /><br />
+                                                                            <div class="table-responsive">
+                                                                                <table class="table">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th class="pt-1 pl-0">
+                                                                                                Receta
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+                                                                                                Precio
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+                                                                                                Categoría
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+                                                                                                Cantidad
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+                                                                                                Total
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="contenidoFinalizar" >
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="tab-pane fade" id="profile-3" role="tabpanel" aria-labelledby="profile-tab-custom">
+                                                                            <div class="d-flex mt-4">
+                                                                            </div>
+                                                                            <p class="mt-4">
+                                                                                <!---borrar--->
+                                                                                Verifica que las recetas que quieres, la cantidad, precio y total. (Para cambiar la cantidad a pedir puedes seleccionar "+" o "-" según lo que desees)
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                                                <br /><br />
+                                                                            <div class="table-responsive">
+                                                                                <table class="table">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th class="pt-1 pl-0">
+                                                                                                Receta
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+                                                                                                Precio
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+                                                                                                Categoría
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+                                                                                                Cantidad
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+                                                                                                Total
+                                                                                            </th>
+                                                                                            <th class="pt-1">
+
+                                                                                            </th>
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody id="contenidoFinalizarBar" >
+
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="submit" name="button" class="btn btn-primary">Confirmar pedidos</button>
+                                                                    <button id="totalOrden"  type="button" class="btn btn-outline-primary btn-fw">Total: $</button>
+                                                                    <br/><br/>
+                                                                    <input type="text" class="form-control form-control-lg" placeholder="Escribe una observación para la orden" aria-label="Escribe una observación para la orden" style="margin-bottom: 0px;">
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
 
 
@@ -225,8 +398,13 @@
         <script src="../../../../js/modal-demo.js"></script>
         <!-- endinject -->
         <!-- plugin js for this page -->
+        <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+        <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
         <!-- End plugin js for this page -->
         <!-- Custom js for this page-->
+        <script th:src="@{/js/alerts.js}"></script>
+        <script th:src="@{/js/avgrund.js}"></script>
+        <script th:src="@{/js/alerts_personalizado.js}"></script>
         <!-- End custom js for this page-->
         <style type="text/css" >
             .flotante {
@@ -277,7 +455,345 @@
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
 
+<<<<<<< HEAD
   
+=======
+        <script type="text/javascript" >
+
+            function d(idReceta, cantidad) {
+
+                var input = document.getElementById('pedido-' + idReceta);
+
+                if (input.value < 1 || input.value == null || input.value == 0) {
+                    input.setAttribute("class", "form-control is-invalid");
+
+                } else {
+                    if (input.value > cantidad) {
+                        input.setAttribute("class", "form-control is-invalid");
+                    } else {
+                        input.setAttribute("class", "form-control is-valid");
+                        Swal.fire({
+                            title: '¿Está seguro que desea pedir esta receta?',
+                            text: "Si pide esta receta solo podra anularlo solicitando asistencia en botón superior izquierdo de la pantalla",
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: '!Si, Pedir!'
+                        }).then((result) => {
+                            if (result.value) {
+                                location.href = "/cliente/pedirOrden/agregarRecetaOrden?idReceta=" + idReceta + "&cantidad=" + input.value;
+                            }
+                        })
+                    }
+                }
+            }
+
+        </script>
+
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="text/javascript" >
+            function detalle(idReceta) {
+
+                document.getElementById("loader").innerHTML = "<div class='square-box-loader'><div class='square-box-loader-container'><div class='square-box-loader-corner-top'></div> <div class='square-box-loader-corner-bottom'></div></div><div class='square-box-loader-square'></div></div>";
+
+                //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
+
+                axios.get('http://localhost:8034/cliente/pedirOrden/detalleReceta?idReceta=' + idReceta)
+                        .then(function (response) {
+                            console.log(response);
+                            if (response.data != null) {
+                                document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre del ingrediente</th><th class='text-right'>Cantidad por porción (En Kilogramos)</th></tr></thead><tbody id='contenidoDetalleReceta' ></tbody></table></div>";
+                            }
+                            if (response.data.length != 0) {
+                                var contenido = "";
+                                for (var i = 0; i < response.data.length; i++) {
+                                    contenido += "<tr> <td class='pl-0'> " + response.data[i].idInsumo.descripcionInsumo + " </td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'> " + response.data[i].cantidad + " </div></td></tr>";
+                                }
+                                document.getElementById('contenidoDetalleReceta').innerHTML = contenido;
+                            } else {
+                                document.getElementById('loader').innerHTML = '<div class="alert alert-danger" >Sin ingredientes disponibles</div>';
+                            }
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            document.getElementById("loader").innerHTML = '<div class="alert alert-danger" >Error</div>';
+                        })
+                        .finally(function () {
+                            // always executed
+                        });
+            }
+        </script>
+
+        <script type="text/javascript" >
+
+            finalizar(0, 'contenidoFinalizar', false);
+
+            finalizar(1, 'contenidoFinalizarBar', true);
+
+            function finalizar(tipo, carga, isCarga) {
+
+                document.getElementById("loader").innerHTML = "<div class='square-box-loader'><div class='square-box-loader-container'><div class='square-box-loader-corner-top'></div> <div class='square-box-loader-corner-bottom'></div></div><div class='square-box-loader-square'></div></div>";
+
+                //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
+
+                axios.get('http://localhost:8034/cliente/pedirOrden/finalizar?tipo=' + tipo)
+                        .then(function (response) {
+                            console.log(response);
+                            var precioTotalOrden = 0;
+                            var contenido = "";
+                            for (var i = 0; i < response.data.length; i++) {
+                                var categoria = "";
+                                if (response.data[i].tipo == 0) {
+                                    categoria = response.data[i].receta.idCategoriaReceta.descripcionCategoriaReceta
+                                } else {
+                                    categoria = "Fría"
+                                }
+                                contenido += "<tr id='borrar-" + response.data[i].receta.idReceta + "' ><td class='py-1 pl-0'><div class='d-flex align-items-center'> <img src='http://localhost:8034/uploads/" + response.data[i].receta.foto + "' alt='profile'> "
+                                        + "<div class='ml-3'><p class='mb-0'>" + response.data[i].receta.nombreReceta + "</p></div> "
+                                        + "</div></td><td class='numberToFormatFinalizar' id='precio-finalizar-cocina-" + response.data[i].receta.idReceta + "' > " + response.data[i].receta.precioReceta + " </td> <td> <div class='badge badge-outline-primary'> " + categoria + " </div> </td> "
+                                        + "<td><div id='cantidad-" + response.data[i].receta.idReceta + "'  class='badge badge-pill badge-primary ml-3'>" + response.data[i].cantidad + "</div> </td> <td><div class='badge badge-outline-primary numberToFormatFinalizar' id='total-finalizar-cocina-" + response.data[i].receta.idReceta + "' >" + response.data[i].precioTotal + "</div> "
+                                        + "</td> <td> <div class='btn-group role='group' aria-label='Basic example'> <button onclick=' restar( " + response.data[i].receta.idReceta + " , " + response.data[i].receta.precioReceta + " ) ' type='button' class='btn btn-primary'> "
+                                        + "<i class='mdi mdi-minus'></i></button> <button onclick='sumar( " + response.data[i].receta.idReceta + " , " + response.data[i].receta.cantidadPrepDiariaReceta + " , " + response.data[i].receta.precioReceta + " )' type='button' class='btn btn-primary'> <i class='mdi mdi-plus'></i> "
+                                        + "</button> <button onclick='borrar( " + response.data[i].receta.idReceta + " , " + response.data[i].receta.precioReceta + " )' type='button' class='btn btn-primary'>  <i class='mdi mdi-close-circle-outline'></i> </button></div> </td> </tr>";
+                                precioTotalOrden = precioTotalOrden + response.data[i].precioTotal;
+                            }
+
+                            if (tipo == 0) {
+                                sessionStorage.setItem('valorCocina', precioTotalOrden);
+                            } else {
+                                sessionStorage.setItem('valorBar', precioTotalOrden);
+                            }
+
+                            calularTotal();
+
+                            document.getElementById(carga).innerHTML = contenido;
+                            if (isCarga) {
+                                formatNumbers('finalizar');
+                            }
+                        })
+                        .catch(function (error) {
+                            // handle error
+
+                        })
+                        .finally(function () {
+                            // always executed
+
+                        });
+            }
+
+            function sumar(idReceta, limite, precio) {
+                var valorCantidad = document.getElementById('cantidad-' + idReceta).innerHTML;
+
+
+                var integer = parseInt(valorCantidad, 10);
+
+                var lim = parseInt(limite, 10);
+
+                var cantidad = integer + 1;
+
+                var valorActual = integer * precio;
+
+                if (cantidad > limite) {
+                    mensaje('No puedes superar la máxima cantidad de stock (' + limite + ')');
+                } else {
+                    console.log(cantidad);
+                    document.getElementById('cantidad-' + idReceta).innerHTML = cantidad;
+
+                    var precioBase = parseInt(precio, 10);
+
+                    var precioNuevo = precioBase * cantidad;
+
+                    document.getElementById('total-finalizar-cocina-' + idReceta).innerHTML = dar_formato(precioNuevo);
+
+                    var totalOrden = sessionStorage.getItem('TOTAL_ORDEN');
+
+                    totalOrden = parseInt(totalOrden, 10);
+
+                    totalOrden = totalOrden - valorActual;
+
+                    totalOrden = totalOrden + precioNuevo;
+
+                    document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(totalOrden);
+
+                    sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
+
+                }
+            }
+
+            function restar(idReceta, precio) {
+                var valorCantidad = document.getElementById('cantidad-' + idReceta).innerHTML;
+
+                var integer = parseInt(valorCantidad, 10);
+
+                var cantidad = integer - 1;
+
+                var valorActual = integer * precio;
+
+                if (cantidad < 1) {
+                    mensaje('No puede ser menor a (1)');
+                } else {
+                    document.getElementById('cantidad-' + idReceta).innerHTML = cantidad;
+
+                    var precioBase = parseInt(precio, 10);
+
+                    var precioNuevo = precioBase * cantidad;
+
+                    document.getElementById('total-finalizar-cocina-' + idReceta).innerHTML = dar_formato(precioNuevo);
+
+                    var totalOrden = sessionStorage.getItem('TOTAL_ORDEN');
+
+                    totalOrden = parseInt(totalOrden, 10);
+
+                    totalOrden = totalOrden - valorActual;
+
+                    totalOrden = totalOrden + precioNuevo;
+
+                    document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(totalOrden);
+
+                    sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
+
+
+                }
+            }
+
+            function borrar(idReceta, precio) {
+                Swal.fire({
+                    title: '¿Está seguro que desea eliminar esta receta de su pedido?',
+                    text: "Si selecciona eliminar debe confirmar el pedido una vez eliminada la recera",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '!Si, Eliminar!'
+                }).then((result) => {
+                    if (result.value) {
+                        var valorCantidad = document.getElementById('cantidad-' + idReceta).innerHTML;
+                        var borrar = document.getElementById('borrar-' + idReceta).remove();
+                        var cantidadBorrada = parseInt(valorCantidad, 10);
+
+                        var valorActual = parseInt(precio, 10);
+                        //5000
+                        //2 2000 
+                        var totalDescuento = valorActual * cantidadBorrada;
+                        //4000
+                        var totalOrden = sessionStorage.getItem('TOTAL_ORDEN');
+                        //5000
+                        totalOrden = parseInt(totalOrden, 10);
+
+                        totalOrden = totalOrden - totalDescuento;
+                        //4000 - 5000 = 1000
+                        document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(totalOrden);
+
+                        sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
+
+                    }
+                })
+
+            }
+
+            function calularTotal() {
+                //funcion para calcular el total
+                var cocina = sessionStorage.getItem('valorCocina');
+                var valorCocina = parseInt(cocina, 10);
+                var bar = sessionStorage.getItem('valorBar');
+                var valorBar = parseInt(bar, 10);
+                var total = valorCocina + valorBar;
+
+                document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(total);
+
+                sessionStorage.setItem('TOTAL_ORDEN', total);
+
+            }
+            function mensaje(mensaje) {
+                Swal.fire({
+                    type: 'error',
+                    title: 'Aviso',
+                    text: mensaje
+                })
+            }
+
+
+            function dar_formato(num) {
+
+                var cadena = "";
+                var aux;
+
+                var cont = 1, m, k;
+
+                if (num < 0)
+                    aux = 1;
+                else
+                    aux = 0;
+
+                num = num.toString();
+
+                for (m = num.length - 1; m >= 0; m--) {
+
+                    cadena = num.charAt(m) + cadena;
+
+                    if (cont % 3 == 0 && m > aux)
+                        cadena = "." + cadena;
+                    else
+                        cadena = cadena;
+
+                    if (cont == 3)
+                        cont = 1;
+                    else
+                        cont++;
+
+                }
+
+                cadena = cadena.replace(/.,/, ",");
+
+                return cadena;
+
+            }
+
+            function formatNumbers(tipo) {
+
+                if (tipo == 'todo') {
+                    var elements = document.getElementsByClassName('numberToFormat');
+                    for (var i = 0; i < elements.length; i++) {
+                        var valor = elements[i].innerHTML.trim();
+                        if (tipo == 'todo') {
+                            document.getElementById(elements[i].id).innerHTML = "$" + dar_formato(valor);
+                        } else {
+                            document.getElementById(elements[i].id).innerHTML = dar_formato(valor);
+                        }
+
+                        //elements[i].innerHTML = ;
+                    }
+                } else {
+                    var elements = document.getElementsByClassName('numberToFormatFinalizar');
+                    for (var i = 0; i < elements.length; i++) {
+                        var valor = elements[i].innerHTML.trim();
+                        if (tipo == 'todo') {
+                            document.getElementById(elements[i].id).innerHTML = "$" + dar_formato(valor);
+                        } else {
+                            document.getElementById(elements[i].id).innerHTML = dar_formato(valor);
+                        }
+
+                        //elements[i].innerHTML = ;
+                    }
+                }
+
+            }
+
+            formatNumbers('todo');
+
+        </script>
+
+        <script type="text/javascript" th:if="${isMensaje == 1}" >
+            Swal.fire(
+                    '[[${nombreMensaje}]]',
+                    '[[${mensaje}]]',
+                    'success'
+                    )
+
+        </script>
+
+>>>>>>> Jean
     </body>
 
 </html>

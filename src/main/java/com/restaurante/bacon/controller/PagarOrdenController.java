@@ -35,10 +35,10 @@ public class PagarOrdenController {
     public String pagarOrdenes(Model modelo,HttpSession sesion) {
      
         //sesion 
-        Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
+       // Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
         
         List<Orden> ordenes = new ArrayList<Orden>();
-        ordenes = this.pagarOrdenService.listarOrdenes(cliente.getIdCliente());
+        ordenes = this.pagarOrdenService.listarOrdenes(BigDecimal.valueOf(1));
    
    
         
