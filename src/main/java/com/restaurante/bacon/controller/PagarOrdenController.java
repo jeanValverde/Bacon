@@ -38,7 +38,7 @@ public class PagarOrdenController {
        // Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
         
         List<Orden> ordenes = new ArrayList<Orden>();
-        ordenes = this.pagarOrdenService.listarOrdenes(BigDecimal.valueOf(1));
+        ordenes = this.pagarOrdenService.listarOrdenes((BigDecimal.valueOf(1)));
    
    
         

@@ -54,19 +54,19 @@ public class ProcedureQueryOrden {
             // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
                 Orden ordenes = new Orden();
-                ordenes.setIdOrden(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                ordenes.setIdOrden((Integer.parseInt(result[0].toString())));
                 ordenes.setDescripcion(String.valueOf(Integer.parseInt(result[1].toString())));
-                ordenes.setSubTotal(BigInteger.valueOf(Integer.parseInt(result[2].toString())));
-                ordenes.setIva(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
-                ordenes.setTotalOrden(BigInteger.valueOf(Integer.parseInt(result[4].toString())));
-                ordenes.setTiempoPreparacion(BigInteger.valueOf(Integer.parseInt(result[5].toString())));
+                ordenes.setSubTotal((Integer.parseInt(result[2].toString())));
+                ordenes.setIva((Integer.parseInt(result[3].toString())));
+                ordenes.setTotalOrden((Integer.parseInt(result[4].toString())));
+                ordenes.setTiempoPreparacion((Integer.parseInt(result[5].toString())));
                 ordenes.setMotivoAnulacion(String.valueOf(Integer.parseInt(result[6].toString())));
                 
                 Cliente clientes = new Cliente();
-                clientes.setIdCliente(BigDecimal.valueOf(Integer.parseInt(result[7].toString())));
+                clientes.setIdCliente((BigDecimal.valueOf(Integer.parseInt(result[7].toString()))));
                 
                 EstadoOrden estadoOrden = new EstadoOrden();
-                estadoOrden.setIdEstadoOrden(BigDecimal.valueOf(Integer.parseInt(result[8].toString())));
+                estadoOrden.setIdEstadoOrden((BigDecimal.valueOf(Integer.parseInt(result[8].toString()))));
                 
               
                 

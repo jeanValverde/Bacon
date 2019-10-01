@@ -52,7 +52,7 @@ public class Orden implements Serializable {
 
     @NotNull
     @Column(name = "ID_ORDEN")
-    private BigDecimal idOrden;
+    private Integer idOrden;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
@@ -61,19 +61,19 @@ public class Orden implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "SUB_TOTAL")
-    private BigInteger subTotal;
+    private Integer subTotal;
     @Basic(optional = false)
     @NotNull
     @Column(name = "IVA")
-    private BigInteger iva;
+    private Integer iva;
     @Basic(optional = false)
     @NotNull
     @Column(name = "TOTAL_ORDEN")
-    private BigInteger totalOrden;
+    private Integer totalOrden;
     @Basic(optional = false)
     @NotNull
     @Column(name = "TIEMPO_PREPARACION")
-    private BigInteger tiempoPreparacion;
+    private Integer tiempoPreparacion;
     @Size(max = 250)
     @Column(name = "MOTIVO_ANULACION")
     private String motivoAnulacion;
@@ -94,11 +94,15 @@ public class Orden implements Serializable {
     public Orden() {
     }
 
-    public Orden(BigDecimal idOrden) {
+    public Orden(Integer idOrden) {
         this.idOrden = idOrden;
     }
 
-    public Orden(BigDecimal idOrden, String descripcion, BigInteger subTotal, BigInteger iva, BigInteger totalOrden, BigInteger tiempoPreparacion,String motivoAnulacion) {
+
+   
+
+    public Orden(Integer idOrden, String descripcion, Integer subTotal, Integer iva, Integer totalOrden, Integer tiempoPreparacion) {
+
         this.idOrden = idOrden;
         this.descripcion = descripcion;
         this.subTotal = subTotal;
@@ -109,11 +113,11 @@ public class Orden implements Serializable {
        
     }
 
-    public BigDecimal getIdOrden() {
+    public Integer getIdOrden() {
         return idOrden;
     }
 
-    public void setIdOrden(BigDecimal idOrden) {
+    public void setIdOrden(Integer idOrden) {
         this.idOrden = idOrden;
     }
 
@@ -125,35 +129,35 @@ public class Orden implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public BigInteger getSubTotal() {
+    public Integer getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(BigInteger subTotal) {
+    public void setSubTotal(Integer subTotal) {
         this.subTotal = subTotal;
     }
 
-    public BigInteger getIva() {
+    public Integer getIva() {
         return iva;
     }
 
-    public void setIva(BigInteger iva) {
+    public void setIva(Integer iva) {
         this.iva = iva;
     }
 
-    public BigInteger getTotalOrden() {
+    public Integer getTotalOrden() {
         return totalOrden;
     }
 
-    public void setTotalOrden(BigInteger totalOrden) {
+    public void setTotalOrden(Integer totalOrden) {
         this.totalOrden = totalOrden;
     }
 
-    public BigInteger getTiempoPreparacion() {
+    public Integer getTiempoPreparacion() {
         return tiempoPreparacion;
     }
 
-    public void setTiempoPreparacion(BigInteger tiempoPreparacion) {
+    public void setTiempoPreparacion(Integer tiempoPreparacion) {
         this.tiempoPreparacion = tiempoPreparacion;
     }
 

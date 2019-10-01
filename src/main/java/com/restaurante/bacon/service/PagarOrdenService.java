@@ -34,7 +34,7 @@ public class PagarOrdenService {
         return this.procedureQueryOrden.listarOrdenes(idCliente);
     }
         
-            public Orden retornarOrdenById(BigDecimal  idOrden){
+            public Orden retornarOrdenById(Integer  idOrden){
         Optional<Orden> optinalEntity =  pagarOrdenDao.findById(idOrden);
         Orden orden = optinalEntity.get();
         return orden;

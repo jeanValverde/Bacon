@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
  * @author Felipe
  */
 @Repository
-public interface IPagarOrdenDao extends JpaRepository<Orden, BigDecimal>{
+public interface IPagarOrdenDao extends JpaRepository<Orden, Integer>{
     
 }

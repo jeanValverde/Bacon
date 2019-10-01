@@ -217,7 +217,7 @@
                                 </div>
                             </div>
 
-                            <a th:if="${orden == true}" class='btn btn-primary btn-lg flotante' data-toggle="modal" data-target="#finalizar" href='#' > Finalizar </a>
+                            <a th:if="${orden == true}" class='btn btn-primary btn-lg flotante' data-toggle="modal" data-target="#finalizar" href='#' >Finalizar</a>
 
                             <div class="modal fade" id="finalizar" tabindex="-1" role="dialog" aria-labelledby="finalizar" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
@@ -249,6 +249,11 @@
                                                                         </a>
                                                                     </li>
                                                                 </ul>
+                                                                <div id="loaderSesion" class="dot-opacity-loader" style="visibility: hidden;" >
+                                                                    <span></span>
+                                                                    <span></span>
+                                                                    <span></span>
+                                                                </div>
                                                             </div>
                                                             <div class="col-9 col-lg-9">
                                                                 <form class="" action="index.html" method="post">
@@ -418,6 +423,13 @@
                 color: rgb(255, 255, 255);
                 background-color: rgb(98, 1, 237);
                 border-color: rgb(98, 1, 237);
+            }
+
+            .flotanteOtro{
+                display:scroll;
+                position: fixed;
+                bottom: 10%;
+                right: 40%;
             }
         </style>
 
@@ -618,6 +630,8 @@
 
                     sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
 
+                    cambiar_cantidad_session(idReceta, cantidad);
+
                 }
             }
 
@@ -653,6 +667,7 @@
 
                     sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
 
+                    cambiar_cantidad_session(idReceta, cantidad);
 
                 }
             }
@@ -686,7 +701,7 @@
                         document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(totalOrden);
 
                         sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
-
+                        borrar_receta_sesion(idReceta);
                     }
                 })
 
@@ -791,6 +806,63 @@
                     'success'
                     )
 
+        </script>
+
+<<<<<<< HEAD
+>>>>>>> Jean
+=======
+        <script type="text/javascript" >
+
+            function cambiar_cantidad_session(idReceta, cantidad) {
+
+                document.getElementById("loaderSesion").style.visibility = "none";
+
+
+                axios.get('http://localhost:8034/cliente/pedirOrden/editarCantidadSesion?idReceta=' + idReceta + '&cantidad=' + cantidad)
+                        .then(function (response) {
+                            console.log(response);
+                            if (response.data == true) {
+                                document.getElementById('loaderSesion').style.visibility = "hidden";
+                            }
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Aviso',
+                                text: 'No se pudo cambiar la cantidad de la receta: ' + idReceta
+                            })
+                        })
+                        .finally(function () {
+                            // always executed
+                        });
+            }
+
+
+            function borrar_receta_sesion(idReceta) {
+
+                document.getElementById("loaderSesion").style.visibility = "none";
+
+
+                axios.get('http://localhost:8034/cliente/pedirOrden/eliminarReceraSesion?idReceta=' + idReceta)
+                        .then(function (response) {
+                            console.log(response);
+                            if (response.data == true) {
+                                document.getElementById('loaderSesion').style.visibility = "hidden";
+                            }
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            Swal.fire({
+                                type: 'error',
+                                title: 'Aviso',
+                                text: 'No se pudo eliminar la receta de la receta: ' + idReceta + ' presione F5'
+                            })
+                        })
+                        .finally(function () {
+                            // always executed
+                        });
+            }
         </script>
 
 >>>>>>> Jean

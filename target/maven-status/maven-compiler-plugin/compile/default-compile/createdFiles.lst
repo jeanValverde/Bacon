@@ -11,6 +11,7 @@ com\restaurante\bacon\service\RecetaService.class
 com\restaurante\bacon\dao\IRolDao.class
 com\restaurante\bacon\dto\procedure\ProcedureInsertProveedor.class
 com\restaurante\bacon\dao\IRecetaDao.class
+com\restaurante\bacon\service\OrdenCocinaService.class
 com\restaurante\bacon\dao\IInsumoDao.class
 com\restaurante\bacon\controller\PersonalInsumo.class
 com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.class
@@ -31,6 +32,7 @@ com\restaurante\bacon\dao\IPersonalDao.class
 com\restaurante\bacon\controller\PersonalController.class
 com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.class
 com\restaurante\bacon\dao\ProcedureQueryReceta.class
+com\restaurante\bacon\dao\IRecetaOrdenadaCocina.class
 com\restaurante\bacon\config\WebConfig.class
 com\restaurante\bacon\dao\ProcedureQuery.class
 com\restaurante\bacon\dto\procedure\ProcedureInsertInsumo.class
@@ -66,5 +68,6 @@ com\restaurante\bacon\dao\ProcedureQueryInsumo.class
 com\restaurante\bacon\config\UserRol.class
 com\restaurante\bacon\controller\ProveedorController.class
 com\restaurante\bacon\dto\RecetaOrden.class
+com\restaurante\bacon\dao\IOrdenCocina.class
 com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.class
 com\restaurante\bacon\dto\InsumoProveedor.class

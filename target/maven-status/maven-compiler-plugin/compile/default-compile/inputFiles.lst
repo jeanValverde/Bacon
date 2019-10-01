@@ -2,6 +2,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\ClienteIn
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\exceptions\NonexistentEntityException.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoCliente.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Ingrediente.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IOrdenCocina.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\ControlCaja.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureDeletetInsumo.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrdenada.java
@@ -29,6 +30,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProveedor.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Notificacion.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IRecetaOrdenadaCocina.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryInsumo.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Insumo.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ICategoriaRecetaDao.java
@@ -55,6 +57,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalP
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\Orden.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IPersonalDao.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\service\OrdenCocinaService.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoOrden.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrden.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IIngredienteDao.java
