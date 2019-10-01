@@ -30,8 +30,8 @@ public class PagarOrdenService {
     @Autowired
     ProcedureQueryOrden procedureQueryOrden;
     
-        public List<Orden> listarOrdenes(){
-        return this.procedureQueryOrden.listarInsumosPedidos();
+        public List<Orden> listarOrdenes(BigDecimal idCliente){
+        return this.procedureQueryOrden.listarOrdenes(idCliente);
     }
         
             public Orden retornarOrdenById(BigDecimal  idOrden){

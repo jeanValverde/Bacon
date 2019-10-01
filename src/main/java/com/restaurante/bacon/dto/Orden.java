@@ -76,7 +76,13 @@ public class Orden implements Serializable {
     @JoinColumn(name = "ID_ESTADO_ORDEN", referencedColumnName = "ID_ESTADO_ORDEN")
     @ManyToOne(optional = false)
     private EstadoOrden idEstadoOrden;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrden")
+    
+    @Column(name = "TIPO_ORDEN")
+    private BigInteger tipoOrden;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 250)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipo_orden")
     private Collection<RecetaOrdenada> recetaOrdenadaCollection;
 
     public Orden() {
@@ -86,13 +92,15 @@ public class Orden implements Serializable {
         this.idOrden = idOrden;
     }
 
-    public Orden(BigDecimal idOrden, String descripcion, BigInteger subTotal, BigInteger iva, BigInteger totalOrden, BigInteger tiempoPreparacion) {
+    public Orden(BigDecimal idOrden, String descripcion, BigInteger subTotal, BigInteger iva, BigInteger totalOrden, BigInteger tiempoPreparacion,String motivoAnulacion, BigInteger tipoOrden) {
         this.idOrden = idOrden;
         this.descripcion = descripcion;
         this.subTotal = subTotal;
         this.iva = iva;
         this.totalOrden = totalOrden;
         this.tiempoPreparacion = tiempoPreparacion;
+        this.motivoAnulacion = motivoAnulacion;
+        this.tipoOrden = tipoOrden;
     }
 
     public BigDecimal getIdOrden() {
@@ -165,6 +173,14 @@ public class Orden implements Serializable {
 
     public void setIdEstadoOrden(EstadoOrden idEstadoOrden) {
         this.idEstadoOrden = idEstadoOrden;
+    }
+    
+        public BigInteger getTipoOrden() {
+        return tipoOrden;
+    }
+
+    public void setTipoOrden(BigInteger TipoOrden) {
+        this.tipoOrden= tipoOrden;
     }
 
     @XmlTransient

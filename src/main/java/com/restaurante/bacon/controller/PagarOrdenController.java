@@ -5,11 +5,13 @@
  */
 package com.restaurante.bacon.controller;
 
+import com.restaurante.bacon.dto.Cliente;
 import com.restaurante.bacon.dto.Orden;
 import com.restaurante.bacon.service.PagarOrdenService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,14 +32,14 @@ public class PagarOrdenController {
   
      
     @RequestMapping("/pagar_ordenes")
-    public String pagarOrdenes(Model modelo, @RequestParam("idOrden") BigDecimal idOrden) {
+    public String pagarOrdenes(Model modelo,HttpSession sesion) {
      
         //sesion 
-        
-       
+        Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
         
         List<Orden> ordenes = new ArrayList<Orden>();
-        ordenes = this.pagarOrdenService.listarOrdenes();
+        ordenes = this.pagarOrdenService.listarOrdenes(cliente.getIdCliente());
+   
    
         
    
