@@ -22,7 +22,6 @@ import javax.persistence.NamedQuery;
 
 import javax.persistence.OneToMany;
 
-
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -42,13 +41,10 @@ public class Orden implements Serializable {
     @Id
     @Basic(optional = false)
 
-    
-   
-
-      //declarar que el id se usa con una secuencia 
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ORDEN")
+    //declarar que el id se usa con una secuencia 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ORDEN")
     //declarar la secuencia 
-    @SequenceGenerator(name="SEQ_ORDEN",sequenceName="SEQ_ORDEN", allocationSize=1 )
+    @SequenceGenerator(name = "SEQ_ORDEN", sequenceName = "SEQ_ORDEN", allocationSize = 1)
 
     @NotNull
     @Column(name = "ID_ORDEN")
@@ -86,20 +82,12 @@ public class Orden implements Serializable {
     @ManyToOne(optional = false)
     private EstadoOrden idEstadoOrden;
 
-    
-   
-    
-
-
     public Orden() {
     }
 
     public Orden(Integer idOrden) {
         this.idOrden = idOrden;
     }
-
-
-   
 
     public Orden(Integer idOrden, String descripcion, Integer subTotal, Integer iva, Integer totalOrden, Integer tiempoPreparacion) {
 
@@ -110,7 +98,7 @@ public class Orden implements Serializable {
         this.totalOrden = totalOrden;
         this.tiempoPreparacion = tiempoPreparacion;
         this.motivoAnulacion = motivoAnulacion;
-       
+
     }
 
     public Integer getIdOrden() {
@@ -192,11 +180,9 @@ public class Orden implements Serializable {
     public void setIdEstadoOrden(EstadoOrden idEstadoOrden) {
         this.idEstadoOrden = idEstadoOrden;
     }
-    
-  
 
     public void setTipoOrden(BigInteger TipoOrden) {
-        this.tipoOrden= tipoOrden;
+        this.tipoOrden = tipoOrden;
     }
 
     @Override
@@ -223,5 +209,5 @@ public class Orden implements Serializable {
     public String toString() {
         return "com.restaurante.bacon.dto.Orden[ idOrden=" + idOrden + " ]";
     }
-    
+
 }

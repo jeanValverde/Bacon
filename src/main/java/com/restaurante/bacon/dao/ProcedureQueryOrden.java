@@ -42,7 +42,7 @@ public class ProcedureQueryOrden {
             query.registerStoredProcedureParameter("cursor_ordenes", Class.class, ParameterMode.REF_CURSOR);
             
             // Configuramos el valor de entrada
-            query.setParameter("P_ID_CLIENTE", idCliente);
+            query.setParameter("p_id_cliente", idCliente);
 
             
             query.execute();
@@ -51,24 +51,27 @@ public class ProcedureQueryOrden {
             List<Object[]> results = query.getResultList();
             List<Orden> orden = new ArrayList<Orden>();
             
+            
             // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
                 Orden ordenes = new Orden();
                 ordenes.setIdOrden((Integer.parseInt(result[0].toString())));
-                ordenes.setDescripcion(String.valueOf(Integer.parseInt(result[1].toString())));
+                ordenes.setDescripcion(result[1].toString());
                 ordenes.setSubTotal((Integer.parseInt(result[2].toString())));
                 ordenes.setIva((Integer.parseInt(result[3].toString())));
                 ordenes.setTotalOrden((Integer.parseInt(result[4].toString())));
                 ordenes.setTiempoPreparacion((Integer.parseInt(result[5].toString())));
-                ordenes.setMotivoAnulacion(String.valueOf(Integer.parseInt(result[6].toString())));
+                ordenes.setMotivoAnulacion(result[6].toString());
+                ordenes.setTipoOrden(BigInteger.valueOf(Integer.parseInt(result[8].toString())));
                 
                 Cliente clientes = new Cliente();
-                clientes.setIdCliente((BigDecimal.valueOf(Integer.parseInt(result[7].toString()))));
-                
-                EstadoOrden estadoOrden = new EstadoOrden();
-                estadoOrden.setIdEstadoOrden((BigDecimal.valueOf(Integer.parseInt(result[8].toString()))));
-                
-              
+                clientes.setNombre(result[1].toString());
+//                clientes.setIdCliente((BigDecimal.valueOf(Integer.parseInt(result[8].toString()))));
+//                
+//                EstadoOrden estadoOrden = new EstadoOrden();
+//                estadoOrden.setIdEstadoOrden((BigDecimal.valueOf(Integer.parseInt(result[9].toString()))));
+//                
+//              
                 
               
                 orden.add(ordenes); //.add(insumo_pedido);

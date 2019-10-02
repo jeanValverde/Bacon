@@ -36,9 +36,11 @@ public class PagarOrdenController {
      
         //sesion 
        // Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
-        
         List<Orden> ordenes = new ArrayList<Orden>();
         ordenes = this.pagarOrdenService.listarOrdenes((BigDecimal.valueOf(1)));
+        
+         modelo.addAttribute("ordenes", ordenes);
+        
    
    
         

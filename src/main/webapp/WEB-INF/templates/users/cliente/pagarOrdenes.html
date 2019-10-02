@@ -85,266 +85,193 @@
                         </ul>
                     </div>
                 </nav>
-                
-                 <a th:if="${orden == true}" class='btn btn-primary btn-lg flotante' data-toggle="modal" data-target="#finalizar" href='#' >Finalizar</a>
-                 <div class="modal fade" id="finalizar" tabindex="-1" role="dialog" aria-labelledby="finalizar" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Finalizar</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="col-12 grid-margin stretch-card d-none d-md-flex" style="margin-bottom: 0px;">
-                                                <div class="">
-                                                    <div class="">
-                                                        <h4 class="card-title">Confirma las recetas de cocina y bar que se seleccionaron para continuar con la orden</h4>
-                                                        <p class="card-description">Para seguir seleccionando recetas presiona <code>cancelar</code>
-                                                            <br /><br />
-                                                        <div class="row">
-                                                            <div class="col-3">
-                                                                <ul class="nav nav-tabs nav-tabs-vertical-custom" role="tablist" style="height: 450px">
-                                                                    <li class="nav-item" style="height: 50%">
-                                                                        <a class="nav-link active text-center" id="home-tab-custom" style="border: 0px" data-toggle="tab" href="#home-3" role="tab" aria-controls="home-3" aria-selected="true">
-                                                                            <h1 class="display-1 mt-4">Cocina</h1>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="nav-item">
-                                                                        <a class="nav-link text-center" id="profile-tab-custom" style="border-bottom: 0px;" data-toggle="tab" href="#profile-3" role="tab" aria-controls="profile-3" aria-selected="false">
-                                                                            <h1 class="display-1 mt-4">Bar</h1>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                                <div id="loaderSesion" class="dot-opacity-loader" style="visibility: hidden;" >
-                                                                    <span></span>
-                                                                    <span></span>
-                                                                    <span></span>
-                                                                </div>
+                <!--INICIO MODAL-->
+                <div class="container-fluid page-body-wrapper"   >
+                    <div class="main-panel" >
+                        <div class="content-wrapper">
+                            <div class="row">
+                                <div class="col-12 grid-margin">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title">Ordenes</h4>
+                                            <p class="card-description">Ordenes realizadas por el cliente</p>
+
+                                            <div class="modal demo-modal">
+                                                <div class="modal-dialog modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" th:each="cli: ${clientes}">
+                                                            <h3 class="modal-title" th:text="cli.nombre"></h3>
+
+
+                                                            <button type="button" class="close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <div class="table-responsive">
+                                                                <table id="order-listing" class="table">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Id Orden</th>
+                                                                            <th>Descripción</th>
+                                                                            <th>Sub-Total</th>
+                                                                            <th>Iva</th>
+                                                                            <th>Total Orden</th>
+                                                                            <th>Tiempo preparacion</th>
+                                                                            <th>Motivo Anulacion</th>
+                                                                            <th>Tipo Orden</th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tbody>
+                                                                        <tr th:each="ord: ${ordenes}">
+                                                                            <td th:text="${ord.idOrden}"></td>
+                                                                            <td th:text="${ord.descripcion}"></td>
+                                                                            <td th:text="${ord.subTotal}"></td>
+                                                                            <td th:text="${ord.iva}"></td>
+                                                                            <td th:text="${ord.totalOrden}"></td>
+                                                                            <td th:text="${ord.tiempoPreparacion}"></td>
+                                                                            <td th:text="${ord.motivoAnulacion}"></td>
+                                                                            <td th:text="${ord.tipoOrden}"></td>
+
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                    
+                                                                </table>
                                                             </div>
-                                                            <div class="col-9 col-lg-9">
-                                                                <form class="" action="index.html" method="post">
-                                                                    <div class="tab-content tab-content-vertical tab-content-vertical-custom" style="height: 415px">
-                                                                        <div class="tab-pane fade active show" id="home-3" role="tabpanel" aria-labelledby="home-tab-custom">
-                                                                            <div class="d-flex mt-4">
-                                                                            </div>
-                                                                            <p class="mt-4">
-                                                                                Verifica que las recetas que quieres, la cantidad, precio y total. (Para cambiar la cantidad a pedir puedes seleccionar "+" o "-" según lo que desees)
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                <br /><br />
-                                                                            <div class="table-responsive">
-                                                                                <table class="table">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th class="pt-1 pl-0">
-                                                                                                Receta
-                                                                                            </th>
-                                                                                            <th class="pt-1">
-                                                                                                Precio
-                                                                                            </th>
-                                                                                            <th class="pt-1">
-                                                                                                Categoría
-                                                                                            </th>
-                                                                                            <th class="pt-1">
-                                                                                                Cantidad
-                                                                                            </th>
-                                                                                            <th class="pt-1">
-                                                                                                Total
-                                                                                            </th>
-                                                                                            <th class="pt-1">
+                                                            
+                                                            
 
-                                                                                            </th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody id="contenidoFinalizar" >
-
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="tab-pane fade" id="profile-3" role="tabpanel" aria-labelledby="profile-tab-custom">
-                                                                            <div class="d-flex mt-4">
-                                                                            </div>
-                                                                            <p class="mt-4">
-                                                                                <!---borrar--->
-                                                                                Verifica que las recetas que quieres, la cantidad, precio y total. (Para cambiar la cantidad a pedir puedes seleccionar "+" o "-" según lo que desees)
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                                                                <br /><br />
-                                                                            <div class="table-responsive">
-                                                                                <table class="table">
-                                                                                    <thead>
-                                                                                        <tr>
-                                                                                            <th class="pt-1 pl-0">
-                                                                                                Receta
-                                                                                            </th>
-                                                                                            <th class="pt-1">
-                                                                                                Precio
-                                                                                            </th>
-                                                                                            <th class="pt-1">
-                                                                                                Categoría
-                                                                                            </th>
-                                                                                            <th class="pt-1">
-                                                                                                Cantidad
-                                                                                            </th>
-                                                                                            <th class="pt-1">
-                                                                                                Total
-                                                                                            </th>
-                                                                                            <th class="pt-1">
-
-                                                                                            </th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody id="contenidoFinalizarBar" >
-
-
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <button type="submit" name="button" class="btn btn-primary">Confirmar pedidos</button>
-                                                                    <button id="totalOrden"  type="button" class="btn btn-outline-primary btn-fw">Total: $</button>
-                                                                    <br/><br/>
-                                                                    <input type="text" class="form-control form-control-lg" placeholder="Escribe una observación para la orden" aria-label="Escribe una observación para la orden" style="margin-bottom: 0px;">
-                                                                </form>
-                                                            </div>
+                                 
+                                                        <div class="modal-footer">
+                                                              
+                                                            <button type="button" class="btn btn-success">Pagar</button>
+                                                            <button type="button" class="btn btn-light">Pagar Online</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!--FIN MODAL-->
 
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-            </div>
-            
+                    </div>
 
 
-                <!-- container-scroller -->
-          
-        <!-- container-scroller -->
-        <!-- base:js -->
-        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
-        <!-- endinject -->
-        <!-- Plugin js for this page-->
-        <!-- End plugin js for this page-->
-        <!-- inject:js -->
-        <script th:src="@{/js/off-canvas.js}"></script>
-        <script th:src="@{/js/hoverable-collapse.js}"></script>
-        <script th:src="@{/js/template.js}"></script>
-        <script th:src="@{/js/settings.js}"></script>
-        <script th:src="@{/js/todolist.js}"></script>
-        <script src="../../../../js/modal-demo.js"></script>
-        <!-- endinject -->
-        <!-- plugin js for this page -->
-        <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
-        <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
-        <!-- End plugin js for this page -->
-        <!-- Custom js for this page-->
-        <script th:src="@{/js/alerts.js}"></script>
-        <script th:src="@{/js/avgrund.js}"></script>
-        <script th:src="@{/js/alerts_personalizado.js}"></script>
-                <!-- End plugin js for this page -->
-                <!-- Custom js for this page-->
-                <!-- End custom js for this page-->
-                <style type="text/css" >
-                    .flotante {
-                        display:scroll;
-                        position: fixed;
-                        bottom: 2%;
-                        right: 20%;
-                    }
 
-                    .activeTipo{
-                        color: rgb(255, 255, 255);
-                        background-color: rgb(98, 1, 237);
-                        border-color: rgb(98, 1, 237);
-                    }
-                </style>
 
-                <script type="text/javascript" >
+                    <!-- container-scroller -->
 
-                    var tipoUno = document.getElementById('tipoUno');
-                    var tipoDos = document.getElementById('tipoDos');
-                    var tipoTres = document.getElementById('tipoTres');
-                    var tipoCuatro = document.getElementById('tipoCuatro');
-                    var tipoMenosUno = document.getElementById('tipoMenosUno');
-
-                    var tipoActivo = '[[${tipo}]]';
-
-                    switch (tipoActivo) {
-                        case '1':
-                            tipoUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                            break;
-                        case '2':
-                            tipoDos.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                            break;
-                        case '3':
-                            tipoTres.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                            break;
-                        case '4':
-                            tipoCuatro.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                            break;
-                        case '-1':
-                            tipoMenosUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                            break;
-                        default:
-                            break;
-                    }
-
-                </script>
-
-                <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
-
-                <script type="text/javascript" >
-
-                    function d(idReceta) {
-
-                        var input = document.getElementById('pedido-' + idReceta);
-
-                        if (input.value < 1 || input.value == null || input.value == 0) {
-                            input.setAttribute("class", "form-control is-invalid");
-                        } else {
-                            input.setAttribute("class", "form-control is-valid");
-                            Swal.fire({
-                                title: '¿Está seguro que desea pedir esta receta?',
-                                text: "Si pide esta receta solo podra anularlo solicitando asistencia en botón superior izquierdo de la pantalla",
-                                type: 'warning',
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: '!Si, Pedir!'
-                            }).then((result) => {
-                                if (result.value) {
-                                    location.href = "/administrador/deleteReceta?idReceta=" + idReceta;
-                                }
-                            })
+                    <!-- container-scroller -->
+                    <!-- base:js -->
+                    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+                    <!-- endinject -->
+                    <!-- Plugin js for this page-->
+                    <!-- End plugin js for this page-->
+                    <!-- inject:js -->
+                    <script th:src="@{/js/off-canvas.js}"></script>
+                    <script th:src="@{/js/hoverable-collapse.js}"></script>
+                    <script th:src="@{/js/template.js}"></script>
+                    <script th:src="@{/js/settings.js}"></script>
+                    <script th:src="@{/js/todolist.js}"></script>
+                    <script src="../../../../js/modal-demo.js"></script>
+                    <!-- endinject -->
+                    <!-- plugin js for this page -->
+                    <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+                    <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+                    <!-- End plugin js for this page -->
+                    <!-- Custom js for this page-->
+                    <script th:src="@{/js/alerts.js}"></script>
+                    <script th:src="@{/js/avgrund.js}"></script>
+                    <script th:src="@{/js/alerts_personalizado.js}"></script>
+                    <!-- End plugin js for this page -->
+                    <!-- Custom js for this page-->
+                    <!-- End custom js for this page-->
+                    <style type="text/css" >
+                        .flotante {
+                            display:scroll;
+                            position: fixed;
+                            bottom: 2%;
+                            right: 20%;
                         }
 
+                        .activeTipo{
+                            color: rgb(255, 255, 255);
+                            background-color: rgb(98, 1, 237);
+                            border-color: rgb(98, 1, 237);
+                        }
+                    </style>
 
-                    }
+                    <script type="text/javascript" >
 
-                </script>
-                </body>
+                        var tipoUno = document.getElementById('tipoUno');
+                        var tipoDos = document.getElementById('tipoDos');
+                        var tipoTres = document.getElementById('tipoTres');
+                        var tipoCuatro = document.getElementById('tipoCuatro');
+                        var tipoMenosUno = document.getElementById('tipoMenosUno');
 
-                </html>
+                        var tipoActivo = '[[${tipo}]]';
+
+                        switch (tipoActivo) {
+                            case '1':
+                                tipoUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                                break;
+                            case '2':
+                                tipoDos.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                                break;
+                            case '3':
+                                tipoTres.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                                break;
+                            case '4':
+                                tipoCuatro.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                                break;
+                            case '-1':
+                                tipoMenosUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
+                                break;
+                            default:
+                                break;
+                        }
+
+                    </script>
+
+                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
+
+                    <script type="text/javascript" >
+
+                        function d(idReceta) {
+
+                            var input = document.getElementById('pedido-' + idReceta);
+
+                            if (input.value < 1 || input.value == null || input.value == 0) {
+                                input.setAttribute("class", "form-control is-invalid");
+                            } else {
+                                input.setAttribute("class", "form-control is-valid");
+                                Swal.fire({
+                                    title: '¿Está seguro que desea pedir esta receta?',
+                                    text: "Si pide esta receta solo podra anularlo solicitando asistencia en botón superior izquierdo de la pantalla",
+                                    type: 'warning',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: '!Si, Pedir!'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        location.href = "/administrador/deleteReceta?idReceta=" + idReceta;
+                                    }
+                                })
+                            }
+
+
+                        }
+
+                    </script>
+                    </body>
+
+                    </html>
