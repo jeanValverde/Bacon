@@ -257,7 +257,7 @@ public class ProveedorController {
         //sesion 
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
         proveedores = this.proveedorService.listarProveedores();
-        Proveedor proveedor = this.proveedorService.retornarInsumoById(idProveedor);
+        Proveedor proveedor = this.proveedorService.retornarProveedorById(idProveedor);
         modelo.addAttribute("modificar", true);
         modelo.addAttribute("proveedor", proveedor);
         modelo.addAttribute("proveedores", proveedores);

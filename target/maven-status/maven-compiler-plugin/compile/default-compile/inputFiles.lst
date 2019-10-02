@@ -4,12 +4,15 @@ C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurant
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\controller\ClientePedirOrdenController.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\service\InsumoProveedorService.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryInsumoPedido.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\EgresoStock.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IIngredienteDao.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\exceptions\IllegalOrphanException.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\config\WebConfig.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoPedido.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IInsumoProveedorDao.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Receta.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdateProveedor.java
@@ -25,6 +28,7 @@ C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurant
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IRecetaDao.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Insumo.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\service\InsumoPedidoService.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryInsumo.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.java
@@ -50,6 +54,7 @@ C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurant
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalInsumo.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrdenada.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoOrden.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IInsumoPedidoDao.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\service\ProveedorService.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProveedor.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Personal.java
@@ -61,6 +66,7 @@ C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurant
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\IPersonalDao.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\controller\IndexController.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\BaconApplication.java
+C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dao\InsumoPedidoProveedorDAO.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoProveedor.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java
 C:\Users\CRISTIAN\Desktop\proyecto_portafolio\Bacon\src\main\java\com\restaurante\bacon\dto\Mesa.java

@@ -12,6 +12,8 @@
         <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
         <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-contextmenu/jquery.contextMenu.min.css}">
+
         <!-- endinject -->
         <!-- plugin css for this page -->
         <!-- End plugin css for this page -->
@@ -77,12 +79,52 @@
                                                     <h5 >Buscar proveedor: </h5>
                                                 </div>
                                                 <div class="col-10" style="text-align: left">
-                                                    <div class="input-group">
-                                                        <select class="btn btn-success dropdown-toggle"  name="proveedor">
-                                                            <option value="select">Seleccione proveedor</option>
-                                                            <option th:each="proveedor : ${proveedores}"  th:value="${proveedor.idProveedor}" th:utext="${proveedor.nombreProveedor}"></option>
-                                                        </select>
-                                                        <button class="btn btn-sm btn-success" type="submit">Buscar</button>
+                                                    <div  class="input-group">
+
+                                                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal"  data-target="#modalInsumos" >Ver pedidos</button>
+
+                                                        <div class="modal fade" id="modalInsumos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel-3">Eliminar insumo</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body" id="pruebaModal">
+                                                                        <div class="table-responsive">
+                                                                            <table id="order-listing" class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th>Nombre Insumo</th>
+                                                                                        <th>Proveedor</th>
+                                                                                        <th>Precio</th>
+                                                                                        <th>Unidad</th>
+                                                                                        <th>Cantidad</th>
+                                                                                        <th>Valor total</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -108,22 +150,35 @@
                                         <div class="tab-content" id="pills-tabContent">
                                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
 
-                                                <div  class="row">
+                                                <div class="row">
                                                     <div style="padding: 5px" th:each="ins_pe: ${insumos_pedidos}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
                                                         <div class="card">
                                                             <div class="card-body text-center">
                                                                 <div class="form-check form-check-flat form-check-success">
-                                                                    <label class="form-check-label">
-                                                                        <input type="checkbox" class="form-check-input">
+                                                                    <label th:if="${ins_pe.proveedores.size()!=0}" class="form-check-label">
+                                                                        <input onchange="cargarInsumo(this)" th:value="${ins_pe.insumoPedido.idInsumoPedido}" th:attr="data-idInsumo=${ins_pe.insumo.idInsumo}"  type="checkbox" class="form-check-input">
 
                                                                     </label>
                                                                 </div>
                                                                 <div >
-                                                                    <img th:src="@{/uploads/}+${ins_pe.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/>
-                                                                    <h4 th:text="${ins_pe.idInsumo.nombreInsumo}"></h4>
-                                                                    <p th:text="${ins_pe.idInsumo.unidadMedidaInsumo}" class="text-muted mb-0"></p>
-                                                                    <p th:text="${ins_pe.cantidadInsumo}" class="text-muted mb-0"></p>
+                                                                    <img th:src="@{/uploads/}+${ins_pe.insumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                    <h4 th:text="${ins_pe.insumo.nombreInsumo}"></h4>
 
+                                                                    <p  class="text-muted mb-0">[[${ins_pe.insumoPedido.cantidadInsumo}]] [[${ins_pe.insumo.unidadMedidaInsumo}]]</p>
+
+                                                                </div>
+                                                                <div>
+                                                                    <h4 th:id="'precio' + ${ins_pe.insumoPedido.idInsumoPedido}">$</h4>
+                                                                </div>
+                                                                <select th:if="${ins_pe.proveedores.size()!=0}" onchange="cargarPrecio(this)" th:attr="data-idInsumoPedido=${ins_pe.insumoPedido.idInsumoPedido},data-idInsumo=${ins_pe.insumo.idInsumo}" class="btn btn-success dropdown-toggle"  th:id="'proveedor' + ${ins_pe.insumoPedido.idInsumoPedido}">
+                                                                    <option value="select">Seleccione proveedor</option>
+                                                                    <option th:each="proveedor : ${ins_pe.proveedores}"  th:value="${proveedor.idProveedor}" th:utext="${proveedor.nombreProveedor}"></option>
+                                                                </select>
+                                                                <div th:if="${ins_pe.proveedores.size()==0}" class="card card-inverse-warning" id="context-menu-open">
+                                                                    <div class="card-body">
+                                                                        <p class="card-text">
+                                                                            Ningun proveedor provee este insumo</p>
+                                                                    </div>
                                                                 </div>
 
 
@@ -145,11 +200,11 @@
                                                         <table id="order-listing" class="table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>Nombre</th>
-                                                                    <th>Descripción</th>
-                                                                    <th>Unidad medida</th>
-                                                                    <th>Stock</th>
-                                                                    <th>Stock minimo</th>
+                                                                    <th>Nombre del insumo</th>
+                                                                    <th>Proveedor</th>
+                                                                    <th>Precio</th>
+                                                                    <th>Cantidad</th>
+                                                                    <th>Stock </th>
                                                                     <th>Stock maximo</th>
                                                                     <th>Foto</th>
                                                                     <th></th>
@@ -159,7 +214,7 @@
                                                             <tbody>
                                                             <tbody>
                                                                 <tr th:each="ins: ${insumos}">
-                                                                    <td th:text="${ins.nombreInsumo}"></td>
+                                                                    <td th:text="${ins.insumo.nombreInsumo}"></td>
                                                                     <td th:text="${ins.descripcionInsumo}"></td>
                                                                     <td th:text="${ins.unidadMedidaInsumo}"></td>
                                                                     <td th:text="${ins.stockInsumo}"></td>
@@ -248,12 +303,14 @@
         <script th:src="@{/js/alerts.js}"></script>
         <!-- End custom js for this page-->
         <!-- plugin js for this page -->
-        <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
-        <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
-        <script th:src="@{/js/data-table.js}"></script>
+
         <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
         <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
 
+
+        <script th:src="@{/vendors/jquery-contextmenu/jquery.contextMenu.min.js}"></script>
+        <script th:src="@{/js/context-menu.js}"></script>
+        <script src="@{/js/modal-demo.js}"></script>
         <script th:src="@{/js/alerts_personalizado.js}"></script>
         <script th:src="@{/js/avgrund.js}"></script>
         <!--validate form--->
@@ -268,88 +325,90 @@
         <script th:src="@{/js/desktop-notification.js}"></script>-->
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script type="text/javascript" >
-            function agregarInsumoPedido(idReceta) {
+           
+                                                                    function cargarPrecio(select) {
+                                                                        var id_proveedor = new Number(select.value.toString());
+                                                                        var id_insumo = new Number(select.getAttribute("data-idInsumo").toString());
+                                                                        var id_insumo_pedido = new Number(select.getAttribute("data-idInsumoPedido").toString());
+                                                                        if (select.value.toString() === 'select') {
+                                                                                document.getElementById("precio"+id_insumo_pedido).innerHTML = '$ 2';
+                                                                                           
+                                                                        } else {
+                                                                                
+                                                                                
+                                                                                axios.get('http://localhost:8034/administrador/pedidoInsumo/cargarPrecio?idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                    .then(function (response) {
+                                                                                        console.log(response);
+                                                                                        if (response.data != null) {
+                                                                                            var contenido = "$"+response.data.toString();
+                                                                                            document.getElementById("precio"+id_insumo_pedido).innerHTML = contenido;
+                                                                                            
+                                                                                        }
+                                                                                        
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                    
+                                                                                    })
+                                                                                    .finally(function () {
+                                                                                    });
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    function cargarInsumo(checkbox) {
+                                                                        if (checkbox.checked) {
+                                                                            
+                                                                            var id_proveedor = new Number(document.getElementById("proveedor3").value);
+                                                                            var id_insumo = new Number(checkbox.getAttribute("data-idInsumo").toString());
+                                                                            var id_insumo_pedido = new Number(checkbox.checkbox.value.toString());
+                                                                            alert(id_proveedor+"|"+id_insumo+"|"+id_insumo_pedido);
+                                                                            /*
+                                                                            axios.get('http://localhost:8034/administrador/pedidoInsumo/cargarInsumoPedidoProveedor?idInsumoPedido='+id_insumo_pedido+'&idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                    .then(function (response) {
+                                                                                        console.log(response);
+                                                                                        if (response.data != null) {
+                                                                                            var contenido = "$"+response.data.toString();
+                                                                                            document.getElementById("precio"+id_insumo_pedido).innerHTML = contenido;
+                                                                                            
+                                                                                        }
+                                                                                        
+                                                                                    })
+                                                                                    .catch(function (error) {
+                                                                                    
+                                                                                    })
+                                                                                    .finally(function () {
+                                                                                    });*/
+                                                                        }
 
-            document.getElementById("loader").innerHTML = "<div class='square-box-loader'><div class='square-box-loader-container'><div class='square-box-loader-corner-top'></div> <div class='square-box-loader-corner-bottom'></div></div><div class='square-box-loader-square'></div></div>";
-            //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
+                                                                        /*
+                                                                         axios.get('http://localhost:8034/administrador/pedidoInsumo/detalleReceta?idReceta=' + idReceta)
+                                                                         .then(function (response) {
+                                                                         console.log(response);
+                                                                         if (response.data != null) {
+                                                                         document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre del ingrediente</th><th class='text-right'>Cantidad por porción (En Kilogramos)</th></tr></thead><tbody id='contenidoDetalleReceta' ></tbody></table></div>";
+                                                                         }
+                                                                         if (response.data.length != 0) {
+                                                                         var contenido = "";
+                                                                         for (var i = 0; i < response.data.length; i++) {
+                                                                         contenido += "<tr> <td class='pl-0'> " + response.data[i].idInsumo.descripcionInsumo + " </td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'> " + response.data[i].cantidad + " </div></td></tr>";
+                                                                         }
+                                                                         document.getElementById('contenidoDetalleReceta').innerHTML = contenido;
+                                                                         } else {
+                                                                         document.getElementById('loader').innerHTML = '<div class="alert alert-danger" >Sin ingredientes disponibles</div>';
+                                                                         }
+                                                                         })
+                                                                         .catch(function (error) {
+                                                                         document.getElementById("loader").innerHTML = '<div class="alert alert-danger" >Error</div>';
+                                                                         })
+                                                                         .finally(function () {
+                                                                         });
+                                                                         }*/
 
-            axios.get('http://localhost:8034/cliente/pedirOrden/detalleReceta?idReceta=' + idReceta)
-                    .then(function (response) {
-                    console.log(response);
-                    if (response.data != null) {
-                    document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre del ingrediente</th><th class='text-right'>Cantidad por porción (En Kilogramos)</th></tr></thead><tbody id='contenidoDetalleReceta' ></tbody></table></div>";
-                    }
-                    if (response.data.length != 0) {
-                    var contenido = "";
-                    for (var i = 0; i < response.data.length; i++) {
-                    contenido += "<tr> <td class='pl-0'> " + response.data[i].idInsumo.descripcionInsumo + " </td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'> " + response.data[i].cantidad + " </div></td></tr>";
-                    }
-                    document.getElementById('contenidoDetalleReceta').innerHTML = contenido;
-                    } else {
-                    document.getElementById('loader').innerHTML = '<div class="alert alert-danger" >Sin ingredientes disponibles</div>';
-                    }
-                    })
-                    .catch(function (error) {
-                    // handle error
-                    document.getElementById("loader").innerHTML = '<div class="alert alert-danger" >Error</div>';
-                    })
-                    .finally(function () {
-                    // always executed
-                    });
-            }
+                                                                    }
         </script>
         <script type="text/javascript" >
-            document.getElementById("div-modificar-foto").setAttribute("style", "display: none");
-            function ocultarFoto(myRadio) {
-
-
-            if (myRadio.value == "si") {
-
-            document.getElementById("div-modificar-foto").setAttribute("style", "display: none");
-            } else if (myRadio.value == "no") {
-            document.getElementById("div-modificar-foto").setAttribute("style", "display: block");
-            }
-
-            }
-        </script>
-        <script th:inline="javascript">
-
-
-            var tipoRespuesta = [[${tipoRespuesta
-            }
-            ]];
-            var respuesta = [[${respuesta
-            }
-            ]];
-            if (tipoRespuesta !== null) {
-            switch (tipoRespuesta) {
-            case 'agregar' :
-                    if (respuesta === 1) {
-            showSwal('success-message', 'Insumo agregado!', 'se ha registrado el insumo exitosamente');
-            } else if (respuesta === 0) {
-            showSwal('warning-message', 'Error!', "No se ha podido agregar el insumo");
-            }
-            break;
-            case 'modificar' :
-                    if (respuesta === 1) {
-            showSwal('success-message', 'Insumo modificado!', 'se ha registrado el insumo exitosamente');
-            } else if (respuesta === 0) {
-            showSwal('warning-message', 'Error!', "No se ha podido modificar el insumo");
-            }
-            break;
-            case 'eliminar' :
-                    if (respuesta === 1) {
-            showSwal('success-message', 'Insumo eliminado!', 'se ha eliminado el insumo exitosamente');
-            } else if (respuesta === 0) {
-            showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
-            }
-            break;
-            }
-            }
-
-
 
         </script>
+
         <script type="text/javascript" >
             var formularioPassword = document.getElementsByName("formAgregarInsumo")[0];
             validatorForms(formularioPassword);

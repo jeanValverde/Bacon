@@ -6,10 +6,13 @@
 package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.config.UserRol;
+import com.restaurante.bacon.dao.InsumoPedidoProveedorDAO;
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.InsumoPedido;
+import com.restaurante.bacon.dto.InsumoPedidoProveedor;
+import com.restaurante.bacon.dto.InsumoProveedor;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.dto.Proveedor;
 import com.restaurante.bacon.dto.Receta;
@@ -25,14 +28,18 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -58,6 +65,7 @@ public class PersonalPedidoInsumo {
 
     @Autowired
     InsumoService insumoService;
+    
     @Autowired
     ProveedorService proveedorService;
     @Autowired
@@ -76,16 +84,58 @@ public class PersonalPedidoInsumo {
        
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
         proveedores = this.proveedorService.listarProveedores();
-        List<InsumoPedido>insumos_pedidos = new ArrayList<InsumoPedido>();
-        insumos_pedidos = this.insumoPedidoService.listarInsumosPedidos();
+        List<InsumoPedidoProveedorDAO>insumos_pedidos_proveedor = new ArrayList<InsumoPedidoProveedorDAO>();
+        insumos_pedidos_proveedor = this.insumoPedidoService.listarInsumosPedidos();
         modelo.addAttribute("proveedores", proveedores);
         //desarrollo aca 
-        modelo.addAttribute("insumos_pedidos", insumos_pedidos);
+        modelo.addAttribute("insumos_pedidos", insumos_pedidos_proveedor);
         modelo.addAttribute("personalSesion", personal);
         return "users/administrador/pedido_proveedor";
 
     }
-
+    
+    @RequestMapping("/cargarPrecio")
+    public ResponseEntity cargarPrecio(Model modelo, HttpSession sesion, @RequestParam("idProveedor") BigInteger idProveedor, @RequestParam("idInsumo") Integer idInsumo) {
+        
+        InsumoProveedor insumoPedidoProveedor = new InsumoProveedor();
+        insumoPedidoProveedor = this.insumoPedidoService.retornarInsumoProveedor(idInsumo, idProveedor);
+        
+        System.out.println(insumoPedidoProveedor.getIdInsumoProveedor());
+        
+        //BigInteger precio = insumoPedidoProveedor.getPrecio();
+      
+        
+        return new ResponseEntity(insumoPedidoProveedor.getPrecio(), HttpStatus.OK);
+    }
+    @RequestMapping("/cargarInsumoPedidoProveedor")
+    public ResponseEntity cargarInsumoPedidoProveedor(Model modelo, HttpSession sesion,@RequestParam("idInsumoPedido") Integer idInsumoPedido, @RequestParam("idProveedor") BigInteger idProveedor, @RequestParam("idInsumo") Integer idInsumo) {
+        
+        Map<InsumoPedidoProveedor, Integer> ordenesInsumos = (Map<InsumoPedidoProveedor, Integer>) sesion.getAttribute("insumosPedidoProveedor");
+        InsumoProveedor insumoProveedor = new InsumoProveedor();
+        InsumoPedido insumoPedido = new InsumoPedido();
+        InsumoPedidoProveedor insumoPedidoProveedor = new InsumoPedidoProveedor();
+        
+        insumoProveedor = this.insumoPedidoService.retornarInsumoProveedor(idInsumo, idProveedor);
+        insumoPedido = this.insumoPedidoService.retornarInsumoPedido(idInsumo);
+        insumoPedidoProveedor.setIdInsumoPedido(insumoPedido);
+        Integer precio = Integer.parseInt(""+insumoProveedor.getPrecio());
+        Integer cantidad = Integer.parseInt(""+insumoPedido.getCantidadInsumo());
+        Integer precioPedido = precio*cantidad;
+        insumoPedidoProveedor.setPrecioPedidoProveedor(BigInteger.valueOf(precioPedido));
+        Double precioTotal = Integer.parseInt(""+insumoPedidoProveedor.getPrecioPedidoProveedor())*0.19;
+        long precioTotalpaso =Math.round(precioTotal);
+        insumoPedidoProveedor.setIvaInsumoPedido(BigInteger.valueOf(precioTotalpaso));
+        Integer total = Integer.parseInt(""+insumoPedidoProveedor.getIvaInsumoPedido())+Integer.parseInt(""+insumoPedidoProveedor.getPrecioPedidoProveedor());
+        insumoPedidoProveedor.setPrecioTotalInsumoPedido(BigInteger.valueOf(total));
+        
+        ordenesInsumos.put(insumoPedidoProveedor, 0);
+        
+        sesion.setAttribute("ordenesPedidos", ordenesInsumos);
+        //BigInteger precio = insumoPedidoProveedor.getPrecio();
+      
+        
+        return new ResponseEntity("", HttpStatus.OK);
+    }
     @RequestMapping("/buscar_por_filtro")
     public String buscar_insumos_proveedor(Model modelo, @RequestParam("proveedor") Integer idProveedor) {
         //sesion 
@@ -109,167 +159,12 @@ public class PersonalPedidoInsumo {
 
     }
 
-    @RequestMapping("/agregar_insumo")
-    public String agregar_insumo(Model modelo, @RequestParam("nombre") String nombre,
-            @RequestParam("descripcion") String descripcion,
-            @RequestParam("unidadMedida") String unidadMedida,
-            @RequestParam("stock") Integer stock,
-            @RequestParam("stockMinimo") Integer stockMinimo,
-            @RequestParam("stockMaximo") Integer stockMaximo,
-            @RequestParam("imagenInsumo") MultipartFile[] file) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        BigInteger stockValida,stockMinValida,stockMaxValida;
-        stockValida = BigInteger.valueOf(Math.round(Math.abs(stock)));
-        stockMinValida = BigInteger.valueOf(Math.round(Math.abs(stockMinimo)));
-        stockMaxValida = BigInteger.valueOf(Math.round(Math.abs(stockMaximo)));
-        
-        Insumo insumo = new Insumo();
-        
-        insumo.setNombreInsumo(nombre);
-        insumo.setDescripcionInsumo(descripcion);
-        insumo.setStockInsumo(stockValida);
-        insumo.setMinimoStockInsumo(stockMinValida);
-        insumo.setMaximoStockInsumo(stockMaxValida);
-        insumo.setUnidadMedidaInsumo(unidadMedida);
-        String nombreImagen = this.personalService.subirImagen(file);
-      
-        if (nombreImagen != null){
+    
 
-            insumo.setFotoInsumo(nombreImagen);
-            if (this.insumoService.ingresarInsumo(insumo)) {
-                //envia al javascrit la respuesta del agregar
-                modelo.addAttribute("tipoRespuesta", "agregar");
-                modelo.addAttribute("respuesta", 1);
-            } else {
-               modelo.addAttribute("tipoRespuesta", "agregar");
-               modelo.addAttribute("respuesta", 0);
-            }
-        }
+   
 
-        List<Insumo> insumos = new ArrayList<Insumo>();
-        insumos = this.insumoService.listarInsumos();
-        //desarrollo aca 
-        modelo.addAttribute("agregar", true);
-        modelo.addAttribute("insumos", insumos);
-         
-       
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/mantenedor_insumos";
-    }
+    
 
-    @RequestMapping("/modificar_insumo")
-    public String modificar_insumo(Model modelo, @RequestParam("id") Integer id,
-            @RequestParam("nombre") String nombre,
-            @RequestParam("descripcion") String descripcion,
-            @RequestParam("unidadMedida") String unidadMedida,
-            @RequestParam("stock") BigInteger stock,
-            @RequestParam("stockMinimo") BigInteger stockMinimo,
-            @RequestParam("stockMaximo") BigInteger stockMaximo,
-            @RequestParam("imagenInsumo") MultipartFile[] file) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        
-        Insumo insumo = new Insumo();
-       
-        insumo.setIdInsumo(id);
-        insumo.setNombreInsumo(nombre);
-        insumo.setDescripcionInsumo(descripcion);
-        insumo.setStockInsumo(stock);
-        insumo.setMinimoStockInsumo(stockMinimo);
-        insumo.setMaximoStockInsumo(stockMaximo);
-        insumo.setUnidadMedidaInsumo(unidadMedida);
-        //contiene los datos del insumo antes de modificar
-        Insumo insu = new Insumo();
-        insu = this.insumoService.retornarInsumoById(id);
-        
-        if(file[0].isEmpty()){
-            insumo.setFotoInsumo(insu.getFotoInsumo().toString());
-        }else{
-            String nombreImagen = this.personalService.subirImagen(file);
-            insumo.setFotoInsumo(nombreImagen);
-            this.personalService.eliminarImagen(insu.getFotoInsumo());
-        }
-        
-        
-        if (this.insumoService.modificarInsumo(insumo)) {
-            modelo.addAttribute("tipoRespuesta", "modificar");
-            modelo.addAttribute("respuesta", 1);
-        } else {
-            modelo.addAttribute("tipoRespuesta", "modificar");
-            modelo.addAttribute("respuesta", 0);
-        }
-        
-        List<Insumo> insumos = new ArrayList<Insumo>();
-        insumos = this.insumoService.listarInsumos();
-        //desarrollo aca 
-        
-        modelo.addAttribute("insumos", insumos);
-        modelo.addAttribute("agregar", true);
-        //fin desarrollo 
-        //despachos 
-
-        //fin despacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/mantenedor_insumos";
-    }
-
-    @RequestMapping("/eliminar_insumo")
-    public String eliminar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo,@RequestParam("nombreFoto") String nombreFoto) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        
-        if(this.insumoService.eliminarInsumo(idInsumo)){
-            this.personalService.eliminarImagen(nombreFoto);
-            modelo.addAttribute("tipoRespuesta", "eliminar");
-            modelo.addAttribute("respuesta", 1);
-        }else{
-            modelo.addAttribute("tipoRespuesta", "eliminar");
-            modelo.addAttribute("respuesta", 0);
-        }
-        List<Insumo> insumos = new ArrayList<Insumo>();
-        insumos = this.insumoService.listarInsumos();
-        modelo.addAttribute("insumos", insumos);
-        modelo.addAttribute("agregar", true);
-        //desarrollo aca 
-
-        //fin desarrollo 
-        //despachos 
-        //fin despacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/mantenedor_insumos";
-    }
-
-    @RequestMapping("/cargar_insumo")
-    public String cargar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        List<Insumo> insumos = new ArrayList<Insumo>();
-        insumos = this.insumoService.listarInsumos();
-        Insumo insumo = this.insumoService.retornarInsumoById(idInsumo);
-        modelo.addAttribute("modificar", true);
-        modelo.addAttribute("insumo", insumo);
-        modelo.addAttribute("insumos", insumos);
-        //fin desarrollo 
-        //despachos 
-        //fin despacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/mantenedor_insumos";
-    }
+    
 
 }

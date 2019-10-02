@@ -8,12 +8,15 @@ com\restaurante\bacon\dto\Insumo.class
 com\restaurante\bacon\dto\InsumoPedidoProveedor.class
 com\restaurante\bacon\dto\Mesa.class
 com\restaurante\bacon\service\RecetaService.class
+com\restaurante\bacon\service\InsumoPedidoService.class
+com\restaurante\bacon\service\InsumoProveedorService.class
 com\restaurante\bacon\dao\IRolDao.class
 com\restaurante\bacon\dto\procedure\ProcedureInsertProveedor.class
 com\restaurante\bacon\dao\IRecetaDao.class
 com\restaurante\bacon\dao\IInsumoDao.class
 com\restaurante\bacon\controller\PersonalInsumo.class
 com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.class
+com\restaurante\bacon\dao\InsumoPedidoProveedorDAO.class
 com\restaurante\bacon\controller\ClienteIngresarController.class
 com\restaurante\bacon\dao\IProveedorDao.class
 com\restaurante\bacon\dto\Pedido.class
@@ -25,6 +28,7 @@ com\restaurante\bacon\dto\Receta.class
 com\restaurante\bacon\dto\EstadoOrden.class
 com\restaurante\bacon\controller\PersonalPedidoInsumo.class
 com\restaurante\bacon\dao\IIngredienteDao.class
+com\restaurante\bacon\dao\IInsumoProveedorDao.class
 com\restaurante\bacon\dto\EstadoCliente.class
 com\restaurante\bacon\dao\ICategoriaRecetaDao.class
 com\restaurante\bacon\dao\IPersonalDao.class
@@ -39,8 +43,10 @@ com\restaurante\bacon\dto\InsumoPedido.class
 com\restaurante\bacon\controller\PersonalProveedorInsumo.class
 com\restaurante\bacon\controller\IndexController.class
 com\restaurante\bacon\dto\Proveedor.class
+com\restaurante\bacon\dao\IInsumoPedidoDao.class
 com\restaurante\bacon\dto\EgresoStock.class
 com\restaurante\bacon\exceptions\PreexistingEntityException.class
+com\restaurante\bacon\dao\ProcedureQueryInsumoPedido.class
 com\restaurante\bacon\service\RolService.class
 com\restaurante\bacon\dto\Notificacion.class
 com\restaurante\bacon\dto\Orden.class

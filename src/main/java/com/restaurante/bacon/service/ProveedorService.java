@@ -52,7 +52,7 @@ public class ProveedorService {
 
     }
     
-    public Proveedor retornarInsumoById(BigDecimal  idProveedor){
+    public Proveedor retornarProveedorById(BigDecimal  idProveedor){
         Optional<Proveedor> optinalEntity = provedorDao.findById(idProveedor);
         Proveedor proveedor = optinalEntity.get();
         return proveedor;
