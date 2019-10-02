@@ -7,6 +7,9 @@
  * Nota: el validar contraseña debe estar un input abajo de otro
  */
 function validatorForms(formulario) {
+        
+    
+    var formulario = document.getElementsByName("formAddPersonal")[0];
 
    console.log(formulario);
     /**

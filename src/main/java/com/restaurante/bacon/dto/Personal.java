@@ -124,7 +124,7 @@ public class Personal implements Serializable {
     }
     
     
-    public Personal(BigDecimal idPersonal, String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal, BigInteger estadoPersonal, Collection<ControlCaja> controlCajaCollection, Rol idRol) {
+    public Personal(BigDecimal idPersonal, String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal, BigInteger estadoPersonal) {
         this.idPersonal = idPersonal;
         this.rutPersonal = rutPersonal;
         this.nombresPersonal = nombresPersonal;
@@ -135,8 +135,8 @@ public class Personal implements Serializable {
         this.correoPersonal = correoPersonal;
         this.contrasenaPersonal = contrasenaPersonal;
         this.estadoPersonal = estadoPersonal;
-        this.controlCajaCollection = controlCajaCollection;
-        this.idRol = idRol;
+
+
     }
 
     public BigDecimal getIdPersonal() {

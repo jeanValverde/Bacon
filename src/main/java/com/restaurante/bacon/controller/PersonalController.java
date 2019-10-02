@@ -99,36 +99,53 @@ public class PersonalController {
 
         @PostMapping("/addPersonal")
           public String addPersonal(Model modelo,
+      
             @RequestParam("rutPersonal") String rutPersonal,
             @RequestParam("nombresPersonal") String nombresPersonal,
-            @RequestParam("apepaterno") String apepaterno,
-            @RequestParam("apematerno") String apematerno,
-            @RequestParam("fechaNacimiento") Date fechaNacimiento,
+            @RequestParam("apepaternopersonal") String apepaternopersonal,
+            @RequestParam("apematernopersonal") String apematernopersonal,
+            @RequestParam("fechaNacimiento") String fechaNacimiento,
             @RequestParam("telefonoPersonal") String telefonoPersonal,
             @RequestParam("correopersonal") String correopersonal,
-            @RequestParam("contraseña") String contraseña,
+            @RequestParam("password") String password,
             @RequestParam("estadopersonal") BigInteger estadopersonal,
-            @RequestParam("rolpersonal") Rol rolpersonal) {
+            @RequestParam("rolpersonal") String rolpersonal) {
 
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
+        
+        
 
-        Personal personal1 = new Personal();
+
+        
+        String edad = this.personalService.getEdad(personal.getFechaNacimientoPersonal());
+        
+        Date FechaNacimiento = PersonalService.ParseFecha(fechaNacimiento);
+        
+        
+        Personal personal1 = this.personalService.findByRut(rutPersonal);
 
         personal1.setRutPersonal(rutPersonal);
         personal1.setNombresPersonal(nombresPersonal);
-        personal1.setApePaternoPersonal(apepaterno);
-        personal1.setApeMaternoPersonal(apematerno);
-        personal1.setFechaNacimientoPersonal(fechaNacimiento);
+        personal1.setApePaternoPersonal(apepaternopersonal);
+        personal1.setApeMaternoPersonal(apematernopersonal);
+        personal1.setFechaNacimientoPersonal(FechaNacimiento);
         personal1.setCelularPersonal(telefonoPersonal);
         personal1.setCorreoPersonal(correopersonal);
-        personal1.setContrasenaPersonal(contraseña);
+        personal1.setContrasenaPersonal(password);
         personal1.setEstadoPersonal(estadopersonal);
-        personal1.setIdRol(rolpersonal);
+        Rol rol=new Rol();
+        rol.setIdRol(BigDecimal.valueOf(Integer.parseInt(rolpersonal)));
+        personal.setIdRol(rol);
+//        personal1.setIdRol(rolpersonal);
 
-        if (this.personalService.addPersonal(personal)) {
+        
+
+        
+        
+        if (this.personalService.addPersonal(personal1)) {
             modelo.addAttribute("tipoRespuesta", "agregar");
             modelo.addAttribute("respuesta", 1);
         } else {
@@ -153,6 +170,30 @@ public class PersonalController {
         return "users/administrador/mantenedor_personal";
 
     }
+          
+        @RequestMapping("/cargar_personal")
+    public String cargar_personal(Model modelo, @RequestParam("idpersonal") BigDecimal idPersonal) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        List<Personal> persosnales = new ArrayList<Personal>();
+        persosnales = this.personalService.getAllUsuario();
+        Personal personal1 = this.personalService.findByRut(idPersonal.toString());
+        modelo.addAttribute("modificar", true);
+        modelo.addAttribute("personal", personal1);
+        modelo.addAttribute("personales", persosnales);
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_personal";
+    }      
+          
+          
+          
     
         @RequestMapping("/eliminar_personal")
     public String eliminar_personal(Model modelo, @RequestParam("idPersonal") BigInteger idPersonal) {
@@ -198,7 +239,7 @@ public class PersonalController {
             @RequestParam("correopersonal") String correopersonal,
             @RequestParam("contraseña") String contraseña,
             @RequestParam("estadopersonal") BigInteger estadopersonal,
-            @RequestParam("rolpersonal") Rol rolpersonal){
+            @RequestParam("rolpersonal") String rolpersonal){
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
@@ -215,7 +256,9 @@ public class PersonalController {
         personal1.setCorreoPersonal(correopersonal);
         personal1.setContrasenaPersonal(contraseña);
         personal1.setEstadoPersonal(estadopersonal);
-        personal1.setIdRol(rolpersonal);
+        Rol rol=new Rol();
+        rol.setIdRol(BigDecimal.valueOf(Integer.parseInt(rolpersonal)));
+        personal.setIdRol(rol);
         
         if (this.personalService.ModificarPersonal(personal1)) {
              
@@ -228,11 +271,12 @@ public class PersonalController {
        
             
         
-        List<Personal> personalx = new ArrayList<Personal>();
-        personalx = this.personalService.getAllUsuario();
-        //desarrollo aca 
-        modelo.addAttribute("agregar", true);
-        modelo.addAttribute("personalx", personalx);
+        List<Personal> persosnales = new ArrayList<Personal>();
+        persosnales = this.personalService.getAllUsuario();
+        Personal personal2 = this.personalService.findByRut(idPersonal.toString());
+        modelo.addAttribute("modificar", true);
+        modelo.addAttribute("personal", personal2);
+        modelo.addAttribute("personales", persosnales);
         //fin desarrollo 
         //despachos 
 

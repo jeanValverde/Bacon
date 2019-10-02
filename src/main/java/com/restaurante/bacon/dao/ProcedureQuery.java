@@ -266,8 +266,7 @@ public class ProcedureQuery {
                     .setParameter(P_CORREO_PERSONAL, correo)
                     .setParameter(P_CONTRASENA_PERSONAL, contrasena)
                     .setParameter(P_ESTADO_PERSONAL, estado)
-                    .setParameter(P_RUT_PERSONAL, rut)
-                    .setParameter(P_ID_ROL, idRol).execute();
+                   .setParameter(P_ID_ROL, idRol).execute();
 
             return true;
         } catch (Exception ex) {
