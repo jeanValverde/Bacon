@@ -35,6 +35,7 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IPersonalDao.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\exceptions\IllegalOrphanException.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\RolService.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IRecetaOrdenadaCocina.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\ControlCaja.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.java
@@ -49,6 +50,7 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQuery.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProveedor.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\InsumoProveedor.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\OrdenCocinaService.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryInsumo.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.java

@@ -30,11 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "ESTADO_ORDEN")
 public class EstadoOrden implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "DESCRIPCION_ESTADO_ORDEN")
-    private String descripcionEstadoOrden;
+   
 
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -42,27 +38,35 @@ public class EstadoOrden implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_ESTADO_ORDEN")
-    private BigDecimal idEstadoOrden;
+    private Integer idEstadoOrden;
+    
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "DESCRIPCION_ESTADO_ORDEN")
+    private String descripcionEstadoOrden;
+     
+     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEstadoOrden")
     private Collection<Orden> ordenCollection;
 
     public EstadoOrden() {
     }
 
-    public EstadoOrden(BigDecimal idEstadoOrden) {
+    public EstadoOrden(Integer idEstadoOrden) {
         this.idEstadoOrden = idEstadoOrden;
     }
 
-    public EstadoOrden(BigDecimal idEstadoOrden, String descripcionEstadoOrden) {
+    public EstadoOrden(Integer idEstadoOrden, String descripcionEstadoOrden) {
         this.idEstadoOrden = idEstadoOrden;
         this.descripcionEstadoOrden = descripcionEstadoOrden;
     }
 
-    public BigDecimal getIdEstadoOrden() {
+    public Integer getIdEstadoOrden() {
         return idEstadoOrden;
     }
 
-    public void setIdEstadoOrden(BigDecimal idEstadoOrden) {
+    public void setIdEstadoOrden(Integer idEstadoOrden) {
         this.idEstadoOrden = idEstadoOrden;
     }
 

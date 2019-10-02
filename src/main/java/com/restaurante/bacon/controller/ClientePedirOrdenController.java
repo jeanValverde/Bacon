@@ -7,12 +7,16 @@ package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Cliente;
+import com.restaurante.bacon.dto.EstadoOrden;
 import com.restaurante.bacon.dto.Ingrediente;
 import com.restaurante.bacon.dto.Orden;
 import com.restaurante.bacon.dto.Receta;
 import com.restaurante.bacon.dto.RecetaOrden;
+import com.restaurante.bacon.dto.RecetaOrdenada;
 import com.restaurante.bacon.service.InsumoService;
+import com.restaurante.bacon.service.OrdenCocinaService;
 import com.restaurante.bacon.service.RecetaService;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +44,9 @@ public class ClientePedirOrdenController {
 
     @Autowired
     InsumoService insumoService;
+    
+    @Autowired
+    OrdenCocinaService ordenCocinaSerice;
 
     @RequestMapping("/")
     public String index(Model modelo, HttpSession sesion, @RequestParam("tipo") Integer idCategoriaReceta) {
@@ -232,41 +239,52 @@ public class ClientePedirOrdenController {
         Map<Receta, Integer> recetasCocinaPedias = (Map<Receta, Integer>) sesion.getAttribute("ordenesCocina");
         Map<Receta, Integer> recetasBarPedidas = (Map<Receta, Integer>) sesion.getAttribute("ordenesBar");
 
-        Orden orden = new Orden();
+        Orden ordenCocina = new Orden();
+        Orden ordenBar = new Orden();
         
         Cliente cliente = new Cliente();
         
+        cliente.setIdCliente(new BigDecimal("1")); 
         
+        Short tipo = Short.valueOf("0");//0 cocina
         
-        Integer subTotal = 0;
-        
-        Integer totalOrden = 0;
-        
-        Integer tiempoPreparacion = 0;
-        
-        
-        for (Map.Entry<Receta, Integer> ordenes : recetasCocinaPedias.entrySet()) {
-
-            
-            
-           
+        if(descripcion == null || descripcion == ""){
+            descripcion = "Sin descripción";
         }
         
+        ordenCocina = this.ordenCocinaSerice.crearOrdenByTipo(recetasCocinaPedias, tipo , cliente, descripcion);
         
+        List<RecetaOrdenada> recetasCocina = this.ordenCocinaSerice.calcularAndCrearRecetasOrdenadas(recetasCocinaPedias, ordenCocina);
         
+        tipo = Short.valueOf("1");//0 cocina
+        ordenBar = this.ordenCocinaSerice.crearOrdenByTipo(recetasBarPedidas, tipo , cliente, descripcion);
         
+        List<RecetaOrdenada> recetasBar = this.ordenCocinaSerice.calcularAndCrearRecetasOrdenadas(recetasBarPedidas, ordenBar);
         
-        
-        Map<Receta, Integer> recetasCocina = new HashMap();
-        Map<Receta, Integer> recetasBar = new HashMap();
+        Map<Receta, Integer> recetasCocinaOtra = new HashMap();
+        Map<Receta, Integer> recetasBarOtra = new HashMap();
 
-        sesion.setAttribute("ordenesCocina", recetasCocina);
+        sesion.setAttribute("ordenesCocina", recetasCocinaOtra);
 
         sesion.setAttribute("orden", false);
 
-        sesion.setAttribute("ordenesBar", recetasBar);
+        sesion.setAttribute("ordenesBar", recetasBarOtra);
 
         return new ModelAndView("redirect:/cliente/pedirOrden/?tipo=2");
+    }
+    
+    
+    public Integer calcularTotal(Map<Receta, Integer> busqueda){
+        
+        Integer salida = 0;
+        
+        for (Map.Entry<Receta, Integer> ordenes : busqueda.entrySet()) {
+
+           salida = salida + Integer.parseInt(ordenes.getKey().getPrecioReceta().toString()); 
+           
+        }
+        
+        return salida;
     }
 
 }
