@@ -15,5 +15,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface IClienteDao extends JpaRepository<Cliente, Integer> {
-    Cliente findByIdMesa(Integer idCliente);
+    Cliente findByIdCliente(Integer idCliente);
 }
