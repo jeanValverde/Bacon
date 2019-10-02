@@ -42,7 +42,7 @@ public class IndexController {
     private BCryptPasswordEncoder encoder;
 
     //Redirecciona al controlador adecuado según el rol del usuario despues de iniciar sesión 
-    @RequestMapping("/")
+    @RequestMapping("/sistema")
     public ModelAndView index(Model modelo) {
 
         //sesion 
@@ -166,6 +166,11 @@ public class IndexController {
         //
         //cargar el html *nombre*
         return "perfil";
+    }
+    
+    @RequestMapping("/")
+    public String sistemaCliente(Model model){
+        return "cliente";
     }
 
 }
