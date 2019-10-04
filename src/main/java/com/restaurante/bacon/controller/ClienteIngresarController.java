@@ -72,6 +72,8 @@ public class ClienteIngresarController {
 
         //aca se registra
         sesion.setAttribute("sesionCliente", clienteAgregado);
+        
+        sesion.setAttribute("instructivo", true);
 
         //esto es para las ordenes NO TOCAR PORFIS 
         Map<Receta, Integer> recetasCocina = new HashMap();
