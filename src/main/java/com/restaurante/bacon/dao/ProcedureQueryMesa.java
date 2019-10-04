@@ -21,44 +21,44 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ProcedureQueryMesa {
-    
+
     //acceder a la conexión 
     @Autowired
     private EntityManager em;
-    
+
     //SuppressWarnings suprime las abvertencias de tipo unchecked
-   @SuppressWarnings("unchecked")
-   public boolean InsertMesa(Integer numero, Integer cantidadAsientos, Integer estado){
-       try {
-           //si no se realiza el procedimiento adecuadamente cae en una exeption 
-           em.createNamedStoredProcedureQuery("InsertMesa")
-                   .setParameter("P_NUMERO_MESA", numero)
-                   .setParameter("P_CANTIDAD_ASIENTOS_MESA", cantidadAsientos)
-                   .setParameter("P_ESTADO_MESA", estado).execute();
-           return true;
-       } catch (Exception ex){
-           ex.printStackTrace();
-           return false;
-       }
-   }
-   
-   @SuppressWarnings("unchecked")
-   public boolean UpdateMesa(Integer id, BigInteger numero, BigInteger cantidadAsientos, BigInteger estado){
-       try {
-           //si no se realiza el procedimiento adecuadamente cae en una exeption 
-           em.createNamedStoredProcedureQuery("UpdateMesa")
-                   .setParameter("P_ID_MESA", id)
-                   .setParameter("P_NUMERO_MESA", numero)
-                   .setParameter("P_CANTIDAD_ASIENTOS_MESA", cantidadAsientos)
-                   .setParameter("P_ESTADO_MESA", estado).execute();
-           return true;
-       } catch (Exception ex){
-           System.out.println(ex.getMessage());
-           return false;
-       }
-   }
-   
-   @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
+    public boolean InsertMesa(Integer numero, Integer cantidadAsientos, Integer estado) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("InsertMesa")
+                    .setParameter("P_NUMERO_MESA", numero)
+                    .setParameter("P_CANTIDAD_ASIENTOS_MESA", cantidadAsientos)
+                    .setParameter("P_ESTADO_MESA", estado).execute();
+            return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public boolean UpdateMesa(Integer id, BigInteger numero, BigInteger cantidadAsientos, BigInteger estado) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("UpdateMesa")
+                    .setParameter("P_ID_MESA", id)
+                    .setParameter("P_NUMERO_MESA", numero)
+                    .setParameter("P_CANTIDAD_ASIENTOS_MESA", cantidadAsientos)
+                    .setParameter("P_ESTADO_MESA", estado).execute();
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
     public List<Mesa> filtrarRecetaByNumero(BigInteger numeroMesa) {
         try {
             StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_MESA.FILTRO_NUMERO_MESA");
@@ -76,7 +76,7 @@ public class ProcedureQueryMesa {
             // Obtenemos el resultado del cursos en una lista
             List<Object[]> results = query.getResultList();
             List<Mesa> mesas = new ArrayList<Mesa>();
-            
+
             // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
                 Mesa mesa = new Mesa();
@@ -86,7 +86,7 @@ public class ProcedureQueryMesa {
                 mesa.setEstadoMesa(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
                 mesas.add(mesa);
             }
-            
+
             return mesas;
 
         } catch (Exception ex) {
@@ -94,7 +94,7 @@ public class ProcedureQueryMesa {
             return null;
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     public List<Mesa> filtrarRecetaByAsientos(BigInteger cantidadAsientosMesa) {
         try {
@@ -113,7 +113,7 @@ public class ProcedureQueryMesa {
             // Obtenemos el resultado del cursos en una lista
             List<Object[]> results = query.getResultList();
             List<Mesa> mesas = new ArrayList<Mesa>();
-            
+
             // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
                 Mesa mesa = new Mesa();
@@ -123,7 +123,7 @@ public class ProcedureQueryMesa {
                 mesa.setEstadoMesa(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
                 mesas.add(mesa);
             }
-            
+
             return mesas;
 
         } catch (Exception ex) {
@@ -131,7 +131,7 @@ public class ProcedureQueryMesa {
             return null;
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     public List<Mesa> filtrarRecetaByEstado(BigInteger estadoMesa) {
         try {
@@ -150,7 +150,7 @@ public class ProcedureQueryMesa {
             // Obtenemos el resultado del cursos en una lista
             List<Object[]> results = query.getResultList();
             List<Mesa> mesas = new ArrayList<Mesa>();
-            
+
             // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
                 Mesa mesa = new Mesa();
@@ -160,9 +160,40 @@ public class ProcedureQueryMesa {
                 mesa.setEstadoMesa(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
                 mesas.add(mesa);
             }
-            
+
             return mesas;
 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Mesa> EstadoPedido() {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_MESA.ESTADO_MESA_PEDIDA");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_MESA_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+
+            //ejecutamos la query
+            query.execute();
+            
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Mesa> mesas = new ArrayList<Mesa>();
+            
+            for (Object[] result : results) {
+                Mesa mesa = new Mesa();
+                mesa.setIdMesa(Integer.parseInt(result[0].toString()));
+                mesa.setNumeroMesa(BigInteger.valueOf(Integer.parseInt(result[1].toString())));
+                mesa.setCantidadAsientosMesa(BigInteger.valueOf(Integer.parseInt(result[2].toString())));
+                mesa.setEstadoMesa(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
+                mesas.add(mesa);
+            }
+
+            return mesas;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
