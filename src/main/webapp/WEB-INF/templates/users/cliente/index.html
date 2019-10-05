@@ -256,7 +256,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-9 col-lg-9">
-                                                                <form class="" action="index.html" method="post">
+                                                                <form class="" th:action="@{/cliente/pedirOrden/confirmarOrden}" method="post">
                                                                     <div class="tab-content tab-content-vertical tab-content-vertical-custom" style="height: 415px">
                                                                         <div class="tab-pane fade active show" id="home-3" role="tabpanel" aria-labelledby="home-tab-custom">
                                                                             <div class="d-flex mt-4">
@@ -350,7 +350,7 @@
                                                                     <button type="submit" name="button" class="btn btn-primary">Confirmar pedidos</button>
                                                                     <button id="totalOrden"  type="button" class="btn btn-outline-primary btn-fw">Total: $</button>
                                                                     <br/><br/>
-                                                                    <input type="text" class="form-control form-control-lg" placeholder="Escribe una observación para la orden" aria-label="Escribe una observación para la orden" style="margin-bottom: 0px;">
+                                                                    <input type="text" name="descripcion" class="form-control form-control-lg" placeholder="Escribe una observación para la orden" aria-label="Escribe una observación para la orden" style="margin-bottom: 0px;">
                                                                 </form>
                                                             </div>
                                                         </div>
