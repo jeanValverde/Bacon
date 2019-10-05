@@ -60,6 +60,7 @@ C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IPersonalDao.jav
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\service\OrdenCocinaService.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoOrden.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrden.java
+C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryRecetaOrdenada.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\IIngredienteDao.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dto\IngresoStock.java
 C:\Proyecto bacon\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQuery.java

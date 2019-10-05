@@ -44,6 +44,7 @@ com\restaurante\bacon\dto\Proveedor.class
 com\restaurante\bacon\controller\PagarOrdenController.class
 com\restaurante\bacon\dto\EgresoStock.class
 com\restaurante\bacon\exceptions\PreexistingEntityException.class
+com\restaurante\bacon\dao\ProcedureQueryRecetaOrdenada.class
 com\restaurante\bacon\service\RolService.class
 com\restaurante\bacon\dto\Notificacion.class
 com\restaurante\bacon\dto\Orden.class

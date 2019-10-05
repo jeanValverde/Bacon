@@ -85,7 +85,73 @@
                         </ul>
                     </div>
                 </nav>
-                <!--INICIO MODAL-->
+                
+                
+                <div class="row">
+                                                <div id="cardReceta" class="card-columns">
+                                <!--card inicio receta--->
+                                <div class="card"  th:each="orden: ${ordenes}"  >
+                                    <div class="card-body text-center">
+                                        <div>
+                                            <h3>Id de la orden</h3>
+                                            <h4 th:text="${orden.idOrden}" >Id Orden</h4>
+                                            <p class="text-muted mb-0"  >
+                                            <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${orden.idCliente}" >id cliente</div>
+                                           
+
+                                            </p>
+                                        </div>
+                                        <h4>Sub-Total</h4>
+                                        <p class="mt-2 card-text" th:text="${orden.subTotal}+ '$'" >
+                                            
+                                        </p>
+                                        
+                                        <br/>
+                                        <br/>
+                                        <div class="border-top pt-3">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h6>Descripcion de la Orden</h6>
+                                                    <h6 th:text="${orden.descripcion}" >5896</h6>
+                                                    <p>Duración Preparación</p>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                         <div class="border-top pt-3">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h6>Total de la Orden</h6>
+                                                    <h6 th:text="${orden.TotalOrden}" >5896</h6>
+                                                    
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                      
+                                       
+                                    </div>
+                                </div>
+                                card fin receta
+                            </div>
+               <!-- <div th:each="ord: ${ordenes}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">   
+                    <div class="card-deck mt-3">
+
+                      
+
+                        <div class="card text-center border-info">
+                            <div class="card-body">
+                                <h4>Id Orden</h4>
+                                <h4 class="card-title" th:text="${ord.idOrden}">ID orden</h4>
+                                <p class="card-text">Lorem ipsum dolor sit </p>
+                                <a href="#" class="btn btn-primary">Entrar</a>
+                            </div>
+                        </div>          
+--->
+           
+                </div>
+                    </div>
+                <!--INICIO MODAL
                 <div class="container-fluid page-body-wrapper"   >
                     <div class="main-panel" >
                         <div class="content-wrapper">
@@ -154,124 +220,123 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--FIN MODAL-->
+                <!--FIN MODAL-->
+            </div>
+        </div>
+    </div>
+</div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
+</div>
+</div>
 
 
 
-                    <!-- container-scroller -->
 
-                    <!-- container-scroller -->
-                    <!-- base:js -->
-                    <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
-                    <!-- endinject -->
-                    <!-- Plugin js for this page-->
-                    <!-- End plugin js for this page-->
-                    <!-- inject:js -->
-                    <script th:src="@{/js/off-canvas.js}"></script>
-                    <script th:src="@{/js/hoverable-collapse.js}"></script>
-                    <script th:src="@{/js/template.js}"></script>
-                    <script th:src="@{/js/settings.js}"></script>
-                    <script th:src="@{/js/todolist.js}"></script>
-                    <script src="../../../../js/modal-demo.js"></script>
-                    <!-- endinject -->
-                    <!-- plugin js for this page -->
-                    <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
-                    <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
-                    <!-- End plugin js for this page -->
-                    <!-- Custom js for this page-->
-                    <script th:src="@{/js/alerts.js}"></script>
-                    <script th:src="@{/js/avgrund.js}"></script>
-                    <script th:src="@{/js/alerts_personalizado.js}"></script>
-                    <!-- End plugin js for this page -->
-                    <!-- Custom js for this page-->
-                    <!-- End custom js for this page-->
-                    <style type="text/css" >
-                        .flotante {
-                            display:scroll;
-                            position: fixed;
-                            bottom: 2%;
-                            right: 20%;
-                        }
+<!-- container-scroller -->
 
-                        .activeTipo{
-                            color: rgb(255, 255, 255);
-                            background-color: rgb(98, 1, 237);
-                            border-color: rgb(98, 1, 237);
-                        }
-                    </style>
+<!-- container-scroller -->
+<!-- base:js -->
+<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script th:src="@{/js/off-canvas.js}"></script>
+<script th:src="@{/js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/template.js}"></script>
+<script th:src="@{/js/settings.js}"></script>
+<script th:src="@{/js/todolist.js}"></script>
+<script src="../../../../js/modal-demo.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script th:src="@{/js/alerts.js}"></script>
+<script th:src="@{/js/avgrund.js}"></script>
+<script th:src="@{/js/alerts_personalizado.js}"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<!-- End custom js for this page-->
+<style type="text/css" >
+    .flotante {
+        display:scroll;
+        position: fixed;
+        bottom: 2%;
+        right: 20%;
+    }
 
-                    <script type="text/javascript" >
+    .activeTipo{
+        color: rgb(255, 255, 255);
+        background-color: rgb(98, 1, 237);
+        border-color: rgb(98, 1, 237);
+    }
+</style>
 
-                        var tipoUno = document.getElementById('tipoUno');
-                        var tipoDos = document.getElementById('tipoDos');
-                        var tipoTres = document.getElementById('tipoTres');
-                        var tipoCuatro = document.getElementById('tipoCuatro');
-                        var tipoMenosUno = document.getElementById('tipoMenosUno');
+<script type="text/javascript" >
 
-                        var tipoActivo = '[[${tipo}]]';
+    var tipoUno = document.getElementById('tipoUno');
+    var tipoDos = document.getElementById('tipoDos');
+    var tipoTres = document.getElementById('tipoTres');
+    var tipoCuatro = document.getElementById('tipoCuatro');
+    var tipoMenosUno = document.getElementById('tipoMenosUno');
 
-                        switch (tipoActivo) {
-                            case '1':
-                                tipoUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                                break;
-                            case '2':
-                                tipoDos.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                                break;
-                            case '3':
-                                tipoTres.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                                break;
-                            case '4':
-                                tipoCuatro.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                                break;
-                            case '-1':
-                                tipoMenosUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
-                                break;
-                            default:
-                                break;
-                        }
+    var tipoActivo = '[[${tipo}]]';
 
-                    </script>
+    switch (tipoActivo) {
+        case '1':
+            tipoUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        case '2':
+            tipoDos.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        case '3':
+            tipoTres.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        case '4':
+            tipoCuatro.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        case '-1':
+            tipoMenosUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        default:
+            break;
+    }
 
-                    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
+</script>
 
-                    <script type="text/javascript" >
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
 
-                        function d(idReceta) {
+<script type="text/javascript" >
 
-                            var input = document.getElementById('pedido-' + idReceta);
+    function d(idReceta) {
 
-                            if (input.value < 1 || input.value == null || input.value == 0) {
-                                input.setAttribute("class", "form-control is-invalid");
-                            } else {
-                                input.setAttribute("class", "form-control is-valid");
-                                Swal.fire({
-                                    title: '¿Está seguro que desea pedir esta receta?',
-                                    text: "Si pide esta receta solo podra anularlo solicitando asistencia en botón superior izquierdo de la pantalla",
-                                    type: 'warning',
-                                    showCancelButton: true,
-                                    confirmButtonColor: '#3085d6',
-                                    cancelButtonColor: '#d33',
-                                    confirmButtonText: '!Si, Pedir!'
-                                }).then((result) => {
-                                    if (result.value) {
-                                        location.href = "/administrador/deleteReceta?idReceta=" + idReceta;
-                                    }
-                                })
-                            }
+        var input = document.getElementById('pedido-' + idReceta);
+
+        if (input.value < 1 || input.value == null || input.value == 0) {
+            input.setAttribute("class", "form-control is-invalid");
+        } else {
+            input.setAttribute("class", "form-control is-valid");
+            Swal.fire({
+                title: '¿Está seguro que desea pedir esta receta?',
+                text: "Si pide esta receta solo podra anularlo solicitando asistencia en botón superior izquierdo de la pantalla",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '!Si, Pedir!'
+            }).then((result) => {
+                if (result.value) {
+                    location.href = "/administrador/deleteReceta?idReceta=" + idReceta;
+                }
+            })
+        }
 
 
-                        }
+    }
 
-                    </script>
-                    </body>
+</script>
+</body>
 
-                    </html>
+</html>

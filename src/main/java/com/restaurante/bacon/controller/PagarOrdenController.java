@@ -7,7 +7,10 @@ package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.dto.Cliente;
 import com.restaurante.bacon.dto.Orden;
+import com.restaurante.bacon.dto.Receta;
+import com.restaurante.bacon.dto.RecetaOrdenada;
 import com.restaurante.bacon.service.PagarOrdenService;
+import com.restaurante.bacon.service.RecetaService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +32,9 @@ public class PagarOrdenController {
     @Autowired
     PagarOrdenService pagarOrdenService;
     
+//    @Autowired
+//    RecetaOrdenadaService recetaService;
+    
   
      
     @RequestMapping("/pagar_ordenes")
@@ -39,7 +45,10 @@ public class PagarOrdenController {
         List<Orden> ordenes = new ArrayList<Orden>();
         ordenes = this.pagarOrdenService.listarOrdenes((BigDecimal.valueOf(1)));
         
+        List<RecetaOrdenada> recetasOrdenadas = new ArrayList<RecetaOrdenada>();
+        
          modelo.addAttribute("ordenes", ordenes);
+//         modelo.addAttribute("recetas", recetas);
         
    
    
