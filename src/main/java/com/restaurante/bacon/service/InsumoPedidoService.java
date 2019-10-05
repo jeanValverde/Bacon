@@ -7,7 +7,7 @@ package com.restaurante.bacon.service;
 
 import com.restaurante.bacon.dao.IInsumoPedidoDao;
 import com.restaurante.bacon.dao.InsumoPedidoProveedorDAO;
-import com.restaurante.bacon.dao.ProcedureQueryInsumoPedido;
+import com.restaurante.bacon.dao.ProcedureQueryPedido;
 import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.InsumoPedido;
 import com.restaurante.bacon.dto.InsumoProveedor;
@@ -35,14 +35,14 @@ public class InsumoPedidoService {
     @Autowired
     InsumoService insumoService;
     @Autowired
-    ProcedureQueryInsumoPedido procedureQueryInsumoPedido;
+    ProcedureQueryPedido procedureQueryPedido;
     
     //se implementan los metodos declarados en la interfaz 
    
     
     public List<InsumoPedidoProveedorDAO> listarInsumosPedidos(){
         ArrayList<InsumoPedidoProveedorDAO> insumos_pedidos_proveedor = new ArrayList<InsumoPedidoProveedorDAO>();
-        List<InsumoPedido> insumos_pedidos = this.procedureQueryInsumoPedido.listarInsumosPedidos();
+        List<InsumoPedido> insumos_pedidos = this.procedureQueryPedido.listarInsumosPedidos();
         
         for (int i = 0; i< insumos_pedidos.size();i++){
             InsumoPedidoProveedorDAO ins = new InsumoPedidoProveedorDAO();
@@ -50,7 +50,7 @@ public class InsumoPedidoService {
             Insumo insumo = new Insumo();
             insumo = insumoService.retornarInsumoById(insumos_pedidos.get(i).getIdInsumo().getIdInsumo());
             ins.setInsumo(insumo);
-            ins.setProveedores(this.procedureQueryInsumoPedido.listarProveedoresConInsumoPedido(BigInteger.valueOf(insumo.getIdInsumo())));
+            ins.setProveedores(this.procedureQueryPedido.listarProveedoresConInsumoPedido(BigInteger.valueOf(insumo.getIdInsumo())));
             insumos_pedidos_proveedor.add(ins);
         }
         return insumos_pedidos_proveedor;
@@ -58,12 +58,12 @@ public class InsumoPedidoService {
     }
     public InsumoProveedor retornarInsumoProveedor(Integer idInsumo,BigInteger idProveedor){
         InsumoProveedor insumoProveedor = new InsumoProveedor();
-        insumoProveedor = this.procedureQueryInsumoPedido.retornarInsumoProveedor(idInsumo,idProveedor);
+        insumoProveedor = this.procedureQueryPedido.retornarInsumoProveedor(idInsumo,idProveedor);
         return insumoProveedor;
     }
     public InsumoPedido retornarInsumoPedido(Integer id){
         InsumoPedido insumoPedido = new InsumoPedido();
-        return insumoPedido = this.procedureQueryInsumoPedido.retornarInsumoPedido(id);
+        return insumoPedido = this.procedureQueryPedido.retornarInsumoPedido(id);
         
     }
     
