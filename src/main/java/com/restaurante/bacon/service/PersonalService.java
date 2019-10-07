@@ -67,6 +67,10 @@ public class PersonalService implements UserDetailsService {
         return this.procedureQuery.InsertPersonal(personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(), personal.getContrasenaPersonal(), personal.getEstadoPersonal(), personal.getIdRol());
          
     }
+    
+    public Personal addPersonalDao(Personal personal) {
+        return this.personalDao.save(personal);
+    }
    
 
 	

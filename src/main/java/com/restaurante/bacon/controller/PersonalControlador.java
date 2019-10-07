@@ -5,7 +5,6 @@
  */
 package com.restaurante.bacon.controller;
 
-
 import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.ControlCaja;
@@ -15,6 +14,7 @@ import com.restaurante.bacon.dto.Rol;
 import com.restaurante.bacon.service.PersonalService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -42,7 +42,6 @@ import org.springframework.web.bind.annotation.RestController;
  *
  *
  */
-
 @RequestMapping("/administrador_personal")
 @Controller
 public class PersonalControlador {
@@ -50,35 +49,34 @@ public class PersonalControlador {
     //acceder a CRUB y mÃ¡s del personal 
     @Autowired
     PersonalService personalService;
-    
-        @Autowired
+
+    @Autowired
     ProcedureQuery procedureQuery;
 
     //para ingresar una contraseÃ±a encriptada 
     @Autowired
     private BCryptPasswordEncoder encoder;
-    
-    
+
     @RequestMapping("/index")
     public String prueba(Model modelo) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
+
         //desarrollo aca 
         modelo.addAttribute("Personal", this.personalService.getAllUsuario());
         //fin desarrollo 
         //despachos 
-        
+
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/index";
     }
-    
-        @RequestMapping("/mantenedor_personal")
+
+    @RequestMapping("/mantenedor_personal")
     public String mantenedor_personal(Model modelo) {
         //sesion 
         UserRol user = new UserRol();
@@ -87,25 +85,19 @@ public class PersonalControlador {
         List<Personal> personales = new ArrayList<Personal>();
         personales = this.personalService.getAllUsuario();
         //desarrollo aca 
-        
-        
+
         modelo.addAttribute("personales", personales);
         modelo.addAttribute("agregar", true);
-        
+
         modelo.addAttribute("personalSesion", personal);
-        
+
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         return "users/administrador/mantenedor_personal";
-        
+
     }
-    
-    
 
-    
-    
-
-        @PostMapping("/addPersonal")
-          public String addPersonal(Model modelo,
+    @PostMapping("/addPersonal")
+    public String addPersonal(Model modelo,
             @RequestParam("rutPersonal") String rutPersonal,
             @RequestParam("nombresPersonal") String nombresPersonal,
             @RequestParam("apePaternoPersonal") String apePaternoPersonal,
@@ -121,44 +113,44 @@ public class PersonalControlador {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
-        
 
-     
-        
         String edad = this.personalService.getEdad(personal.getFechaNacimientoPersonal());
-        
+
         Date fechaNacimiento = PersonalService.ParseFecha(fechaNacimientoPersonal);
-        
-        
+
         Personal personal1 = this.personalService.findByRut(rutPersonal);
-        
+
         Personal perso = new Personal();
 
-        perso.setRutPersonal(rutPersonal);
-        perso.setNombresPersonal(nombresPersonal);
-        perso.setApePaternoPersonal(apePaternoPersonal);
-        perso.setApeMaternoPersonal(apeMaternoPersonal);
-        perso.setFechaNacimientoPersonal(fechaNacimiento);
-        perso.setCelularPersonal(celularPersonal);
-        perso.setCorreoPersonal(correoPersonal);
-        perso.setContrasenaPersonal(contrasenaPersonal);
-        perso.setEstadoPersonal(estadoPersonal);
-        Rol rol=new Rol();
-        rol.setIdRol(idRol);
+        perso.setRutPersonal("194702671");
+        perso.setNombresPersonal("enrique andres   ");
+        perso.setApePaternoPersonal("noguera    ");
+        perso.setApeMaternoPersonal("contreras");
+        perso.setFechaNacimientoPersonal(new Date());
+        perso.setCelularPersonal("82961951");
+        perso.setCorreoPersonal("enri_toto@hotmail.com ");
+        String contra = encoder.encode("123");
+        perso.setContrasenaPersonal(contra);
+        perso.setEstadoPersonal(1);
+        Rol rol = new Rol();
+        rol.setIdRol(1);
         perso.setIdRol(rol);
 //        personal1.setIdRol(rolpersonal);
 
-        
+        try {
 
-        
-        
-        if (this.personalService.addPersonal(perso)) {
-            modelo.addAttribute("tipoRespuesta", "registroAgregar");
-            modelo.addAttribute("respuesta", 1);
-        } else {
-            modelo.addAttribute("tipoRespuesta", "registroAgregar");
-            modelo.addAttribute("respuesta", 0);
+            Personal g = this.personalService.addPersonalDao(perso);
+            if (g.getIdPersonal() != null) {
+                modelo.addAttribute("tipoRespuesta", "registroAgregar");
+                modelo.addAttribute("respuesta", 1);
+            } else {
+                modelo.addAttribute("tipoRespuesta", "registroAgregar");
+                modelo.addAttribute("respuesta", 0);
+            }
+            
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         //desarollo
         //fin desarrollo 
@@ -178,8 +170,8 @@ public class PersonalControlador {
         return "users/administrador/mantenedor_personal";
 
     }
-          
-        @RequestMapping("/cargar_personal")
+
+    @RequestMapping("/cargar_personal")
     public String cargar_personal(Model modelo, @RequestParam("idpersonal") BigDecimal idPersonal) {
         //sesion 
         UserRol user = new UserRol();
@@ -198,12 +190,9 @@ public class PersonalControlador {
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/mantenedor_personal";
-    }      
-          
-          
-          
-    
-        @RequestMapping("/eliminar_personal")
+    }
+
+    @RequestMapping("/eliminar_personal")
     public String eliminar_personal(Model modelo, @RequestParam("idPersonal") BigInteger idPersonal) {
         //sesion 
         UserRol user = new UserRol();
@@ -211,12 +200,12 @@ public class PersonalControlador {
         //sesion 
         if (this.procedureQuery.DeletePersonalById(idPersonal)) {
             modelo.addAttribute("tipoRespuesta", "eliminar");
-                modelo.addAttribute("respuesta", 1);
-        }else{
+            modelo.addAttribute("respuesta", 1);
+        } else {
             modelo.addAttribute("tipoRespuesta", "eliminar");
-                modelo.addAttribute("respuesta", 0);
+            modelo.addAttribute("respuesta", 0);
         }
-        
+
         List<Personal> personales = new ArrayList<Personal>();
         personales = this.personalService.getAllUsuario();
         modelo.addAttribute("proveedores", personales);
@@ -232,11 +221,8 @@ public class PersonalControlador {
         return "users/administrador";
 //                + "/mantenedor_proveedor";
     }
-    
-    
-    
-    
-        @RequestMapping("/modificar_personal")
+
+    @RequestMapping("/modificar_personal")
     public String modificar_personal(Model modelo, @RequestParam("idPersonal") BigDecimal idPersonal,
             @RequestParam("rutPersonal") String rutPersonal,
             @RequestParam("nombresPersonal") String nombresPersonal,
@@ -247,13 +233,13 @@ public class PersonalControlador {
             @RequestParam("correopersonal") String correopersonal,
             @RequestParam("contraseña") String contraseña,
             @RequestParam("estadopersonal") Integer estadopersonal,
-            @RequestParam("rolpersonal") Integer rolpersonal){
+            @RequestParam("rolpersonal") Integer rolpersonal) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        
+
         Personal personal1 = new Personal();
-        
+
         personal1.setIdPersonal(idPersonal);
         personal1.setRutPersonal(rutPersonal);
         personal1.setNombresPersonal(nombresPersonal);
@@ -264,21 +250,19 @@ public class PersonalControlador {
         personal1.setCorreoPersonal(correopersonal);
         personal1.setContrasenaPersonal(contraseña);
         personal1.setEstadoPersonal(estadopersonal);
-        Rol rol=new Rol();
+        Rol rol = new Rol();
         rol.setIdRol(rolpersonal);
         personal.setIdRol(rol);
-        
+
         if (this.personalService.ModificarPersonal(personal1)) {
-             
-             modelo.addAttribute("tipoRespuesta", "modificar");
-                modelo.addAttribute("respuesta", 1);
-        }else{
+
             modelo.addAttribute("tipoRespuesta", "modificar");
-                modelo.addAttribute("respuesta", 0);
+            modelo.addAttribute("respuesta", 1);
+        } else {
+            modelo.addAttribute("tipoRespuesta", "modificar");
+            modelo.addAttribute("respuesta", 0);
         }
-       
-            
-        
+
         List<Personal> persosnales = new ArrayList<Personal>();
         persosnales = this.personalService.getAllUsuario();
         Personal personal2 = this.personalService.findByRut(idPersonal.toString());
@@ -294,9 +278,5 @@ public class PersonalControlador {
         //
         return "users/administrador";
     }
-    
-    
-
 
 }
-

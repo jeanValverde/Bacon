@@ -49,7 +49,7 @@
                                                                                 <p class="card-description text-justify">
                                                                                     Completa estos campos para agregar un personal al sistema.
                                                                                 </p>
-                                                                                <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="post" name="formAddPersonal" enctype="multipart/form-data">
+                                                                                <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="post" name="formAddPersonal" >
                                                                                   <input type="hidden" name="agregar" id="registroAgregar" th:value="${registroAgregar}" />                                                                                   
                                                                                     <div class="form-group">
                                                                                         <label for="rutPersonal">Rut Personal</label>
