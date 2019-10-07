@@ -49,8 +49,8 @@
                                                                                 <p class="card-description text-justify">
                                                                                     Completa estos campos para agregar un personal al sistema.
                                                                                 </p>
-                                                                                <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="post" name="formAddPersonal" enctype="multipart/form-data">
-                                                                                  <input type="hidden" name="agregar" id="registroAgregar" th:value="${registroAgregar}" />                                                                                   
+                                                                                <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="POST" name="formAddPersonal" enctype="multipart/form-data">
+                                                                                  <input type="hidden" name="agregar" id="agregar" th:value="${agregar}" />                                                                                   
                                                                                     <div class="form-group">
                                                                                         <label for="rutPersonal">Rut Personal</label>
                                                                                         <input type="text" class="form-control" id="rutPersonal" name="rutPersonal" placeholder="11.111.111-1">
@@ -73,8 +73,8 @@
                                                                                     </div>
 
                                                                                     <div class="form-group">
-                                                                                        <label for="apePaternoPersonal">apellido Paterno</label>
-                                                                                        <input type="text" class="form-control" id="apePaternoPersonal" name="apePaternoPersonal" placeholder="Perez">
+                                                                                        <label for="apepaternopersonal">apellido Paterno</label>
+                                                                                        <input type="text" class="form-control" id="apepaternopersonal" name="apeaternopersonal" placeholder="Perez">
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -84,8 +84,8 @@
                                                                                     </div>
 
                                                                                     <div class="form-group">
-                                                                                        <label for="apeMaternoPersonal">apellido Materno</label>
-                                                                                        <input type="text" class="form-control" id="apeMaternoPersonal" name="apeMaternoPersonal" placeholder="Suarez">
+                                                                                        <label for="apematernopersonal">apellido Materno</label>
+                                                                                        <input type="text" class="form-control" id="apematernopersonal" name="apematernopersonal" placeholder="Suarez">
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -94,8 +94,8 @@
                                                                                             </div>
                                                                                     </div>
                                                                                     <div class="form-group">
-                                                                                        <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
-                                                                                        <input type="text" class="form-control" id="fechaNacimientoPersonal" name="fechaNacimientoPersonal" >
+                                                                                        <label for="fechaNacimiento">Fecha Nacimiento</label>
+                                                                                        <input type="text" class="form-control" id="fechaNacimiento" name="fechaNacimiento" >
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -104,8 +104,8 @@
                                                                                             </div>
                                                                                     </div>
                                                                                     <div class="form-group">
-                                                                                        <label for="celularPersonal">Celular Personal</label>
-                                                                                        <input type="text" class="form-control" id="celularPersonal" name="celularPersonal" placeholder="982961951">
+                                                                                        <label for="telefonoPersonal">Celular Personal</label>
+                                                                                        <input type="text" class="form-control" id="telefonoPersonal" name="telefonoPersonal" placeholder="982961951">
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -114,8 +114,8 @@
                                                                                             </div>
                                                                                     </div>                                
                                                                                     <div class="form-group">
-                                                                                        <label for="correoPersonal">Correo Personal</label>
-                                                                                        <input type="text" class="form-control" id="correoPersonal" name="correoPersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
+                                                                                        <label for="correopersonal">Correo Personal</label>
+                                                                                        <input type="text" class="form-control" id="correopersonal" name="correopersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -125,8 +125,8 @@
                                                                                     </div>
                                                                                   
                                                                                     <div class="form-group">
-                                                                                        <label for="contrasenaPersonal">CONTRASEÑA</label>
-                                                                                        <input type="password" class="form-control" id="contrasenaPersonal" name="contrasenaPersonal" placeholder="************">
+                                                                                        <label for="password">CONTRASEÑA</label>
+                                                                                        <input type="password" class="form-control" id="password" name="password" placeholder="************">
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -134,7 +134,7 @@
                                                                                                 Escribe una contraseña para el personal.
                                                                                             </div>
                                                                                     </div>                                                                                  
-<!--
+
                                                                                     <div class="form-group">
                                                                                         <label for="password">REPITA CONTRASEÑA</label>
                                                                                         <input type="password" class="form-control" id="password" name="password" placeholder="************">
@@ -145,10 +145,9 @@
                                                                                                 Escribe una contraseña para el personal.
                                                                                             </div>
                                                                                     </div>
--->
                                                                                     <div class="form-group">
-                                                                                        <label for="estadoPersonal">Estado personal</label>
-                                                                                        <input type="number" min="1" max="4" class="form-control" id="estadoPersonal" name="estadoPersonal" placeholder="1">
+                                                                                        <label for="estadopersonal">estadopersonal</label>
+                                                                                        <input type="number" min="1" max="4" class="form-control" id="estadopersonal" name="estadopersonal" placeholder="1">
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -156,18 +155,24 @@
                                                                                                 Seleccione un estado para el personal.
                                                                                             </div>
                                                                                     </div>
-                                                                                                                                                                     <div class="form-group">
-                                                                                        <label for="idRol">Rol personal</label>
-                                                                                        <input type="number" min="1" max="5" class="form-control" id="idRol" name="idRol" placeholder="1">
-                                                                                            <div class="valid-feedback">
-                                                                                                !Listo!
-                                                                                            </div>
-                                                                                            <div class="invalid-feedback">
-                                                                                                Seleccione un estado para el personal.
-                                                                                            </div>
-                                                                                    </div> 
-                                                                                 
+                                                                                    <div class="form-group">
+                                                                                        <select id="rolpersonal" name="rolpersonal" class="custom-select" required>
+                                                                                            <option value="select">seleccióne</option>
+                                                                                            <option value="admin">ADMIN</option>
+                                                                                            <option value="bodega">BODEGA</option>
+                                                                                            <option value="finanzas">FINANZAS</option>
+                                                                                            <option value="garzon">GARZON</option>
+                                                                                            <option value="cocina">COCINA</option>
 
+                                                                                        </select>
+                                                                                        <small id="selectHelp" class="form-text text-muted">Selecciona al menos una opción.</small>
+                                                                                        <div class="valid-feedback">
+                                                                                            ¡Fantástica elección!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            No te olvides de seleccionar al menos una opción.
+                                                                                        </div>
+                                                                                    </div>
                                                                                     <button type="submit" class="btn btn-primary mr-2">Agregar</button>                                
 
                                                                                 </form>
@@ -206,10 +211,10 @@
                                                                                         <td th:text="${ins.EstadoPersonal}"></td>
                                                                                         <td th:text="${ins.IdRol}"></td>
                                                                                         <td>
-                                                                                            <a  th:href="@{/administrador_personal/modificar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                            <a  th:href="@{/administrador_proveedor/modificar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
                                                                                         </td>
                                                                                         <td>
-                                                                                            <a  th:href="@{/administrador_personal/eliminar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
+                                                                                            <a  th:href="@{/administrador_proveedor/eliminar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
                                                                                         </td>
                                                                                     </tr>
 

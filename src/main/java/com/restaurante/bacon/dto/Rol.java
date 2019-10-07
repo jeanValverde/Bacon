@@ -33,7 +33,7 @@ public class Rol implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_ROL")
-    private BigDecimal idRol;
+    private Integer idRol;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -47,20 +47,20 @@ public class Rol implements Serializable {
     public Rol() {
     }
 
-    public Rol(BigDecimal idRol) {
+    public Rol(Integer idRol) {
         this.idRol = idRol;
     }
 
-    public Rol(BigDecimal idRol, String descripcionRol) {
+    public Rol(Integer idRol, String descripcionRol) {
         this.idRol = idRol;
         this.descripcionRol = descripcionRol;
     }
 
-    public BigDecimal getIdRol() {
+    public Integer getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(BigDecimal idRol) {
+    public void setIdRol(Integer idRol) {
         this.idRol = idRol;
     }
 

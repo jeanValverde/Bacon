@@ -72,7 +72,7 @@ public class ProcedureQuery {
 
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
-    public boolean modificarPersonal(BigDecimal idPersonal,String rut, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo, String contrasena, BigInteger estado,Rol idRol) {
+    public boolean modificarPersonal(BigDecimal idPersonal,String rut, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo, String contrasena, Integer estado,Rol idRol) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("modificarPersonal")
@@ -249,10 +249,10 @@ public class ProcedureQuery {
 //            return false;
 //        }
 //    }
-    Rol r= new Rol();
+//    Rol r= new Rol();
     
         @SuppressWarnings("unchecked")
-        public boolean InsertPersonal(String rut, String nombres, String apePaterno, String apeMaterno, Date fecha_nacimiento, String celular, String correo, String contrasena, BigInteger estado,Rol idRol) {
+        public boolean InsertPersonal(String rut, String nombres, String apePaterno, String apeMaterno, Date fecha_nacimiento, String celular, String correo, String contrasena, Integer estado,Rol idRol) {
         try {
 
 

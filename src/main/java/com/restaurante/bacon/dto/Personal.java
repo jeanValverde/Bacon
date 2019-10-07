@@ -95,7 +95,7 @@ public class Personal implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ESTADO_PERSONAL")
-    private BigInteger estadoPersonal;
+    private Integer estadoPersonal;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonal")
     private Collection<ControlCaja> controlCajaCollection;
     @JoinColumn(name = "ID_ROL", referencedColumnName = "ID_ROL")
@@ -124,7 +124,7 @@ public class Personal implements Serializable {
     }
     
     
-    public Personal(BigDecimal idPersonal, String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal, BigInteger estadoPersonal) {
+    public Personal(BigDecimal idPersonal, String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal, Integer estadoPersonal) {
         this.idPersonal = idPersonal;
         this.rutPersonal = rutPersonal;
         this.nombresPersonal = nombresPersonal;
@@ -211,11 +211,11 @@ public class Personal implements Serializable {
         this.contrasenaPersonal = contrasenaPersonal;
     }
 
-    public BigInteger getEstadoPersonal() {
+    public Integer getEstadoPersonal() {
         return estadoPersonal;
     }
 
-    public void setEstadoPersonal(BigInteger estadoPersonal) {
+    public void setEstadoPersonal(Integer estadoPersonal) {
         this.estadoPersonal = estadoPersonal;
     }
 

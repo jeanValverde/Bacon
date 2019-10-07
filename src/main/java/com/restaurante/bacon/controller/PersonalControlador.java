@@ -43,9 +43,9 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 
-@RequestMapping("/administrador")
+@RequestMapping("/administrador_personal")
 @Controller
-public class PersonalController {
+public class PersonalControlador {
 
     //acceder a CRUB y mÃ¡s del personal 
     @Autowired
@@ -108,14 +108,14 @@ public class PersonalController {
           public String addPersonal(Model modelo,
             @RequestParam("rutPersonal") String rutPersonal,
             @RequestParam("nombresPersonal") String nombresPersonal,
-            @RequestParam("ApePaternoPersonal") String ApePaternoPersonal,
-            @RequestParam("ApeMaternoPersonal") String ApeMaternoPersonal,
-            @RequestParam("FechaNacimientoPersonal") String FechaNacimientoPersonal,
-            @RequestParam("CelularPersonal") String CelularPersonal,
-            @RequestParam("CorreoPersonal") String CorreoPersonal,
-            @RequestParam("password") String password,
-            @RequestParam("EstadoPersonal") Integer EstadoPersonal,
-            @RequestParam("IdRol") Integer IdRol) {
+            @RequestParam("apePaternoPersonal") String apePaternoPersonal,
+            @RequestParam("apeMaternoPersonal") String apeMaternoPersonal,
+            @RequestParam("fechaNacimientoPersonal") String fechaNacimientoPersonal,
+            @RequestParam("celularPersonal") String celularPersonal,
+            @RequestParam("correoPersonal") String correoPersonal,
+            @RequestParam("contrasenaPersonal") String contrasenaPersonal,
+            @RequestParam("estadoPersonal") Integer estadoPersonal,
+            @RequestParam("idRol") Integer idRol) {
 
         //sesion 
         UserRol user = new UserRol();
@@ -124,38 +124,40 @@ public class PersonalController {
         
         
 
-
+     
         
         String edad = this.personalService.getEdad(personal.getFechaNacimientoPersonal());
         
-        Date FechaNacimiento = PersonalService.ParseFecha(FechaNacimientoPersonal);
+        Date fechaNacimiento = PersonalService.ParseFecha(fechaNacimientoPersonal);
         
         
         Personal personal1 = this.personalService.findByRut(rutPersonal);
+        
+        Personal perso = new Personal();
 
-        personal1.setRutPersonal(rutPersonal);
-        personal1.setNombresPersonal(nombresPersonal);
-        personal1.setApePaternoPersonal(ApePaternoPersonal);
-        personal1.setApeMaternoPersonal(ApeMaternoPersonal);
-        personal1.setFechaNacimientoPersonal(FechaNacimiento);
-        personal1.setCelularPersonal(CelularPersonal);
-        personal1.setCorreoPersonal(CorreoPersonal);
-        personal1.setContrasenaPersonal(password);
-        personal1.setEstadoPersonal(EstadoPersonal);
+        perso.setRutPersonal(rutPersonal);
+        perso.setNombresPersonal(nombresPersonal);
+        perso.setApePaternoPersonal(apePaternoPersonal);
+        perso.setApeMaternoPersonal(apeMaternoPersonal);
+        perso.setFechaNacimientoPersonal(fechaNacimiento);
+        perso.setCelularPersonal(celularPersonal);
+        perso.setCorreoPersonal(correoPersonal);
+        perso.setContrasenaPersonal(contrasenaPersonal);
+        perso.setEstadoPersonal(estadoPersonal);
         Rol rol=new Rol();
-        rol.setIdRol(IdRol);
-        personal.setIdRol(rol);
+        rol.setIdRol(idRol);
+        perso.setIdRol(rol);
 //        personal1.setIdRol(rolpersonal);
 
         
 
         
         
-        if (this.personalService.addPersonal(personal1)) {
-            modelo.addAttribute("tipoRespuesta", "agregar");
+        if (this.personalService.addPersonal(perso)) {
+            modelo.addAttribute("tipoRespuesta", "registroAgregar");
             modelo.addAttribute("respuesta", 1);
         } else {
-            modelo.addAttribute("tipoRespuesta", "agregar");
+            modelo.addAttribute("tipoRespuesta", "registroAgregar");
             modelo.addAttribute("respuesta", 0);
         }
         //desarollo
@@ -183,12 +185,12 @@ public class PersonalController {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        List<Personal> personales = new ArrayList<Personal>();
-        personales = this.personalService.getAllUsuario();
+        List<Personal> persosnales = new ArrayList<Personal>();
+        persosnales = this.personalService.getAllUsuario();
         Personal personal1 = this.personalService.findByRut(idPersonal.toString());
         modelo.addAttribute("modificar", true);
         modelo.addAttribute("personal", personal1);
-        modelo.addAttribute("personales", personales);
+        modelo.addAttribute("personales", persosnales);
         //fin desarrollo 
         //despachos 
         //fin despacho 

@@ -8,6 +8,7 @@ com\restaurante\bacon\dto\InsumoPedidoProveedor.class
 com\restaurante\bacon\dto\Mesa.class
 com\restaurante\bacon\dao\IRolDao.class
 com\restaurante\bacon\dto\procedure\ProcedureInsertProveedor.class
+com\restaurante\bacon\controller\PersonalControlador.class
 com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.class
 com\restaurante\bacon\dao\IProveedorDao.class
 com\restaurante\bacon\dto\Pedido.class
