@@ -6,7 +6,7 @@
 package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.config.UserRol;
-import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dao.ProcedureQueryPersonal;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.service.PersonalService;
 import java.util.Date;
@@ -35,7 +35,7 @@ public class IndexController {
 
     //Aceeder a todos los procedimientos almacenados 
     @Autowired
-    ProcedureQuery procedureQuery;
+    ProcedureQueryPersonal procedureQuery;
 
     //Para ingresar una contraseña encriptada 
     @Autowired

@@ -6,7 +6,7 @@
 package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.config.UserRol;
-import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dao.ProcedureQueryPersonal;
 import com.restaurante.bacon.dto.ControlCaja;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.dto.Proveedor;
@@ -51,7 +51,7 @@ public class PersonalControlador {
     PersonalService personalService;
 
     @Autowired
-    ProcedureQuery procedureQuery;
+    ProcedureQueryPersonal procedureQuery;
 
     //para ingresar una contraseÃ±a encriptada 
     @Autowired
@@ -122,36 +122,39 @@ public class PersonalControlador {
 
         Personal perso = new Personal();
 
-        perso.setRutPersonal("194702671");
-        perso.setNombresPersonal("enrique andres   ");
-        perso.setApePaternoPersonal("noguera    ");
-        perso.setApeMaternoPersonal("contreras");
+        perso.setRutPersonal(rutPersonal);
+        perso.setNombresPersonal(nombresPersonal);
+        perso.setApePaternoPersonal(apePaternoPersonal);
+        perso.setApeMaternoPersonal(apeMaternoPersonal);
         perso.setFechaNacimientoPersonal(new Date());
-        perso.setCelularPersonal("82961951");
-        perso.setCorreoPersonal("enri_toto@hotmail.com ");
-        String contra = encoder.encode("123");
+        perso.setCelularPersonal(celularPersonal);
+        perso.setCorreoPersonal(correoPersonal);
+        String contra = encoder.encode(contrasenaPersonal);
         perso.setContrasenaPersonal(contra);
-        perso.setEstadoPersonal(1);
+        perso.setEstadoPersonal(estadoPersonal);
+        
+        
+        
         Rol rol = new Rol();
-        rol.setIdRol(1);
+        rol.setIdRol(idRol);
         perso.setIdRol(rol);
 //        personal1.setIdRol(rolpersonal);
-
-        try {
-
-            Personal g = this.personalService.addPersonalDao(perso);
-            if (g.getIdPersonal() != null) {
-                modelo.addAttribute("tipoRespuesta", "registroAgregar");
-                modelo.addAttribute("respuesta", 1);
-            } else {
-                modelo.addAttribute("tipoRespuesta", "registroAgregar");
-                modelo.addAttribute("respuesta", 0);
-            }
+        this.personalService.addPersonal(perso);
+//        try {
+//
+//            
+//            if (this.personalService.addPersonal(perso)) {
+//                modelo.addAttribute("tipoRespuesta", "registroAgregar");
+//                modelo.addAttribute("respuesta", 1);
+//            } else {
+//                modelo.addAttribute("tipoRespuesta", "registroAgregar");
+//                modelo.addAttribute("respuesta", 0);
+//            }
+//            
             
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
         //desarollo
         //fin desarrollo 
         //despacho  modelo.addAttribute(nombreDespacho, objetoAdespachar)

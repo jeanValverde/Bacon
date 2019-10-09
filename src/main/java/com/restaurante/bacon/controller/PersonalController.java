@@ -5,34 +5,30 @@
  */
 package com.restaurante.bacon.controller;
 
-
 import com.restaurante.bacon.config.UserRol;
-import com.restaurante.bacon.dao.ProcedureQuery;
-import com.restaurante.bacon.dto.ControlCaja;
+import com.restaurante.bacon.dto.CategoriaReceta;
+import com.restaurante.bacon.dao.ProcedureQueryPersonal;
+import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.Personal;
-import com.restaurante.bacon.dto.Proveedor;
+import com.restaurante.bacon.dto.Receta;
 import com.restaurante.bacon.dto.Rol;
 import com.restaurante.bacon.service.PersonalService;
+//import com.restaurante.bacon.service.RecetaService;
+import java.io.IOException;
+//import com.restaurante.bacon.service.InsumoService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import javax.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -42,247 +38,330 @@ import org.springframework.web.bind.annotation.RestController;
  *
  *
  */
-
 @RequestMapping("/administrador")
 @Controller
 public class PersonalController {
 
-    //acceder a CRUB y mÃ¡s del personal 
+    //acceder a CRUB y más del personal 
     @Autowired
     PersonalService personalService;
-    
-        @Autowired
-    ProcedureQuery procedureQuery;
 
-    //para ingresar una contraseÃ±a encriptada 
+    @Autowired
+//    RecetaService recetaService;
+
+    public static String UPLOAD_DIR_IMAGEN = System.getProperty("user.dir") + "/src/main/resources/static/uploads";
+
+    @Autowired
+//    InsumoService insumoService;
+//    @Autowired
+    ProcedureQueryPersonal procedureQuery;
+
+    //para ingresar una contraseña encriptada 
     @Autowired
     private BCryptPasswordEncoder encoder;
-    
-    
+
     @RequestMapping("/index")
     public String prueba(Model modelo) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
+
         //desarrollo aca 
-        modelo.addAttribute("Personal", this.personalService.getAllUsuario());
+        modelo.addAttribute("funcionarios", this.personalService.getAllUsuario());
+
         //fin desarrollo 
         //despachos 
-        
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
         return "users/administrador/index";
     }
-    
-        @RequestMapping("/mantenedor_personal")
-    public String mantenedor_personal(Model modelo) {
+
+    @RequestMapping("/receta")
+    public String receta(Model modelo) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        List<Personal> personales = new ArrayList<Personal>();
-        personales = this.personalService.getAllUsuario();
         //desarrollo aca 
+
+//        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+        modelo.addAttribute("tipoForm", "agregar");
         
-        
-        modelo.addAttribute("personales", personales);
-        modelo.addAttribute("agregar", true);
-        
-        modelo.addAttribute("personalSesion", personal);
-        
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 0 );
+        //fin mensajes 
+
+//        modelo.addAttribute("recetas", this.recetaService.listar());
+
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        return "users/administrador/mantenedor_personal";
-        
+        //
+        return "users/administrador/mantenedorReceta";
     }
-    
-    
 
-    
-    
+    @RequestMapping("/Recetafiltro")
+    public String filtro(Model modelo, @RequestParam("nombreReceta") String nombreReceta) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
 
-        @PostMapping("/addPersonal")
-          public String addPersonal(Model modelo,
-            @RequestParam("rutPersonal") String rutPersonal,
-            @RequestParam("nombresPersonal") String nombresPersonal,
-            @RequestParam("ApePaternoPersonal") String ApePaternoPersonal,
-            @RequestParam("ApeMaternoPersonal") String ApeMaternoPersonal,
-            @RequestParam("FechaNacimientoPersonal") String FechaNacimientoPersonal,
-            @RequestParam("CelularPersonal") String CelularPersonal,
-            @RequestParam("CorreoPersonal") String CorreoPersonal,
-            @RequestParam("password") String password,
-            @RequestParam("EstadoPersonal") Integer EstadoPersonal,
-            @RequestParam("IdRol") Integer IdRol) {
+//        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+//        List<Receta> recetas = this.recetaService.filtrarRecetasByNombre(nombreReceta);
+
+//        modelo.addAttribute("recetas", recetas);
+
+        modelo.addAttribute("tipoForm", "agregar");
+        
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 0 );
+        //fin mensajes 
+        
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedorReceta";
+    }
+
+    @RequestMapping("/deleteReceta")
+    public String deleteReceta(Model modelo, @RequestParam("idReceta") Integer idReceta) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+//        this.recetaService.deleteRecetaById(idReceta);
+
+//        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+//        List<Receta> recetas = this.recetaService.listar();
+
+//        modelo.addAttribute("recetas", recetas);
+
+        modelo.addAttribute("tipoForm", "agregar");
+        //fin desarrollo 
+        //despachos 
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 1 );
+        modelo.addAttribute("nombreMensaje", "Información");
+        modelo.addAttribute("mensaje", "Receta Eliminada");
+        //puede ser success - info - danger - warning
+        modelo.addAttribute("tipoMensaje", "success");
+        //fin mensajes 
+        //desarrollo aca 
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedorReceta";
+    }
+
+    @RequestMapping("/loadEditarReceta")
+    public String loadEditarReceta(Model modelo, @RequestParam("idReceta") Integer idReceta) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarrollo aca 
+
+//        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+
+//        Receta receta = this.recetaService.buscarRecetaById(idReceta);
+
+//        List<Receta> recetas = this.recetaService.listar();
+//
+//        modelo.addAttribute("recetas", recetas);
+//
+//        modelo.addAttribute("recetaEdit", receta);
+
+        modelo.addAttribute("tipoForm", "editar");
+
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 0 );
+        //fin mensajes 
+        
+        //fin desarrollo 
+        //despachos 
+        //fin despacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+
+        return "users/administrador/mantenedorReceta";
+    }
+
+   
+  
+    @PostMapping("/addReceta")
+    public String addReceta(Model modelo,
+            @RequestParam("nombreReceta") String nombreReceta,
+            @RequestParam("descripcionReceta") String descripcionReceta,
+            @RequestParam("duracionReceta") Integer duracionReceta,
+            @RequestParam("precioReceta") Integer precioReceta,
+            @RequestParam("cantidadReceta") Integer cantidadReceta,
+            @RequestParam("tipoReceta") String tipoReceta,
+            @RequestParam("categoriaReceta") String categoriaReceta,
+            @RequestParam("imagenReceta") MultipartFile[] file) throws IOException {
 
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
-        
 
+        Receta receta = new Receta();
 
-        
-        String edad = this.personalService.getEdad(personal.getFechaNacimientoPersonal());
-        
-        Date FechaNacimiento = PersonalService.ParseFecha(FechaNacimientoPersonal);
-        
-        
-        Personal personal1 = this.personalService.findByRut(rutPersonal);
+        receta.setNombreReceta(nombreReceta);
+        receta.setDescripcionReceta(descripcionReceta);
+        receta.setDuracionPreparacion(BigInteger.valueOf(duracionReceta));
+        receta.setDisponibilidadReceta(BigInteger.valueOf(1));
+        receta.setPrecioReceta(BigInteger.valueOf(precioReceta));
+        receta.setCantidadPrepDiariaReceta(BigInteger.valueOf(cantidadReceta));
 
-        personal1.setRutPersonal(rutPersonal);
-        personal1.setNombresPersonal(nombresPersonal);
-        personal1.setApePaternoPersonal(ApePaternoPersonal);
-        personal1.setApeMaternoPersonal(ApeMaternoPersonal);
-        personal1.setFechaNacimientoPersonal(FechaNacimiento);
-        personal1.setCelularPersonal(CelularPersonal);
-        personal1.setCorreoPersonal(CorreoPersonal);
-        personal1.setContrasenaPersonal(password);
-        personal1.setEstadoPersonal(EstadoPersonal);
-        Rol rol=new Rol();
-        rol.setIdRol(IdRol);
-        personal.setIdRol(rol);
-//        personal1.setIdRol(rolpersonal);
+        receta.setTipoReceta(tipoReceta);
+        CategoriaReceta categoria = new CategoriaReceta();
+        categoria.setIdCategoriaReceta(BigDecimal.valueOf(Integer.parseInt(categoriaReceta)));
+        receta.setIdCategoriaReceta(categoria);
 
-        
+//        String nombre = this.personalService.subirImagen(file);
 
+//        if (nombre == null) {
+//            nombre = "foto";
+//        } else {
+//            receta.setFoto(nombre);
+//        }
+
+//        this.recetaService.add(receta);
         
+        ///mensajes 1 = si mensaje / 0 = no mensaje
+        modelo.addAttribute("isMensaje", 1 );
+        modelo.addAttribute("nombreMensaje", "Información");
+        modelo.addAttribute("mensaje", "Receta agregada");
+        //puede ser success - info - danger - warning
+        modelo.addAttribute("tipoMensaje", "success");
+        //fin mensajes 
+//        
+//        modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
+//
+//        modelo.addAttribute("tipoForm", "agregar");
+//        
+//        modelo.addAttribute("recetas", this.recetaService.listar());
         
-        if (this.personalService.addPersonal(personal1)) {
-            modelo.addAttribute("tipoRespuesta", "agregar");
-            modelo.addAttribute("respuesta", 1);
-        } else {
-            modelo.addAttribute("tipoRespuesta", "agregar");
-            modelo.addAttribute("respuesta", 0);
-        }
         //desarollo
         //fin desarrollo 
         //despacho  modelo.addAttribute(nombreDespacho, objetoAdespachar)
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", personal);
-
-        List<Personal> personales = new ArrayList<Personal>();
-        personales = this.personalService.getAllUsuario();
-        //desarrollo aca 
-        modelo.addAttribute("personales", personales);
-        modelo.addAttribute("agregar", true);
-
         //
         //cargar el html nombre
-        return "users/administrador/mantenedor_personal";
+        return "users/administrador/mantenedorReceta";
 
     }
-          
-        @RequestMapping("/cargar_personal")
-    public String cargar_personal(Model modelo, @RequestParam("idpersonal") BigDecimal idPersonal) {
+
+    @RequestMapping("/ingresar_insumo")
+    public String ingresar_insumo(Model modelo, @RequestParam("nombre") String nombre,
+            @RequestParam("descripcion") String descripcion,
+            @RequestParam("unidadMedida") String unidadMedida,
+            @RequestParam("stock") BigInteger stock,
+            @RequestParam("stockMinimo") BigInteger stockMinimo,
+            @RequestParam("stockMaximo") BigInteger stockMaximo,
+            @RequestParam("imagenInsumo") MultipartFile[] file) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        List<Personal> personales = new ArrayList<Personal>();
-        personales = this.personalService.getAllUsuario();
-        Personal personal1 = this.personalService.findByRut(idPersonal.toString());
-        modelo.addAttribute("modificar", true);
-        modelo.addAttribute("personal", personal1);
-        modelo.addAttribute("personales", personales);
-        //fin desarrollo 
-        //despachos 
-        //fin despacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/mantenedor_personal";
-    }      
-          
-          
-          
-    
-        @RequestMapping("/eliminar_personal")
-    public String eliminar_personal(Model modelo, @RequestParam("idPersonal") BigInteger idPersonal) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        if (this.procedureQuery.DeletePersonalById(idPersonal)) {
-            modelo.addAttribute("tipoRespuesta", "eliminar");
-                modelo.addAttribute("respuesta", 1);
-        }else{
-            modelo.addAttribute("tipoRespuesta", "eliminar");
-                modelo.addAttribute("respuesta", 0);
-        }
+//        String nombreImagen = this.personalService.subirImagen(file);
+//        Insumo insumo = new Insumo();
+//        if (nombreImagen == null) {
+//            nombreImagen = "260x162.png";
+//        } else {
+//            
+//            insumo.setFotoInsumo(nombreImagen);
+//        }
+//        insumo.setNombreInsumo(nombre);
+//        insumo.setDescripcionInsumo(descripcion);
+//        insumo.setStockInsumo(stock);
+//        insumo.setMinimoStockInsumo(stockMinimo);
+//        insumo.setMaximoStockInsumo(stockMaximo);
+//        insumo.setUnidadMedidaInsumo(unidadMedida);
+//        
+//        if(this.insumoService.ingresarInsumo(insumo)){
+//            
+//        }else{
+//            
+//        }
         
-        List<Personal> personales = new ArrayList<Personal>();
-        personales = this.personalService.getAllUsuario();
-        modelo.addAttribute("proveedores", personales);
+        List<Insumo> insumos = new ArrayList<Insumo>();
+//        insumos = this.insumoService.listarInsumos();
         //desarrollo aca 
-
+        modelo.addAttribute("agregar", true);
+        modelo.addAttribute("insumos", insumos);
         //fin desarrollo 
         //despachos 
+
         //fin despacho 
         //siempre despachar esto por la sesion 
-        modelo.addAttribute("agregar", true);
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
-        return "users/administrador";
-//                + "/mantenedor_proveedor";
+        return "users/administrador/mantenedor_insumos";
     }
-    
-    
-    
-    
-        @RequestMapping("/modificar_personal")
-    public String modificar_personal(Model modelo, @RequestParam("idPersonal") BigDecimal idPersonal,
-            @RequestParam("rutPersonal") String rutPersonal,
-            @RequestParam("nombresPersonal") String nombresPersonal,
-            @RequestParam("apepaterno") String apepaterno,
-            @RequestParam("apematerno") String apematerno,
-            @RequestParam("fechaNacimiento") Date fechaNacimiento,
-            @RequestParam("telefonoPersonal") String telefonoPersonal,
-            @RequestParam("correopersonal") String correopersonal,
-            @RequestParam("contraseña") String contraseña,
-            @RequestParam("estadopersonal") Integer estadopersonal,
-            @RequestParam("rolpersonal") Integer rolpersonal){
+
+    @RequestMapping("/modificar_insumo")
+    public String modificar_insumo(Model modelo, @RequestParam("id") BigDecimal id,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("descripcion") String descripcion,
+            @RequestParam("unidadMedida") String unidadMedida,
+            @RequestParam("stock") BigInteger stock,
+            @RequestParam("stockMinimo") BigInteger stockMinimo,
+            @RequestParam("stockMaximo") BigInteger stockMaximo,
+            @RequestParam("imagenInsumo") MultipartFile[] file) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        
-        Personal personal1 = new Personal();
-        
-        personal1.setIdPersonal(idPersonal);
-        personal1.setRutPersonal(rutPersonal);
-        personal1.setNombresPersonal(nombresPersonal);
-        personal1.setApePaternoPersonal(apepaterno);
-        personal1.setApeMaternoPersonal(apematerno);
-        personal1.setFechaNacimientoPersonal(fechaNacimiento);
-        personal1.setCelularPersonal(telefonoPersonal);
-        personal1.setCorreoPersonal(correopersonal);
-        personal1.setContrasenaPersonal(contraseña);
-        personal1.setEstadoPersonal(estadopersonal);
-        Rol rol=new Rol();
-        rol.setIdRol(rolpersonal);
-        personal.setIdRol(rol);
-        
-        if (this.personalService.ModificarPersonal(personal1)) {
-             
-             modelo.addAttribute("tipoRespuesta", "modificar");
-                modelo.addAttribute("respuesta", 1);
-        }else{
-            modelo.addAttribute("tipoRespuesta", "modificar");
-                modelo.addAttribute("respuesta", 0);
-        }
-       
+        //String nombreImagen = this.personalService.subirImagen(file);
+        Insumo insumo = new Insumo();
+        /*if (nombreImagen == null) {
+            nombreImagen = "260x162.png";
+        } else {
             
+            insumo.setFotoInsumo(nombreImagen);
+        }*/
         
-        List<Personal> persosnales = new ArrayList<Personal>();
-        persosnales = this.personalService.getAllUsuario();
-        Personal personal2 = this.personalService.findByRut(idPersonal.toString());
-        modelo.addAttribute("modificar", true);
-        modelo.addAttribute("personal", personal2);
-        modelo.addAttribute("personales", persosnales);
+        insumo.setIdInsumo(id);
+        insumo.setNombreInsumo(nombre);
+        insumo.setDescripcionInsumo(descripcion);
+        insumo.setStockInsumo(stock);
+        insumo.setMinimoStockInsumo(stockMinimo);
+        insumo.setMaximoStockInsumo(stockMaximo);
+        insumo.setUnidadMedidaInsumo(unidadMedida);
+        insumo.setFotoInsumo("adfbfd87-379f-4760-8771-643c689a9537.jpg");
+        
+//        if(this.insumoService.modificarInsumo(insumo)){
+            
+//        }else{
+//            System.out.println("no modifico");
+//            System.out.println("stock: "+stockMinimo);
+//        }
+//        List<Insumo> insumos = new ArrayList<Insumo>();
+////        insumos = this.insumoService.listarInsumos();
+//        //desarrollo aca 
+//        modelo.addAttribute("agregar", true);
+//        modelo.addAttribute("insumos", insumos);
         //fin desarrollo 
         //despachos 
 
@@ -290,11 +369,44 @@ public class PersonalController {
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
-        return "users/administrador";
+        return "users/administrador/mantenedor_insumos";
     }
-    
-    
 
+    //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL *CAMBIAR A PORST*
+    @RequestMapping("/add")
+    public String add(Model modelo) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        //desarollo 
+        Personal person = new Personal();
+
+        //person.setIdPersonal(BigDecimal.valueOf(5));
+        person.setRutPersonal("17.347.762-6");
+        person.setNombresPersonal("Diego Alejandro");
+        person.setApePaternoPersonal("León");
+        person.setApeMaternoPersonal("Plaza");
+        person.setFechaNacimientoPersonal(new Date());
+        person.setCelularPersonal("954714587");
+        person.setCorreoPersonal("diego.leon@gmail.com");
+        person.setContrasenaPersonal(encoder.encode("123"));
+        person.setEstadoPersonal(Integer.valueOf(1));
+
+        Rol rol = new Rol();
+        rol.setIdRol(Integer.valueOf(2));
+
+        person.setIdRol(rol);
+
+        this.personalService.addPersonal(person);
+
+        //fin desarrollo 
+        //despacho 
+        //fin despacacho 
+        //siempre despachar esto por la sesion 
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/index";
+    }
 
 }
-

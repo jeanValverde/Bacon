@@ -33,6 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+
 /**
  *
  * @author jean
@@ -94,10 +97,11 @@ public class Personal implements Serializable {
     private String contrasenaPersonal;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 255)
     @Column(name = "ESTADO_PERSONAL")
     private Integer estadoPersonal;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonal")
-    private Collection<ControlCaja> controlCajaCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonal")
+//    private Collection<ControlCaja> controlCajaCollection;
     @JoinColumn(name = "ID_ROL", referencedColumnName = "ID_ROL")
     @ManyToOne(optional = false)
     private Rol idRol;
@@ -138,7 +142,9 @@ public class Personal implements Serializable {
 
 
     }
-
+    
+    
+    @NotNull
     public BigDecimal getIdPersonal() {
         return idPersonal;
     }
@@ -221,14 +227,14 @@ public class Personal implements Serializable {
 
     
    
-    @XmlTransient
-    public Collection<ControlCaja> getControlCajaCollection() {
-        return controlCajaCollection;
-    }
-
-    public void setControlCajaCollection(Collection<ControlCaja> controlCajaCollection) {
-        this.controlCajaCollection = controlCajaCollection;
-    }
+//    @XmlTransient
+//    public Collection<ControlCaja> getControlCajaCollection() {
+//        return controlCajaCollection;
+//    }
+//
+//    public void setControlCajaCollection(Collection<ControlCaja> controlCajaCollection) {
+//        this.controlCajaCollection = controlCajaCollection;
+//    }
 
     public Rol getIdRol() {
         return idRol;

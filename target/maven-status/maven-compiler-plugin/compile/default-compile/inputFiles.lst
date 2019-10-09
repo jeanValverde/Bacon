@@ -38,6 +38,7 @@ C:\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
 C:\Bacon\src\main\java\com\restaurante\bacon\exceptions\IllegalOrphanException.java
 C:\Bacon\src\main\java\com\restaurante\bacon\service\RolService.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\Boleta.java
+C:\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryPersonal.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\EgresoStock.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java

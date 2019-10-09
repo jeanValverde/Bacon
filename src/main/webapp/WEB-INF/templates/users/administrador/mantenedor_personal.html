@@ -134,7 +134,7 @@
                                                                                                 Escribe una contraseña para el personal.
                                                                                             </div>
                                                                                     </div>                                                                                  
-<!--
+<!--  -->
                                                                                     <div class="form-group">
                                                                                         <label for="password">REPITA CONTRASEÑA</label>
                                                                                         <input type="password" class="form-control" id="password" name="password" placeholder="************">
@@ -145,10 +145,10 @@
                                                                                                 Escribe una contraseña para el personal.
                                                                                             </div>
                                                                                     </div>
--->
+
                                                                                     <div class="form-group">
                                                                                         <label for="estadoPersonal">Estado personal</label>
-                                                                                        <input type="number" min="1" max="4" class="form-control" id="estadoPersonal" name="estadoPersonal" placeholder="1">
+                                                                                        <input type="number" class="form-control" id="estadoPersonal" name="estadoPersonal" placeholder="1">
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -156,9 +156,23 @@
                                                                                                 Seleccione un estado para el personal.
                                                                                             </div>
                                                                                     </div>
-                                                                                                                                                                     <div class="form-group">
+
+                                                                                <div class="form-group" id="idRol">
+                                                                                    <label for="idRol">Rol Personal</label>
+                                                                                    <select  name="idRol" class="form-control" id="idRol">
+                                                                                        <option th:each="rol: ${rol}"  th:value="${rol.idRol}" th:text="${rol.descripcionRol" ></option>
+                                                                                    </select>
+                                                                                </div>
+ <!-- 
+                                                                                <div class="form-group" id="categoriaReceta">
+                                                                                    <label for="categoriaReceta">Categoría Cocina</label>
+                                                                                    <select  name="categoriaReceta" class="form-control" id="categoriaReceta">
+                                                                                        <option th:each="categoria: ${categoriasReceta}"  th:value="${categoria.idCategoriaReceta}" th:text="${categoria.descripcionCategoriaReceta}" ></option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group">
                                                                                         <label for="idRol">Rol personal</label>
-                                                                                        <input type="number" min="1" max="5" class="form-control" id="idRol" name="idRol" placeholder="1">
+                                                                                        <input type="number"  class="form-control" id="idRol" name="idRol" placeholder="1">
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -166,7 +180,7 @@
                                                                                                 Seleccione un estado para el personal.
                                                                                             </div>
                                                                                     </div> 
-                                                                                 
+                                               -->                                  
 
                                                                                     <button type="submit" class="btn btn-primary mr-2">Agregar</button>                                
 
@@ -273,7 +287,7 @@
                                                 <!--validate form--->
                                                 <script th:src="@{/custom/formularios.js}"></script>
 
-<!--                                                
+                                           
                                              <script th:inline="javascript">
                                                 
             
@@ -313,18 +327,19 @@
                                                 
                                                 
 
-                                                
+                                              
 
                                               <script type="text/javascript" >
                                                     var formularioPassword = document.getElementsByName("formAddPersonal")[0];
                                                     validatorForms(formularioPassword);
                                                 </script>
+                                                
+  <!--                                               
                                                 <script type="text/javascript" >
                                                     var formularioPassword = document.getElementsByName("formEditar")[0];
                                                     validatorForms(formularioPassword);
                                                 </script>
-                  
-
+      
                                                 <script src="text/javascript">
                                                     dropify.dropify({
                                                         "defaultFile": "full path file",
@@ -336,7 +351,8 @@
                                                         }
                                                     });
                                                 </script>
--->
+
+-->                  
 
 
                                         </body>

@@ -6,7 +6,7 @@
 package com.restaurante.bacon.service;
 
 import com.restaurante.bacon.dao.IProveedorDao;
-import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dao.ProcedureQueryPersonal;
 import com.restaurante.bacon.dto.Proveedor;
 import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
@@ -25,7 +25,7 @@ public class ProveedorService {
     @Autowired
     IProveedorDao provedorDao;
     @Autowired
-    ProcedureQuery procedureQuery;
+    ProcedureQueryPersonal procedureQuery;
 
     public Proveedor addProveedor(Proveedor proveedor) {
         return this.provedorDao.save(proveedor);

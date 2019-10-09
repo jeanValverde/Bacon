@@ -47,5 +47,6 @@ com\restaurante\bacon\dto\IngresoStock.class
 com\restaurante\bacon\exceptions\NonexistentEntityException.class
 com\restaurante\bacon\dto\EstadoPedido.class
 com\restaurante\bacon\config\UserRol.class
+com\restaurante\bacon\dao\ProcedureQueryPersonal.class
 com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.class
 com\restaurante\bacon\dto\InsumoProveedor.class

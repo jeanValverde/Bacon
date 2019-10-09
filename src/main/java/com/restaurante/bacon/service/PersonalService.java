@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.restaurante.bacon.dao.IPersonalDao;
-import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dao.ProcedureQueryPersonal;
 import com.restaurante.bacon.dto.ControlCaja;
 import com.restaurante.bacon.dto.Rol;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
@@ -60,7 +60,7 @@ public class PersonalService implements UserDetailsService {
     @Autowired
     IPersonalDao personalDao;
     @Autowired
-    ProcedureQuery procedureQuery;
+    ProcedureQueryPersonal procedureQuery;
     //se implementa el metodo de la interfaz 
 	
     public boolean addPersonal(Personal personal) {
