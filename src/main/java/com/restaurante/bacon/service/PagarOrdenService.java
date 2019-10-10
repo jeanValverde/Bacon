@@ -15,27 +15,25 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 /**
  *
  * @author Felipe
  */
 @Service
 public class PagarOrdenService {
-    
-    
+
     @Autowired
     IPagarOrdenDao pagarOrdenDao;
-    
+
     @Autowired
     ProcedureQueryOrden procedureQueryOrden;
-    
-        public List<Orden> listarOrdenes(BigDecimal idCliente){
+
+    public List<Orden> listarOrdenes(BigDecimal idCliente) {
         return this.procedureQueryOrden.listarOrdenes(idCliente);
     }
-        
-            public Orden retornarOrdenById(Integer  idOrden){
-        Optional<Orden> optinalEntity =  pagarOrdenDao.findById(idOrden);
+
+    public Orden retornarOrdenById(Integer idOrden) {
+        Optional<Orden> optinalEntity = pagarOrdenDao.findById(idOrden);
         Orden orden = optinalEntity.get();
         return orden;
     }

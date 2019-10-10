@@ -41,6 +41,9 @@ public class RecetaService {
     @Autowired
     IIngredienteDao ingrediente;
 
+     @Autowired
+    ProcedureQueryReceta procedureQueryReceta;
+     
     @Autowired
     InsumoService insumoService;
 
@@ -62,6 +65,10 @@ public class RecetaService {
 
     public void deleteRecetaById(Integer idReceta) {
         this.recetaDao.deleteById(idReceta);
+    }
+    
+    public Receta buscarRecetaByIdd(Integer idReceta){
+        return this.procedureQueryReceta.retornarRecetaById(idReceta);
     }
 
     public Receta buscarRecetaById(Integer idReceta) {

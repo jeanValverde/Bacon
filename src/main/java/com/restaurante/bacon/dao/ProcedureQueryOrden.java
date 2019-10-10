@@ -49,23 +49,23 @@ public class ProcedureQueryOrden {
 
             // Obtenemos el resultado del cursos en una lista
             List<Object[]> results = query.getResultList();
-            List<Orden> orden = new ArrayList<Orden>();
+            List<Orden> ordenes = new ArrayList<Orden>();
             
             
             // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
-                Orden ordenes = new Orden();
-                ordenes.setIdOrden((Integer.parseInt(result[0].toString())));
-                ordenes.setDescripcion(result[1].toString());
-                ordenes.setSubTotal((Integer.parseInt(result[2].toString())));
-                ordenes.setIva((Integer.parseInt(result[3].toString())));
-                ordenes.setTotalOrden((Integer.parseInt(result[4].toString())));
-                ordenes.setTiempoPreparacion((Integer.parseInt(result[5].toString())));
-                ordenes.setMotivoAnulacion(result[6].toString());
-                ordenes.setTipoOrden(BigInteger.valueOf(Integer.parseInt(result[8].toString())));
+                Orden orden = new Orden();
+                orden.setIdOrden((Integer.parseInt(result[0].toString())));
+                orden.setDescripcion(result[1].toString());
+                orden.setSubTotal((Integer.parseInt(result[2].toString())));
+                orden.setIva((Integer.parseInt(result[3].toString())));
+                orden.setTotalOrden((Integer.parseInt(result[4].toString())));
+                orden.setTiempoPreparacion((Integer.parseInt(result[5].toString())));
+                orden.setMotivoAnulacion(result[6].toString());
+                orden.setTipoOrden(BigInteger.valueOf(Integer.parseInt(result[8].toString())));
                 
-                Cliente clientes = new Cliente();
-                clientes.setNombre(result[1].toString());
+                //Cliente clientes = new Cliente();
+                //clientes.setNombre(result[9].toString());
 //                clientes.setIdCliente((BigDecimal.valueOf(Integer.parseInt(result[8].toString()))));
 //                
 //                EstadoOrden estadoOrden = new EstadoOrden();
@@ -74,10 +74,10 @@ public class ProcedureQueryOrden {
 //              
                 
               
-                orden.add(ordenes); //.add(insumo_pedido);
+                ordenes.add(orden); //.add(insumo_pedido);
             }
             
-            return orden;
+            return ordenes;
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage().toString());

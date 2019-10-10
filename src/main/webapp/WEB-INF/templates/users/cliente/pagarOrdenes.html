@@ -87,143 +87,72 @@
                 </nav>
                 
                 
-                <div class="row">
-                                                <div id="cardReceta" class="card-columns">
-                                <!--card inicio receta--->
-                                <div class="card"  th:each="orden: ${ordenes}"  >
-                                    <div class="card-body text-center">
-                                        <div>
-                                            <h3>Id de la orden</h3>
-                                            <h4 th:text="${orden.idOrden}" >Id Orden</h4>
-                                            <p class="text-muted mb-0"  >
-                                            <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${orden.idCliente}" >id cliente</div>
-                                           
 
-                                            </p>
-                                        </div>
-                                        <h4>Sub-Total</h4>
-                                        <p class="mt-2 card-text" th:text="${orden.subTotal}+ '$'" >
-                                            
-                                        </p>
-                                        
-                                        <br/>
-                                        <br/>
-                                        <div class="border-top pt-3">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <h6>Descripcion de la Orden</h6>
-                                                    <h6 th:text="${orden.descripcion}" >5896</h6>
-                                                    <p>Duración Preparación</p>
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                         <div class="border-top pt-3">
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <h6>Total de la Orden</h6>
-                                                    <h6 th:text="${orden.TotalOrden}" >5896</h6>
-                                                    
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                      
-                                       
-                                    </div>
-                                </div>
-                                card fin receta
-                            </div>
-               <!-- <div th:each="ord: ${ordenes}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">   
-                    <div class="card-deck mt-3">
-
-                      
-
-                        <div class="card text-center border-info">
-                            <div class="card-body">
-                                <h4>Id Orden</h4>
-                                <h4 class="card-title" th:text="${ord.idOrden}">ID orden</h4>
-                                <p class="card-text">Lorem ipsum dolor sit </p>
-                                <a href="#" class="btn btn-primary">Entrar</a>
-                            </div>
-                        </div>          
---->
-           
-                </div>
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div style="text-align: center">
+                        <h2 id="deudaTotal">$</h2>
+                        <h3>Total Deuda</h3>
                     </div>
-                <!--INICIO MODAL
-                <div class="container-fluid page-body-wrapper"   >
-                    <div class="main-panel" >
-                        <div class="content-wrapper">
-                            <div class="row">
-                                <div class="col-12 grid-margin">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h4 class="card-title">Ordenes</h4>
-                                            <p class="card-description">Ordenes realizadas por el cliente</p>
+                        <br/>
+                        <div class="row">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
 
-                                            <div class="modal demo-modal">
-                                                <div class="modal-dialog modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header" th:each="cli: ${clientes}">
-                                                            <h3 class="modal-title" th:text="cli.nombre"></h3>
+                    
+                    
 
+                    <div style=" height: 45px; width: 350px; margin-left: 400px; " class="alert alert-info">Seleccione una opción para pagar sus ordenes</div>
+                    <br/>
+                    <div style="margin-left: 310px">
+                        <button style="inline-box-align: "  type="button" data-toggle="modal"  data-target="#exampleModal-3" class="btn btn-outline-primary btn-fw">Caja</button>
 
-                                                            <button type="button" class="close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="modal-body">
-                                                            <div class="table-responsive">
-                                                                <table id="order-listing" class="table">
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th>Id Orden</th>
-                                                                            <th>Descripción</th>
-                                                                            <th>Sub-Total</th>
-                                                                            <th>Iva</th>
-                                                                            <th>Total Orden</th>
-                                                                            <th>Tiempo preparacion</th>
-                                                                            <th>Motivo Anulacion</th>
-                                                                            <th>Tipo Orden</th>
-
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    <tbody>
-                                                                        <tr th:each="ord: ${ordenes}">
-                                                                            <td th:text="${ord.idOrden}"></td>
-                                                                            <td th:text="${ord.descripcion}"></td>
-                                                                            <td th:text="${ord.subTotal}"></td>
-                                                                            <td th:text="${ord.iva}"></td>
-                                                                            <td th:text="${ord.totalOrden}"></td>
-                                                                            <td th:text="${ord.tiempoPreparacion}"></td>
-                                                                            <td th:text="${ord.motivoAnulacion}"></td>
-                                                                            <td th:text="${ord.tipoOrden}"></td>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+                        <button style="inline-box-align: "  type="button" data-toggle="modal"  data-target="#exampleModal-3" class="btn btn-outline-primary btn-fw">Online</button>
+                    </div>
+                    <br/>
+                    <br/>
 
 
-                                                                        </tr>
-                                                                    </tbody>
-                                                                    
-                                                                </table>
-                                                            </div>
-                                                            
-                                                            
+                    <div id="divRecetas" class="row">
 
-                                 
-                                                        <div class="modal-footer">
-                                                              
-                                                            <button type="button" class="btn btn-success">Pagar</button>
-                                                            <button type="button" class="btn btn-light">Pagar Online</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                <!--FIN MODAL-->
+                        <!--inicio row-->
+
+
+
+
+
+
+
+                        <!--fin tarjeta de ordenes--->
+
+
+                    </div>
+
+
+                </div>
+                        </div>
+                    </div>
+
+                <!---fin columnas--->
             </div>
+            <!--fin row-->
+
+
         </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+
+        <!-- partial -->
     </div>
+</div>
+</div>
+</div>
 </div>
 
 </div>
@@ -273,6 +202,109 @@
         border-color: rgb(98, 1, 237);
     }
 </style>
+
+
+
+
+
+<script th:inline="javascript">
+    var ordenes = [[${recetaByOrden}]];
+    var contenido = "";
+    var sumaValorTotal = 0;
+    var sumaRecetasCantidad =0;
+    var sumaTotalRecetas = 0;
+    
+    for (var i = 0; i < ordenes.length; i++) {
+        
+        contenido = contenido+ '<div style="padding: 7px" class="col-md-6 grid-margin grid-margin-md-0 stretch-card"><div class="card"><div class="card-body text-left"><h3 class="card-title mt-3 text-center">Numero de Orden </h3>'
+        + '<div style="margin-left: 250px" class=" badge badge-primary">' + ordenes[i].orden.idOrden +'</div><br/>'
+        + '<table class="table mb-0"><thead><tr><th class="pl-0">Receta</th><th class="text-right">Cantidad</th><th class="text-right">Precio</th></tr></thead>';
+        
+       
+        // contenido = contenido+ '<div class="col-xl-6 grid-margin grid-margin-md-0 stretch-card"><div class="card-columns"><div class="card"><div class="card-body"><h4 class="card-title mt-3 text-center">Numero de Orden</h4><div style="margin-left: 130px" class="badge badge-primary">'+ ordenes[i].orden.idOrden +'</div> </div></div></div></div>';
+        for (var x = 0; x < ordenes[i].recetaOrdenada.length; x++) { 
+            
+            contenido = contenido 
+                                  + '<tbody><tr><td class="pl-0">'+ ordenes[i].recetaOrdenada[x].idReceta.nombreReceta +'</td><td class="pr-0 text-right"> <div class="badge badge-pill badge-outline-danger">'+ordenes[i].recetaOrdenada[x].cantidad+'</div></td><td class="pr-0 text-right"><div class="badge badge-pill badge-outline-primary">$'+ ordenes[i].recetaOrdenada[x].valor+'</div></td></tr></tbody>';
+                                  
+                          
+                                 // + '<div><h4 class="card-title mt-3">Descripción</h4></div>'
+                                //  + '<table class="table mb-0"><thead><tr><th class="text-left"><h3 style="display: inline">Total Orden: $</h3><h4 style="display: inline"">Hola</h4></th></tr></thead>';
+            
+                  //  +  '<tbody><tr><td class="pl-0">'+ ordenes[i].recetaOrdenada[x].idReceta.nombreReceta +'</td><td class="pr-0 text-right"><div class="badge badge-pill badge-outline-danger">'+ordenes[i].recetaOrdenada[x].cantidad+'</div></td><td class="pr-0 text-right"><div class="badge badge-pill badge-outline-primary">$'+ ordenes[i].recetaOrdenada[x].valor+'</div></td></tr></tbody></table>';
+                                //  +  '<h4 class="card-title mt-3">Descripción</h4><p class="card-text">'+ ordenes[i].orden.descripcion+'</p>';
+                                 // +  '<table class="table mb-0"><thead><tr> <th class="text-left"><h3 style="display: inline">Total Orden: $</h3><h4 style="display: inline">'+ ordenes[i].orden.totalOrden+'</h4></th>';
+                                  
+                                  
+          sumaRecetasCantidad = ordenes[i].recetaOrdenada[x].valor * ordenes[i].recetaOrdenada[x].cantidad ;
+          sumaTotalRecetas = sumaRecetasCantidad + ordenes[i].recetaOrdenada[x].valor * ordenes[i].recetaOrdenada[x].cantidad ;
+           sumaValorTotal = sumaValorTotal + ordenes[i].orden.totalOrden;
+        }
+        contenido = contenido + '</table><h3 class="card-title mt-3">Descripción</h3>'+ ordenes[i].orden.descripcion+'<table class="table mb-0"><thead><tr><th class="text-left"><h3 style="display: inline">Total Orden: $</h3><h4 style="display: inline">'+ ordenes[i].orden.totalOrden+'</h4></th></tr></thead></table></div></div></div></div>';
+    }
+    document.getElementById("deudaTotal").innerHTML = '$' + sumaValorTotal;
+    document.getElementById("divRecetas").innerHTML = contenido;
+
+</script>
+
+
+
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" >
+    function listarRecetaByorden(idOrden) {
+
+        //  document.getElementById("loader").innerHTML = "<div class='square-box-loader'><div class='square-box-loader-container'><div class='square-box-loader-corner-top'></div> <div class='square-box-loader-corner-bottom'></div></div><div class='square-box-loader-square'></div></div>";
+
+        //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
+
+        // axios.get('http://localhost:8034/cliente/pagar/pagarOrdenes?idOrden =' + idOrden)
+        // .then(function (response) {
+        //  console.log(response);
+        //if (response.data != null) {
+        //    document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre de la receta</th><th class='text-right'>Valor de la receta</th></tr></thead><tbody id='contenidoListarRecetaByOrden' ></tbody></table></div>";
+        // }
+        //  if (response.data.length != 0) {
+        //       var contenido = "";
+        //      for (var i = 0; i < response.data.length; i++) {
+                 //  contenido += "<tr> <td class='pl-0'> " + response.data[i].idOrden.descripcion + " </td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'> " + response.data[i].totalOrden + " </div></td></tr>";
+        //      }
+        //      document.getElementById('contenidoListarRecetaByOrden').innerHTML = contenido;
+        //   } else {
+        //       document.getElementById('loader').innerHTML = '<div class="alert alert-danger" >Sin recetas disponibles</div>';
+        //   }
+        //  })
+        // .catch(function (error) {
+        // handle error
+        //     document.getElementById("loader").innerHTML = '<div class="alert alert-danger" >Error</div>';
+        //  })
+        //  .finally(function () {
+        // always executed
+        //  });
+
+    }
+    // listarRecetaByorden(3);   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript" >
 
@@ -337,6 +369,7 @@
     }
 
 </script>
+
 </body>
 
 </html>
