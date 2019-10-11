@@ -63,7 +63,7 @@ public class PersonalControlador {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-
+      modelo.addAttribute("rolpersonal", this.personalService.listarRol());   
         //desarrollo aca 
         modelo.addAttribute("Personal", this.personalService.getAllUsuario());
         //fin desarrollo 
@@ -75,6 +75,30 @@ public class PersonalControlador {
         //
         return "users/administrador/index";
     }
+    
+    
+//        @RequestMapping("/personal")
+//    public String personal(Model modelo) {
+//        //sesion 
+//        UserRol user = new UserRol();
+//        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+//        //sesion 
+//        //desarrollo aca 
+//
+//        modelo.addAttribute("rol", this.personalService.listarRol());
+//
+//        modelo.addAttribute("tipoForm", "agregar");
+//
+//        modelo.addAttribute("personal", this.personalService.getAllUsuario());
+//
+//        //fin desarrollo 
+//        //despachos 
+//        //fin despacho 
+//        //siempre despachar esto por la sesion 
+//        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+//        //
+//        return "users/administrador/mantenedor_personal";
+//    }
 
     @RequestMapping("/mantenedor_personal")
     public String mantenedor_personal(Model modelo) {
@@ -85,7 +109,7 @@ public class PersonalControlador {
         List<Personal> personales = new ArrayList<Personal>();
         personales = this.personalService.getAllUsuario();
         //desarrollo aca 
-
+        modelo.addAttribute("rolpersonal", this.personalService.listarRol());
         modelo.addAttribute("personales", personales);
         modelo.addAttribute("agregar", true);
 
@@ -107,7 +131,7 @@ public class PersonalControlador {
             @RequestParam("correoPersonal") String correoPersonal,
             @RequestParam("contrasenaPersonal") String contrasenaPersonal,
             @RequestParam("estadoPersonal") Integer estadoPersonal,
-            @RequestParam("idRol") Integer idRol) {
+            @RequestParam("idRol") String rolpersonal) {
 
         //sesion 
         UserRol user = new UserRol();
@@ -126,7 +150,7 @@ public class PersonalControlador {
         perso.setNombresPersonal(nombresPersonal);
         perso.setApePaternoPersonal(apePaternoPersonal);
         perso.setApeMaternoPersonal(apeMaternoPersonal);
-        perso.setFechaNacimientoPersonal(new Date());
+        perso.setFechaNacimientoPersonal(fechaNacimiento);
         perso.setCelularPersonal(celularPersonal);
         perso.setCorreoPersonal(correoPersonal);
         String contra = encoder.encode(contrasenaPersonal);
@@ -136,10 +160,10 @@ public class PersonalControlador {
         
         
         Rol rol = new Rol();
-        rol.setIdRol(idRol);
+        rol.setIdRol(BigInteger.valueOf(Integer.parseInt("rolpersonal")));
         perso.setIdRol(rol);
 //        personal1.setIdRol(rolpersonal);
-        this.personalService.addPersonal(perso);
+        this.personalService.addPersonalDao(perso);
 //        try {
 //
 //            
@@ -160,13 +184,14 @@ public class PersonalControlador {
         //despacho  modelo.addAttribute(nombreDespacho, objetoAdespachar)
         //fin despacho 
         //siempre despachar esto por la sesion 
+
         modelo.addAttribute("personalSesion", personal);
 
-        List<Personal> personales = new ArrayList<Personal>();
-        personales = this.personalService.getAllUsuario();
-        //desarrollo aca 
-        modelo.addAttribute("personales", personales);
-        modelo.addAttribute("agregar", true);
+//        List<Personal> personales = new ArrayList<Personal>();
+//        personales = this.personalService.getAllUsuario();
+//        //desarrollo aca 
+//        modelo.addAttribute("personales", personales);
+//        modelo.addAttribute("agregar", true);
 
         //
         //cargar el html nombre
@@ -211,7 +236,7 @@ public class PersonalControlador {
 
         List<Personal> personales = new ArrayList<Personal>();
         personales = this.personalService.getAllUsuario();
-        modelo.addAttribute("proveedores", personales);
+        modelo.addAttribute("personal", personales);
         //desarrollo aca 
 
         //fin desarrollo 
@@ -221,8 +246,8 @@ public class PersonalControlador {
         modelo.addAttribute("agregar", true);
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
-        return "users/administrador";
-//                + "/mantenedor_proveedor";
+        return "users/administrador/mantedor_personal";
+//                
     }
 
     @RequestMapping("/modificar_personal")
@@ -236,7 +261,7 @@ public class PersonalControlador {
             @RequestParam("correopersonal") String correopersonal,
             @RequestParam("contraseña") String contraseña,
             @RequestParam("estadopersonal") Integer estadopersonal,
-            @RequestParam("rolpersonal") Integer rolpersonal) {
+            @RequestParam("rolpersonal") String rolpersonal) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
@@ -254,7 +279,7 @@ public class PersonalControlador {
         personal1.setContrasenaPersonal(contraseña);
         personal1.setEstadoPersonal(estadopersonal);
         Rol rol = new Rol();
-        rol.setIdRol(rolpersonal);
+        rol.setIdRol(BigInteger.valueOf(Integer.parseInt(rolpersonal)));
         personal.setIdRol(rol);
 
         if (this.personalService.ModificarPersonal(personal1)) {
@@ -270,7 +295,7 @@ public class PersonalControlador {
         persosnales = this.personalService.getAllUsuario();
         Personal personal2 = this.personalService.findByRut(idPersonal.toString());
         modelo.addAttribute("modificar", true);
-        modelo.addAttribute("personal", personal2);
+        modelo.addAttribute("personal", personal1);
         modelo.addAttribute("personales", persosnales);
         //fin desarrollo 
         //despachos 
@@ -279,7 +304,7 @@ public class PersonalControlador {
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
-        return "users/administrador";
+        return "users/administrador/mantenedor_personal";
     }
 
 }

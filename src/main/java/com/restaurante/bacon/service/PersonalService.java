@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.restaurante.bacon.dao.IPersonalDao;
+import com.restaurante.bacon.dao.IRolDao;
 import com.restaurante.bacon.dao.ProcedureQueryPersonal;
 import com.restaurante.bacon.dto.ControlCaja;
 import com.restaurante.bacon.dto.Rol;
@@ -61,12 +62,14 @@ public class PersonalService implements UserDetailsService {
     IPersonalDao personalDao;
     @Autowired
     ProcedureQueryPersonal procedureQuery;
-    //se implementa el metodo de la interfaz 
+    @Autowired
+    IRolDao rol;
+//    se implementa el metodo de la interfaz 
 	
-    public boolean addPersonal(Personal personal) {
-        return this.procedureQuery.InsertPersonal(personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(), personal.getContrasenaPersonal(), personal.getEstadoPersonal(), personal.getIdRol());
-         
-    }
+//    public boolean addPersonal(Personal personal) {
+//        return this.procedureQuery.InsertPersonal(personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(), personal.getContrasenaPersonal(), personal.getEstadoPersonal(), personal.getIdRol());
+//         
+//    }
     
     public Personal addPersonalDao(Personal personal) {
         return this.personalDao.save(personal);
@@ -83,8 +86,12 @@ public class PersonalService implements UserDetailsService {
     public List<Personal> getAllUsuario() {
         return this.personalDao.findAll();
     }
+    
+        public List<Rol> listarRol() {
+        return this.rol.findAll();
+    }
 	
-	public void deletePersonalByID(int id){
+	public void deletePersonalByID(String id){
 		
 		this.personalDao.deleteById(id);
 	}

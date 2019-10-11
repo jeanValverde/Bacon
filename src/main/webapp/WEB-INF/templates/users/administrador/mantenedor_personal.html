@@ -49,7 +49,7 @@
                                                                                 <p class="card-description text-justify">
                                                                                     Completa estos campos para agregar un personal al sistema.
                                                                                 </p>
-                                                                                <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="post" name="formAddPersonal" >
+                                                                                <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="POST" name="formAddPersonal" >
                                                                                   <input type="hidden" name="agregar" id="registroAgregar" th:value="${registroAgregar}" />                                                                                   
                                                                                     <div class="form-group">
                                                                                         <label for="rutPersonal">Rut Personal</label>
@@ -95,7 +95,7 @@
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
-                                                                                        <input type="text" class="form-control" id="fechaNacimientoPersonal" name="fechaNacimientoPersonal" >
+                                                                                        <input type="Date" class="form-control" id="fechaNacimientoPersonal" name="fechaNacimientoPersonal" >
                                                                                             <div class="valid-feedback">
                                                                                                 !Listo!
                                                                                             </div>
@@ -144,25 +144,33 @@
                                                                                             <div class="invalid-feedback">
                                                                                                 Escribe una contraseña para el personal.
                                                                                             </div>
+                                                                                    </div>                                         
+                                                                                <div class="form-group row">
+                                                                                    <label> Estado Personal</label>
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-check">
+                                                                                            <label class="form-check-label">
+                                                                                                <input type="radio" th:value="1" class="form-check-input" onchange="agregarRol()" name="estadoPersonal" id="estadoPersonal" checked="">
+                                                                                                    1
+                                                                                                    <i class="input-helper"></i></label>
+                                                                                        </div>
                                                                                     </div>
-
-                                                                                    <div class="form-group">
-                                                                                        <label for="estadoPersonal">Estado personal</label>
-                                                                                        <input type="number" class="form-control" id="estadoPersonal" name="estadoPersonal" placeholder="1">
-                                                                                            <div class="valid-feedback">
-                                                                                                !Listo!
-                                                                                            </div>
-                                                                                            <div class="invalid-feedback">
-                                                                                                Seleccione un estado para el personal.
-                                                                                            </div>
+                                                                                    <div class="col-sm-6">
+                                                                                        <div class="form-check">
+                                                                                            <label class="form-check-label">
+                                                                                                <input type="radio" th:value="0" onchange="deleteCategoria()" class="form-check-input" name="estadoPersonal" id="estadoPersonal">
+                                                                                                    0
+                                                                                                    <i class="input-helper"></i></label>
+                                                                                        </div>
                                                                                     </div>
-
-                                                                                <div class="form-group" id="idRol">
-                                                                                    <label for="idRol">Rol Personal</label>
-                                                                                    <select  name="idRol" class="form-control" id="idRol">
-                                                                                        <option th:each="rol: ${rol}"  th:value="${rol.idRol}" th:text="${rol.descripcionRol" ></option>
+                                                                                </div>
+                                                                                <div class="form-group" id="rolpersonal">
+                                                                                    <label for="rolpersonal">Rol </label>
+                                                                                    <select  name="rolpersonal" class="form-control" id="rolpersonal">
+                                                                                        <option th:each="rol:${rolpersonal}"  th:value="${rol.idRol}" th:text="${rol.desripcionRol}" ></option>
                                                                                     </select>
                                                                                 </div>
+
  <!-- 
                                                                                 <div class="form-group" id="categoriaReceta">
                                                                                     <label for="categoriaReceta">Categoría Cocina</label>
@@ -223,7 +231,7 @@
                                                                                             <a  th:href="@{/administrador_personal/modificar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
                                                                                         </td>
                                                                                         <td>
-                                                                                            <a  th:href="@{/administrador_personal/eliminar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
+                                                                                            <a  th:href="@{/administrador_personal/eliminar_personal?(idPersonal=${ins.rutPersonal})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
                                                                                         </td>
                                                                                     </tr>
 
@@ -291,48 +299,24 @@
                                              <script th:inline="javascript">
                                                 
             
+                                                function agregarRol() {
+                                                    var check = document.getElementById("idRol");
+                                                    check.style.display = "";
+                                                    check.style.visibility = "";
+                                                }
          
 
-                                                        var tipoRespuesta = [[${tipoRespuesta}]];
-                                                        var respuesta = [[${respuesta}]];
-                                                        if (tipoRespuesta !== null) {
-                                                            switch (tipoRespuesta) {
-                                                                case 'Agregar' :
-                                                                    if (respuesta === 1) {
-                                                                         showSwal('success-message', 'PERSONAL agregado!', 'se ha registrado el personal exitosamente');
-                                                                    } else if (respuesta === 0) {
-                                                                        showSwal('warning-message', 'Error!', "No se ha podido agregar el personal");
-                                                                    }
-                                                                    break;
-                                                                case 'modificar' :
-                                                                    if (respuesta === 1) {
-                                                                        showSwal('success-message', 'PERSONAL modificado!', 'se ha registrado el personal exitosamente');
-                                                                    } else if (respuesta === 0) {
-                                                                       showSwal('warning-message', 'Error!', "No se ha podido modificar el personal");
-                                                                    }
-                                                                    break;
-                                                                case 'eliminar' :
-                                                                    if (respuesta === 1) {
-                                                                        showSwal('success-message', 'PERSONAL eliminado!', 'se ha eliminado el proveedor exitosamente');
-                                                                    } else if (respuesta === 0) {
-                                                                       showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
-                                                                    }
-                                                                    break;
-                                                            }
-                                                        }
 
 
 
-                                                    </script>
+
+                                             </script>
                                                 
                                                 
 
                                               
 
-                                              <script type="text/javascript" >
-                                                    var formularioPassword = document.getElementsByName("formAddPersonal")[0];
-                                                    validatorForms(formularioPassword);
-                                                </script>
+
                                                 
   <!--                                               
                                                 <script type="text/javascript" >

@@ -373,40 +373,40 @@ public class PersonalController {
     }
 
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL *CAMBIAR A PORST*
-    @RequestMapping("/add")
-    public String add(Model modelo) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        //desarollo 
-        Personal person = new Personal();
-
-        //person.setIdPersonal(BigDecimal.valueOf(5));
-        person.setRutPersonal("17.347.762-6");
-        person.setNombresPersonal("Diego Alejandro");
-        person.setApePaternoPersonal("León");
-        person.setApeMaternoPersonal("Plaza");
-        person.setFechaNacimientoPersonal(new Date());
-        person.setCelularPersonal("954714587");
-        person.setCorreoPersonal("diego.leon@gmail.com");
-        person.setContrasenaPersonal(encoder.encode("123"));
-        person.setEstadoPersonal(Integer.valueOf(1));
-
-        Rol rol = new Rol();
-        rol.setIdRol(Integer.valueOf(2));
-
-        person.setIdRol(rol);
-
-        this.personalService.addPersonal(person);
-
-        //fin desarrollo 
-        //despacho 
-        //fin despacacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/index";
-    }
+//    @RequestMapping("/add")
+//    public String add(Model modelo) {
+//        //sesion 
+//        UserRol user = new UserRol();
+//        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+//        //sesion 
+//        //desarollo 
+//        Personal person = new Personal();
+//
+//        //person.setIdPersonal(BigDecimal.valueOf(5));
+//        person.setRutPersonal("17.347.762-6");
+//        person.setNombresPersonal("Diego Alejandro");
+//        person.setApePaternoPersonal("León");
+//        person.setApeMaternoPersonal("Plaza");
+//        person.setFechaNacimientoPersonal(new Date());
+//        person.setCelularPersonal("954714587");
+//        person.setCorreoPersonal("diego.leon@gmail.com");
+//        person.setContrasenaPersonal(encoder.encode("123"));
+//        person.setEstadoPersonal(Integer.valueOf(1));
+//
+//        Rol rol = new Rol();
+//        rol.setIdRol(Integer.valueOf(2));
+//
+//        person.setIdRol(rol);
+//
+//        this.personalService.addPersonalDao(person);
+//
+//        //fin desarrollo 
+//        //despacho 
+//        //fin despacacho 
+//        //siempre despachar esto por la sesion 
+//        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+//        //
+//        return "users/administrador/index";
+//    }
 
 }

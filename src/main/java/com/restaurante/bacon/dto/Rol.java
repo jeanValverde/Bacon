@@ -7,6 +7,7 @@ package com.restaurante.bacon.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -33,7 +34,7 @@ public class Rol implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_ROL")
-    private Integer idRol;
+    private BigInteger idRol;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -47,20 +48,20 @@ public class Rol implements Serializable {
     public Rol() {
     }
 
-    public Rol(Integer idRol) {
+    public Rol(BigInteger idRol) {
         this.idRol = idRol;
     }
 
-    public Rol(Integer idRol, String descripcionRol) {
+    public Rol(BigInteger idRol, String descripcionRol) {
         this.idRol = idRol;
         this.descripcionRol = descripcionRol;
     }
 
-    public Integer getIdRol() {
+    public BigInteger getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(Integer idRol) {
+    public void setIdRol(BigInteger idRol) {
         this.idRol = idRol;
     }
 
