@@ -79,9 +79,9 @@
     </build>
     <repositories>
         <repository>
-            <id>bacon</id>
-            <name>bacon</name>
-            <url>file:https://validarformularioconbootstrap.jeanvalverde.now.sh/repo</url>
+            <id>unknown-jars-temp-repo</id>
+            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
+            <url>${project.basedir}/lib</url>
         </repository>
     </repositories>
     
