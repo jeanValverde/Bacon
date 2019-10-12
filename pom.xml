@@ -81,7 +81,7 @@
         <repository>
             <id>lib</id>
             <name>repository.</name>
-             <url>file:${project.basedir}/repo</url>
+             <url>${project.basedir}/repo</url>
         </repository>
     </repositories>
     
