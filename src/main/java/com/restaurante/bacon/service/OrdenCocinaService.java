@@ -120,7 +120,7 @@ public class OrdenCocinaService {
         
         for (Map.Entry<Receta, Integer> ordenes : busqueda.entrySet()) {
 
-           salida = salida + Integer.parseInt(ordenes.getKey().getPrecioReceta().toString()); 
+           salida = salida + Integer.parseInt(ordenes.getKey().getPrecioReceta().toString()) * ordenes.getValue(); 
            
         }
         

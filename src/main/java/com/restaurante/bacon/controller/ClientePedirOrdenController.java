@@ -244,7 +244,7 @@ public class ClientePedirOrdenController {
         
         Cliente cliente = new Cliente();
         
-        cliente.setIdCliente(new BigDecimal("1")); 
+        cliente.setIdCliente(new BigDecimal("25")); 
         
         Short tipo = Short.valueOf("0");//0 cocina
         
@@ -280,7 +280,7 @@ public class ClientePedirOrdenController {
         
         for (Map.Entry<Receta, Integer> ordenes : busqueda.entrySet()) {
 
-           salida = salida + Integer.parseInt(ordenes.getKey().getPrecioReceta().toString()); 
+           salida = salida + Integer.parseInt(ordenes.getKey().getPrecioReceta().toString()) * ordenes.getValue(); 
            
         }
         
