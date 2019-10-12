@@ -79,7 +79,7 @@
     </build>
     <repositories>
         <repository>
-            <id>lib</id>
+            <id>repo</id>
             <name>repository.</name>
              <url>file:${project.basedir}/repo</url>
         </repository>
