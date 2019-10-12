@@ -1,4 +1,4 @@
-# BACON (Sistema POS para restautante)
+# BACON (Sistema para restautante)
 
 _Sistema para gestión y control de restaurantes, bodega, finanzas, cocina, bar y administración  para portafolio de título de la carrera de ingeniería en informática en Duoc Uc sede Viña del Mar, Chile_
 
