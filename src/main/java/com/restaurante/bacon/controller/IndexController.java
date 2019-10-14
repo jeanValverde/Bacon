@@ -119,7 +119,7 @@ public class IndexController {
         //desarrollo 
         String edad = this.personalService.getEdad(personal.getFechaNacimientoPersonal());
 
-        this.procedureQuery.updateContrasenaPersonal(Integer.valueOf(personal.getIdPersonal().intValue()), encoder.encode(contrasena));
+        
 
       
         //fin desarollo 

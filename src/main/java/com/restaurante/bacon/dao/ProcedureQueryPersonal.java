@@ -72,7 +72,7 @@ public class ProcedureQueryPersonal {
 
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
-    public boolean modificarPersonal(BigDecimal idPersonal,String rut, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo, String contrasena, Integer estado,Rol idRol) {
+    public boolean modificarPersonal(BigDecimal idPersonal,String rut, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo, String contrasena, BigInteger estado,Rol idRol) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("modificarPersonal")
@@ -252,21 +252,21 @@ public class ProcedureQueryPersonal {
 //    Rol r= new Rol();
     
         @SuppressWarnings("unchecked")
-        public boolean InsertPersonal(String rut, String nombres, String apePaterno, String apeMaterno, Date fecha_nacimiento, String celular, String correo, String contrasena, Integer estado,Rol idRol) {
+        public boolean InsertPersonal(String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal,Rol rolpersonal) {
         try {
 
 
             em.createNamedStoredProcedureQuery("InsertPersonal")
-                    .setParameter(P_RUT_PERSONAL, rut)
-                    .setParameter(P_NOMBRES_PERSONAL, nombres)
-                    .setParameter(P_APE_PATERNO_PERSONAL, apePaterno)
-                    .setParameter(P_APE_MATERNO_PERSONAL, apeMaterno)
-                    .setParameter(P_FECHA_NACIMIENTO_PERSONAL, fecha_nacimiento)
-                    .setParameter(P_CELULAR_PERSONAL, celular)
-                    .setParameter(P_CORREO_PERSONAL, correo)
-                    .setParameter(P_CONTRASENA_PERSONAL, contrasena)
-                    .setParameter(P_ESTADO_PERSONAL, estado)
-                   .setParameter(P_ID_ROL, idRol).execute();
+                    .setParameter("P_RUT_PERSONAL", rutPersonal)
+                    .setParameter("P_NOMBRES_PERSONAL", nombresPersonal)
+                    .setParameter("P_APE_PATERNO_PERSONAL", apePaternoPersonal)
+                    .setParameter("P_APE_MATERNO_PERSONAL", apeMaternoPersonal)
+                    .setParameter("P_FECHA_NACIMIENTO_PERSONAL", fechaNacimientoPersonal)
+                    .setParameter("P_CELULAR_PERSONAL", celularPersonal)
+                    .setParameter("P_CORREO_PERSONAL", correoPersonal)
+                    .setParameter("P_CONTRASENA_PERSONAL", contrasenaPersonal)
+                    .setParameter("P_ID_ROL", rolpersonal)
+                    .execute();
 
             return true;
         } catch (Exception ex) {

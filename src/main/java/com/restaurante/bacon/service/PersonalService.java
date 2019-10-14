@@ -74,7 +74,11 @@ public class PersonalService implements UserDetailsService {
     public Personal addPersonalDao(Personal personal) {
         return this.personalDao.save(personal);
     }
-   
+    
+      public Personal updatePersonalDao(Personal personal) {
+        return this.personalDao.save(personal);
+    }
+    
 
 	
 	public boolean ModificarPersonal (Personal personal) {

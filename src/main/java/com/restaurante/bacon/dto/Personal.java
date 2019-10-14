@@ -6,6 +6,8 @@
 package com.restaurante.bacon.dto;
 
 
+
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -92,14 +94,12 @@ public class Personal implements Serializable {
     private String correoPersonal;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
     @Column(name = "CONTRASENA_PERSONAL")
     private String contrasenaPersonal;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
     @Column(name = "ESTADO_PERSONAL")
-    private Integer estadoPersonal;
+    private BigInteger estadoPersonal; 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonal")
     private Collection<ControlCaja> controlCajaCollection;
     @JoinColumn(name = "ID_ROL", referencedColumnName = "ID_ROL")
@@ -128,7 +128,7 @@ public class Personal implements Serializable {
     }
     
     
-    public Personal(BigDecimal idPersonal, String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal, Integer estadoPersonal) {
+    public Personal(BigDecimal idPersonal, String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal, BigInteger estadoPersonal) {
         this.idPersonal = idPersonal;
         this.rutPersonal = rutPersonal;
         this.nombresPersonal = nombresPersonal;
@@ -144,7 +144,7 @@ public class Personal implements Serializable {
     }
     
     
-    @NotNull
+  
     public BigDecimal getIdPersonal() {
         return idPersonal;
     }
@@ -212,16 +212,16 @@ public class Personal implements Serializable {
     public String getContrasenaPersonal() {
         return contrasenaPersonal;
     }
-
+    
     public void setContrasenaPersonal(String contrasenaPersonal) {
         this.contrasenaPersonal = contrasenaPersonal;
     }
 
-    public Integer getEstadoPersonal() {
+    public BigInteger getEstadoPersonal() {
         return estadoPersonal;
     }
 
-    public void setEstadoPersonal(Integer estadoPersonal) {
+    public void setEstadoPersonal(BigInteger estadoPersonal) {
         this.estadoPersonal = estadoPersonal;
     }
 
