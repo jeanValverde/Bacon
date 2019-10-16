@@ -74,7 +74,8 @@
             value: true,
             visible: true,
             className: "btn btn-primary",
-            closeModal: true
+            closeModal: true,
+            onclick: ""
           }
         }
       })

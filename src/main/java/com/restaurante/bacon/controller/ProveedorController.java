@@ -89,8 +89,11 @@ public class ProveedorController {
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
         proveedores = this.proveedorService.listarProveedores();
         //desarrollo aca 
+        
+        
         modelo.addAttribute("proveedores", proveedores);
         modelo.addAttribute("agregar", true);
+        
         modelo.addAttribute("personalSesion", personal);
         
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
@@ -158,15 +161,33 @@ public class ProveedorController {
         proveedor.setCelularProveedor(celularProveedor);
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
+        List<Proveedor> proveedores = new ArrayList<Proveedor>();
+        proveedores = this.proveedorService.listarProveedores();
         
-        if (this.proveedorService.ingresarProveedor(proveedor)) {
-                modelo.addAttribute("agrego", 1);
-            } else {
-               modelo.addAttribute("agrego", 0);
+        boolean seRepite = false;
+        
+        for (int i = 0; i < proveedores.size(); i++) {
+            if (rutProveedor.equals(proveedores.get(i).getRutProveedor())) {
+                seRepite = true;
             }
+        }
+        
+        if (!seRepite) {
             
+        if (this.proveedorService.ingresarProveedor(proveedor) != false) {
+               modelo.addAttribute("tipoRespuesta", "agregar");
+                modelo.addAttribute("respuesta", 1);
+            } else {
+               modelo.addAttribute("tipoRespuesta", "agregar");
+                modelo.addAttribute("respuesta", 0);
+        }}else{
+            modelo.addAttribute("tipoRespuesta","error");
+            modelo.addAttribute("respuesta" ,0);
+        }
+            
+        
          
-       
+          proveedores = this.proveedorService.listarProveedores();
 
        
         
@@ -179,8 +200,7 @@ public class ProveedorController {
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", personal);
         
-        List<Proveedor> proveedores = new ArrayList<Proveedor>();
-        proveedores = this.proveedorService.listarProveedores();
+        
         //desarrollo aca 
         modelo.addAttribute("proveedores", proveedores);
         modelo.addAttribute("agregar", true);
@@ -196,8 +216,17 @@ public class ProveedorController {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        
+        
         //sesion 
-        this.procedureQuery.DeleteProveedorById(idProveedor);
+        if (this.procedureQuery.DeleteProveedorById(idProveedor)) {
+            modelo.addAttribute("tipoRespuesta", "eliminar");
+                modelo.addAttribute("respuesta", 1);
+        }else{
+            modelo.addAttribute("tipoRespuesta", "eliminar");
+                modelo.addAttribute("respuesta", 0);
+        }
+        
         List<Proveedor> proveedores = new ArrayList<Proveedor>();
         proveedores = this.proveedorService.listarProveedores();
         modelo.addAttribute("proveedores", proveedores);
@@ -287,9 +316,11 @@ public class ProveedorController {
         
         if (this.proveedorService.modificarProveedor(proveedor)) {
              
-             modelo.addAttribute("modifico",1);
+             modelo.addAttribute("tipoRespuesta", "modificar");
+                modelo.addAttribute("respuesta", 1);
         }else{
-            modelo.addAttribute("modifico",0);
+            modelo.addAttribute("tipoRespuesta", "modificar");
+                modelo.addAttribute("respuesta", 0);
         }
        
             

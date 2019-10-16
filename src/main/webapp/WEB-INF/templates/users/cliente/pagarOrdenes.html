@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <link rel="stylesheet" href="@{/vendors/flag-icon-css/css/flag-icon.min.css}" />
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/horizontal-layout-light/style.css}"/>
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!---->
+
+    </head>
+
+    <body>
+
+        <div class="container-scroller">
+            <!-- partial:partials/_horizontal-navbar.html -->
+            <div class="horizontal-menu">
+
+                <nav class="navbar top-navbar col-lg-12 col-12 p-0">
+                    <div class="container">
+                        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                            <a class="navbar-brand brand-logo" href="index.html"><img th:src="@{/images/clienteCerdo.png}" alt="logo" /></a>
+                            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo" /></a>
+                        </div>
+                        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+
+                            <!---este boton solo debe estar cuando no se tiene ninguna orden emitida--->
+                            <ul class="navbar-nav navbar-nav-right">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" th:href="@{/}">
+                                        <i class="mdi mdi-logout-variant"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!------>
+
+                            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                                <span class="mdi mdi-menu"></span>
+                            </button>
+                        </div>
+                    </div>
+                </nav>
+
+                <nav class="bottom-navbar">
+                    <div class="container">
+                        <ul class="nav page-navigation">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">
+                                    <i class="mdi mdi-help-circle-outline menu-icon"></i>
+                                    <span class="menu-title">Solicitar Asistencia</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="pages/widgets/widgets.html">
+                                    <i class="mdi mdi-cart-plus menu-icon"></i>
+                                    <span class="menu-title">Agregar Orden</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="pages/widgets/widgets.html">
+                                    <i class="mdi mdi-shopping menu-icon"></i>
+                                    <span class="menu-title">Mis Ordenes</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/documentation/documentation.html" class="nav-link">
+                                    <i class="mdi mdi-cash-multiple menu-icon"></i>
+                                    <span class="menu-title">Pagar</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                
+
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div style="text-align: center">
+                        <h2 id="deudaTotal">$</h2>
+                        <h3>Total Deuda</h3>
+                    </div>
+                        <br/>
+                        <div class="row">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    
+                    
+
+                    <div style=" height: 45px; width: 350px; margin-left: 400px; " class="alert alert-info">Seleccione una opción para pagar sus ordenes</div>
+                    <br/>
+                    <div style="margin-left: 310px">
+                        <button style="inline-box-align: "  type="button" data-toggle="modal"  data-target="#exampleModal-3" class="btn btn-outline-primary btn-fw">Caja</button>
+
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+                        <button style="inline-box-align: "  type="button" data-toggle="modal"  data-target="#exampleModal-3" class="btn btn-outline-primary btn-fw">Online</button>
+                    </div>
+                    <br/>
+                    <br/>
+
+
+                    <div id="divRecetas" class="row">
+
+                        <!--inicio row-->
+
+
+
+
+
+
+
+                        <!--fin tarjeta de ordenes--->
+
+
+                    </div>
+
+
+                </div>
+                        </div>
+                    </div>
+
+                <!---fin columnas--->
+            </div>
+            <!--fin row-->
+
+
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+
+        <!-- partial -->
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+<!-- container-scroller -->
+
+<!-- container-scroller -->
+<!-- base:js -->
+<script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+<!-- endinject -->
+<!-- Plugin js for this page-->
+<!-- End plugin js for this page-->
+<!-- inject:js -->
+<script th:src="@{/js/off-canvas.js}"></script>
+<script th:src="@{/js/hoverable-collapse.js}"></script>
+<script th:src="@{/js/template.js}"></script>
+<script th:src="@{/js/settings.js}"></script>
+<script th:src="@{/js/todolist.js}"></script>
+<script src="../../../../js/modal-demo.js"></script>
+<!-- endinject -->
+<!-- plugin js for this page -->
+<script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<script th:src="@{/js/alerts.js}"></script>
+<script th:src="@{/js/avgrund.js}"></script>
+<script th:src="@{/js/alerts_personalizado.js}"></script>
+<!-- End plugin js for this page -->
+<!-- Custom js for this page-->
+<!-- End custom js for this page-->
+<style type="text/css" >
+    .flotante {
+        display:scroll;
+        position: fixed;
+        bottom: 2%;
+        right: 20%;
+    }
+
+    .activeTipo{
+        color: rgb(255, 255, 255);
+        background-color: rgb(98, 1, 237);
+        border-color: rgb(98, 1, 237);
+    }
+</style>
+
+
+
+
+
+<script th:inline="javascript">
+    var ordenes = [[${recetaByOrden}]];
+    var contenido = "";
+    var sumaValorTotal = 0;
+    var sumaRecetasCantidad =0;
+    var sumaTotalRecetas = 0;
+    
+    for (var i = 0; i < ordenes.length; i++) {
+        
+        contenido = contenido+ '<div style="padding: 7px" class="col-md-6 grid-margin grid-margin-md-0 stretch-card"><div class="card"><div class="card-body text-left"><h3 class="card-title mt-3 text-center">Numero de Orden </h3>'
+        + '<div style="margin-left: 250px" class=" badge badge-primary">' + ordenes[i].orden.idOrden +'</div><br/>'
+        + '<table class="table mb-0"><thead><tr><th class="pl-0">Receta</th><th class="text-right">Cantidad</th><th class="text-right">Precio</th></tr></thead>';
+        
+       
+        // contenido = contenido+ '<div class="col-xl-6 grid-margin grid-margin-md-0 stretch-card"><div class="card-columns"><div class="card"><div class="card-body"><h4 class="card-title mt-3 text-center">Numero de Orden</h4><div style="margin-left: 130px" class="badge badge-primary">'+ ordenes[i].orden.idOrden +'</div> </div></div></div></div>';
+        for (var x = 0; x < ordenes[i].recetaOrdenada.length; x++) { 
+            
+            contenido = contenido 
+                                  + '<tbody><tr><td class="pl-0">'+ ordenes[i].recetaOrdenada[x].idReceta.nombreReceta +'</td><td class="pr-0 text-right"> <div class="badge badge-pill badge-outline-danger">'+ordenes[i].recetaOrdenada[x].cantidad+'</div></td><td class="pr-0 text-right"><div class="badge badge-pill badge-outline-primary">$'+ ordenes[i].recetaOrdenada[x].valor+'</div></td></tr></tbody>';
+                                  
+                          
+                                 // + '<div><h4 class="card-title mt-3">Descripción</h4></div>'
+                                //  + '<table class="table mb-0"><thead><tr><th class="text-left"><h3 style="display: inline">Total Orden: $</h3><h4 style="display: inline"">Hola</h4></th></tr></thead>';
+            
+                  //  +  '<tbody><tr><td class="pl-0">'+ ordenes[i].recetaOrdenada[x].idReceta.nombreReceta +'</td><td class="pr-0 text-right"><div class="badge badge-pill badge-outline-danger">'+ordenes[i].recetaOrdenada[x].cantidad+'</div></td><td class="pr-0 text-right"><div class="badge badge-pill badge-outline-primary">$'+ ordenes[i].recetaOrdenada[x].valor+'</div></td></tr></tbody></table>';
+                                //  +  '<h4 class="card-title mt-3">Descripción</h4><p class="card-text">'+ ordenes[i].orden.descripcion+'</p>';
+                                 // +  '<table class="table mb-0"><thead><tr> <th class="text-left"><h3 style="display: inline">Total Orden: $</h3><h4 style="display: inline">'+ ordenes[i].orden.totalOrden+'</h4></th>';
+                                  
+                                  
+          sumaRecetasCantidad = ordenes[i].recetaOrdenada[x].valor * ordenes[i].recetaOrdenada[x].cantidad ;
+          sumaTotalRecetas = sumaRecetasCantidad + ordenes[i].recetaOrdenada[x].valor * ordenes[i].recetaOrdenada[x].cantidad ;
+           sumaValorTotal = sumaValorTotal + ordenes[i].orden.totalOrden;
+        }
+        contenido = contenido + '</table><h3 class="card-title mt-3">Descripción</h3>'+ ordenes[i].orden.descripcion+'<table class="table mb-0"><thead><tr><th class="text-left"><h3 style="display: inline">Total Orden: $</h3><h4 style="display: inline">'+ ordenes[i].orden.totalOrden+'</h4></th></tr></thead></table></div></div></div></div>';
+    }
+    document.getElementById("deudaTotal").innerHTML = '$' + sumaValorTotal;
+    document.getElementById("divRecetas").innerHTML = contenido;
+
+</script>
+
+
+
+
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" >
+    function listarRecetaByorden(idOrden) {
+
+        //  document.getElementById("loader").innerHTML = "<div class='square-box-loader'><div class='square-box-loader-container'><div class='square-box-loader-corner-top'></div> <div class='square-box-loader-corner-bottom'></div></div><div class='square-box-loader-square'></div></div>";
+
+        //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
+
+        // axios.get('http://localhost:8034/cliente/pagar/pagarOrdenes?idOrden =' + idOrden)
+        // .then(function (response) {
+        //  console.log(response);
+        //if (response.data != null) {
+        //    document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre de la receta</th><th class='text-right'>Valor de la receta</th></tr></thead><tbody id='contenidoListarRecetaByOrden' ></tbody></table></div>";
+        // }
+        //  if (response.data.length != 0) {
+        //       var contenido = "";
+        //      for (var i = 0; i < response.data.length; i++) {
+                 //  contenido += "<tr> <td class='pl-0'> " + response.data[i].idOrden.descripcion + " </td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'> " + response.data[i].totalOrden + " </div></td></tr>";
+        //      }
+        //      document.getElementById('contenidoListarRecetaByOrden').innerHTML = contenido;
+        //   } else {
+        //       document.getElementById('loader').innerHTML = '<div class="alert alert-danger" >Sin recetas disponibles</div>';
+        //   }
+        //  })
+        // .catch(function (error) {
+        // handle error
+        //     document.getElementById("loader").innerHTML = '<div class="alert alert-danger" >Error</div>';
+        //  })
+        //  .finally(function () {
+        // always executed
+        //  });
+
+    }
+    // listarRecetaByorden(3);   
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" >
+
+    var tipoUno = document.getElementById('tipoUno');
+    var tipoDos = document.getElementById('tipoDos');
+    var tipoTres = document.getElementById('tipoTres');
+    var tipoCuatro = document.getElementById('tipoCuatro');
+    var tipoMenosUno = document.getElementById('tipoMenosUno');
+
+    var tipoActivo = '[[${tipo}]]';
+
+    switch (tipoActivo) {
+        case '1':
+            tipoUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        case '2':
+            tipoDos.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        case '3':
+            tipoTres.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        case '4':
+            tipoCuatro.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        case '-1':
+            tipoMenosUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
+            break;
+        default:
+            break;
+    }
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
+
+<script type="text/javascript" >
+
+    function d(idReceta) {
+
+        var input = document.getElementById('pedido-' + idReceta);
+
+        if (input.value < 1 || input.value == null || input.value == 0) {
+            input.setAttribute("class", "form-control is-invalid");
+        } else {
+            input.setAttribute("class", "form-control is-valid");
+            Swal.fire({
+                title: '¿Está seguro que desea pedir esta receta?',
+                text: "Si pide esta receta solo podra anularlo solicitando asistencia en botón superior izquierdo de la pantalla",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '!Si, Pedir!'
+            }).then((result) => {
+                if (result.value) {
+                    location.href = "/administrador/deleteReceta?idReceta=" + idReceta;
+                }
+            })
+        }
+
+
+    }
+
+</script>
+
+</body>
+
+</html>
