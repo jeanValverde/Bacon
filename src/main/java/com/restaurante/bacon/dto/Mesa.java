@@ -21,7 +21,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-
 /**
  *
  * @author jean
@@ -30,13 +29,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "MESA")
 public class Mesa implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_MESA")
-    private BigDecimal idMesa;
     @Basic(optional = false)
     @NotNull
     @Column(name = "NUMERO_MESA")
@@ -49,6 +41,14 @@ public class Mesa implements Serializable {
     @NotNull
     @Column(name = "ESTADO_MESA")
     private BigInteger estadoMesa;
+
+    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ID_MESA")
+    private BigDecimal idMesa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMesa")
     private Collection<Cliente> clienteCollection;
 
@@ -131,5 +131,6 @@ public class Mesa implements Serializable {
     public String toString() {
         return "com.restaurante.bacon.dto.Mesa[ idMesa=" + idMesa + " ]";
     }
+
     
 }

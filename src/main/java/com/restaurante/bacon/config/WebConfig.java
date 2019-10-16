@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+    
     //Carga los archivos estaticos del proyecto 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -28,7 +29,8 @@ public class WebConfig implements WebMvcConfigurer {
                 "/js/**",
                 "/scss/**",
                 "/vendors/**",
-                "/custom/**")
+                "/custom/**",
+                "/uploads/**")
                 .addResourceLocations(
                         "classpath:/static/css/",
                         "classpath:/static/fonts/",
@@ -36,6 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "classpath:/static/js/",
                         "classpath:/static/scss/",
                         "classpath:/static/vendors/",
-                        "classpath:/static/custom/");
+                        "classpath:/static/custom/",
+                        "classpath:/static/uploads/");
     }
 }

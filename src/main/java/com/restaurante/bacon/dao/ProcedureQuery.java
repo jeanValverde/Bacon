@@ -5,23 +5,32 @@
  */
 package com.restaurante.bacon.dao;
 
+import com.restaurante.bacon.dto.CategoriaReceta;
+import com.restaurante.bacon.dto.Insumo;
+import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author jean 
- * Se deben llamar a todos los procedimientos creados en el package procedure 
+ * @author jean Se deben llamar a todos los procedimientos creados en el package
+ * procedure
  */
 @Repository
 public class ProcedureQuery {
+
     //acceder a la conexión 
     @Autowired
     private EntityManager em;
-    
+
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
     public boolean updateContrasenaPersonal(Integer idPersonal, String contrasena) {
@@ -35,7 +44,7 @@ public class ProcedureQuery {
             return false;
         }
     }
-    
+
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
     public boolean updatePerfilPersonal(BigDecimal idPersonal, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo) {
@@ -54,5 +63,5 @@ public class ProcedureQuery {
             return false;
         }
     }
-    
+
 }

@@ -11,11 +11,14 @@ import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,17 +35,21 @@ public class RecetaOrdenada implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
+    //declarar que el id se usa con una secuencia 
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_RECETA_ORDENADA")
+    //declarar la secuencia 
+    @SequenceGenerator(name="SEQ_RECETA_ORDENADA",sequenceName="SEQ_RECETA_ORDENADA", allocationSize=1 )
     @NotNull
     @Column(name = "ID_RECETA_ORDENADA")
-    private BigDecimal idRecetaOrdenada;
+    private Integer idRecetaOrdenada;
     @Basic(optional = false)
     @NotNull
     @Column(name = "CANTIDAD")
-    private BigInteger cantidad;
+    private Integer cantidad;
     @Basic(optional = false)
     @NotNull
     @Column(name = "VALOR")
-    private BigInteger valor;
+    private Integer valor;
     @JoinColumn(name = "ID_ORDEN", referencedColumnName = "ID_ORDEN")
     @ManyToOne(optional = false)
     private Orden idOrden;
@@ -53,37 +60,37 @@ public class RecetaOrdenada implements Serializable {
     public RecetaOrdenada() {
     }
 
-    public RecetaOrdenada(BigDecimal idRecetaOrdenada) {
+    public RecetaOrdenada(Integer idRecetaOrdenada) {
         this.idRecetaOrdenada = idRecetaOrdenada;
     }
 
-    public RecetaOrdenada(BigDecimal idRecetaOrdenada, BigInteger cantidad, BigInteger valor) {
+    public RecetaOrdenada(Integer idRecetaOrdenada, Integer cantidad, Integer valor) {
         this.idRecetaOrdenada = idRecetaOrdenada;
         this.cantidad = cantidad;
         this.valor = valor;
     }
 
-    public BigDecimal getIdRecetaOrdenada() {
+    public Integer getIdRecetaOrdenada() {
         return idRecetaOrdenada;
     }
 
-    public void setIdRecetaOrdenada(BigDecimal idRecetaOrdenada) {
+    public void setIdRecetaOrdenada(Integer idRecetaOrdenada) {
         this.idRecetaOrdenada = idRecetaOrdenada;
     }
 
-    public BigInteger getCantidad() {
+    public Integer getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(BigInteger cantidad) {
+    public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
     }
 
-    public BigInteger getValor() {
+    public Integer getValor() {
         return valor;
     }
 
-    public void setValor(BigInteger valor) {
+    public void setValor(Integer valor) {
         this.valor = valor;
     }
 

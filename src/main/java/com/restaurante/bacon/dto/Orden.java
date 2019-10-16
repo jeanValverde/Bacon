@@ -8,22 +8,21 @@ package com.restaurante.bacon.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,9 +36,13 @@ public class Orden implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
+      //declarar que el id se usa con una secuencia 
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ORDEN")
+    //declarar la secuencia 
+    @SequenceGenerator(name="SEQ_ORDEN",sequenceName="SEQ_ORDEN", allocationSize=1 )
     @NotNull
     @Column(name = "ID_ORDEN")
-    private BigDecimal idOrden;
+    private Integer idOrden;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 250)
@@ -48,39 +51,39 @@ public class Orden implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "SUB_TOTAL")
-    private BigInteger subTotal;
+    private Integer subTotal;
     @Basic(optional = false)
     @NotNull
     @Column(name = "IVA")
-    private BigInteger iva;
+    private Integer iva;
     @Basic(optional = false)
     @NotNull
     @Column(name = "TOTAL_ORDEN")
-    private BigInteger totalOrden;
+    private Integer totalOrden;
     @Basic(optional = false)
     @NotNull
     @Column(name = "TIEMPO_PREPARACION")
-    private BigInteger tiempoPreparacion;
+    private Integer tiempoPreparacion;
     @Size(max = 250)
     @Column(name = "MOTIVO_ANULACION")
     private String motivoAnulacion;
+    @Column(name = "TIPO_ORDEN")
+    private Short tipoOrden;
     @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID_CLIENTE")
     @ManyToOne(optional = false)
     private Cliente idCliente;
     @JoinColumn(name = "ID_ESTADO_ORDEN", referencedColumnName = "ID_ESTADO_ORDEN")
     @ManyToOne(optional = false)
     private EstadoOrden idEstadoOrden;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idOrden")
-    private Collection<RecetaOrdenada> recetaOrdenadaCollection;
 
     public Orden() {
     }
 
-    public Orden(BigDecimal idOrden) {
+    public Orden(Integer idOrden) {
         this.idOrden = idOrden;
     }
 
-    public Orden(BigDecimal idOrden, String descripcion, BigInteger subTotal, BigInteger iva, BigInteger totalOrden, BigInteger tiempoPreparacion) {
+    public Orden(Integer idOrden, String descripcion, Integer subTotal, Integer iva, Integer totalOrden, Integer tiempoPreparacion) {
         this.idOrden = idOrden;
         this.descripcion = descripcion;
         this.subTotal = subTotal;
@@ -89,11 +92,11 @@ public class Orden implements Serializable {
         this.tiempoPreparacion = tiempoPreparacion;
     }
 
-    public BigDecimal getIdOrden() {
+    public Integer getIdOrden() {
         return idOrden;
     }
 
-    public void setIdOrden(BigDecimal idOrden) {
+    public void setIdOrden(Integer idOrden) {
         this.idOrden = idOrden;
     }
 
@@ -105,35 +108,35 @@ public class Orden implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public BigInteger getSubTotal() {
+    public Integer getSubTotal() {
         return subTotal;
     }
 
-    public void setSubTotal(BigInteger subTotal) {
+    public void setSubTotal(Integer subTotal) {
         this.subTotal = subTotal;
     }
 
-    public BigInteger getIva() {
+    public Integer getIva() {
         return iva;
     }
 
-    public void setIva(BigInteger iva) {
+    public void setIva(Integer iva) {
         this.iva = iva;
     }
 
-    public BigInteger getTotalOrden() {
+    public Integer getTotalOrden() {
         return totalOrden;
     }
 
-    public void setTotalOrden(BigInteger totalOrden) {
+    public void setTotalOrden(Integer totalOrden) {
         this.totalOrden = totalOrden;
     }
 
-    public BigInteger getTiempoPreparacion() {
+    public Integer getTiempoPreparacion() {
         return tiempoPreparacion;
     }
 
-    public void setTiempoPreparacion(BigInteger tiempoPreparacion) {
+    public void setTiempoPreparacion(Integer tiempoPreparacion) {
         this.tiempoPreparacion = tiempoPreparacion;
     }
 
@@ -143,6 +146,14 @@ public class Orden implements Serializable {
 
     public void setMotivoAnulacion(String motivoAnulacion) {
         this.motivoAnulacion = motivoAnulacion;
+    }
+
+    public Short getTipoOrden() {
+        return tipoOrden;
+    }
+
+    public void setTipoOrden(Short tipoOrden) {
+        this.tipoOrden = tipoOrden;
     }
 
     public Cliente getIdCliente() {
@@ -159,15 +170,6 @@ public class Orden implements Serializable {
 
     public void setIdEstadoOrden(EstadoOrden idEstadoOrden) {
         this.idEstadoOrden = idEstadoOrden;
-    }
-
-    @XmlTransient
-    public Collection<RecetaOrdenada> getRecetaOrdenadaCollection() {
-        return recetaOrdenadaCollection;
-    }
-
-    public void setRecetaOrdenadaCollection(Collection<RecetaOrdenada> recetaOrdenadaCollection) {
-        this.recetaOrdenadaCollection = recetaOrdenadaCollection;
     }
 
     @Override
@@ -190,5 +192,9 @@ public class Orden implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "com.restaurante.bacon.dto.Orden[ idOrden=" + idOrden + " ]";
+    }
     
 }
