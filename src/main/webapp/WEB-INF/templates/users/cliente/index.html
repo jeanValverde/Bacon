@@ -29,7 +29,7 @@
 
         <div class="container-scroller">
             <!-- partial:partials/_horizontal-navbar.html -->
-            <div class="horizontal-menu">
+            <div  class="horizontal-menu">
 
                 <nav class="navbar top-navbar col-lg-12 col-12 p-0">
                     <div class="container">
@@ -78,7 +78,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="pages/documentation/documentation.html" class="nav-link">
+                                <a class="nav-link" th:href="@{/cliente/pagar/pagarOrdenes}">
                                     <i class="mdi mdi-cash-multiple menu-icon"></i>
                                     <span class="menu-title">Pagar</span></a>
                             </li>
@@ -400,6 +400,7 @@
         <script th:src="@{/js/template.js}"></script>
         <script th:src="@{/js/settings.js}"></script>
         <script th:src="@{/js/todolist.js}"></script>
+        <script src="../../../../js/modal-demo.js"></script>
         <!-- endinject -->
         <!-- plugin js for this page -->
         <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
@@ -464,6 +465,7 @@
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
+
 
         <script type="text/javascript" >
 
@@ -803,6 +805,7 @@
 
         </script>
 
+
         <script type="text/javascript" >
 
             function cambiar_cantidad_session(idReceta, cantidad) {
@@ -856,6 +859,7 @@
                         });
             }
         </script>
+
 
     </body>
 

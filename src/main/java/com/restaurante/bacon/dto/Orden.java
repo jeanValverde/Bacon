@@ -8,6 +8,7 @@ package com.restaurante.bacon.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+
+import javax.persistence.OneToMany;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -36,10 +40,12 @@ public class Orden implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
-      //declarar que el id se usa con una secuencia 
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ORDEN")
+
+    //declarar que el id se usa con una secuencia 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ORDEN")
     //declarar la secuencia 
-    @SequenceGenerator(name="SEQ_ORDEN",sequenceName="SEQ_ORDEN", allocationSize=1 )
+    @SequenceGenerator(name = "SEQ_ORDEN", sequenceName = "SEQ_ORDEN", allocationSize = 1)
+
     @NotNull
     @Column(name = "ID_ORDEN")
     private Integer idOrden;
@@ -84,12 +90,15 @@ public class Orden implements Serializable {
     }
 
     public Orden(Integer idOrden, String descripcion, Integer subTotal, Integer iva, Integer totalOrden, Integer tiempoPreparacion) {
+
         this.idOrden = idOrden;
         this.descripcion = descripcion;
         this.subTotal = subTotal;
         this.iva = iva;
         this.totalOrden = totalOrden;
         this.tiempoPreparacion = tiempoPreparacion;
+        this.motivoAnulacion = motivoAnulacion;
+
     }
 
     public Integer getIdOrden() {
@@ -172,6 +181,10 @@ public class Orden implements Serializable {
         this.idEstadoOrden = idEstadoOrden;
     }
 
+    public void setTipoOrden(BigInteger TipoOrden) {
+        this.tipoOrden = tipoOrden;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -196,5 +209,5 @@ public class Orden implements Serializable {
     public String toString() {
         return "com.restaurante.bacon.dto.Orden[ idOrden=" + idOrden + " ]";
     }
-    
+
 }

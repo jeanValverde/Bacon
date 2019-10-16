@@ -161,18 +161,33 @@ public class ProveedorController {
         proveedor.setCelularProveedor(celularProveedor);
         proveedor.setCategoriaProveedor(categoriaProveedor);
         
+        List<Proveedor> proveedores = new ArrayList<Proveedor>();
+        proveedores = this.proveedorService.listarProveedores();
         
+        boolean seRepite = false;
         
-        if (this.proveedorService.ingresarProveedor(proveedor)) {
+        for (int i = 0; i < proveedores.size(); i++) {
+            if (rutProveedor.equals(proveedores.get(i).getRutProveedor())) {
+                seRepite = true;
+            }
+        }
+        
+        if (!seRepite) {
+            
+        if (this.proveedorService.ingresarProveedor(proveedor) != false) {
                modelo.addAttribute("tipoRespuesta", "agregar");
                 modelo.addAttribute("respuesta", 1);
             } else {
                modelo.addAttribute("tipoRespuesta", "agregar");
                 modelo.addAttribute("respuesta", 0);
-            }
+        }}else{
+            modelo.addAttribute("tipoRespuesta","error");
+            modelo.addAttribute("respuesta" ,0);
+        }
             
+        
          
-       
+          proveedores = this.proveedorService.listarProveedores();
 
        
         
@@ -185,8 +200,7 @@ public class ProveedorController {
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", personal);
         
-        List<Proveedor> proveedores = new ArrayList<Proveedor>();
-        proveedores = this.proveedorService.listarProveedores();
+        
         //desarrollo aca 
         modelo.addAttribute("proveedores", proveedores);
         modelo.addAttribute("agregar", true);
@@ -202,6 +216,8 @@ public class ProveedorController {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        
+        
         //sesion 
         if (this.procedureQuery.DeleteProveedorById(idProveedor)) {
             modelo.addAttribute("tipoRespuesta", "eliminar");
