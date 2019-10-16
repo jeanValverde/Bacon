@@ -200,7 +200,7 @@
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
-                                                <a th:href="@{/administrador/recetaInsumos/deleteIngrediente(idReceta=${receta.idReceta}, idIngrediente=${ingrediente.idIngrediente})}"  class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</a>
+                                                <a href="#" th:onclick="'deleteInsumoReceta(' + ${receta.idReceta} + ' , ' +  ${ingrediente.idIngrediente}  + ' )'"  class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</a>
                                             </form>
                                         </div>
                                     </div>
@@ -402,7 +402,28 @@
         </script>
 
      
-        
+           <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
+
+        <script type="text/javascript" >
+
+            function deleteInsumoReceta(idReceta, idIngrediente) {
+                
+                Swal.fire({
+                    title: '¿Está seguro que desea eliminar?',
+                    text: "Si elimina la receta se perderán todos los datos relacionados y serán irrecuperables",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '!Si, Eliminar!'
+                }).then((result) => {
+                    if (result.value) {
+                        location.href="/administrador/recetaInsumos/deleteIngrediente?idReceta=" + idReceta + "&idIngrediente="+ idIngrediente;
+                    }
+                });
+            }
+
+        </script>
         
         
     </body>

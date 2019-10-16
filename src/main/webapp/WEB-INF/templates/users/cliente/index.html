@@ -433,7 +433,6 @@
         </style>
 
         <script type="text/javascript" >
-
             var tipoUno = document.getElementById('tipoUno');
             var tipoDos = document.getElementById('tipoDos');
             var tipoTres = document.getElementById('tipoTres');
@@ -507,7 +506,7 @@
 
                 //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
 
-                axios.get('http://localhost:8034/cliente/pedirOrden/detalleReceta?idReceta=' + idReceta)
+                axios.get( window.location.protocol + "//" + window.location.host + '/cliente/pedirOrden/detalleReceta?idReceta=' + idReceta)
                         .then(function (response) {
                             console.log(response);
                             if (response.data != null) {
@@ -545,7 +544,7 @@
 
                 //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
 
-                axios.get('http://localhost:8034/cliente/pedirOrden/finalizar?tipo=' + tipo)
+                axios.get(window.location.protocol + "//" + window.location.host + '/cliente/pedirOrden/finalizar?tipo=' + tipo)
                         .then(function (response) {
                             console.log(response);
                             var precioTotalOrden = 0;
@@ -557,7 +556,7 @@
                                 } else {
                                     categoria = "Fría"
                                 }
-                                contenido += "<tr id='borrar-" + response.data[i].receta.idReceta + "' ><td class='py-1 pl-0'><div class='d-flex align-items-center'> <img src='http://localhost:8034/uploads/" + response.data[i].receta.foto + "' alt='profile'> "
+                                contenido += "<tr id='borrar-" + response.data[i].receta.idReceta + "' ><td class='py-1 pl-0'><div class='d-flex align-items-center'> <img src='" + window.location.protocol + "//" + window.location.host + "/uploads/" + response.data[i].receta.foto + "' alt='profile'> "
                                         + "<div class='ml-3'><p class='mb-0'>" + response.data[i].receta.nombreReceta + "</p></div> "
                                         + "</div></td><td class='numberToFormatFinalizar' id='precio-finalizar-cocina-" + response.data[i].receta.idReceta + "' > " + response.data[i].receta.precioReceta + " </td> <td> <div class='badge badge-outline-primary'> " + categoria + " </div> </td> "
                                         + "<td><div id='cantidad-" + response.data[i].receta.idReceta + "'  class='badge badge-pill badge-primary ml-3'>" + response.data[i].cantidad + "</div> </td> <td><div class='badge badge-outline-primary numberToFormatFinalizar' id='total-finalizar-cocina-" + response.data[i].receta.idReceta + "' >" + response.data[i].precioTotal + "</div> "
@@ -811,7 +810,7 @@
                 document.getElementById("loaderSesion").style.visibility = "none";
 
 
-                axios.get('http://localhost:8034/cliente/pedirOrden/editarCantidadSesion?idReceta=' + idReceta + '&cantidad=' + cantidad)
+                axios.get(window.location.protocol + "//" + window.location.host + '/cliente/pedirOrden/editarCantidadSesion?idReceta=' + idReceta + '&cantidad=' + cantidad)
                         .then(function (response) {
                             console.log(response);
                             if (response.data == true) {
@@ -837,7 +836,7 @@
                 document.getElementById("loaderSesion").style.visibility = "none";
 
 
-                axios.get('http://localhost:8034/cliente/pedirOrden/eliminarReceraSesion?idReceta=' + idReceta)
+                axios.get(window.location.protocol + "//" + window.location.host +'/cliente/pedirOrden/eliminarReceraSesion?idReceta=' + idReceta)
                         .then(function (response) {
                             console.log(response);
                             if (response.data == true) {

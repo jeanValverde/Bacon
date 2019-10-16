@@ -7,7 +7,6 @@ package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Cliente;
-import com.restaurante.bacon.dto.EstadoOrden;
 import com.restaurante.bacon.dto.Ingrediente;
 import com.restaurante.bacon.dto.Orden;
 import com.restaurante.bacon.dto.Receta;
@@ -16,7 +15,6 @@ import com.restaurante.bacon.dto.RecetaOrdenada;
 import com.restaurante.bacon.service.InsumoService;
 import com.restaurante.bacon.service.OrdenCocinaService;
 import com.restaurante.bacon.service.RecetaService;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -242,10 +240,8 @@ public class ClientePedirOrdenController {
         Orden ordenCocina = new Orden();
         Orden ordenBar = new Orden();
         
-        Cliente cliente = new Cliente();
-        
-        cliente.setIdCliente(new BigDecimal("25")); 
-        
+        Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
+             
         Short tipo = Short.valueOf("0");//0 cocina
         
         if(descripcion == null || descripcion == ""){
