@@ -127,7 +127,7 @@ public class ProcedureQueryInsumo {
             // Registrar los parámetros de entrada y salida
             query.registerStoredProcedureParameter("P_STOCK_INSUMO", BigInteger.class, ParameterMode.IN);
             query.registerStoredProcedureParameter("P_INSUMOS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
-
+            
             // Configuramos el valor de entrada
             query.setParameter("P_STOCK_INSUMO", stock);
 
