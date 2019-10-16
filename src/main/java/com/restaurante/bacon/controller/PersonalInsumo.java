@@ -66,9 +66,7 @@ public class PersonalInsumo {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        if(this.personalService.comprobarImagen("adfbfd87-379f-4760-8771-643c689a9537.jpg")){
-            System.out.println("existe la imagen qla");
-        }
+        
         List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
         //desarrollo aca 
@@ -92,7 +90,11 @@ public class PersonalInsumo {
                 insumos = this.insumoService.filtrarInsumosByNombre(filtro);
                 break;
             case "stock":
+                if(!filtro.equals("")){
                 insumos = this.insumoService.filtrarInsumosByStock(BigInteger.valueOf(Integer.parseInt(filtro)));
+                }else{
+                    insumos = this.insumoService.listarInsumos();
+                }
                 break;
             case "unidad":
                 insumos = this.insumoService.filtrarInsumosByUnidadMedida(filtro);
@@ -141,9 +143,12 @@ public class PersonalInsumo {
 
             insumo.setFotoInsumo(nombreImagen);
             if (this.insumoService.ingresarInsumo(insumo)) {
-                modelo.addAttribute("agrego", 1);
+                //envia al javascrit la respuesta del agregar
+                modelo.addAttribute("tipoRespuesta", "agregar");
+                modelo.addAttribute("respuesta", 1);
             } else {
-               modelo.addAttribute("agrego", 0);
+               modelo.addAttribute("tipoRespuesta", "agregar");
+               modelo.addAttribute("respuesta", 0);
             }
         }
 
@@ -152,7 +157,6 @@ public class PersonalInsumo {
         //desarrollo aca 
         modelo.addAttribute("agregar", true);
         modelo.addAttribute("insumos", insumos);
-        modelo.addAttribute("modifico", false);
          
        
         //siempre despachar esto por la sesion 
@@ -173,15 +177,9 @@ public class PersonalInsumo {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //String nombreImagen = this.personalService.subirImagen(file);
+        
         Insumo insumo = new Insumo();
-        /*if (nombreImagen == null) {
-            nombreImagen = "260x162.png";
-        } else {
-            
-            insumo.setFotoInsumo(nombreImagen);
-        }*/
-
+       
         insumo.setIdInsumo(id);
         insumo.setNombreInsumo(nombre);
         insumo.setDescripcionInsumo(descripcion);
@@ -189,18 +187,33 @@ public class PersonalInsumo {
         insumo.setMinimoStockInsumo(stockMinimo);
         insumo.setMaximoStockInsumo(stockMaximo);
         insumo.setUnidadMedidaInsumo(unidadMedida);
-        insumo.setFotoInsumo("adfbfd87-379f-4760-8771-643c689a9537.jpg");
-        if (this.insumoService.modificarInsumo(insumo)) {
-            modelo.addAttribute("modifico", 1);
-        } else {
-            modelo.addAttribute("modifico", 0);
+        //contiene los datos del insumo antes de modificar
+        Insumo insu = new Insumo();
+        insu = this.insumoService.retornarInsumoById(id);
+        
+        if(file[0].isEmpty()){
+            insumo.setFotoInsumo(insu.getFotoInsumo().toString());
+        }else{
+            String nombreImagen = this.personalService.subirImagen(file);
+            insumo.setFotoInsumo(nombreImagen);
+            this.personalService.eliminarImagen(insu.getFotoInsumo());
         }
+        
+        
+        if (this.insumoService.modificarInsumo(insumo)) {
+            modelo.addAttribute("tipoRespuesta", "modificar");
+            modelo.addAttribute("respuesta", 1);
+        } else {
+            modelo.addAttribute("tipoRespuesta", "modificar");
+            modelo.addAttribute("respuesta", 0);
+        }
+        
         List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
         //desarrollo aca 
-        modelo.addAttribute("agregar", true);
-        modelo.addAttribute("insumos", insumos);
         
+        modelo.addAttribute("insumos", insumos);
+        modelo.addAttribute("agregar", true);
         //fin desarrollo 
         //despachos 
 
@@ -220,6 +233,11 @@ public class PersonalInsumo {
         
         if(this.insumoService.eliminarInsumo(idInsumo)){
             this.personalService.eliminarImagen(nombreFoto);
+            modelo.addAttribute("tipoRespuesta", "eliminar");
+            modelo.addAttribute("respuesta", 1);
+        }else{
+            modelo.addAttribute("tipoRespuesta", "eliminar");
+            modelo.addAttribute("respuesta", 0);
         }
         List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();

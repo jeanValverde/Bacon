@@ -32,11 +32,11 @@ public class InsumoService {
     //se implementan los metodos declarados en la interfaz 
    
     public boolean ingresarInsumo(Insumo insumo) {
-        return this.procedureQueryInsumo.InsertInsumo(insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
+        return this.procedureQueryInsumo.InsertInsumo(insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMaximoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
          
     }
     public boolean modificarInsumo(Insumo insumo) {
-        return this.procedureQueryInsumo.UpdateInsumo(insumo.getIdInsumo(),insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
+        return this.procedureQueryInsumo.UpdateInsumo(insumo.getIdInsumo(),insumo.getNombreInsumo(), insumo.getDescripcionInsumo(), insumo.getStockInsumo(), insumo.getMinimoStockInsumo(), insumo.getMaximoStockInsumo(), insumo.getUnidadMedidaInsumo(), insumo.getFotoInsumo());
     }
     public boolean eliminarInsumo(Integer id) {
         return this.procedureQueryInsumo.DeleteInsumo(id);
