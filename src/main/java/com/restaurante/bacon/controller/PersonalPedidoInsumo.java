@@ -350,6 +350,7 @@ public class PersonalPedidoInsumo {
         //desarrollo aca 
         modelo.addAttribute("insumos_pedidos", insumos_pedidos_proveedor);
         insumos_pedidos_proveedor = null;
+         modelo.addAttribute("respuesta", true);
         modelo.addAttribute("personalSesion", personal);
         return "users/administrador/pedido_proveedor";
 

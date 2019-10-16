@@ -20,6 +20,7 @@ com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.class
 com\restaurante\bacon\dao\InsumoPedidoProveedorDAO.class
 com\restaurante\bacon\controller\ClienteIngresarController.class
 com\restaurante\bacon\dao\IProveedorDao.class
+com\restaurante\bacon\dao\ProcedureQueryInsumoPedidoProveedor.class
 com\restaurante\bacon\dto\Pedido.class
 com\restaurante\bacon\dao\IPedidoDao.class
 com\restaurante\bacon\dao\IInsumoPedidoProveedorDao.class
