@@ -132,7 +132,7 @@ public class PersonalControlador {
             @RequestParam("celularPersonal") String celularPersonal,
             @RequestParam("correoPersonal") String correoPersonal,
             @RequestParam("contrasenaPersonal") String contrasenaPersonal,
-            @RequestParam("rolpersonal") String rolpersonal) {
+            @RequestParam("rolpersonal") Integer rolpersonal) {
 
         //sesion 
         UserRol user = new UserRol();
@@ -147,33 +147,27 @@ public class PersonalControlador {
 
         Personal perso = new Personal();
 
-    
-        
-        perso.setRutPersonal(rutPersonal);
-        perso.setNombresPersonal(nombresPersonal);
-        perso.setApePaternoPersonal(apePaternoPersonal);
-        perso.setApeMaternoPersonal(apeMaternoPersonal);
-        perso.setFechaNacimientoPersonal(new Date());
-        perso.setCelularPersonal(celularPersonal);
-        perso.setCorreoPersonal(correoPersonal);
-        
         
         String contra = encoder.encode(contrasenaPersonal);
         perso.setContrasenaPersonal(contra);
-        perso.setEstadoPersonal(BigInteger.valueOf(1));
+        
+        
+        BigInteger estado = BigInteger.valueOf(1);
+        
+       perso.setEstadoPersonal(estado);
+        
+        
+//        perso.setEstadoPersonal(BigInteger.valueOf(Integer.parseInt(estado.toString())));
         
 //      this.procedureQuery.updateContrasenaPersonal(Integer.valueOf(perso.getIdPersonal().intValue()),(contra));
         
-        Rol rol = new Rol();
-        rol.setIdRol(BigInteger.valueOf(Integer.parseInt(rolpersonal)));
-        perso.setIdRol(rol);
 //        personal1.setIdRol(rolpersonal);
         
         
                  
         
         try {
-            Personal addPersonalDao = this.personalService.addPersonalDao(perso);
+            this.procedureQuery.InsertPersonal(rutPersonal, nombresPersonal, apePaternoPersonal, apeMaternoPersonal, fechaNacimiento, celularPersonal, correoPersonal, contra,estado,rolpersonal);
 //            this.procedureQuery.InsertPersonal(rutPersonal, nombresPersonal, apePaternoPersonal, apeMaternoPersonal, fechaNacimiento, celularPersonal, correoPersonal, contrasenaPersonal, rol);
             
         } catch (Exception ex) {
@@ -227,14 +221,23 @@ public class PersonalControlador {
     }
 
     @RequestMapping("/eliminar_personal")
-    public String eliminarPersonal(Model modelo, @RequestParam("idPersonal") String idPersonal) {
+    public String eliminarPersonal(Model modelo, @RequestParam("idPersonal") BigInteger idPersonal) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
         
-        this.personalService.deletePersonalByID(idPersonal);
-
+        
+        if (this.procedureQuery.DeletePersonalById(idPersonal)) {
+            modelo.addAttribute("tipoRespuesta", "eliminar");
+                modelo.addAttribute("respuesta", 1);
+        }else{
+            modelo.addAttribute("tipoRespuesta", "eliminar");
+                modelo.addAttribute("respuesta", 0);
+        }
+        
+        
+        
         List<Personal> personales = new ArrayList<Personal>();
         personales = this.personalService.getAllUsuario();
         modelo.addAttribute("personales", personales);
@@ -259,7 +262,8 @@ public class PersonalControlador {
             @RequestParam("apeMaternoPersonal") String apeMaternoPersonal,
             @RequestParam("fechaNacimientoPersonal") Date fechaNacimientoPersonal,
             @RequestParam("celularPersonal") String celularPersonal,
-            @RequestParam("correoPersonal") String correoPersonal            
+            @RequestParam("correoPersonal") String correoPersonal,
+            @RequestParam("estadoPersonal") Integer estadoPersonal
             ) {
         //sesion 
         UserRol user = new UserRol();
@@ -276,6 +280,16 @@ public class PersonalControlador {
         personal1.setCelularPersonal(celularPersonal);
         personal1.setCorreoPersonal(correoPersonal);
         
+        if (estadoPersonal==1) {
+            
+        personal1.setEstadoPersonal(BigInteger.valueOf(1));
+        
+        }else  {
+        
+        personal1.setEstadoPersonal(BigInteger.valueOf(0));
+        
+        }
+             
         this.personalService.updatePersonalDao(personal1);
 
 
@@ -299,4 +313,47 @@ public class PersonalControlador {
         return "users/administrador/mantenedor_personal";
     }
 
+    
+    
+        @RequestMapping("/buscar_por_filtro")
+    public String buscar_por_filtro(Model modelo, @RequestParam("tipoBusqueda") String tipoBusqueda, @RequestParam("filtro") String filtro) {
+        //sesion 
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion 
+        
+        List<Personal> personales = new ArrayList<Personal>();
+        switch (tipoBusqueda) {
+            case "nombre":
+//                personals = this.proveedorService.filtrarProveedoresByNombre(filtro);
+                break;
+            case "rut":
+                personales= this.personalService.filtrarPersonalByRut(filtro);
+                break;
+             default:
+                personales = this.personalService.getAllUsuario();
+        }
+        
+           modelo.addAttribute("personales", personales);
+        modelo.addAttribute("agregar", true);
+        modelo.addAttribute("personalSesion", personal);
+
+        //
+        //cargar el html nombre
+        return "users/administrador/mantenedor_personal";
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

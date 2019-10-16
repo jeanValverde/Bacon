@@ -49,11 +49,11 @@
                                                                             <p class="card-description text-justify">
                                                                                 Completa estos campos para agregar un personal al sistema.
                                                                             </p>
-                                                                            <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="POST" name="addPersonal" >
+                                                                            <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="POST" name="formAddPersonal" >
                                                                                 <input type="hidden" name="addPersonal" id="registroAgregar" th:value="${registroAgregar}" />                                                                           
                                                                                 <div class="form-group">
                                                                                     <label for="rutPersonal">Rut Personal</label>
-                                                                                    <input type="text" class="form-control" id="rutPersonal" name="rutPersonal" placeholder="11.111.111-1">
+                                                                                    <input type="text" class="form-control" id="rut" name="rutPersonal" placeholder="11.111.111-1">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -95,13 +95,18 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
-                                                                                    <input type="text" class="form-control" id="fechaNacimientoPersonal" name="fechaNacimientoPersonal" >
-                                                                                        <div class="valid-feedback">
-                                                                                            !Listo!
-                                                                                        </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Ingrese Fecha Nacimiento.
-                                                                                        </div>
+                                                                                    <div id="datepicker-popup" class="input-group date datepicker">
+                                                                                        <input th:value="${fechaNacimientoPersonal}" name="fechaNacimiento" type="text" id="fecha" class="form-control">
+                                                                                            <span class="input-group-addon input-group-append border-left">
+                                                                                                <span class="mdi mdi-calendar input-group-text"></span>
+                                                                                            </span>
+                                                                                    </div>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Ingrese Fecha Nacimiento.
+                                                                                    </div>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="celularPersonal">Celular Personal</label>
@@ -143,17 +148,17 @@
                                                                                             Las contraseñas no coinciden, ¡reintenta!
                                                                                         </div>
                                                                                 </div>    
-                                                                                <!--
-                                                                                   <div class="form-group">
-                                                                                    <label for="estadoPersonal">Estado Personal</label>
-                                                                                    <input type="number" class="form-control" name="estadoPersonal" id="estadoPersonal" placeholder="7800">
-                                                                                        <div class="valid-feedback">
-                                                                                            bien seleccionado
-                                                                                        </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Tiene que ser uno
-                                                                                        </div>
-                                                                                </div>-->
+
+                                                                                <!--  <div class="form-group">
+                                                                                      <label for="estadoPersonal">Estado Personal</label>
+                                                                                      <input type="number" class="form-control" name="estadoPersonal" id="estadoPersonal" >
+                                                                                          <div class="valid-feedback">
+                                                                                              1 habilidato //0 No habilitado
+                                                                                          </div>
+                                                                                          <div class="invalid-feedback">
+                                                                                              Tiene que ser uno
+                                                                                          </div>
+                                                                                  </div>-->
                                                                                 <div class="form-group" id="rolpersonal">
                                                                                     <label for="rolpersonal">Rol </label>
                                                                                     <select  name="rolpersonal" class="form-control" id="rolpersonal">
@@ -165,142 +170,320 @@
                                                                             </form>
                                                                         </div>
                                                                     </div>
-                                                                  
+
                                                                 </div>
-                                                                <!--Form editar-->
-                                                                <div th:if="${modificar}" class="col-lg-8 grid-margin stretch-card">
-                                                                    
+
+
+
+
+
+                                                                <div class="col-md-8 col-xl-8 grid-margin stretch-card">
+
                                                                     <div class="card">
-                                                                        
                                                                         <div class="card-body">
-                                                                            <h4 class="card-title">Modificar Personal</h4>
-                                                                                 <div class="form-group">
-                                                                                    <label for="rutPersonal">Rut Personal</label>
-                                                                                    <input type="text" class="form-control" id="rutPersonal" name="rutPersonal" placeholder="11.111.111-1">
-                                                                                        <div class="valid-feedback">
-                                                                                            !Listo!
+                                                                            <h3 class="card-title">Personal</h3>
+
+                                                                            <form  th:action="@{/administrador_personal/buscar_por_filtro}"  enctype="multipart/form-data" method="post">
+
+
+
+                                                                                <div class="row">
+                                                                                    <div class="col-2">
+                                                                                        <h5 >Buscar por: </h5>
+                                                                                    </div>
+                                                                                    <div class="col-4">
+                                                                                        <select class="btn btn-success dropdown-toggle"  name="tipoBusqueda">
+                                                                                            <option value="nombre">Nombre personal</option>
+                                                                                            <option value="rut">rut personal</option>
+
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control" name="filtro" aria-label="Escribe el nombre del Personal">
+                                                                                                <div class="input-group-append">
+                                                                                                    <button class="btn btn-sm btn-success" type="submit">Buscar</button>
+                                                                                                </div>
                                                                                         </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Escribe un rut para el personal.
-                                                                                        </div>
+                                                                                    </div>
+
                                                                                 </div>
-                                                                            
-                                                                            
+                                                                            </form> 
+                                                                            <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
+                                                                                </li>
+                                                                                <li class="nav-item">
+                                                                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
+                                                                                </li>
+
+
+
+                                                                            </ul>
+                                                                            <div class="tab-content" id="pills-tabContent">
+                                                                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                                                                                    <div  class="row">
+                                                                                        <div th:each="ins: ${personales}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
+                                                                                            <input type="hidden" name="elimino" id="agrego" th:value="${elimino}" />
+                                                                                            <div class="card">
+                                                                                                <div class="card-body text-center">
+                                                                                                    <div style="text-align:right">
+                                                                                                        <!--
+                                                                                                        <button type="button" class="btn btn-success btn-rounded btn-icon">
+                                                                                                            <i class="mdi mdi-lead-pencil"></i>
+                                                                                                        </button>
+                                                                                                        -->
+                                                                                                        <a  th:href="@{/administrador_personal/cargar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                                        <!--
+                                                                                                        <button type="button" class="btn btn-danger btn-rounded btn-icon" >
+                                                                                                            <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
+                                                                                                            <i class="mdi mdi-close"></i>
+                                                                                                        </button>
+                                                                                                        -->
+                                                                                                        <a  th:href="@{/administrador_personal/eliminar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
+                                                                                                    </div>
+
+                                                                                                    <div >
+
+
+                                                                                                        <h4 th:text="${ins.nombresPersonal}"></h4>
+                                                                                                        <h6>Apellido Paterno :</h6>
+                                                                                                        <p th:text="${ins.ApePaternoPersonal}" class="text-muted mb-0">Apellido Paterno</p>
+
+                                                                                                    </div>
+                                                                                                    <h6>Apellido Materno </h6>
+                                                                                                    <p th:text="${ins.ApeMaternoPersonal}" class="mt-2 card-text">
+
+                                                                                                    </p>
+                                                                                                    <div class="border-top pt-3">
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-12">
+                                                                                                                <h6>Fecha Nacimiento:</h6>
+
+                                                                                                                <p th:text="${ins.FechaNacimientoPersonal}" class="mt-2 card-text">Fecha Nacimiento</p>
+                                                                                                            </div>
+                                                                                                            <div class="col-12">
+                                                                                                                <h6>Celular:</h6>
+
+                                                                                                                <p th:text="${ins.CelularPersonal}" class="mt-2 card-text">Celular</p>
+                                                                                                            </div>
+                                                                                                            <div class="col-12">
+                                                                                                                <h6>Correo:</h6>
+
+                                                                                                                <p th:text="${ins.CorreoPersonal}" class="mt-2 card-text">Correo Personal</p>
+                                                                                                            </div>
+                                                                                                            <div class="col-12">
+                                                                                                                <h6>Estado:</h6>
+
+                                                                                                                <p th:text="${ins.EstadoPersonal}" class="mt-2 card-text">Estado</p>
+                                                                                                            </div>
+
+                                                                                                            <div class="col-12">
+                                                                                                                <h6>Rol:</h6>
+
+                                                                                                                <p th:text="${ins.IdRol.DescripcionRol}" class="mt-2 card-text">Rol</p>
+                                                                                                            </div>
+
+                                                                                                            <div class="col-12">
+
+
+                                                                                                            </div>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+                                                                                    <div class="media" >
+                                                                                        <div class="table-responsive">
+                                                                                            <table id="order-listing" class="table">
+                                                                                                <thead>
+                                                                                                    <tr>
+                                                                                                        <th>ID</th>
+                                                                                                        <th>Rut</th>
+                                                                                                        <th>Nombres</th>
+                                                                                                        <th>Apellido Paterno </th>
+                                                                                                        <th>Apellido Materno</th>
+                                                                                                        <th>Fecha de Nacimiento</th>
+                                                                                                        <th>Celular Personal</th>
+                                                                                                        <th>Correo</th>
+                                                                                                        <th>Estado</th>
+                                                                                                        <th>Rol</th>
+                                                                                                    </tr>
+                                                                                                </thead>
+                                                                                                <tbody>
+                                                                                                    <tbody>
+                                                                                                        <tr th:each="ins: ${personales}">
+                                                                                                            <td th:text="${ins.idPersonal}" </td>
+                                                                                                            <td th:text="${ins.rutPersonal}"></td>
+                                                                                                            <td th:text="${ins.nombresPersonal}"></td>
+                                                                                                            <td th:text="${ins.ApePaternoPersonal}"></td>
+                                                                                                            <td th:text="${ins.ApeMaternoPersonal}"></td>
+                                                                                                            <td th:text="${ins.FechaNacimientoPersonal}"></td>
+                                                                                                            <td th:text="${ins.CelularPersonal}"></td>
+                                                                                                            <td th:text="${ins.CorreoPersonal}"></td>
+                                                                                                            <td th:text="${ins.EstadoPersonal}"></td>
+                                                                                                            <td th:text="${ins.IdRol.DescripcionRol}"> </td>
+
+                                                                                                            <td>
+                                                                                                                <a  th:href="@{/administrador_personal/cargar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
+
+                                                                                                                <a  th:href="@{/administrador_personal/eliminar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
+
+
+
+
+                                                                                                            </td>
+
+                                                                                                        </tr>
+
+
+                                                                                                    </tbody>
+                                                                                            </table>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
+
+
+                                                            <!--Form editar-->
+                                                            <div th:if="${modificar}" class="col-lg-4 grid-margin stretch-card">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <h4 class="card-title">Modificar Personal</h4>
+
+
+                                                                        <form  th:action="@{/administrador_personal/modificarPersonal}" name="formEditar" method="post">
+
+                                                                            <!--   <input type="hidden" th:value="${personales.rutPersonal}" id="modificarPersonal" name="rutPersonal"/>-->
+
                                                                             <div class="form-group">
-                                                                                    <label for="nombresPersonal">Nombres Personal</label>
-                                                                                    <input type="text" class="form-control" id="nombresPersonal" name="nombresPersonal" placeholder="Pablo Pedro">
-                                                                                        <div class="valid-feedback">
-                                                                                            !Listo!
-                                                                                        </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Escriba los nombres para el personal.
-                                                                                        </div>
+                                                                                <label for="rut">Rut Personal</label>
+                                                                                <input th:value="${rutPersonal}" type="text" class="form-control" name="rutPersonal"  id="rut" aria-describedby="rut chileno" placeholder="Rut">
+                                                                                    <small id="rutHelp" class="form-text text-muted">Formato de rut XX.XXX.XXX-X .</small>
+                                                                                    <div class="valid-feedback">
+                                                                                        Se ve bien!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Ingresa un rut valido
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="nombresPersonal">Nombre</label>
+                                                                                <input th:value="${nombresPersonal}" type="text" class="form-control" name="nombresPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Nombre Personal">
+                                                                                    <small id="textHelp" class="form-text text-muted">Nombre obligatorio</small>
+                                                                                    <div class="valid-feedback">
+                                                                                        Se ve bien!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe al menos un carácter.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="ApePaternoPersonal">Apellido Paterno</label>
+                                                                                <input th:value="${ApePaternoPersonal}" type="text" class="form-control" name="ApePaternoPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Apellido Paterno">
+                                                                                    <small id="textHelp" class="form-text text-muted">Apellido Paterno </small>
+                                                                                    <div class="valid-feedback">
+                                                                                        Se ve bien!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe al menos un carácter.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="ApeMaternoPersonal">Apellido Materno</label>
+                                                                                <input th:value="${ApeMaternoPersonal}" type="text" class="form-control" name="ApeMaternoPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Apellido Materno">
+                                                                                    <small id="textHelp" class="form-text text-muted">Apellido Materno</small>
+                                                                                    <div class="valid-feedback">
+                                                                                        Se ve bien!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe al menos un carácter.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
+                                                                                <div id="datepicker-popup" class="input-group date datepicker">
+                                                                                    <input th:value="${fechaNacimientoPersonal}" name="fechaNacimiento" type="text" id="fecha" class="form-control">
+                                                                                        <span class="input-group-addon input-group-append border-left">
+                                                                                            <span class="mdi mdi-calendar input-group-text"></span>
+                                                                                        </span>
                                                                                 </div>
+                                                                                <div class="valid-feedback">
+                                                                                    !Listo!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                    Ingrese Fecha Nacimiento.
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="CelularPersonal">Celular</label>
+                                                                                <input th:value="${CelularPersonal}" type="text" class="form-control" name="CelularPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Celular Personal">
+                                                                                    <small id="textHelp" class="form-text text-muted">Celular obligatorio</small>
+                                                                                    <div class="valid-feedback">
+                                                                                        Se ve bien!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Escribe al menos un carácter.
+                                                                                    </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="exampleInputEmail1">Correo electrónico</label>
+                                                                                <input th:value="${CorreoPersonal}" type="email" class="form-control" name="CorreoPersonal" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electrónico">
+                                                                                    <small id="emailHelp" class="form-text text-muted">Escribe un correo electrónico valido.</small>
+                                                                                    <div class="valid-feedback">
+                                                                                        ¡Buen Email!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        No es un correo electrónico
+                                                                                    </div>
+                                                                            </div>
 
-                                                                                <div class="form-group">
-                                                                                    <label for="apePaternoPersonal">apellido Paterno</label>
-                                                                                    <input type="text" class="form-control" id="apePaternoPersonal" name="apePaternoPersonal" placeholder="Perez">
-                                                                                        <div class="valid-feedback">
-                                                                                            !Listo!
-                                                                                        </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Escriba el apellido Paterno  para el personal.
-                                                                                        </div>
-                                                                                </div>
-
-                                                                                <div class="form-group">
-                                                                                    <label for="apeMaternoPersonal">apellido Materno</label>
-                                                                                    <input type="text" class="form-control" id="apeMaternoPersonal" name="apeMaternoPersonal" placeholder="Suarez">
-                                                                                        <div class="valid-feedback">
-                                                                                            !Listo!
-                                                                                        </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Escriba el apellido Materno  para el personal.
-                                                                                        </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
-                                                                                    <input type="text" class="form-control" id="fechaNacimientoPersonal" name="fechaNacimientoPersonal" >
-                                                                                        <div class="valid-feedback">
-                                                                                            !Listo!
-                                                                                        </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Ingrese Fecha Nacimiento.
-                                                                                        </div>
-                                                                                </div>
-                                                                                <div class="form-group">
-                                                                                    <label for="celularPersonal">Celular Personal</label>
-                                                                                    <input type="text" class="form-control" id="celularPersonal" name="celularPersonal" placeholder="982961951">
-                                                                                        <div class="valid-feedback">
-                                                                                            !Listo!
-                                                                                        </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Escribe un telefono para el personal.
-                                                                                        </div>
-                                                                                </div>                                
-                                                                                <div class="form-group">
-                                                                                    <label for="correoPersonal">Correo Personal</label>
-                                                                                    <input type="text" class="form-control" id="correoPersonal" name="correoPersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
-                                                                                        <div class="valid-feedback">
-                                                                                            !Listo!
-                                                                                        </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Escribe E-mail para el personal.
-                                                                                        </div>
-                                                                                </div>
-                                                                            
-                                                                        </div>
-                                                                        
-                                                                    </div>
-                                                                    
-                                                                </div>
-                                                                
-                                                                <!---lista de personal-->
-                                                                <div class="container-fluid">
-                                                                    <div class="media" >
-                                                                        <div class="table-responsive">
-                                                                            <table id="order-listing" class="table">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th>Rut</th>
-                                                                                        <th>Nombres</th>
-                                                                                        <th>Apellido Paterno </th>
-                                                                                        <th>Apellido Materno</th>
-                                                                                        <th>Fecha de Nacimiento</th>
-                                                                                        <th>Celular Personal</th>
-                                                                                        <th>Correo</th>
-                                                                                        <th>Estado</th>
-                                                                                        <th>Rol</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <tbody>
-                                                                                        <tr th:each="ins: ${personales}">
-                                                                                            <td th:text="${ins.rutPersonal}"></td>
-                                                                                            <td th:text="${ins.nombresPersonal}"></td>
-                                                                                            <td th:text="${ins.ApePaternoPersonal}"></td>
-                                                                                            <td th:text="${ins.ApeMaternoPersonal}"></td>
-                                                                                            <td th:text="${ins.FechaNacimientoPersonal}"></td>
-                                                                                            <td th:text="${ins.CelularPersonal}"></td>
-                                                                                            <td th:text="${ins.CorreoPersonal}"></td>
-                                                                                            <td th:text="${ins.EstadoPersonal}"></td>
-                                                                                            <td th:text="${ins.IdRol.DescripcionRol}"> </td>
-                                                                                        </tr>
+                                                                            <div class="form-group">
+                                                                                <label for="estadoPersonal">Tipo</label>
+                                                                                <select id="selectExample1" name="estadoPersonal" class="custom-select" required>
+                                                                                    <option th:selected="${estadoPersonal == 1}" value="1">Activo</option>
+                                                                                    <option th:selected="${estadoPersonal == 0}" value="0">Retirado</option>
 
 
-                                                                                    </tbody>
-                                                                            </table>
-                                                                        </div>
+                                                                                </select>
+                                                                                <small id="selectHelp" class="form-text text-muted">Selecciona al menos una opción.</small>
+                                                                                <div class="valid-feedback">
+                                                                                    ¡Fantástica elección!
+                                                                                </div>
+                                                                                <div class="invalid-feedback">
+                                                                                    No te olvides de seleccionar al menos una opción.
+                                                                                </div>
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary mr-2">Actualizar</button>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
-
-                                                            </div>
-
-                                                            </div>
+                                                            </div> 
                                                         </div>
+
                                                     </div>
                                                 </div>
-                                           
+                                            </div>
+                                            </div>
+
 
 
 
@@ -350,6 +533,33 @@
 
 
                                             <script th:inline="javascript">
+                                                var tipoRespuesta = [[${tipoRespuesta}]];
+                                                        var respuesta = [[${respuesta}]];
+                                                        if (tipoRespuesta !== null) {
+                                                    switch (tipoRespuesta) {
+                                                        case 'agregar' :
+                                                            if (respuesta === 1) {
+                                                                showSwal('success-message', 'Personal agregado!', 'se ha registrado el proveedor exitosamente');
+                                                            } else if (respuesta === 0) {
+                                                                showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
+                                                            }
+                                                            break;
+                                                        case 'modificar' :
+                                                            if (respuesta === 1) {
+                                                                showSwal('success-message', 'Personal modificado!', 'se ha registrado el proveedor exitosamente');
+                                                            } else if (respuesta === 0) {
+                                                                showSwal('warning-message', 'Error!', "No se ha podido modificar el proveedor");
+                                                            }
+                                                            break;
+                                                        case 'eliminar' :
+                                                            if (respuesta === 1) {
+                                                                showSwal('success-message', 'Personal eliminado!', 'se ha eliminado el proveedor exitosamente');
+                                                            } else if (respuesta === 0) {
+                                                                showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
+                                                            }
+                                                            break;
+                                                    }
+                                                }
 
 
                                                 function agregarRol() {
@@ -364,7 +574,7 @@
 
 
                                             <script type="text/javascript" >
-                                                var formularioPassword = document.getElementsByName("addPersonal")[0];
+                                                var formularioPassword = document.getElementsByName("formAddPersonal")[0];
                                                 validatorForms(formularioPassword);
                                             </script>
 
@@ -374,25 +584,7 @@
 
 
 
-                                            <!--
-                                                <script type="text/javascript" >
-                                                    var formularioPassword = document.getElementsByName("formEditar")[0];
-                                                    validatorForms(formularioPassword);
-                                                </script>
-      
-                                                <script src="text/javascript">
-                                                    dropify.dropify({
-                                                        "defaultFile": "full path file",
-                                                        "messages": {
-                                                            default: 'Arrastre un archivo o haga clic aquí',
-                                                            replace: 'Arrastre un archivo o haga clic en reemplazar',
-                                                            remove: 'Eliminar',
-                                                            error: 'Lo sentimos, el archivo demasiado grande'
-                                                        }
-                                                    });
-                                                </script>
 
-                                            -->                  
 
 
                                         </body>

@@ -32,6 +32,7 @@ import com.restaurante.bacon.dto.Proveedor;
 import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
 import com.restaurante.bacon.dto.Receta;
 import com.restaurante.bacon.dto.Rol;
+import com.restaurante.bacon.service.PersonalService;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -252,20 +253,21 @@ public class ProcedureQueryPersonal {
 //    Rol r= new Rol();
     
         @SuppressWarnings("unchecked")
-        public boolean InsertPersonal(String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal,Rol rolpersonal) {
+        public boolean InsertPersonal(String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal,BigInteger estado,Integer rolpersonal) {
         try {
 
 
             em.createNamedStoredProcedureQuery("InsertPersonal")
-                    .setParameter("P_RUT_PERSONAL", rutPersonal)
-                    .setParameter("P_NOMBRES_PERSONAL", nombresPersonal)
-                    .setParameter("P_APE_PATERNO_PERSONAL", apePaternoPersonal)
-                    .setParameter("P_APE_MATERNO_PERSONAL", apeMaternoPersonal)
-                    .setParameter("P_FECHA_NACIMIENTO_PERSONAL", fechaNacimientoPersonal)
-                    .setParameter("P_CELULAR_PERSONAL", celularPersonal)
-                    .setParameter("P_CORREO_PERSONAL", correoPersonal)
-                    .setParameter("P_CONTRASENA_PERSONAL", contrasenaPersonal)
-                    .setParameter("P_ID_ROL", rolpersonal)
+                    .setParameter("P_RUT_PERSONAL_IN", rutPersonal)
+                    .setParameter("P_NOMBRES_PERSONA_INL", nombresPersonal)
+                    .setParameter("P_APE_PATERNO_IN", apePaternoPersonal)
+                    .setParameter("P_APE_MATERNO_IN", apeMaternoPersonal)
+                    .setParameter("P_FECHA_NACIMIENTO_IN", fechaNacimientoPersonal)
+                    .setParameter("P_CELULAR_IN", celularPersonal)
+                    .setParameter("P_CORREO_IN", correoPersonal)
+                    .setParameter("P_CONTRASENA_IN", contrasenaPersonal)
+                    .setParameter("P_ESTADO_PERSONAL_IN", estado)
+                    .setParameter("P_ROL_PERSONAL_IN", rolpersonal)
                     .execute();
 
             return true;
@@ -276,6 +278,58 @@ public class ProcedureQueryPersonal {
 
         return false;
     }
+        
+        
+         @SuppressWarnings("unchecked")
+    public List<Personal> filtrarPersonalByRut(String rut) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PERSONAL.PR_FIND_PERSONAL_BY_RUT");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_RUT_PERSONAL", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("CURSOR_PERSONAL", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("P_RUT_PERSONAL", rut);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Personal> Personals = new ArrayList<Personal>();
+           
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+               Personal personal = new Personal();
+                personal.setIdPersonal(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                personal.setRutPersonal(result[1].toString());
+                personal.setNombresPersonal(result[2].toString());
+                personal.setApePaternoPersonal(result[3].toString());
+                personal.setApeMaternoPersonal(result[4].toString());
+//              personal.setFechaNacimientoPersonal(result[5]);
+                personal.setCelularPersonal(result[6].toString());
+                personal.setCorreoPersonal(result[7].toString());
+                personal.setContrasenaPersonal(result[8].toString());
+                personal.setIdPersonal(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                
+              
+                Personals.add(personal);
+            }
+            
+            return Personals;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }    
+        
+        
+        
+        
+        
+        
+        
 
     public void updatePerfilPersonal(BigDecimal idPersonal, String nombre, String paterno, String materno, Date FechaNacimiento, String celular, String correo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

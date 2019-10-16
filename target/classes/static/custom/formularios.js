@@ -9,7 +9,7 @@
 function validatorForms(formulario) {
         
     
-    var formulario = document.getElementsByName("formAddPersonal")[0];
+
 
    console.log(formulario);
     /**

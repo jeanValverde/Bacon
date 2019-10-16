@@ -99,11 +99,28 @@ public class PersonalService implements UserDetailsService {
 		
 		this.personalDao.deleteById(id);
 	}
+        
+
+        
+//      public List<Proveedor> filtrarProveedoresByRut(String rut) {
+//        return this.procedureQuery.filtrarProveedorByRut(rut);
+//    }
+        
 
     //se implementan los metodos de la interfaz 
     public Personal findByRut(String rut) {
         return this.personalDao.findByRutPersonal(rut);
     }
+    
+        public List<Personal> filtrarPersonalByRut(String rut) {
+        return this.procedureQuery.filtrarPersonalByRut(rut);
+    }
+      
+//
+//        public List<Proveedor> filtrarProveedoresByRut(String rut) {
+//        return this.procedureQuery.filtrarProveedorByRut(rut);
+//    }
+      
 
     //se implementan los metodos de la interfaz 
 
