@@ -31,60 +31,11 @@
             <!-- partial:partials/_horizontal-navbar.html -->
             <div  class="horizontal-menu">
 
-                <nav class="navbar top-navbar col-lg-12 col-12 p-0">
-                    <div class="container">
-                        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                            <a class="navbar-brand brand-logo" href="index.html"><img th:src="@{/images/clienteCerdo.png}" alt="logo" /></a>
-                            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo" /></a>
-                        </div>
-                        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <nav th:replace="fragments/_navCliente :: nav"></nav>
+                
+                <nav th:replace="fragments/_navBarCliente :: nav"></nav>
 
-                            <!---este boton solo debe estar cuando no se tiene ninguna orden emitida--->
-                            <ul class="navbar-nav navbar-nav-right">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" th:href="@{/}">
-                                        <i class="mdi mdi-logout-variant"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!------>
-
-                            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
-                                <span class="mdi mdi-menu"></span>
-                            </button>
-                        </div>
-                    </div>
-                </nav>
-
-                <nav class="bottom-navbar">
-                    <div class="container">
-                        <ul class="nav page-navigation">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.html">
-                                    <i class="mdi mdi-help-circle-outline menu-icon"></i>
-                                    <span class="menu-title">Solicitar Asistencia</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="pages/widgets/widgets.html">
-                                    <i class="mdi mdi-cart-plus menu-icon"></i>
-                                    <span class="menu-title">Agregar Orden</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="pages/widgets/widgets.html">
-                                    <i class="mdi mdi-shopping menu-icon"></i>
-                                    <span class="menu-title">Mis Ordenes</span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/cliente/pagar/pagarOrdenes}">
-                                    <i class="mdi mdi-cash-multiple menu-icon"></i>
-                                    <span class="menu-title">Pagar</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
+                
             </div>
 
             <!-- partial -->

@@ -1,0 +1,24 @@
+<nav class="navbar top-navbar col-lg-12 col-12 p-0">
+    <div class="container">
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo" href="index.html"><img th:src="@{/images/clienteCerdo.png}" alt="logo" /></a>
+            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../../images/logo-mini.svg" alt="logo" /></a>
+        </div>
+        <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+
+            <!---este boton solo debe estar cuando no se tiene ninguna orden emitida--->
+            <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" th:href="@{/}">
+                        <i class="mdi mdi-logout-variant"></i>
+                    </a>
+                </li>
+            </ul>
+            <!------>
+
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="horizontal-menu-toggle">
+                <span class="mdi mdi-menu"></span>
+            </button>
+        </div>
+    </div>
+</nav>

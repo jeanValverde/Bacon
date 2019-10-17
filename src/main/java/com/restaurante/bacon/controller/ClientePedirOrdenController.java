@@ -42,7 +42,7 @@ public class ClientePedirOrdenController {
 
     @Autowired
     InsumoService insumoService;
-    
+
     @Autowired
     OrdenCocinaService ordenCocinaSerice;
 
@@ -231,32 +231,35 @@ public class ClientePedirOrdenController {
     }
 
     @RequestMapping("/confirmarOrden")
-    public ModelAndView confirmar(Model model, HttpSession sesion,  @RequestParam("descripcion") String descripcion) {
+    public ModelAndView confirmar(Model model, HttpSession sesion, @RequestParam("descripcion") String descripcion) {
 
-        
         Map<Receta, Integer> recetasCocinaPedias = (Map<Receta, Integer>) sesion.getAttribute("ordenesCocina");
         Map<Receta, Integer> recetasBarPedidas = (Map<Receta, Integer>) sesion.getAttribute("ordenesBar");
 
         Orden ordenCocina = new Orden();
         Orden ordenBar = new Orden();
-        
+
         Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
-             
+
         Short tipo = Short.valueOf("0");//0 cocina
-        
-        if(descripcion == null || descripcion == ""){
+
+        if (descripcion == null || descripcion == "") {
             descripcion = "Sin descripción";
         }
-        
-        ordenCocina = this.ordenCocinaSerice.crearOrdenByTipo(recetasCocinaPedias, tipo , cliente, descripcion);
-        
-        List<RecetaOrdenada> recetasCocina = this.ordenCocinaSerice.calcularAndCrearRecetasOrdenadas(recetasCocinaPedias, ordenCocina);
-        
+
+        if (!recetasCocinaPedias.isEmpty()) {
+            ordenCocina = this.ordenCocinaSerice.crearOrdenByTipo(recetasCocinaPedias, tipo, cliente, descripcion);
+
+            List<RecetaOrdenada> recetasCocina = this.ordenCocinaSerice.calcularAndCrearRecetasOrdenadas(recetasCocinaPedias, ordenCocina);
+        }
+
         tipo = Short.valueOf("1");//0 cocina
-        ordenBar = this.ordenCocinaSerice.crearOrdenByTipo(recetasBarPedidas, tipo , cliente, descripcion);
-        
-        List<RecetaOrdenada> recetasBar = this.ordenCocinaSerice.calcularAndCrearRecetasOrdenadas(recetasBarPedidas, ordenBar);
-        
+        if (!recetasBarPedidas.isEmpty()) {
+            ordenBar = this.ordenCocinaSerice.crearOrdenByTipo(recetasBarPedidas, tipo, cliente, descripcion);
+
+            List<RecetaOrdenada> recetasBar = this.ordenCocinaSerice.calcularAndCrearRecetasOrdenadas(recetasBarPedidas, ordenBar);
+        }
+
         Map<Receta, Integer> recetasCocinaOtra = new HashMap();
         Map<Receta, Integer> recetasBarOtra = new HashMap();
 
@@ -268,18 +271,17 @@ public class ClientePedirOrdenController {
 
         return new ModelAndView("redirect:/cliente/pedirOrden/?tipo=2");
     }
-    
-    
-    public Integer calcularTotal(Map<Receta, Integer> busqueda){
-        
+
+    public Integer calcularTotal(Map<Receta, Integer> busqueda) {
+
         Integer salida = 0;
-        
+
         for (Map.Entry<Receta, Integer> ordenes : busqueda.entrySet()) {
 
-           salida = salida + Integer.parseInt(ordenes.getKey().getPrecioReceta().toString()) * ordenes.getValue(); 
-           
+            salida = salida + Integer.parseInt(ordenes.getKey().getPrecioReceta().toString()) * ordenes.getValue();
+
         }
-        
+
         return salida;
     }
 

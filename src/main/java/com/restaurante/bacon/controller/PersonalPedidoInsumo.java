@@ -85,7 +85,7 @@ public class PersonalPedidoInsumo {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
-    @RequestMapping("/inicio")
+    @RequestMapping("/pedido")
     public String inicio(Model modelo, HttpSession sesion) {
         //sesion 
         UserRol user = new UserRol();

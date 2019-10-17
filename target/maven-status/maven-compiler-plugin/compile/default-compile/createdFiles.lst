@@ -54,6 +54,7 @@ com\restaurante\bacon\dao\ProcedureQuery.class
 com\restaurante\bacon\dto\procedure\ProcedureInsertInsumo.class
 com\restaurante\bacon\service\InsumoService.class
 com\restaurante\bacon\dto\InsumoPedido.class
+com\restaurante\bacon\controller\ClientePedirOrdenExtraController.class
 com\restaurante\bacon\controller\PersonalProveedorInsumo.class
 com\restaurante\bacon\controller\IndexController.class
 com\restaurante\bacon\dto\Proveedor.class

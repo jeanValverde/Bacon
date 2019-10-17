@@ -346,7 +346,7 @@
 
 
 
-                                                                                    axios.get('http://localhost:8034/administrador/pedidoInsumo/cargarPrecio?idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                    axios.get( window.location.protocol + "//" + window.location.host + '/administrador/pedidoInsumo/cargarPrecio?idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
                                                                                             .then(function (response) {
                                                                                                 console.log(response);
                                                                                                 if (response.data != null) {
@@ -375,7 +375,7 @@
                                                                                     if (document.getElementById("proveedor" + id_insumo_pedido).value.toString() !== "select") {
                                                                                         var id_proveedor = new Number(document.getElementById("proveedor" + id_insumo_pedido).value);
 
-                                                                                        axios.get('http://localhost:8034/administrador/pedidoInsumo/agregarInsumoPedidoProveedor?idInsumoPedido=' + id_insumo_pedido + '&idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                        axios.get(window.location.protocol + "//" + window.location.host + '/administrador/pedidoInsumo/agregarInsumoPedidoProveedor?idInsumoPedido=' + id_insumo_pedido + '&idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
                                                                                                 .then(function (response) {
                                                                                                     console.log(response.data);
                                                                                                     console.log(response);
@@ -430,7 +430,7 @@
                                                                                     var id_proveedor = new Number(document.getElementById("proveedor" + id_insumo_pedido).value);
                                                                                     document.getElementById("check" + id_insumo_pedido).checked = false;
                                                                                     document.getElementById("check2" + id_insumo_pedido).checked = false;
-                                                                                    axios.get('http://localhost:8034/administrador/pedidoInsumo/eliminarInsumoPedidoProveedor?idInsumoPedido=' + id_insumo_pedido + '&idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                    axios.get(window.location.protocol + "//" + window.location.host  + '/administrador/pedidoInsumo/eliminarInsumoPedidoProveedor?idInsumoPedido=' + id_insumo_pedido + '&idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
                                                                                             .then(function (response) {
                                                                                                 console.log(response.data);
                                                                                                 console.log(response);
