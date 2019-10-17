@@ -5,6 +5,7 @@
  */
 package com.restaurante.bacon.controller;
 
+import com.restaurante.bacon.aws.s3.AmazonClient;
 import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Ingrediente;
@@ -42,6 +43,13 @@ public class PersonalMantenedorReceta {
 
     @Autowired
     InsumoService insumoService;
+    
+    private AmazonClient amazonClient;
+
+    @Autowired
+    PersonalMantenedorReceta(AmazonClient amazonClient) {
+        this.amazonClient = amazonClient;
+    }
 
     @RequestMapping("/filtroDisponibilidad")
     public String filtroDisponibilidad(Model modelo, @RequestParam("disponibilidad") Integer disponibilidad) {
@@ -143,6 +151,7 @@ public class PersonalMantenedorReceta {
                     nombre = "foto";
                 } else {
                     receta.setFoto(nombre);
+                    this.amazonClient.uploadFile(file[0], nombre);
                 }
             }
         }

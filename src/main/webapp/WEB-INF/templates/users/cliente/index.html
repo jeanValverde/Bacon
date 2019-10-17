@@ -95,7 +95,7 @@
                                 <div class="card"  th:each="receta: ${recetas}"  >
                                     <div class="card-body text-center">
                                         <div>
-                                            <img th:src="@{/uploads/}+${receta.foto}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                            <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${receta.foto}" class="img-lg rounded-circle mb-2" alt="profile image">
                                             <h4 th:text="${receta.nombreReceta}" >Nombre Receta</h4>
                                             <p class="text-muted mb-0"  >
                                             <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${receta.idReceta}" >id receta</div>
@@ -509,7 +509,7 @@
                                 } else {
                                     categoria = "Fría"
                                 }
-                                contenido += "<tr id='borrar-" + response.data[i].receta.idReceta + "' ><td class='py-1 pl-0'><div class='d-flex align-items-center'> <img src='" + window.location.protocol + "//" + window.location.host + "/uploads/" + response.data[i].receta.foto + "' alt='profile'> "
+                                contenido += "<tr id='borrar-" + response.data[i].receta.idReceta + "' ><td class='py-1 pl-0'><div class='d-flex align-items-center'> <img src='https://baconappimagenes.s3-sa-east-1.amazonaws.com/" + response.data[i].receta.foto + "' alt='profile'> "
                                         + "<div class='ml-3'><p class='mb-0'>" + response.data[i].receta.nombreReceta + "</p></div> "
                                         + "</div></td><td class='numberToFormatFinalizar' id='precio-finalizar-cocina-" + response.data[i].receta.idReceta + "' > " + response.data[i].receta.precioReceta + " </td> <td> <div class='badge badge-outline-primary'> " + categoria + " </div> </td> "
                                         + "<td><div id='cantidad-" + response.data[i].receta.idReceta + "'  class='badge badge-pill badge-primary ml-3'>" + response.data[i].cantidad + "</div> </td> <td><div class='badge badge-outline-primary numberToFormatFinalizar' id='total-finalizar-cocina-" + response.data[i].receta.idReceta + "' >" + response.data[i].precioTotal + "</div> "

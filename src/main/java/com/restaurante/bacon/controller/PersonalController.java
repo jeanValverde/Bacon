@@ -5,6 +5,7 @@
  */
 package com.restaurante.bacon.controller;
 
+import com.restaurante.bacon.aws.s3.AmazonClient;
 import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dao.ProcedureQuery;
@@ -60,6 +61,13 @@ public class PersonalController {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
+    private AmazonClient amazonClient;
+
+    @Autowired
+    PersonalController(AmazonClient amazonClient) {
+        this.amazonClient = amazonClient;
+    }
+
     @RequestMapping("/index")
     public String prueba(Model modelo) {
         //sesion 
@@ -90,9 +98,9 @@ public class PersonalController {
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
         modelo.addAttribute("tipoForm", "agregar");
-        
+
         ///mensajes 1 = si mensaje / 0 = no mensaje
-        modelo.addAttribute("isMensaje", 0 );
+        modelo.addAttribute("isMensaje", 0);
         //fin mensajes 
 
         modelo.addAttribute("recetas", this.recetaService.listar());
@@ -106,10 +114,7 @@ public class PersonalController {
         return "users/administrador/mantenedorReceta";
     }
 
-
     @RequestMapping("/filtro")
-
-    
 
     public String filtro(Model modelo, @RequestParam("nombreReceta") String nombreReceta) {
         //sesion 
@@ -125,11 +130,11 @@ public class PersonalController {
         modelo.addAttribute("recetas", recetas);
 
         modelo.addAttribute("tipoForm", "agregar");
-        
+
         ///mensajes 1 = si mensaje / 0 = no mensaje
-        modelo.addAttribute("isMensaje", 0 );
+        modelo.addAttribute("isMensaje", 0);
         //fin mensajes 
-        
+
         //fin desarrollo 
         //despachos 
         //fin despacho 
@@ -159,7 +164,7 @@ public class PersonalController {
         //fin desarrollo 
         //despachos 
         ///mensajes 1 = si mensaje / 0 = no mensaje
-        modelo.addAttribute("isMensaje", 1 );
+        modelo.addAttribute("isMensaje", 1);
         modelo.addAttribute("nombreMensaje", "Información");
         modelo.addAttribute("mensaje", "Receta Eliminada");
         //puede ser success - info - danger - warning
@@ -196,9 +201,9 @@ public class PersonalController {
         modelo.addAttribute("tipoForm", "editar");
 
         ///mensajes 1 = si mensaje / 0 = no mensaje
-        modelo.addAttribute("isMensaje", 0 );
+        modelo.addAttribute("isMensaje", 0);
         //fin mensajes 
-        
+
         //fin desarrollo 
         //despachos 
         //fin despacho 
@@ -208,7 +213,6 @@ public class PersonalController {
 
         return "users/administrador/mantenedorReceta";
     }
-
 
     @RequestMapping("/mantenedor_insumos")
     public String mantenedor_insumos(Model modelo) {
@@ -225,10 +229,6 @@ public class PersonalController {
         return "users/administrador/mantenedor_insumos";
 
     }
-
-
-   
-  
 
     @PostMapping("/addReceta")
     public String addReceta(Model modelo,
@@ -266,24 +266,25 @@ public class PersonalController {
             nombre = "foto";
         } else {
             receta.setFoto(nombre);
+            this.amazonClient.uploadFile(file[0], nombre);
         }
 
         this.recetaService.add(receta);
-        
+
         ///mensajes 1 = si mensaje / 0 = no mensaje
-        modelo.addAttribute("isMensaje", 1 );
+        modelo.addAttribute("isMensaje", 1);
         modelo.addAttribute("nombreMensaje", "Información");
         modelo.addAttribute("mensaje", "Receta agregada");
         //puede ser success - info - danger - warning
         modelo.addAttribute("tipoMensaje", "success");
         //fin mensajes 
-        
+
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
         modelo.addAttribute("tipoForm", "agregar");
-        
+
         modelo.addAttribute("recetas", this.recetaService.listar());
-        
+
         //desarollo
         //fin desarrollo 
         //despacho  modelo.addAttribute(nombreDespacho, objetoAdespachar)
@@ -293,7 +294,6 @@ public class PersonalController {
         //
         //cargar el html nombre
         return "users/administrador/mantenedorReceta";
-
 
     }
 //
@@ -346,8 +346,6 @@ public class PersonalController {
 //
 //    }
 
-
-
 //    @RequestMapping("/ingresar_insumo")
 //    public String ingresar_insumo(Model modelo, @RequestParam("nombre") String nombre,
 //            @RequestParam("descripcion") String descripcion,
@@ -395,7 +393,6 @@ public class PersonalController {
 //        //
 //        return "users/administrador/mantenedor_insumos";
 //    }
-
 //    @RequestMapping("/modificar_insumo")
 //    public String modificar_insumo(Model modelo, @RequestParam("id") Integer id,
 //            @RequestParam("nombre") String nombre,
@@ -443,9 +440,6 @@ public class PersonalController {
 //        //
 //        return "users/administrador/mantenedor_insumos";
 //    }
-
-
-
     @RequestMapping("/modificar_insumo")
     public String modificar_insumo(Model modelo, @RequestParam("id") Integer id,
             @RequestParam("nombre") String nombre,
@@ -466,7 +460,7 @@ public class PersonalController {
             
             insumo.setFotoInsumo(nombreImagen);
         }*/
-        
+
         insumo.setIdInsumo(id);
         insumo.setNombreInsumo(nombre);
         insumo.setDescripcionInsumo(descripcion);
@@ -475,12 +469,12 @@ public class PersonalController {
         insumo.setMaximoStockInsumo(stockMaximo);
         insumo.setUnidadMedidaInsumo(unidadMedida);
         insumo.setFotoInsumo("adfbfd87-379f-4760-8771-643c689a9537.jpg");
-        
-        if(this.insumoService.modificarInsumo(insumo)){
-            
-        }else{
+
+        if (this.insumoService.modificarInsumo(insumo)) {
+
+        } else {
             System.out.println("no modifico");
-            System.out.println("stock: "+stockMinimo);
+            System.out.println("stock: " + stockMinimo);
         }
         List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
@@ -496,8 +490,6 @@ public class PersonalController {
         //
         return "users/administrador/mantenedor_insumos";
     }
-
-
 
     @RequestMapping("/eliminar_insumo")
     public String eliminar_insumo(Model modelo, @RequestParam("idInsumo") Integer idInsumo) {
@@ -543,9 +535,7 @@ public class PersonalController {
     }
 
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL CAMBIAR A PORST
-
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL *CAMBIAR A PORST*
-
     @RequestMapping("/add")
     public String add(Model modelo) {
         //sesion 

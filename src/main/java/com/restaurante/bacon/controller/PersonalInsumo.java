@@ -5,6 +5,7 @@
  */
 package com.restaurante.bacon.controller;
 
+import com.restaurante.bacon.aws.s3.AmazonClient;
 import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dao.ProcedureQuery;
@@ -60,6 +61,13 @@ public class PersonalInsumo {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
+    private AmazonClient amazonClient;
+
+    @Autowired
+    PersonalInsumo(AmazonClient amazonClient) {
+        this.amazonClient = amazonClient;
+    }
+    
     @RequestMapping("/inicio")
     public String inicio(Model modelo) {
         //sesion 
@@ -142,6 +150,7 @@ public class PersonalInsumo {
         if (nombreImagen != null){
 
             insumo.setFotoInsumo(nombreImagen);
+            this.amazonClient.uploadFile(file[0], nombre);
             if (this.insumoService.ingresarInsumo(insumo)) {
                 //envia al javascrit la respuesta del agregar
                 modelo.addAttribute("tipoRespuesta", "agregar");
@@ -196,6 +205,7 @@ public class PersonalInsumo {
         }else{
             String nombreImagen = this.personalService.subirImagen(file);
             insumo.setFotoInsumo(nombreImagen);
+            this.amazonClient.uploadFile(file[0], nombreImagen);
             this.personalService.eliminarImagen(insu.getFotoInsumo());
         }
         

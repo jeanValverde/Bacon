@@ -321,7 +321,7 @@
                                         <div class="card"  th:each="receta: ${recetas}"  >
                                             <div class="card-body text-center">
                                                 <div>
-                                                    <img th:src="@{/uploads/}+${receta.foto}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                                    <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${receta.foto}" class="img-lg rounded-circle mb-2" alt="profile image">
                                                         <h4 th:text="${receta.nombreReceta}" >Nombre Receta</h4>
                                                         <p class="text-muted mb-0"  >
                                                             <div class="badge badge-outline-primary badge-pill" th:text="'#' + ${receta.idReceta}" >id receta</div>
@@ -404,7 +404,7 @@
                                                         <tbody>
                                                             <tr th:each="receta: ${recetas}" >
                                                                 <td class="py-1">
-                                                                    <img th:src="@{/uploads/}+${receta.foto}" alt="image">
+                                                                    <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${receta.foto}" alt="image">
                                                                 </td>
                                                                 <td th:text="'#' + ${receta.idReceta}"   >
                                                                     ID
