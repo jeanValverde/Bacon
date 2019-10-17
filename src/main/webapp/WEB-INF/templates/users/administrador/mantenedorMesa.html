@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-1to10.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-horizontal.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-movie.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-pill.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-reversed.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-square.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bootstrap-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/css-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/examples.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{//vendors/jquery-bar-rating/fontawesome-stars-o.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/fontawesome-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-asColorPicker/css/asColorPicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/x-editable/bootstrap-editable.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/dropify/dropify.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-file-upload/uploadfile.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-tags-input/jquery.tagsinput.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+
+
+
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.css}">
+
+
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!---->
+
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../fragments/_navbar.html -->
+            <nav th:replace="fragments/_navbar :: nav"></nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../fragments/_settings-panel.html -->
+                <div th:replace="fragments/_settings-panel :: div"></div>
+                <!-- partial -->
+                <!-- partial:../../fragments/_sidebar.html -->
+                <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div class="row">
+
+                            <!--Form agegar-->
+                            <div th:if="${agregarMesa}" class="col-md-4 grid-margin stretch-card" >
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Agregar Mesa</h4>
+                                        <p class="card-description text-justify">
+                                            Completa estos campos para agregar una mesa al sistema
+                                        </p>
+                                        <form class="forms-sample" th:action="@{/administrador/mesa/agregar}" method="POST" name="formMesa">
+                                            <input type="hidden" id="registroAgregar" th:value="${registroAgregar}"/>
+                                            <div class="form-group">
+                                                <label for="numeroMesa">Número Mesa</label>
+                                                <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa" min="1">
+
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeNumeroMesa1">
+                                                Escribe un número para la mesa.
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeNumeroMesa2">
+                                                El número de la mesa debe ser mayor a 0
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
+                                                <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa" min="0" max="10">
+
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
+                                                Escribe la cantidad de asientos de la mesa.
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeCantidadAsientosMesa2">
+                                                Debe ingresar una cantidad valida de asientos
+                                            </div>
+                                            <div class="form-group">
+
+                                                <label for="estadoMesa">Estado Mesa</label>
+                                                <select class="form-control form-control-lg" id="estadoMesa" name="estadoMesa">
+                                                    <option value="select">Seleccione</option>
+                                                    <option value="1">Habilitada</option>
+                                                    <option value="2">Deshabilitada</option>
+                                                </select>
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeEstadoMesa1">
+                                                Elija un Estado de la mesa.
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary mr-2">Agregar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Form agegar-->
+                            <!--Form Editar-->
+                            <div th:if="${modificarMesa}" class="col-md-4 grid-margin stretch-card" >
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Modifcar Mesa</h4>
+                                        <p class="card-description text-justify">
+                                            Completa estos campos para modificar una mesa al sistema
+                                        </p>
+                                        <form class="forms-sample" th:action="@{/administrador/mesa/modificar}" method="POST" name="formMesa">
+                                            <input type="hidden" id="idMesa" name="idMesa" th:value="${mesa.idMesa}">
+                                            <div class="form-group">
+                                                <label for="numeroMesa">Número Mesa</label>
+                                                <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa" th:value="${mesa.numeroMesa}" min="1">
+
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeNumeroMesa1">
+                                                Escribe un numero para la mesa.
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeNumeroMesa2">
+                                                El número de la mesa debe ser mayor a 0
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cantidadAsientosMesa">Cantidad de Asientos Mesa</label>
+                                                <input type="number" class="form-control" id="cantidadAsientosMesa" name="cantidadAsientosMesa" placeholder="Cantidad de Asientos Mesa" th:value="${mesa.cantidadAsientosMesa}" min="0" max="10">
+
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeCantidadAsientosMesa1">
+                                                Debe ingresar una cantidad valida de asientos
+                                            </div>
+                                            <div class="invalid-feedback" id="mensajeCantidadAsientosMesa2">
+                                                Debe ser mayor a 0
+                                            </div>
+                                            <div class="form-group">
+
+                                                <label for="estadoMesa">Estado Mesa</label>
+                                                <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="estadoMesa">
+                                                    <option th:selected="${mesa.estadoMesa} == 1" value="1">Habilitada</option>
+                                                    <option th:selected="${mesa.estadoMesa} == 2" value="2">Deshabilitada</option>
+                                                </select>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary mr-2">Modificar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Form Editar-->
+
+                            <!--Form Listar-->
+
+                            <div class="col-md-8 col-xl-8 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Mesas</h3>
+                                        <form  th:action="@{/administrador/mesa/buscar_por_filtro}" method="post">
+
+                                            <input type="hidden" id="modifico" value="${modifico}"/>
+
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h5 >Buscar por: </h5>
+                                                </div>
+                                                <div class="col-4">
+                                                    <select class="btn btn-success dropdown-toggle"  name="tipoBusqueda" id="tipoBusqueda" onchange="myFunction()">
+                                                        <option value="numero">Número de Mesa</option>
+                                                        <option value="asientos">Cantidad de Asientos</option>
+                                                        <option value="habilitada">Habilitada</option>
+                                                        <option value="deshabilitada">Deshabilitada</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" id="filtro" name="filtro" aria-label="Escribe el nombre de la mesa">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-sm btn-success" type="submit">Buscar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form> 
+
+                                        <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                <div class="media">
+                                                    <div  class="row">
+                                                        <div style="padding: 10px"  th:each="mes: ${mesas}" class="card">
+                                                            <div class="card">
+                                                                <div class="card-body text-center">
+                                                                    <div style="text-align:right">
+
+
+                                                                        <a  th:href="@{/administrador/mesa/cargar_mesa (idMesa=${mes.idMesa})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                        <!--
+                                                                        <button type="button" class="btn btn-danger btn-rounded btn-icon" >
+                                                                            <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
+                                                                            <i class="mdi mdi-close"></i>
+                                                                        </button>
+                                                                        -->
+                                                                        
+                                                                    <button type="button" class="btn btn-danger " data-toggle="modal"  th:attr="data-target='#modal'+${mes.idMesa }" ><i class="mdi mdi-close"></i></button>
+                                                                    <div class="modal fade" th:id="'modal' + ${mes.idMesa}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel-3">Eliminar insumo</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body" id="pruebaModal">
+                                                                                    <p >¿Seguro que desea eliminar el insumo?</p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a id="btn-eliminar" th:href="@{/administrador/mesa/eliminar (idMesa=${mes.idMesa})}" class="btn btn-danger ">Eliminar</a>
+                                                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                    <div >
+                                                                        <h6>Número de Mesa: </h6>
+                                                                        <h4 th:text="${mes.numeroMesa}"></h4>
+                                                                    </div>
+                                                                    <div >
+                                                                        <h6>Cantidad de Asientos: </h6>
+                                                                        <h4
+                                                                            <p th:text="${mes.cantidadAsientosMesa}" class="text-muted mb-0">Cantidad de asientos</p>
+                                                                        </h4>
+                                                                    </div>
+
+                                                                    <div th:if="${mes.estadoMesa} == 1">
+                                                                        <h6>Estado de la Mesa: </h6>
+                                                                        Habilitada
+
+                                                                    </div>
+                                                                    <div th:if="${mes.estadoMesa} == 2">
+                                                                        <h6>Estado de la Mesa: </h6>
+
+                                                                        Deshabilitada
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <div class="media">
+                                                    <div class="table-responsive">
+                                                        <table id="order-listing" class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Número de Mesa</th>
+                                                                    <th>Cantidad de asientos</th>
+                                                                    <th>Estado de la Mesa</th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tbody>
+                                                                <tr th:each="mes: ${mesas}">
+                                                                    <td th:text="${mes.numeroMesa}"></td>
+                                                                    <td th:text="${mes.cantidadAsientosMesa}"></td>
+                                                                    <td th:if="${mes.estadoMesa} == 1"> Habilitada</td>
+                                                                    <td th:if="${mes.estadoMesa} == 2"> Deshabilitada</td>
+                                                                    <td>
+                                                                        <a  th:href="@{/administrador/mesa/cargar_mesa (idMesa=${mes.idMesa})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-danger " data-toggle="modal"  th:attr="data-target='#modal'+${mes.idMesa }" ><i class="mdi mdi-close"></i></button>
+                                                                    <div class="modal fade" th:id="'modal2' + ${mes.idMesa}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel-3">Eliminar insumo</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body" id="pruebaModal">
+                                                                                    <p >¿Seguro que desea eliminar el insumo?</p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a id="btn-eliminar" th:href="@{/administrador/mesa/eliminar (idMesa=${mes.idMesa})}" class="btn btn-danger ">Eliminar</a>
+                                                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Form Listar-->
+
+                        </div>
+
+
+
+                        <!--final-->
+
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <!-- End custom js for this page-->
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+        <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+        <script th:src="@{/vendors/moment/moment.min.js}"></script>
+        <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+        <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+        <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+        <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+        <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+        <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+        <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+        <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+        <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone.js}"></script>
+
+
+
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-addons.js}"></script>
+        <script th:src="@{/js/x-editable.js}"></script>
+        <script th:src="@{/js/dropify.js}"></script>
+        <script th:src="@{/js/dropzone.js}"></script>
+        <script th:src="@{/js/jquery-file-upload.js}"></script>
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-repeater.js}"></script>
+
+        <script src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+        <script src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+        <script src="@{/js/alerts_personalizado.js}"></script>
+        <script src="@{/js/avgrund.js}"></script>
+        <script src="@{/js/modal-demo.js}"></script>
+        <!-- End custom js for this page-->
+        <!-- plugin js for this page -->
+
+
+        <!--validate form--->
+        <script th:src="@{/custom/formularioMesa.js}"></script>
+
+
+
+
+        <script th:inline="javascript">
+
+            var tipoRespuesta = [[${tipoRespuesta}]];
+            var respuesta = [[${respuesta}]];
+            if (tipoRespuesta !== null) {
+            switch (tipoRespuesta) {
+            case 'agregar' :
+            if (respuesta === 1) {
+            alert("Mesa Agregada correctamente");
+            } else if (respuesta === 0) {
+            alert("No se ha podido agregar la mesa");
+            }
+            break;
+            case 'modificar' :
+            if (respuesta === 1) {
+            alert("Mesa modificada correctamente");
+            } else if (respuesta === 0) {
+            alert("No se ha podido modificar la mesa");
+            }
+            break;
+            case 'eliminar' :
+            if (respuesta === 1) {
+            alert("Mesa eliminada correctamente");
+            } else if (respuesta === 0) {
+            alert("No se ha podido eliminar la mesa");
+            }
+            break;
+            }
+            }
+
+
+
+        </script>
+
+        <script type="text/javascript" >
+            var formularioPassword = document.getElementsByName("formMesa")[0];
+            validatorForms(formularioPassword);
+        </script>
+
+        <script type="text/javascript">
+            function myFunction() {
+
+            var estado = document.getElementById("tipoBusqueda").value;
+
+            if (estado === "habilitada") {
+            document.getElementById("filtro").readOnly = true;
+            } else if (estado === "deshabilitada") {
+            document.getElementById("filtro").readOnly = true;
+            } else if (estado === "numero") {
+            document.getElementById("filtro").readOnly = false;
+            } else if (estado === "asientos") {
+            document.getElementById("filtro").readOnly = false;
+            }
+            }
+        </script>
+    </body>
+
+</html>

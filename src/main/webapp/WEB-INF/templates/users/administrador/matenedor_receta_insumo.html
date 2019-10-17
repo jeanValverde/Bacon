@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!---->
+
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../fragments/_navbar.html -->
+            <nav th:replace="fragments/_navbar :: nav"></nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../fragments/_settings-panel.html -->
+                <div th:replace="fragments/_settings-panel :: div"></div>
+                <!-- partial -->
+                <!-- partial:../../fragments/_sidebar.html -->
+                <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+
+                        <!--Desarrollar acá-->
+
+
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="row">
+                                    <div class="col-md-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-sm-flex flex-row flex-wrap text-center text-sm-left align-items-center">
+                                                    <img th:src="@{/uploads/}+${receta.foto}" class="img-lg rounded" alt="profile image">
+                                                    <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
+                                                        <h6 class="mb-0" th:text="${receta.nombreReceta}" >Nombre de la Receta</h6>
+                                                        <br/>
+                                                        <p class="mb-0 text-success font-weight-bold" th:text="'$' + ${receta.precioReceta}" >$2321</p>
+                                                    </div>
+                                                    <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
+                                                        <h6 class="mb-0">Disponible</h6>
+                                                        <br />
+                                                        <p class="mb-0 text-success font-weight-bold">
+                                                        <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-outline-info ml-3"><i class="mdi mdi-check"></i></div>
+                                                        <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-outline-info ml-3"><i class="mdi mdi-close"></i></div>
+                                                        </p>
+                                                    </div>
+                                                    <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
+                                                        <p class="mb-0 text-success font-weight-bold">
+                                                        <div class="badge badge-primary"  th:text="'#' + ${receta.idReceta}"  >#ID</div>
+                                                        <div class="badge badge-primary" th:text="${receta.duracionPreparacion} + ' min'" >120 min</div>
+                                                        <div class="badge badge-primary" th:text="${receta.cantidadPrepDiariaReceta} + ' Estimación ventas'" >23 Estimación ventas</div>
+                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
+                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '1' }" >Bar</div>
+                                                        <div class="badge badge-primary" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" th:if="${receta.tipoReceta == '0'}" >Categoría</div>
+                                                        </p>
+                                                    </div>
+                                                    <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
+                                                        <br/>
+                                                        <h6 class="mb-0" th:text="${receta.descripcionReceta}" >
+                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                                            Aenean commodo ligula eget dolor. Lorem</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <!---inicio fila de los filtros-->
+                                <div class="row">
+                                    <!--inicio filtro nombre--->
+                                    <div class="col-md-9 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <form class="" th:action="@{/administrador/recetaInsumos/insumoName}" method="get">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
+                                                            <input type="text" class="form-control" name="nombre" placeholder="Escribe el nombre del insumo" aria-label="Escribe el nombre de la receta">
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-sm btn-primary" type="submit">Buscar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--fin filtro nombre--->
+
+                                    <!--inicio vista tipos--->
+                                    <div class="col-md-2 grid-margin">
+                                        <div class="btn-group mt-4" role="group" aria-label="Basic example">
+                                            <a data-toggle="tooltip"  data-placement="top" title="" data-original-title="Ver recetas" th:href="@{/administrador/receta}" class="btn btn-primary">
+                                                <i class="mdi mdi-backburger"></i>
+                                            </a>
+                                            <a  data-toggle="tooltip"  data-placement="top" title="" data-original-title="Insumos vinculados a la receta"  th:href="@{/administrador/recetaInsumos/ingredientesReceta(idReceta=${receta.idReceta})}"   class="btn btn-primary">
+                                                <i class="mdi mdi-dropbox"></i>
+                                            </a>
+                                            <a data-toggle="tooltip"  data-placement="top" title="" data-original-title="Agregar insumos nuevos para la receta" th:href="@{/administrador/recetaInsumos/verInsumos(idReceta=${receta.idReceta})}" class="btn btn-primary">
+                                                <i class="mdi mdi-plus-circle-outline"></i>
+                                            </a>
+                                            <button data-toggle="tooltip"  data-placement="top" title="" data-original-title="Ver en modo tarjeta" onclick="verCard()" type="button" class="btn btn-primary">
+                                                <i class="mdi mdi-grid"></i>
+                                            </button>
+                                            <button data-toggle="tooltip"  data-placement="top" title="" data-original-title="Ver en modo lista" onclick="verTabla()" type="button" class="btn btn-primary">
+                                                <i class="mdi mdi-format-list-bulleted"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!--fin vista tipos--->
+
+                                </div>
+                                <!---inicio fila de los filtros-->
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div id="cardInsumos" class="card-columns">
+
+                                    <!--inicio card insumos no agregados--->
+                                    <div class="card" th:if="${tipo == 'agregar' }" th:each="insumo: ${insumos}"  >
+                                        <div class="card-body text-center">
+                                            <div>
+                                                <img th:src="@{/uploads/}+${insumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                                <h4 th:text="${insumo.nombreInsumo}"  >Insumo</h4>
+                                                <p class="text-muted mb-0" th:text="'#' + ${insumo.idInsumo} " >#ID</p>
+                                            </div>
+                                            <p class="mt-2 card-text" th:text="${insumo.descripcionInsumo}"  >
+                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                                Aenean commodo ligula eget dolor. Lorem
+                                            </p>
+                                            <br />
+                                            <form class="forms-sample" th:action="@{/administrador/recetaInsumos/addRecetaInsumo}"  method="POST" th:name="'form-card-' + ${insumo.idInsumo}"  >
+                                                <input type="hidden" name="idInsumo" th:value="${insumo.idInsumo}" />
+                                                <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
+                                                <div class="form-group row">
+                                                    <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
+                                                    <div class="col-sm-8">
+                                                        <input min="0.1" required="" type="number" step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!--inicio card insumos no agregados--->
+
+
+                                    <div class="card" th:if="${tipo == 'misInsumos' }"  th:each="ingrediente: ${ingredientes}"   >
+
+                                        <div class="card-body text-center">
+                                            <div>
+                                                <img th:src="@{/uploads/}+${ingrediente.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                                <h4 th:text="${ingrediente.idInsumo.nombreInsumo}" >Insumo</h4>
+                                                <p class="text-muted mb-0" th:text="'#' + ${ingrediente.idInsumo.idInsumo} "  >#ID</p>
+                                            </div>
+                                            <p class="mt-2 card-text" th:text="${ingrediente.idInsumo.descripcionInsumo}" >
+                                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                                Aenean commodo ligula eget dolor. Lorem
+                                            </p>
+                                            <form class="forms-sample" th:action="@{/administrador/recetaInsumos/editarIngrediente}"  method="POST" >
+                                                <input type="hidden" name="idIngrediente" th:value="${ingrediente.idIngrediente}" />
+                                                <input type="hidden" name="idInsumo" th:value="${ingrediente.idInsumo.idInsumo}" />
+                                                <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
+                                                <div class="form-group row">
+                                                    <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
+                                                    <div class="col-sm-9">
+                                                        <input min="0.1" required="" type="number" step="any" name="cantidad" class="form-control" th:value="${ingrediente.cantidad}"  id="cantidadInsumo" placeholder="Cantidad">
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
+                                                <a href="#" th:onclick="'deleteInsumoReceta(' + ${receta.idReceta} + ' , ' +  ${ingrediente.idIngrediente}  + ' )'"  class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</a>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                            <!--inicio table insumos no agregados--->
+                            <div id="tablaIndumos" class="col-md-12" style="" th:if="${tipo == 'agregar' }"  >
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Recetas</h4>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Foto
+                                                        </th>
+                                                        <th>
+                                                            ID
+                                                        </th>
+                                                        <th>
+                                                            Nombre Insumo
+                                                        </th>
+                                                        <th>
+                                                            Descripción
+                                                        </th>
+                                                        <th>
+                                                            Agregar Cantidad
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="insumo: ${insumos}"  >
+                                                        <td class="py-1">
+                                                            <img th:src="@{/uploads/}+${insumo.fotoInsumo}"  alt="image">
+                                                        </td>
+                                                        <td th:text="${insumo.idInsumo}"   >
+                                                            Herman Beck
+                                                        </td>
+                                                        <td th:text="${insumo.nombreInsumo}" >
+                                                            Herman Beck
+                                                        </td>
+                                                        <td th:text="${insumo.descripcionInsumo}" >
+                                                            Herman Beck
+                                                        </td>
+                                                        <td>
+                                                            <form class="forms-sample" th:action="@{/administrador/recetaInsumos/addRecetaInsumo}"  method="POST" th:name="'form-' + ${insumo.idInsumo}" >
+                                                                <input type="hidden" name="idInsumo" th:value="${insumo.idInsumo}" />
+                                                                <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
+                                                                <div style="float: left; padding:0px;" class="form-group row">
+                                                                    <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
+                                                                    <div class="col-sm-9">
+                                                                        <input required="" type="number" step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
+                                                                    </div>
+                                                                </div> &nbsp;
+                                                                <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--fin table insumos no agregados--->
+
+                            <!--inicio table mis insumos--->
+                            <div id="tablaIndumos" class="col-md-12" style="" th:if="${tipo == 'misInsumos' }" >
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Recetas</h4>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Foto
+                                                        </th>
+                                                        <th>
+                                                            ID
+                                                        </th>
+                                                        <th>
+                                                            Nombre Insumo
+                                                        </th>
+                                                        <th>
+                                                            Descripción
+                                                        </th>
+                                                        <th>
+                                                            Agregar Cantidad
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr th:each="ingrediente: ${ingredientes}" >
+                                                        <td class="py-1">
+                                                            <img th:src="@{/uploads/}+${ingrediente.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                                        </td>
+                                                        <td th:text="${ingrediente.idInsumo.idInsumo}"  >
+                                                            Herman Beck
+                                                        </td>
+                                                        <td th:text="${ingrediente.idInsumo.nombreInsumo}"  >
+                                                            Herman Beck
+                                                        </td>
+                                                        <td th:text="${ingrediente.idInsumo.descripcionInsumo}" >
+                                                            $ 77.99
+                                                        </td>
+                                                        <td>
+                                                            <form th:name="'form-table-' + ${ingrediente.idInsumo.idInsumo}" class="forms-sample" th:action="@{/administrador/recetaInsumos/editarIngrediente}"  method="POST" >
+                                                                <input type="hidden" name="idIngrediente" th:value="${ingrediente.idIngrediente}" />
+                                                                <input type="hidden" name="idInsumo" th:value="${ingrediente.idInsumo.idInsumo}" />
+                                                                <input type="hidden" name="idReceta" th:value="${receta.idReceta}" />
+                                                                <div style="float: left; padding:0px;" class="form-group row">
+                                                                    <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
+                                                                    <div class="col-sm-9">
+                                                                        <input required=""  type="number"  step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
+                                                                    </div>
+                                                                </div> &nbsp;
+                                                                <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
+                                                                <a th:href="@{/administrador/recetaInsumos/deleteIngrediente(idReceta=${receta.idReceta}, idIngrediente=${ingrediente.idIngrediente})}"  class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</a>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--fin table mis insumos--->
+
+                        </div>
+
+
+
+
+
+
+
+                        <!--final-->
+
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script th:src="@{/js/tooltips.js}"></script>
+        <!-- End custom js for this page-->
+
+        <script type="text/javascript">
+            var tabla = document.getElementById("tablaIndumos");
+            tabla.style.display = "none";
+            tabla.style.visibility = "hidden";
+
+
+            function verCard() {
+                var tabla = document.getElementById("tablaIndumos");
+                tabla.style.display = "none";
+                tabla.style.visibility = "hidden";
+                var cards = document.getElementById("cardInsumos");
+                cards.style.display = "";
+                cards.style.visibility = "";
+            }
+
+            function verTabla() {
+                var cards = document.getElementById("cardInsumos");
+                cards.style.display = "none";
+                cards.style.visibility = "hidden";
+                var tabla = document.getElementById("tablaIndumos");
+                tabla.style.display = "";
+                tabla.style.visibility = "";
+            }
+        </script>
+
+     
+           <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
+
+        <script type="text/javascript" >
+
+            function deleteInsumoReceta(idReceta, idIngrediente) {
+                
+                Swal.fire({
+                    title: '¿Está seguro que desea eliminar?',
+                    text: "Si elimina la receta se perderán todos los datos relacionados y serán irrecuperables",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '!Si, Eliminar!'
+                }).then((result) => {
+                    if (result.value) {
+                        location.href="/administrador/recetaInsumos/deleteIngrediente?idReceta=" + idReceta + "&idIngrediente="+ idIngrediente;
+                    }
+                });
+            }
+
+        </script>
+        
+        
+    </body>
+
+</html>

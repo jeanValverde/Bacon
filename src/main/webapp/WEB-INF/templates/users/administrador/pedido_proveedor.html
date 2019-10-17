@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-contextmenu/jquery.contextMenu.min.css}">
+
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-1to10.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-horizontal.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-movie.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-pill.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-reversed.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-square.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bootstrap-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/css-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/examples.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{//vendors/jquery-bar-rating/fontawesome-stars-o.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/fontawesome-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-asColorPicker/css/asColorPicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/x-editable/bootstrap-editable.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/dropify/dropify.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-file-upload/uploadfile.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-tags-input/jquery.tagsinput.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.css}">
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!-- plugin css for this page -->
+        <!--<link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-toast-plugin/jquery.toast.min.css}">-->
+        <!-- End plugin css for this page -->
+        <!---->
+
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../fragments/_navbar.html -->
+            <nav th:replace="fragments/_navbar :: nav"></nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../fragments/_settings-panel.html -->
+                <div th:replace="fragments/_settings-panel :: div"></div>
+                <!-- partial -->
+                <!-- partial:../../fragments/_sidebar.html -->
+                <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div class="row">
+
+
+                            <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
+                            <div class="col-md-12 col-xl-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Proveedores</h3>
+                                        <form  th:action="@{/administrador/pedidoInsumo/buscar_insumos_proveedor}"  enctype="multipart/form-data" method="post">
+
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h5 >Buscar proveedor: </h5>
+                                                </div>
+                                                <div class="col-10" style="text-align: left">
+                                                    <div  class="input-group">
+
+                                                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal"  data-target="#modalInsumos" >Ver pedidos</button>
+                                                        <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                            <div class="modal-dialog modal-sm" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel-3">Pedidos realizados</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body" id="pruebaModal">
+                                                                        <p >Los pedidos se han realizadó exitosamente!</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-light" data-dismiss="modal">Ok</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="modalInsumos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content" id="loader">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel-3">Eliminar insumo</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body" id="pruebaModal" style="text-align: center">
+                                                                        <h5 id="exampleModalLabel-3">No se han encontrado insumos en la lista</h5>
+                                                                    </div>
+
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-xl-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Insumos</h3>
+
+                                        <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                                                <div class="row">
+                                                    <div style="padding: 5px" th:each="ins_pe: ${insumos_pedidos}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
+                                                        <div class="card">
+                                                            <div class="card-body text-center">
+                                                                <div class="form-check form-check-flat form-check-success">
+                                                                    <label  th:if="${ins_pe.proveedores.size()!=0}" class="form-check-label">
+                                                                        <input th:id="'check' + ${ins_pe.insumoPedido.idInsumoPedido}"  onchange="cargarInsumo(this)" th:value="${ins_pe.insumoPedido.idInsumoPedido}" th:attr="data-idInsumo=${ins_pe.insumo.idInsumo}"  type="checkbox" class="form-check-input">
+
+                                                                    </label>
+                                                                </div>
+                                                                <div th:id="'mensaje' + ${ins_pe.insumoPedido.idInsumoPedido}">
+
+                                                                </div><br/>
+                                                                <div >
+                                                                    <img th:src="@{/uploads/}+${ins_pe.insumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                    <h4 th:text="${ins_pe.insumo.nombreInsumo}"></h4>
+
+                                                                    <p  class="text-muted mb-0">[[${ins_pe.insumoPedido.cantidadInsumo}]] [[${ins_pe.insumo.unidadMedidaInsumo}]]</p>
+
+                                                                </div>
+                                                                <div>
+                                                                    <h4 th:id="'precio' + ${ins_pe.insumoPedido.idInsumoPedido}">$ 0</h4>
+                                                                </div>
+                                                                <select th:if="${ins_pe.proveedores.size()!=0}" onchange="cargarPrecio(this)" th:attr="data-idInsumoPedido=${ins_pe.insumoPedido.idInsumoPedido},data-idInsumo=${ins_pe.insumo.idInsumo}" class="btn btn-success dropdown-toggle"  th:id="'proveedor' + ${ins_pe.insumoPedido.idInsumoPedido}">
+                                                                    <option value="select">Seleccione proveedor</option>
+                                                                    <option th:each="proveedor : ${ins_pe.proveedores}"  th:value="${proveedor.idProveedor}" th:utext="${proveedor.nombreProveedor}"></option>
+                                                                </select>
+
+                                                                <div th:if="${ins_pe.proveedores.size()==0}" class="card card-inverse-danger" id="context-menu-open">
+                                                                    <div class="card-body">
+                                                                        <p class="card-text">
+                                                                            Ningun proveedor provee este insumo</p>
+                                                                    </div>
+                                                                </div>
+
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <div class="media">
+                                                    <div class="table-responsive">
+                                                        <table id="order-listing" class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                    <th>Nombre del insumo</th>
+                                                                    <th>Cantidad</th>
+                                                                    <th>proveedor</th>
+                                                                    <th>Precio</th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tbody>
+                                                                <tr th:each="ins_pe: ${insumos_pedidos}">
+                                                                    <td>
+                                                                        <div class="form-check form-check-flat form-check-success">
+                                                                            <label th:if="${ins_pe.proveedores.size()!=0}" class="form-check-label">
+                                                                                <input th:id="'check2' + ${ins_pe.insumoPedido.idInsumoPedido}" onchange="cargarInsumo(this)" th:value="${ins_pe.insumoPedido.idInsumoPedido}" th:attr="data-idInsumo=${ins_pe.insumo.idInsumo}"  type="checkbox" class="form-check-input">
+                                                                            </label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td ><img th:src="@{/uploads/}+${ins_pe.insumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/></td>
+                                                                    <td ><h4 th:text="${ins_pe.insumo.nombreInsumo}"></h4></td>
+                                                                    <td ><p  class="text-muted mb-0">[[${ins_pe.insumoPedido.cantidadInsumo}]] [[${ins_pe.insumo.unidadMedidaInsumo}]]</p></td>
+                                                                    <td >
+                                                                        <select th:if="${ins_pe.proveedores.size()!=0}" onchange="cargarPrecio(this)" th:attr="data-idInsumoPedido=${ins_pe.insumoPedido.idInsumoPedido},data-idInsumo=${ins_pe.insumo.idInsumo}" class="btn btn-success dropdown-toggle"  th:id="'proveedor2' + ${ins_pe.insumoPedido.idInsumoPedido}">
+                                                                            <option value="select">Seleccione proveedor</option>
+                                                                            <option th:each="proveedor : ${ins_pe.proveedores}"  th:value="${proveedor.idProveedor}" th:utext="${proveedor.nombreProveedor}"></option>
+                                                                        </select>
+                                                                        <div th:if="${ins_pe.proveedores.size()==0}" class="card card-inverse-danger" id="context-menu-open">
+                                                                            <div class="card-body">
+                                                                                <p class="card-text">
+                                                                                    Ningun proveedor provee este insumo</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div th:id="'mensaje2' + ${ins_pe.insumoPedido.idInsumoPedido}">
+
+                                                                        </div>
+                                                                    </td>
+                                                                    <td ><h4 th:id="'precio2' + ${ins_pe.insumoPedido.idInsumoPedido}">$ 0</h4></td>
+                                                                    <td ></td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Desarrollar acá-->
+                        <!--final-->
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+        <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+        <script th:src="@{/vendors/moment/moment.min.js}"></script>
+        <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+        <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+        <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+        <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+        <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+        <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+        <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+        <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+        <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-addons.js}"></script>
+        <script th:src="@{/js/x-editable.js}"></script>
+        <script th:src="@{/js/dropify.js}"></script>
+        <script th:src="@{/js/dropzone.js}"></script>
+        <script th:src="@{/js/jquery-file-upload.js}"></script>
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-repeater.js}"></script>
+        <!-- End custom js for this page-->
+        <!-- plugin js for this page -->
+
+        <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+        <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+
+        <script th:src="@{/vendors/jquery-contextmenu/jquery.contextMenu.min.js}"></script>
+        <script th:src="@{/js/context-menu.js}"></script>
+        <script src="@{/js/modal-demo.js}"></script>
+        <script th:src="@{/js/alerts_personalizado.js}"></script>
+        <script th:src="@{/js/avgrund.js}"></script>
+        <!--validate form--->
+        <script th:src="@{/custom/formulario-insumo.js}"></script>
+
+
+
+        <!--
+        <script th:src="@{/vendors/jquery-toast-plugin/jquery.toast.min.js}"></script>
+        
+        <script th:src="@{/js/toastDemo.js}"></script>
+        <script th:src="@{/js/desktop-notification.js}"></script>-->
+        <script th:inline="javascript">
+                                                                            var respuesta = [[${respuesta}]];
+                                                                            if (respuesta) {
+                                                                                $('#modalConfirmacion').modal('show');
+                                                                            }
+        </script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="text/javascript" >
+
+                                                                            function cargarPrecio(select) {
+                                                                                var id_proveedor = new Number(select.value.toString());
+                                                                                var id_insumo = new Number(select.getAttribute("data-idInsumo").toString());
+                                                                                var id_insumo_pedido = new Number(select.getAttribute("data-idInsumoPedido").toString());
+                                                                                var index = select.selectedIndex;
+                                                                                document.getElementById("proveedor" + id_insumo_pedido).selectedIndex = index;
+                                                                                document.getElementById("proveedor2" + id_insumo_pedido).selectedIndex = index;
+                                                                                if (select.value.toString() === 'select') {
+                                                                                    document.getElementById("precio" + id_insumo_pedido).innerHTML = '$ 0';
+                                                                                    document.getElementById("precio2" + id_insumo_pedido).innerHTML = '$ 0';
+                                                                                } else {
+
+
+
+                                                                                    axios.get( window.location.protocol + "//" + window.location.host + '/administrador/pedidoInsumo/cargarPrecio?idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                            .then(function (response) {
+                                                                                                console.log(response);
+                                                                                                if (response.data != null) {
+                                                                                                    var contenido = "$" + response.data.toString();
+                                                                                                    document.getElementById("precio" + id_insumo_pedido).innerHTML = contenido;
+                                                                                                    document.getElementById("precio2" + id_insumo_pedido).innerHTML = contenido;
+                                                                                                }
+
+                                                                                            })
+                                                                                            .catch(function (error) {
+
+                                                                                            })
+                                                                                            .finally(function () {
+                                                                                            });
+                                                                                }
+                                                                            }
+
+                                                                            function cargarInsumo(checkbox) {
+                                                                                var contenidoMensaje = "";
+                                                                                var id_insumo_pedido = new Number(checkbox.value.toString());
+                                                                                document.getElementById("mensaje" + id_insumo_pedido).innerHTML = contenidoMensaje;
+                                                                                var id_insumo = new Number(checkbox.getAttribute("data-idInsumo").toString());
+                                                                                if (checkbox.checked) {
+                                                                                    document.getElementById("check" + id_insumo_pedido).checked = true;
+                                                                                    document.getElementById("check2" + id_insumo_pedido).checked = true;
+                                                                                    if (document.getElementById("proveedor" + id_insumo_pedido).value.toString() !== "select") {
+                                                                                        var id_proveedor = new Number(document.getElementById("proveedor" + id_insumo_pedido).value);
+
+                                                                                        axios.get(window.location.protocol + "//" + window.location.host + '/administrador/pedidoInsumo/agregarInsumoPedidoProveedor?idInsumoPedido=' + id_insumo_pedido + '&idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                                .then(function (response) {
+                                                                                                    console.log(response.data);
+                                                                                                    console.log(response);
+                                                                                                    if (response.data != null) {
+                                                                                                        // alert('se agregó el insumo');
+                                                                                                        var contenidoPedido = '<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel-3">Insumos para pedir</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                                                                                                        for (var i = 0; i < response.data.grupoProveedores.length; i++) {
+                                                                                                            contenidoPedido = contenidoPedido
+                                                                                                                    + '<div class="modal-body" id="pruebaModal" style="text-align: center"><h5 id="exampleModalLabel-3">Pedido para ' + response.data.grupoProveedores[i].nombreProveedor + '</h5><div class="table-responsive"><table id="order-listing" class="table">'
+                                                                                                                    + '<thead><tr><th>Nombre Insumo</th><th>Precio</th><th>Unidad</th><th>Cantidad</th><th>Valor total</th></tr></thead>'
+                                                                                                                    + '<tbody>';
+                                                                                                            for (var x = 0; x < response.data.insumos.length; x++) {
+                                                                                                                var idPro = new Number(response.data.insumos[x].proveedor.idProveedor);
+                                                                                                                var total = new Number();
+                                                                                                                var precio = new Number(response.data.insumos[x].insumoProveedor.precio);
+                                                                                                                var cantidad = new Number(response.data.insumos[x].insumoPedido.cantidadInsumo);
+
+                                                                                                                total = parseInt(precio * cantidad);
+                                                                                                                if (idPro == response.data.grupoProveedores[i].idProveedor) {
+                                                                                                                    contenidoPedido = contenidoPedido + '<tr><td>' + response.data.insumos[x].insumo.nombreInsumo + '</td><td>' + response.data.insumos[x].insumoProveedor.precio + '</td><td>' + response.data.insumos[x].insumo.unidadMedidaInsumo + '</td><td>' + response.data.insumos[x].insumoPedido.cantidadInsumo + '</td><td>' + total + '</td></tr>'
+                                                                                                                }
+                                                                                                            }
+                                                                                                            contenidoPedido = contenidoPedido + '</tbody></table></div></div>';
+
+                                                                                                        }
+                                                                                                        if (response.data.insumos.length > 0) {
+                                                                                                            contenidoPedido = contenidoPedido + '<div class="modal-footer"><a onclick="agregarPedido()" class="btn btn-success ">Realizar pedido</a><button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button></div>';
+                                                                                                        }
+                                                                                                        document.getElementById("loader").innerHTML = contenidoPedido;
+                                                                                                        showSwal('success-message', 'Insumo agregado!', 'se ha agregado el insumo a la lista');
+                                                                                                    } else {
+                                                                                                        alert('no se agregó el insumo');
+                                                                                                    }
+
+                                                                                                })
+                                                                                                .catch(function (error) {
+                                                                                                    console.log(error);
+                                                                                                })
+                                                                                                .finally(function () {
+                                                                                                });
+                                                                                        document.getElementById("proveedor" + id_insumo_pedido).disabled = true;
+                                                                                        document.getElementById("proveedor2" + id_insumo_pedido).disabled = true;
+                                                                                    } else {
+
+                                                                                        document.getElementById("check" + id_insumo_pedido).checked = false;
+                                                                                        document.getElementById("check2" + id_insumo_pedido).checked = false;
+                                                                                        contenidoMensaje = '<div class="card card-inverse-warning"><div class="card-body"><p class="card-text">Ningun proveedor provee este insumo</p></div></div>';
+                                                                                        document.getElementById("mensaje" + id_insumo_pedido).innerHTML = contenidoMensaje;
+                                                                                        document.getElementById("mensaje2" + id_insumo_pedido).innerHTML = contenidoMensaje;
+                                                                                    }
+                                                                                } else {
+                                                                                    var id_proveedor = new Number(document.getElementById("proveedor" + id_insumo_pedido).value);
+                                                                                    document.getElementById("check" + id_insumo_pedido).checked = false;
+                                                                                    document.getElementById("check2" + id_insumo_pedido).checked = false;
+                                                                                    axios.get(window.location.protocol + "//" + window.location.host  + '/administrador/pedidoInsumo/eliminarInsumoPedidoProveedor?idInsumoPedido=' + id_insumo_pedido + '&idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                            .then(function (response) {
+                                                                                                console.log(response.data);
+                                                                                                console.log(response);
+                                                                                                if (response.data != null) {
+                                                                                                    // alert('se agregó el insumo');
+                                                                                                    var contenidoPedido = '<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel-3">Insumos para pedir</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                                                                                                    for (var i = 0; i < response.data.grupoProveedores.length; i++) {
+
+                                                                                                        contenidoPedido = contenidoPedido
+                                                                                                                + '<div class="modal-body" id="pruebaModal" style="text-align: center"><h5 id="exampleModalLabel-3">Pedido para ' + response.data.grupoProveedores[i].nombreProveedor + '</h5><div class="table-responsive"><table id="order-listing" class="table">'
+                                                                                                                + '<thead><tr><th>Nombre Insumo</th><th>Precio</th><th>Unidad</th><th>Cantidad</th><th>Valor total</th></tr></thead>'
+                                                                                                                + '<tbody>';
+                                                                                                        for (var x = 0; x < response.data.insumos.length; x++) {
+                                                                                                            var idPro = new Number(response.data.insumos[x].proveedor.idProveedor);
+                                                                                                            var total = new Number();
+                                                                                                            var precio = new Number(response.data.insumos[x].insumoProveedor.precio);
+                                                                                                            var cantidad = new Number(response.data.insumos[x].insumoPedido.cantidadInsumo);
+
+                                                                                                            total = parseInt(precio * cantidad);
+
+                                                                                                            if (idPro == response.data.grupoProveedores[i].idProveedor) {
+                                                                                                                contenidoPedido = contenidoPedido + '<tr><td>' + response.data.insumos[x].insumo.nombreInsumo + '</td><td>' + response.data.insumos[x].insumoProveedor.precio + '</td><td>' + response.data.insumos[x].insumo.unidadMedidaInsumo + '</td><td>' + response.data.insumos[x].insumoPedido.cantidadInsumo + '</td><td>' + total + '</td></tr>'
+                                                                                                            }
+                                                                                                        }
+                                                                                                        contenidoPedido = contenidoPedido + '</tbody></table></div></div>';
+
+                                                                                                    }
+                                                                                                    if (response.data.insumos.length > 0) {
+                                                                                                        contenidoPedido = contenidoPedido + '<div class="modal-footer"><button type="button" class="btn btn-success">Realizar pedido</button><button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button></div>';
+                                                                                                    } else {
+                                                                                                        contenidoPedido = '<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel-3">Insumos para pedir</h5>'
+                                                                                                                + '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">'
+                                                                                                                + '&times;</span></button></div><div class="modal-body" id="pruebaModal" style="text-align: center">'
+                                                                                                                + '<h5 id="exampleModalLabel-3">No se han agregado insumos en la lista</h5></div><div class="modal-footer">'
+                                                                                                                + '<button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button> </div>';
+                                                                                                    }
+                                                                                                    document.getElementById("loader").innerHTML = contenidoPedido;
+                                                                                                    document.getElementById("proveedor" + id_insumo_pedido).disabled = false;
+                                                                                                    document.getElementById("proveedor2" + id_insumo_pedido).disabled = false;
+                                                                                                    showSwal('warning-message', 'Eliminar insumo!', "Se eliminó el insumo de la lista");
+                                                                                                } else {
+                                                                                                    alert('no se agregó el insumo');
+                                                                                                }
+
+                                                                                            })
+                                                                                            .catch(function (error) {
+                                                                                                console.log(error);
+                                                                                            })
+                                                                                            .finally(function () {
+                                                                                            });
+                                                                                }
+                                                                            }
+                                                                            function agregarPedido() {
+                                                                                location.href = "/administrador/pedidoInsumo/agregarPedido";
+                                                                            }
+        </script>
+        <script type="text/javascript" >
+
+        </script>
+
+        <script type="text/javascript" >
+            var formularioPassword = document.getElementsByName("formAgregarInsumo")[0];
+            validatorForms(formularioPassword);
+        </script>
+
+
+
+        <script type="text/javascript" >
+            var formularioPassword = document.getElementsByName("formModificarInsumo")[0];
+            validatorForms(formularioPassword);
+        </script>
+
+
+
+    </body>
+
+</html>

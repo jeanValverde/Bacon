@@ -13,15 +13,17 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-
 /**
  *
  * @author jean
@@ -34,9 +36,15 @@ public class Mesa implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
     @Basic(optional = false)
+    //declarar que el id se usa con una secuencia 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_MESA")
+    //declarar la secuencia 
+    @SequenceGenerator(name = "SEQ_MESA", sequenceName = "SEQ_MESA", allocationSize = 1)
+    
+    
     @NotNull
     @Column(name = "ID_MESA")
-    private BigDecimal idMesa;
+    private Integer idMesa;
     @Basic(optional = false)
     @NotNull
     @Column(name = "NUMERO_MESA")
@@ -55,22 +63,22 @@ public class Mesa implements Serializable {
     public Mesa() {
     }
 
-    public Mesa(BigDecimal idMesa) {
+    public Mesa(Integer idMesa) {
         this.idMesa = idMesa;
     }
 
-    public Mesa(BigDecimal idMesa, BigInteger numeroMesa, BigInteger cantidadAsientosMesa, BigInteger estadoMesa) {
+    public Mesa(Integer idMesa, BigInteger numeroMesa, BigInteger cantidadAsientosMesa, BigInteger estadoMesa) {
         this.idMesa = idMesa;
         this.numeroMesa = numeroMesa;
         this.cantidadAsientosMesa = cantidadAsientosMesa;
         this.estadoMesa = estadoMesa;
     }
 
-    public BigDecimal getIdMesa() {
+    public Integer getIdMesa() {
         return idMesa;
     }
 
-    public void setIdMesa(BigDecimal idMesa) {
+    public void setIdMesa(Integer idMesa) {
         this.idMesa = idMesa;
     }
 
@@ -131,5 +139,7 @@ public class Mesa implements Serializable {
     public String toString() {
         return "com.restaurante.bacon.dto.Mesa[ idMesa=" + idMesa + " ]";
     }
+
+   
     
 }

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/font-awesome/css/font-awesome.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-1to10.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-horizontal.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-movie.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-pill.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-reversed.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bars-square.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/bootstrap-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/css-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/examples.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{//vendors/jquery-bar-rating/fontawesome-stars-o.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-bar-rating/fontawesome-stars.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-asColorPicker/css/asColorPicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/x-editable/bootstrap-editable.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/dropify/dropify.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-file-upload/uploadfile.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-tags-input/jquery.tagsinput.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css}">
+        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.css}">
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!-- plugin css for this page -->
+        <!--<link rel="stylesheet" type="text/css" th:href="@{/vendors/jquery-toast-plugin/jquery.toast.min.css}">-->
+        <!-- End plugin css for this page -->
+        <!---->
+
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../fragments/_navbar.html -->
+            <nav th:replace="fragments/_navbar :: nav"></nav>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../fragments/_settings-panel.html -->
+                <div th:replace="fragments/_settings-panel :: div"></div>
+                <!-- partial -->
+                <!-- partial:../../fragments/_sidebar.html -->
+                <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
+                <!-- partial -->
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        <div class="row">
+                            <div th:if="${agregar}" class="col-lg-4 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Agregar Insumo</h4>
+                                        <form  th:action="@{/administrador/insumo/agregar_insumo}" name="formAgregarInsumo" enctype="multipart/form-data" method="post">
+                                            <div class="row">
+                                                <div class="col-lg-12" >
+
+                                                    <div class="form-group">
+                                                        <label for="exampleInputUsername1" >Nombre</label>
+                                                        <input type="text" class="form-control" id="nombre" name="nombre"/>
+
+                                                    </div>
+                                                    <div id="nombre-mensaje1"  class="invalid-feedback">
+                                                        Ingrese el nombre del insumo.
+                                                    </div>
+                                                    <div class="form-group is-invalid">
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
+                                                        <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+                                                    </div>
+                                                    <div id="descripcion-mensaje1"  class="invalid-feedback">
+                                                        Ingrese una descripción para el insumo.
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Unidad de medida</label>
+                                                        <select class="form-control form-control-lg" id="unidadMedida" name="unidadMedida">
+                                                            <option value="select">Seleccione</option>
+                                                            <option value="Kilos">Kilos</option>
+                                                            <option value="Litros">Litros</option>
+                                                        </select>
+                                                    </div>
+                                                    <div id="unidad-mensaje1"  class="invalid-feedback">
+                                                        Seleccione el tipo de unidad de medida.
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12" >
+                                                    <div class="form-group" id="form-group-stock">
+                                                        <label  style="margin-top: 20px" for="exampleInputUsername1">Stock actual</label>
+                                                        <input type="number" class="form-control"  id="stock" name="stock"/>
+                                                    </div>
+                                                    <div id="stock-mensaje1"  class="invalid-feedback">
+                                                        Ingrese el stock actual.
+                                                    </div>
+                                                    <div id="stock-mensaje2"  class="invalid-feedback">
+                                                        Debe ser mayor o igual a 0.
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
+                                                        <input type="number" class="form-control"  id="stockMinimo" name="stockMinimo"/>
+
+                                                    </div>
+                                                    <div id="stockMin-mensaje1" class="invalid-feedback">
+                                                        Ingrese el stock mínimo.
+                                                    </div>
+                                                    <div id="stockMin-mensaje2"  class="invalid-feedback">
+                                                        Debe ser mayor a 0.
+                                                    </div>
+                                                    <div id="stockMin-mensaje3"  class="invalid-feedback">
+                                                        Debe ser menor o igual al stock actual.
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
+                                                        <input type="number" class="form-control"  id="stockMaximo" name="stockMaximo"/>
+                                                    </div>
+                                                    <div id="stockMax-mensaje1"  class="invalid-feedback">
+                                                        Ingrese el stock Maximo
+                                                    </div>
+                                                    <div id="stockMax-mensaje2"  class="invalid-feedback">
+                                                        Debe ser mayor o igual al stock actual.
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-lg-12" >
+                                                    <div class="form-group">
+                                                        <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
+                                                        <input type="file" class="dropify" id="foto" name="imagenInsumo"/>
+                                                    </div>
+                                                    <div id="foto-mensaje1"  class="invalid-feedback">
+                                                        Ingrese una foto para el insumo
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12" style="margin-top: 30px;text-align:center">
+                                                    <button type="submit" class="btn btn-success btn-rounded btn-fw">Registrar</button>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- -------------------------------------------------------------------------------------------------------------- -->
+                            <div th:if="${modificar}" class="col-lg-4 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title">Modificar Insumo</h4>
+                                        <form  th:action="@{/administrador/insumo/modificar_insumo}" name="formModificarInsumo" enctype="multipart/form-data" method="post">
+                                            <div class="row">
+                                                <div class="col-lg-12" style="text-align: center">
+                                                    <img th:src="@{/uploads/}+${insumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                </div>             
+
+                                                <div class="col-lg-12" >
+                                                    <input th:value="${insumo.idInsumo}"  type="hidden" name="id"/>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputUsername1" >Nombre</label>
+                                                        <input th:value="${insumo.nombreInsumo}"  type="text" class="form-control" id="nombre" name="nombre"/>
+                                                    </div>
+                                                    <div id="nombre-mensaje1"  class="invalid-feedback">
+                                                        Ingrese el nombre del insumo.
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
+                                                        <textarea class="form-control" id="descripcion" name="descripcion">[[${insumo.descripcionInsumo}]]</textarea>
+                                                    </div>
+                                                    <div id="descripcion-mensaje1"  class="invalid-feedback">
+                                                        Ingrese una descripción para el insumo.
+                                                    </div>
+                                                    <div class="form-group">   
+                                                        <div class="form-group">  
+                                                            <label style="margin-top: 20px" for="exampleInputUsername1">Unidad de medida</label>
+                                                            <select class="form-control form-control-lg" id="unidadMedida" name="unidadMedida">
+                                                                <option th:selected="${insumo.unidadMedidaInsumo} == Kilos" value="Kilos">Kilos</option>
+                                                                <option th:selected="${insumo.unidadMedidaInsumo} == Litros" value="Litros">Litros</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div id="unidad-mensaje1"  class="invalid-feedback">
+                                                        Seleccione el tipo de unidad de medida.
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12" >
+                                                    <div class="form-group is-valid">
+                                                        <label  style="margin-top: 20px" for="exampleInputUsername1">Stock</label>
+                                                        <input th:value="${insumo.stockInsumo}" type="number" class="form-control" id="stock" name="stock"/>
+                                                    </div>
+                                                    <div id="stock-mensaje1"  class="invalid-feedback">
+                                                        Ingrese el stock actual.
+                                                    </div>
+                                                    <div id="stock-mensaje2"  class="invalid-feedback">
+                                                        Debe ser mayor o igual a 0.
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label  style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
+                                                        <input th:value="${insumo.minimoStockInsumo}" type="number" class="form-control" id="stockMinimo" name="stockMinimo" onkeydown=""/>
+                                                    </div>
+                                                    <div id="stockMin-mensaje1" class="invalid-feedback">
+                                                        Ingrese el stock minimo.
+                                                    </div>
+                                                    <div id="stockMin-mensaje2"  class="invalid-feedback">
+                                                        Debe ser mayor a 0.
+                                                    </div>
+                                                    <div id="stockMin-mensaje3"  class="invalid-feedback">
+                                                        Debe ser menor o igual al stock actual.
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
+                                                        <input th:value="${insumo.maximoStockInsumo}" type="number" class="form-control" id="stockMaximo" name="stockMaximo"/>
+                                                    </div>
+                                                    <div id="stockMax-mensaje1"  class="invalid-feedback">
+                                                        Ingrese el stock Maximo
+                                                    </div>
+                                                    <div id="stockMax-mensaje2"  class="invalid-feedback">
+                                                        Debe ser mayor o igual al stock actual.
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12" >
+                                                    <div class="form-group">
+                                                        <div class="form-check form-check-success">
+                                                            <label class="form-check-label">
+                                                                <input type="radio" class="form-check-input" name="opcionFoto" id="optionsRadios1" value="si" checked onclick="ocultarFoto(this);">
+                                                                Mantener foto
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check form-check-success">
+                                                            <label class="form-check-label">
+                                                                <input type="radio" class="form-check-input" name="opcionFoto" id="optionsRadios2" value="no" onclick="ocultarFoto(this);">
+                                                                Cambiar foto
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="div-modificar-foto" class="col-lg-12" >
+
+                                                    <div class="form-group">
+                                                        <label  style="margin-top: 20px" for="exampleInputUsername1">Foto</label>
+                                                        <input type="file" class="dropify" id="foto" name="imagenInsumo"/>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-12" style="margin-top: 30px;text-align:center">
+                                                    <button type="submit" class="btn btn-success btn-rounded btn-fw">Actualizar</button>
+                                                </div>
+
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
+                            <div class="col-md-8 col-xl-8 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="card-title">Insumos</h3>
+                                        <form  th:action="@{/administrador/insumo/buscar_por_filtro}"  enctype="multipart/form-data" method="post">
+
+                                            <div class="row">
+                                                <div class="col-2">
+                                                    <h5 >Buscar por: </h5>
+                                                </div>
+                                                <div class="col-4">
+                                                    <select class="btn btn-success dropdown-toggle"  name="tipoBusqueda">
+                                                        <option value="nombre">Nombre insumo</option>
+                                                        <option value="stock">Stock Actual</option>
+                                                        <option value="unidad">Unidad de medida</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" name="filtro" aria-label="Escribe el nombre de la receta">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-sm btn-success" type="submit">Buscar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form> 
+
+                                        <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+                                                <div  class="row">
+                                                    <div style="padding: 5px" th:each="ins: ${insumos}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
+                                                        <div class="card">
+                                                            <div class="card-body text-center">
+                                                                <div style="text-align:right">
+
+
+                                                                    <a  th:href="@{/administrador/insumo/cargar_insumo(idInsumo=${ins.idInsumo})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                    <button type="button" class="btn btn-danger " data-toggle="modal"  th:attr="data-target='#modal'+${ins.idInsumo }" ><i class="mdi mdi-close"></i></button>
+                                                                    <div class="modal fade" th:id="'modal' + ${ins.idInsumo}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel-3">Eliminar insumo</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body" id="pruebaModal">
+                                                                                    <p >¿Seguro que desea eliminar el insumo?</p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a id="btn-eliminar" th:href="@{/administrador/insumo/eliminar_insumo(idInsumo=${ins.idInsumo},nombreFoto=${ins.fotoInsumo})}" class="btn btn-danger ">Eliminar</a>
+                                                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div >
+                                                                    <img th:src="@{/uploads/}+${ins.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/>
+                                                                    <h4 th:text="${ins.nombreInsumo}"></h4>
+                                                                    <p th:text="${ins.unidadMedidaInsumo}" class="text-muted mb-0">Unidad: Kilos</p>
+
+                                                                </div>
+                                                                <p th:text="${ins.descripcionInsumo}" class="mt-2 card-text">
+                                                                    Zanahoria especial sabor zanagoria
+                                                                </p>
+                                                                <div class="border-top pt-3">
+                                                                    <div class="row">
+                                                                        <div class="col-12">
+
+                                                                            <h6>Stock actual: </h6><label>[[${ins.stockInsumo}]]</label>
+                                                                        </div>
+                                                                        <div class="col-12">
+
+                                                                            <h6>Stock minimo: </h6><label>[[${ins.minimoStockInsumo}]]</label>
+                                                                        </div>
+                                                                        <div class="col-12">
+
+                                                                            <h6>Stock maximo: </h6><label>[[${ins.maximoStockInsumo}]]</label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <div class="media">
+                                                    <div class="table-responsive">
+                                                        <table id="order-listing" class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Nombre</th>
+                                                                    <th>Descripción</th>
+                                                                    <th>Unidad medida</th>
+                                                                    <th>Stock</th>
+                                                                    <th>Stock minimo</th>
+                                                                    <th>Stock maximo</th>
+                                                                    <th>Foto</th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <tbody>
+                                                                <tr th:each="ins: ${insumos}">
+                                                                    <td th:text="${ins.nombreInsumo}"></td>
+                                                                    <td th:text="${ins.descripcionInsumo}"></td>
+                                                                    <td th:text="${ins.unidadMedidaInsumo}"></td>
+                                                                    <td th:text="${ins.stockInsumo}"></td>
+                                                                    <td th:text="${ins.minimoStockInsumo}"></td>
+                                                                    <td th:text="${ins.maximoStockInsumo}"></td>
+                                                                    <td><img th:src="@{/uploads/}+${ins.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image"/></td>
+                                                                    <td>
+                                                                        <a  th:href="@{/administrador/insumo/cargar_insumo(idInsumo=${ins.idInsumo})}" class="btn btn-success  "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-danger " data-toggle="modal"  th:attr="data-target='#modal2'+${ins.idInsumo }" ><i class="mdi mdi-close"></i></button>
+                                                                    </td>
+                                                                    <div class="modal fade" th:id="'modal2' + ${ins.idInsumo}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-sm" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h5 class="modal-title" id="exampleModalLabel-3">Eliminar insumo</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body" id="pruebaModal">
+                                                                                    <p >¿Seguro que desea eliminar el insumo?</p>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a id="btn-eliminar" th:href="@{/administrador/insumo/eliminar_insumo(idInsumo=${ins.idInsumo},nombreFoto=${ins.fotoInsumo})}" class="btn btn-danger ">Eliminar</a>
+                                                                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--Desarrollar acá-->
+                        <!--final-->
+                    </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../fragments/_footer.html -->
+                    <footer th:replace="fragments/_footer :: footer"></footer>
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+        <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+        <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+        <script th:src="@{/vendors/moment/moment.min.js}"></script>
+        <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+        <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+        <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+        <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+        <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+        <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+        <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+        <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+        <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+        <script th:src="@{/vendors/inputmask/phone.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-addons.js}"></script>
+        <script th:src="@{/js/x-editable.js}"></script>
+        <script th:src="@{/js/dropify.js}"></script>
+        <script th:src="@{/js/dropzone.js}"></script>
+        <script th:src="@{/js/jquery-file-upload.js}"></script>
+        <script th:src="@{/js/formpickers.js}"></script>
+        <script th:src="@{/js/form-repeater.js}"></script>
+        <script src="@{/js/modal-demo.js}"></script>
+        <!-- End custom js for this page-->
+        <!-- plugin js for this page -->
+
+        <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+        <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+
+        <script th:src="@{/js/alerts_personalizado.js}"></script>
+        <script th:src="@{/js/avgrund.js}"></script>
+        <!--validate form--->
+        <script th:src="@{/custom/formulario-insumo.js}"></script>
+
+
+
+        <!--
+        <script th:src="@{/vendors/jquery-toast-plugin/jquery.toast.min.js}"></script>
+        
+        <script th:src="@{/js/toastDemo.js}"></script>
+        <script th:src="@{/js/desktop-notification.js}"></script>-->
+        <script type="text/javascript" >
+            
+            document.getElementById("div-modificar-foto").setAttribute("style", "display: none");
+            function ocultarFoto(myRadio) {
+                if (myRadio.value == "si") {
+                    document.getElementById("div-modificar-foto").setAttribute("style", "display: none");
+                } else if (myRadio.value == "no") {
+                document.getElementById("div-modificar-foto").setAttribute("style", "display: block");
+                }
+            }
+        </script>
+        <script th:inline="javascript">
+
+
+            var tipoRespuesta = [[${tipoRespuesta
+            }
+            ]];
+                    var respuesta = [[${respuesta
+                    }
+                    ]];
+            if (tipoRespuesta !== null) {
+                switch (tipoRespuesta) {
+                    case 'agregar' :
+                        if (respuesta === 1) {
+                            showSwal('success-message', 'Insumo agregado!', 'se ha registrado el insumo exitosamente');
+                        } else if (respuesta === 0) {
+                            showSwal('warning-message', 'Error!', "No se ha podido agregar el insumo");
+                        }
+                        break;
+                    case 'modificar' :
+                        if (respuesta === 1) {
+                            showSwal('success-message', 'Insumo modificado!', 'se ha registrado el insumo exitosamente');
+                        } else if (respuesta === 0) {
+                            showSwal('warning-message', 'Error!', "No se ha podido modificar el insumo");
+                        }
+                        break;
+                    case 'eliminar' :
+                        if (respuesta === 1) {
+                            showSwal('success-message', 'Insumo eliminado!', 'se ha eliminado el insumo exitosamente');
+                        } else if (respuesta === 0) {
+                            showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
+                        }
+                        break;
+                }
+            }
+
+
+
+        </script>
+        <script type="text/javascript" >
+            var formularioPassword = document.getElementsByName("formAgregarInsumo")[0];
+            validatorForms(formularioPassword);
+        </script>
+
+
+
+        <script type="text/javascript" >
+            var formularioPassword = document.getElementsByName("formModificarInsumo")[0];
+            validatorForms(formularioPassword);
+        </script>
+
+
+
+    </body>
+
+</html>

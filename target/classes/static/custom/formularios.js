@@ -8,7 +8,7 @@
  */
 function validatorForms(formulario) {
 
-   console.log(formulario);
+    console.log(formulario);
     /**
      *
      * @param {Elements} rut
@@ -143,6 +143,7 @@ function validatorForms(formulario) {
             return false;
         }
     }
+
     /*
      *
      * @param {type}
@@ -253,19 +254,23 @@ function validatorForms(formulario) {
     function validarInputFile(elemento) {
         var filePath = elemento.value;
         var allowedExtensions = /(.jpg|.jpeg|.png|.gif)$/i;
-        if (!allowedExtensions.exec(filePath)) {
-            elemento.value = '';
-            return false;
-        } else {
-            //Image preview
-            if (elemento.files && elemento.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    document.getElementById('imagePreview').src = e.target.result;
-                };
-                reader.readAsDataURL(elemento.files[0]);
+        if (elemento.value !== null || elemento.value !=="" ) {
+            if (!allowedExtensions.exec(filePath)) {
+                elemento.value = '';
+                return false;
+            } else {
+                //Image preview
+                if (elemento.files && elemento.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        document.getElementById('imagePreview').src = e.target.result;
+                    };
+                    reader.readAsDataURL(elemento.files[0]);
+                }
+                return true;
             }
-            return true;
+        } else {
+             return false;
         }
     }
 
@@ -371,8 +376,10 @@ function validatorForms(formulario) {
                 //validar ruta absoluta
                 if (validarInputFile(formulario.elements[i])) {
                     formulario.elements[i].setAttribute("class", "custom-file-input is-valid");
+                    document.getElementById("foto-mensaje1").setAttribute("style", "display: display");
                 } else {
                     formulario.elements[i].setAttribute("class", "custom-file-input is-invalid");
+                    document.getElementById("foto-mensaje1").setAttribute("style", "display: block");
                     e.preventDefault(e);
                 }
             }
@@ -382,4 +389,5 @@ function validatorForms(formulario) {
     formulario.addEventListener("change", validar);
     //Evento de envio de formulario
     formulario.addEventListener("submit", validar);
-};
+}
+;

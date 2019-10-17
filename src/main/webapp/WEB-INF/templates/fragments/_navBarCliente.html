@@ -1,0 +1,30 @@
+<nav class="bottom-navbar">
+    <div class="container">
+        <ul class="nav page-navigation">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="mdi mdi-help-circle-outline menu-icon"></i>
+                    <span class="menu-title">Solicitar Asistencia</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/cliente/pedirOrdenExtra/}">
+                    <i class="mdi mdi-cart-plus menu-icon"></i>
+                    <span class="menu-title">Agregar Orden</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="mdi mdi-shopping menu-icon"></i>
+                    <span class="menu-title">Mis Ordenes</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/cliente/pagar/pagarOrdenes}">
+                    <i class="mdi mdi-cash-multiple menu-icon"></i>
+                    <span class="menu-title">Pagar</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

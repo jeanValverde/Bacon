@@ -40,20 +40,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers(
-                        "/css/vertical-layout-light/style.css",
-                        "/vendors/mdi/css/materialdesignicons.min.css",
-                        "/vendors/flag-icon-css/css/flag-icon.min.css",
-                        "/vendors/css/vendor.bundle.base.css",
-                        "/images/favicon.png",
-                        "/images/logo.svg",
-                        "/vendors/js/vendor.bundle.base.js",
-                        "/js/off-canvas.js",
-                        "/js/hoverable-collapse.js",
-                        "/js/template.js",
-                        "/js/settings.js",
-                        "/js/todolist.js",
-                        "/fonts/Roboto/**",
-                        "/custom/**").permitAll()
+                        "/css/**",
+                        "/images/**",
+                        "/vendors/**",
+                        "/js/**",
+                        "/scss/**",
+                        "/uploads/**",
+                        "/fonts/**",
+                        "/custom/**", 
+                        "/", 
+                        "/cliente/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
