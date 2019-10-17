@@ -7,9 +7,13 @@ package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dto.Mesa;
 import com.restaurante.bacon.dto.Personal;
+import com.restaurante.bacon.service.MesaService;
 import com.restaurante.bacon.service.PersonalService;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -168,8 +172,21 @@ public class IndexController {
         return "perfil";
     }
     
+    
+    @Autowired
+    MesaService mesaService;
+    
+    
+    
+    
     @RequestMapping("/")
     public String sistemaCliente(Model model){
+        
+        
+        List<Mesa> mesas = new ArrayList<Mesa>();
+        mesas = this.mesaService.EstadoPedido();
+        
+        model.addAttribute("numeroMesa", mesas);
         return "cliente";
     }
 

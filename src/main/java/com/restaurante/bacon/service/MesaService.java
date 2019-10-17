@@ -33,6 +33,10 @@ public class MesaService {
     public Mesa add(Mesa mesa) {
         return this.mesaDao.save(mesa);
     }
+    
+    public Mesa updateEstado(Mesa mesa) {
+        return this.mesaDao.save(mesa);
+    }
 
     public boolean editarMesa(Mesa mesa) {
         return this.procedureQuery.UpdateMesa(mesa.getIdMesa(), mesa.getNumeroMesa(), mesa.getCantidadAsientosMesa(), mesa.getEstadoMesa());
@@ -65,5 +69,8 @@ public class MesaService {
     public List<Mesa> filtrarRecetaByEstado(BigInteger estadoMesa) {
         return this.procedureQuery.filtrarRecetaByEstado(estadoMesa);
     }
-
+    
+    public List<Mesa> EstadoPedido() {
+        return this.procedureQuery.EstadoPedido();
+    }
 }

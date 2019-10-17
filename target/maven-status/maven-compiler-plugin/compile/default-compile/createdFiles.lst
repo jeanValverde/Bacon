@@ -32,7 +32,6 @@ com\restaurante\bacon\controller\PersonalController.class
 com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.class
 com\restaurante\bacon\dao\ProcedureQueryReceta.class
 com\restaurante\bacon\config\WebConfig.class
-.netbeans_automatic_build
 com\restaurante\bacon\dao\ProcedureQuery.class
 com\restaurante\bacon\dto\procedure\ProcedureInsertInsumo.class
 com\restaurante\bacon\service\InsumoService.class
