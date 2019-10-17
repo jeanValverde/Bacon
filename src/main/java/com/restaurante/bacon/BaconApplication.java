@@ -12,7 +12,7 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
 @SpringBootApplication
-@ComponentScan({"com.restaurante.bacon","com.restaurante.bacon.controller"})
+@ComponentScan({"com.restaurante.bacon", "com.restaurante.bacon.controller"})
 public class BaconApplication {
 
     public static void main(String[] args) {

@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,6 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,6 +39,18 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CLIENTE")
 public class Cliente implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Id
+    @Basic(optional = false)
+    
+    //declarar que el id se usa con una secuencia 
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CLIENTE")
+    //declarar la secuencia 
+    @SequenceGenerator(name = "SEQ_CLIENTE", sequenceName = "SEQ_CLIENTE", allocationSize = 1)
+    @NotNull
+    @Column(name = "ID_CLIENTE")
+    private Integer idCliente;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -46,14 +61,6 @@ public class Cliente implements Serializable {
     @Column(name = "FECHA_INGRESO")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaIngreso;
-
-    private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ID_CLIENTE")
-    private BigDecimal idCliente;
     @Column(name = "FECHA_SALIDA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaSalida;
@@ -71,24 +78,31 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(BigDecimal idCliente) {
+    public Cliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
-    public Cliente(BigDecimal idCliente, String nombre, Date fechaIngreso) {
+    public Cliente(Integer idCliente, String nombre, Date fechaIngreso) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.fechaIngreso = fechaIngreso;
     }
 
-    public BigDecimal getIdCliente() {
+    public Integer getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(BigDecimal idCliente) {
+    public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Date getFechaIngreso() {
         return fechaIngreso;
@@ -158,14 +172,5 @@ public class Cliente implements Serializable {
         }
         return true;
     }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     
 }

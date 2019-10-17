@@ -50,7 +50,7 @@ public class PagarOrdenController {
         //sesion 
         Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
         List<Orden> ordenes = new ArrayList<Orden>();
-        ordenes = this.pagarOrdenService.listarOrdenes(cliente.getIdCliente());
+        ordenes = this.pagarOrdenService.listarOrdenes(new BigDecimal(cliente.getIdCliente().toString())); 
         
         List<Receta> recetas = new ArrayList<Receta>();
         
