@@ -18,16 +18,11 @@ com\restaurante\bacon\service\OrdenCocinaService.class
 com\restaurante\bacon\dao\IInsumoDao.class
 com\restaurante\bacon\controller\PersonalInsumo.class
 com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.class
-<<<<<<< HEAD
 com\restaurante\bacon\dao\InsumoPedidoProveedorDAO.class
-com\restaurante\bacon\controller\ClienteIngresarController.class
-com\restaurante\bacon\dao\IProveedorDao.class
-com\restaurante\bacon\dao\ProcedureQueryInsumoPedidoProveedor.class
-=======
 com\restaurante\bacon\controller\ClienteIngresarController.class
 com\restaurante\bacon\dao\ProcedureQueryOrden.class
 com\restaurante\bacon\dao\IProveedorDao.class
->>>>>>> Felipe
+com\restaurante\bacon\dao\ProcedureQueryInsumoPedidoProveedor.class
 com\restaurante\bacon\dto\Pedido.class
 com\restaurante\bacon\dao\IPedidoDao.class
 com\restaurante\bacon\dao\IInsumoPedidoProveedorDao.class
@@ -58,11 +53,8 @@ com\restaurante\bacon\dto\InsumoPedido.class
 com\restaurante\bacon\controller\PersonalProveedorInsumo.class
 com\restaurante\bacon\controller\IndexController.class
 com\restaurante\bacon\dto\Proveedor.class
-<<<<<<< HEAD
-com\restaurante\bacon\dao\IInsumoPedidoDao.class
-=======
 com\restaurante\bacon\controller\PagarOrdenController.class
->>>>>>> Felipe
+com\restaurante\bacon\dao\IInsumoPedidoDao.class
 com\restaurante\bacon\dto\EgresoStock.class
 com\restaurante\bacon\exceptions\PreexistingEntityException.class
 com\restaurante\bacon\dao\ProcedureQueryRecetaOrdenada.class
@@ -75,11 +67,8 @@ com\restaurante\bacon\dto\BoletaControl.class
 com\restaurante\bacon\dto\procedure\ProcedureUpdateProveedor.class
 com\restaurante\bacon\config\WebSecurityConfig.class
 com\restaurante\bacon\BaconApplication.class
-<<<<<<< HEAD
-com\restaurante\bacon\service\PedidoService.class
-=======
 com\restaurante\bacon\dao\IRecetaOrdenadaDao.class
->>>>>>> Felipe
+com\restaurante\bacon\service\PedidoService.class
 com\restaurante\bacon\dto\Personal.class
 com\restaurante\bacon\dao\ProcedureQueryIngrediente.class
 com\restaurante\bacon\service\ProveedorService.class
@@ -89,11 +78,8 @@ com\restaurante\bacon\dto\RecetaOrdenada.class
 com\restaurante\bacon\service\RecetaOrdenadaService.class
 com\restaurante\bacon\dto\IngresoStock.class
 com\restaurante\bacon\exceptions\NonexistentEntityException.class
-<<<<<<< HEAD
 com\restaurante\bacon\service\EstadoPedidoService.class
-=======
 com\restaurante\bacon\dao\IPagarOrdenDao.class
->>>>>>> Felipe
 com\restaurante\bacon\controller\CocinaController.class
 com\restaurante\bacon\dto\EstadoPedido.class
 com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.class

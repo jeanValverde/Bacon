@@ -15,12 +15,9 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Orden.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\InsumoPedidoProveedorDAO.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrden.java
-<<<<<<< HEAD
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IPedidoDao.java
-=======
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\PagarOrdenService.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryOrden.java
->>>>>>> Felipe
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryReceta.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IInsumoPedidoProveedorDao.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\EstadoPedidoService.java
@@ -39,28 +36,19 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\PersonalService.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IProveedorDao.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Personal.java
-<<<<<<< HEAD
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IEstadoPedidoDao.java
-=======
->>>>>>> Felipe
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdateProveedor.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\ProveedorService.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\config\WebConfig.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\PersonalMantenedorReceta.java
-<<<<<<< HEAD
-=======
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IPagarOrdenDao.java
->>>>>>> Felipe
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureDeleteProveedor.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\BaconApplication.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\EstadoOrden.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Mesa.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IInsumoDao.java
-<<<<<<< HEAD
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\InsumoPedidoService.java
-=======
->>>>>>> Felipe
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\ProveedorController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Notificacion.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
@@ -93,11 +81,8 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryInsumoPedidoProveedor.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrdenada.java
-<<<<<<< HEAD
-C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\PersonalPedidoInsumo.java
-=======
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\RecetaOrdenadaService.java
->>>>>>> Felipe
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\PersonalPedidoInsumo.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\IngresoStock.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\RecetaService.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ICategoriaRecetaDao.java
