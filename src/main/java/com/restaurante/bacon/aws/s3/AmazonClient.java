@@ -7,6 +7,8 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.restaurante.bacon.dao.DatosProcecureCredenciales;
+import com.restaurante.bacon.dto.Datos;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,26 +17,38 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class AmazonClient {
 
     private AmazonS3 s3client;
 
-    @Value("https://s3-sa-east-1.amazonaws.com")
+ 
+    @Value("${amazonProperties.endpointUrl}")
     private String endpointUrl;
-    @Value("aws.s3.bucket")
+    @Value("${amazonProperties.bucketName}")
     private String bucketName;
-    @Value("aws.access.key")
+    @Value("${amazonProperties.accessKey}")
     private String accessKey;
-    @Value("aws.secret.key")
+    @Value("${amazonProperties.secretKey}")
     private String secretKey;
 
     @PostConstruct
-    private void initializeAmazon() {
+    private void initializeAmazon() throws Exception {
+        getCredenciales();
         AWSCredentials credentials = new BasicAWSCredentials(this.accessKey, this.secretKey);
         this.s3client = new AmazonS3Client(credentials);
+    }
+    
+    public void getCredenciales() throws Exception{
+        Rsa rsa = new Rsa();
+        this.bucketName = rsa.decode(this.bucketName, "#Jean199726.");
+        this.accessKey = rsa.decode(this.accessKey, "#Jean199726.");
+        this.secretKey = rsa.decode(this.secretKey, "#Jean199726.");
     }
 
     public String uploadFile(MultipartFile multipartFile, String nombre) {

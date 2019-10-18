@@ -7,6 +7,7 @@ package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.aws.s3.AmazonClient;
 import com.restaurante.bacon.config.UserRol;
+import com.restaurante.bacon.dao.DatosProcecureCredenciales;
 import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dto.Ingrediente;
 import com.restaurante.bacon.dto.Insumo;
@@ -46,6 +47,9 @@ public class PersonalMantenedorReceta {
     
     private AmazonClient amazonClient;
 
+    @Autowired
+    DatosProcecureCredenciales datosProcecureCredenciales;
+     
     @Autowired
     PersonalMantenedorReceta(AmazonClient amazonClient) {
         this.amazonClient = amazonClient;

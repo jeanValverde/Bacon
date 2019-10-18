@@ -1,0 +1,5 @@
+amazonProperties:
+  endpointUrl: https://s3-sa-east-1.amazonaws.com
+  accessKey: zWPMYYNIOj4a0HihuTv8065RV4vWXhTX
+  secretKey: Wx7V+Vq2csbKtoWmPf4K0G3iv3ST6EjkmlzNS5xTNwXTN/vdPYW1FXRD2GSC+Vnh
+  bucketName: aWzg+HpV8W0AHI+s5XaEZnRD2GSC+Vnh

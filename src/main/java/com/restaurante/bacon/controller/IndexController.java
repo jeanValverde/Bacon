@@ -5,7 +5,9 @@
  */
 package com.restaurante.bacon.controller;
 
+import com.restaurante.bacon.aws.s3.Rsa;
 import com.restaurante.bacon.config.UserRol;
+import com.restaurante.bacon.dao.DatosProcecureCredenciales;
 import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dto.Mesa;
 import com.restaurante.bacon.dto.Personal;
@@ -44,7 +46,7 @@ public class IndexController {
     //Para ingresar una contraseña encriptada 
     @Autowired
     private BCryptPasswordEncoder encoder;
-
+   
     //Redirecciona al controlador adecuado según el rol del usuario despues de iniciar sesión 
     @RequestMapping("/sistema")
     public ModelAndView index(Model modelo) {
@@ -82,7 +84,6 @@ public class IndexController {
         }
         
         //fin desarrollo 
-        
         //despacho 
         return new ModelAndView("redirect:" + page);
     }
