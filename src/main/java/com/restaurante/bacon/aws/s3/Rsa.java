@@ -50,12 +50,6 @@ public class Rsa {
         return desencriptarContrasena(clave, llave);
     }
 
-//    private String getLlavePrivada(Integer idUsuario) {
-//        try {
-//            return this.usuarioService.getLlaveUsuario(idUsuario).get().getLlave();
-//        } catch (Exception ex) {
-//            return "";
-//        }
-//    }
+
     
 }
