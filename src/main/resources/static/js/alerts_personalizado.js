@@ -36,10 +36,7 @@
           className: "btn btn-primary"
         }
       })
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> Alejandro
+
       } else if (type === 'warning-message') {
       swal({
         title: titulo,
@@ -52,11 +49,7 @@
           className: "btn btn-primary"
         }
       })
-<<<<<<< HEAD
-=======
-=======
->>>>>>> Jean
->>>>>>> Alejandro
+
 
     } else if (type === 'auto-close') {
       swal({
@@ -91,11 +84,11 @@
             closeModal: true,
           },
           confirm: {
-<<<<<<< HEAD
+
             text: "OK",
-=======
+
             text: "Eliminar",
->>>>>>> Jean
+
             value: true,
             visible: true,
             className: "btn btn-primary",
