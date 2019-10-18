@@ -36,7 +36,6 @@
           className: "btn btn-primary"
         }
       })
-
       } else if (type === 'warning-message') {
       swal({
         title: titulo,
@@ -49,7 +48,6 @@
           className: "btn btn-primary"
         }
       })
-
 
     } else if (type === 'auto-close') {
       swal({
@@ -84,11 +82,7 @@
             closeModal: true,
           },
           confirm: {
-
-            text: "OK",
-
             text: "Eliminar",
-
             value: true,
             visible: true,
             className: "btn btn-primary",
