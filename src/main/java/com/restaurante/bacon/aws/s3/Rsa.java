@@ -49,7 +49,4 @@ public class Rsa {
     public String decode(String clave, String llave) throws Exception{
         return desencriptarContrasena(clave, llave);
     }
-
-
-    
 }
