@@ -17,9 +17,9 @@
             <!-- plugin css for this page -->
             <!-- End plugin css for this page -->
             <!-- inject:css -->
-        <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}"/>
+            <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}"/>
             <!-- endinject -->
-        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+            <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
 
             <!---->
 
@@ -42,447 +42,92 @@
 
                         <!--Desarrollar acá-->
 
-
-
-
-
                         <div class="row">
-
-                            <div class="col-12 col-sm-6 col-md-3 grid-margin stretch-card">
+                            <div class="col-12 col-sm-6 col-md-4 grid-margin stretch-card">
                                 <div class="card icon-card-primary">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div class="icon mb-0 mb-md-2 mb-xl-0 mr-2">
                                                 <i class="mdi mdi-star-circle"></i>
                                             </div>
-                                            <p class="font-weight-medium mb-0">Recetas</p>
+                                            <p class="font-weight-medium mb-0">Clientes</p>
                                         </div>
                                         <div class="d-flex align-items-center mt-3 flex-wrap">
-                                            <h3 class="font-weight-normal mb-0 mr-2">59467</h3>
+                                            <h3 class="font-weight-normal mb-0 mr-2" id="totalClientesAtendidos">0</h3>
+
+                                            <a class="btn btn-outline-light btn-icon-text" th:href="@{/informeCliente/verInformesCliente}" target="_blank">
+                                                Descargar Informe
+
+                                                <i class="mdi mdi-download btn-icon-prepend"></i>                          
+                                            </a>
                                         </div>
-                                        <small class="font-weight-medium d-block mt-2">Total de recetas en el restautante.</small>
+                                        <small class="font-weight-medium d-block mt-2">Total Clientes Atendidos</small>
+
                                     </div>
                                 </div>
                             </div>
-
-
-                            <div class="col-12 col-sm-6 col-md-3 grid-margin stretch-card">
+                            <div class="col-12 col-sm-6 col-md-4 grid-margin stretch-card">
                                 <div class="card icon-card-success">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div class="icon mb-0 mb-md-2 mb-xl-0 mr-2">
                                                 <i class="mdi mdi-truck"></i>
                                             </div>
-                                            <p class="font-weight-medium mb-0">ingresos de dinero</p>
+                                            <p class="font-weight-medium mb-0">Clientes</p>
                                         </div>
                                         <div class="d-flex align-items-center mt-3 flex-wrap">
-                                            <h3 class="font-weight-normal mb-0 mr-2">28085</h3>
-                                            <div class="badge badge-outline-light badge-pill mt-md-2 mt-xl-0 ">
-                                                <div class="d-flex align-items-baselin0">
-                                                    <span class="mdi mdi-arrow-up"></span>
-                                                </div>
-                                            </div>
+                                            <h3 class="font-weight-normal mb-0 mr-2" id="clienteConfirmado">0</h3>
+                                            
                                         </div>
-                                        <small class="font-weight-medium d-block mt-2">Total para este mes</small>
+                                        <small class="font-weight-medium d-block mt-2">Total Clientes Por Confirmado</small>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-12 col-sm-6 col-md-3 grid-margin stretch-card">
+                            <div class="col-12 col-sm-6 col-md-4 grid-margin stretch-card">
                                 <div class="card icon-card-info">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
                                             <div class="icon mb-0 mb-md-2 mb-xl-0 mr-2">
                                                 <i class="mdi mdi-basket"></i>
                                             </div>
-                                            <p class="font-weight-medium mb-0">Egresos de dinero</p>
+                                            <p class="font-weight-medium mb-0">Clientes</p>
                                         </div>
                                         <div class="d-flex align-items-center mt-3 flex-wrap">
-                                            <h3 class="font-weight-normal mb-0 mr-2">39645</h3>
-                                            <div class="badge badge-outline-light badge-pill mt-md-2 mt-xl-0">
-                                                <div class="d-flex align-items-baseline">
-                                                    <span class="mdi mdi-arrow-down"></span>
-                                                </div>
-                                            </div>
+                                            <h3 class="font-weight-normal mb-0 mr-2" id="clienteMesa">0</h3>
+                                            
                                         </div>
-                                        <small class="font-weight-medium d-block mt-2">Total para este mes</small>
+                                        <small class="font-weight-medium d-block mt-2">Total Clientes Por Mesa</small>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-12 col-sm-6 col-md-3 grid-margin stretch-card">
-                                <div class="card icon-card-dark">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="icon mb-0 mb-md-2 mb-xl-0 mr-2">
-                                                <i class="mdi mdi-package-down"></i>
-                                            </div>
-                                            <p class="font-weight-medium mb-0">Pedidos</p>
-                                        </div>
-                                        <div class="d-flex align-items-center mt-3 flex-wrap">
-                                            <h3 class="font-weight-normal mb-0 mr-2">44148</h3>
-                                        </div>
-                                        <small class="font-weight-medium d-block mt-2">Total de pedidos este mes</small>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
-
                         <div class="row">
 
-
-                            <!--Grafico y total del personal registrado en el sistema.--->
-                            <div class="col-md-4 grid-margin stretch-card">
-                                <div class="card">
+                            <div class="col-md-12 grid-margin stretch-card">
+                                <div class="card"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                                     <div class="card-body">
                                         <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title">Personal</p>
+                                            <p class="card-title">Cantidad de Platillos Vendidos Por Platillos</p>
                                             <div class="dropdown dropright card-menu-dropdown">
                                                 <button class="btn" type="button" id="cardMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
                                                 </button>
                                                 <div class="dropdown-menu" aria-labelledby="cardMenuButton1">
-                                                    <a class="dropdown-item" href="#">Descargar Informe</a>
+                                                    <a class="dropdown-item" th:href="@{/informe/verInformesReceta}" target="_blank">Descargar Informe y Ver Detalle</a>
                                                 </div>
                                             </div>
                                         </div>
-                                        <p class="text-muted mb-5">Total de funcionarios de administración, finanzas, cocina, garzón, bar y bodega. </p>
                                         <div class="d-flex flex-column justify-content-center align-items-center">
-                                            <h1 class="font-weight-bold">11156</h1>
-                                        </div>
-                                    </div>
-                                    <canvas height="110" id="customers-chart"></canvas>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 grid-margin stretch-card">
-                                <div class="card overflow-hidden">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title">Recetas por tipo</p>
-                                            <div class="dropdown dropleft card-menu-dropdown">
-                                                <button class="btn" type="button" id="cardMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="cardMenuButton2">
-                                                    <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                </div>
+                                            <h1 class="font-weight-bold" id="totalReceta">0</h1>
+                                            <div class="d-flex align-items-baseline flex-wrap justify-content-center">
+                                                <h5 class="mb-0 mt-0 mt-md-2 mt-xl-0 font-weight-normal">Cantidad de Recetas</h5>
                                             </div>
                                         </div>
-                                        <p class="text-muted mb-5">Total de recetas por tipo cocina y bar.</p>
-                                        <div class="d-flex flex-column justify-content-center align-items-center">
-                                            <h1 class="font-weight-bold">53812</h1>
-                                        </div>
                                     </div>
-                                    <canvas id="purchases-chart" height="110"></canvas>
+                                    <canvas height="67" id="informeRecetas" style="display: block; width: 310px; height: 67px;" width="310" class="chartjs-render-monitor"></canvas>
                                 </div>
                             </div>
-
-                            <div class="col-md-4 grid-margin stretch-card">
-                                <div class="card overflow-hidden">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title">Ventas en el mes</p>
-                                            <div class="dropdown dropright card-menu-dropdown">
-                                                <button class="btn" type="button" id="cardMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="cardMenuButton3">
-                                                    <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-muted mb-5">Resumen de las venas mensuales</p>
-                                        <div class="d-flex flex-column justify-content-center align-items-center">
-                                            <h1 class="font-weight-bold">40008</h1>
-                                        </div>
-                                    </div>
-                                    <canvas height="110" id="revenue-chart"></canvas>
-                                </div>
-                            </div>
-
                         </div>
-
-
-                        <div class="row">
-
-                            <div class="col-md-8 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title flex-grow">Total de ordenes por meses en el año</p>
-                                            <div class="d-flex align-items-center">
-                                                <div class="dropdown dropright card-menu-dropdown">
-                                                    <button class="btn" type="button" id="cardMenuButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="cardMenuButton4">
-                                                        <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-start flex-wrap ">
-                                            <p class="text-muted mb-0">Total de ordenes pagadas durante todo el año.</p>
-                                            <div class="online-revenue-chart-legend mt-2 mt-sm-0 mt-md-2 mt-xl-0 mr-1" id="online-revenue-legend"></div>
-                                        </div>
-                                        <canvas id="online-revenue-chart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title flex-grow">Ordenes totales</p>
-                                            <div class="dropdown dropright card-menu-dropdown">
-                                                <button class="btn" type="button" id="cardMenuButton5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="cardMenuButton5">
-                                                    <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-muted">Total de ordenes pagadas, no pagadas o anuladas en el último mes.</p>
-                                        <canvas id="online-sales-chart" class="mt-5 mt-md-4 mt-xl-5"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-4 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title flex-grow">Total de boletas</p>
-                                            <div class="dropdown dropright card-menu-dropdown">
-                                                <button class="btn" type="button" id="cardMenuButton5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="cardMenuButton5">
-                                                    <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p class="text-muted">Total de boletas pagadas y no pagadas</p>
-                                        <canvas id="online-sales-chart" class="mt-5 mt-md-4 mt-xl-5"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-8 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title flex-grow">Total de boletas por meses en el año</p>
-                                            <div class="d-flex align-items-center">
-                                                <div class="dropdown dropright card-menu-dropdown">
-                                                    <button class="btn" type="button" id="cardMenuButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="cardMenuButton4">
-                                                        <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-start flex-wrap ">
-                                            <p class="text-muted mb-0">Total de boletas emitidas y pagadas en el año.</p>
-                                            <div class="online-revenue-chart-legend mt-2 mt-sm-0 mt-md-2 mt-xl-0 mr-1" id="online-revenue-legend"></div>
-                                        </div>
-                                        <canvas id="online-revenue-chart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-8 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title flex-grow">Total de ganancias de boletas por meses en el año</p>
-                                            <div class="d-flex align-items-center">
-                                                <div class="dropdown dropright card-menu-dropdown">
-                                                    <button class="btn" type="button" id="cardMenuButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="cardMenuButton4">
-                                                        <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-start flex-wrap ">
-                                            <p class="text-muted mb-0">Total de boletas emitidas y pagadas en el año.</p>
-                                            <div class="online-revenue-chart-legend mt-2 mt-sm-0 mt-md-2 mt-xl-0 mr-1" id="online-revenue-legend"></div>
-                                        </div>
-                                        <canvas id="online-revenue-chart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-5 col-xl-4 grid-margin stretch-card">
-                                <div class="card overflow-hidden">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title flex-grow">Ganancia total en el último mes</p>
-                                            <div class="dropdown dropright card-menu-dropdown">
-                                                <button class="btn" type="button" id="cardMenuButton7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="cardMenuButton7">
-                                                    <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 class="font-weight-bold mb-3">$971883</h2>
-                                        <p class="text-muted mb-4">Totales de boletas y ordenes en el último mes y totales de boletas emitidas</p>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <h4 class="font-weight-bold">400</h4>
-                                                <div class="progress progress-md mb-2">
-                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <small>Ordenes</small>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <h4 class="font-weight-bold mt-3 mt-md-0">159</h4>
-                                                <div class="progress progress-md mb-2">
-                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <small>Boletas</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <canvas id="total-sales-chart"></canvas>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="row">
-
-                            <div class="col-md-5 col-xl-4 grid-margin stretch-card">
-                                <div class="card overflow-hidden">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title flex-grow">Total de egresos de pedidos</p>
-                                            <div class="dropdown dropright card-menu-dropdown">
-                                                <button class="btn" type="button" id="cardMenuButton7" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                </button>
-                                                <div class="dropdown-menu" aria-labelledby="cardMenuButton7">
-                                                    <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h2 class="font-weight-bold mb-3">$971883</h2>
-                                        <p class="text-muted mb-4">Totales del egreso de dinero en el último mes y cantidad total</p>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <h4 class="font-weight-bold">400</h4>
-                                                <div class="progress progress-md mb-2">
-                                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <small>Cantidad de pedidos</small>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <h4 class="font-weight-bold mt-3 mt-md-0">159</h4>
-                                                <div class="progress progress-md mb-2">
-                                                    <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                                <small>Boletas</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <canvas id="total-sales-chart"></canvas>
-                                </div>
-                            </div>
-
-                            <div class="col-md-8 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title flex-grow">Total de pedidos por meses en el año</p>
-                                            <div class="d-flex align-items-center">
-                                                <div class="dropdown dropright card-menu-dropdown">
-                                                    <button class="btn" type="button" id="cardMenuButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="cardMenuButton4">
-                                                        <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-start flex-wrap ">
-                                            <p class="text-muted mb-0">Total de pedidos emitidos y pagados en el año.</p>
-                                            <div class="online-revenue-chart-legend mt-2 mt-sm-0 mt-md-2 mt-xl-0 mr-1" id="online-revenue-legend"></div>
-                                        </div>
-                                        <canvas id="online-revenue-chart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                        </div>
-
-
-                        <div class="row">
-
-
-
-                            <div class="col-md-12 grid-margin stretch-card">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start justify-content-between">
-                                            <p class="card-title flex-grow">Total de egresos de dinero de pedidos por meses en el año</p>
-                                            <div class="d-flex align-items-center">
-                                                <div class="dropdown dropright card-menu-dropdown">
-                                                    <button class="btn" type="button" id="cardMenuButton4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="mdi mdi-dots-horizontal card-menu-btn"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="cardMenuButton4">
-                                                        <a class="dropdown-item" href="#">Descargar Informe</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-start flex-wrap ">
-                                            <div class="online-revenue-chart-legend mt-2 mt-sm-0 mt-md-2 mt-xl-0 mr-1" id="online-revenue-legend"></div>
-                                        </div>
-                                        <canvas id="online-revenue-chart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                        </div>
-
-
-
-
-
-
-
 
                         <!--final-->
 
@@ -503,9 +148,11 @@
         <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
         <!-- endinject -->
         <!-- Plugin js for this page-->
+
+
         <!-- End plugin js for this page-->
-        
-        
+
+
         <!-- inject:js -->
         <script th:src="@{/js/off-canvas.js}"></script>
         <script th:src="@{/js/hoverable-collapse.js}"></script>
@@ -513,15 +160,176 @@
         <script th:src="@{/js/settings.js}"></script>
         <script th:src="@{/js/todolist.js}"></script>
         <!-- endinject -->
-        
-        
+
+
         <!-- plugin js for this page -->
         <script src="../../vendors/chart.js/Chart.min.js"></script>
         <!-- End plugin js for this page -->
-        
+
         <!-- Custom js for this page-->
         <script src="../../js/dashboard.js"></script>
         <!-- End custom js for this page-->
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="text/javascript" >
+            getGrafico();
+            function getGrafico() {
+                
+                
+                
+                axios.get(window.location.protocol + "//" + window.location.host + '/informe/graficoReceta')
+                        .then(function (response) {
+                            console.log(response);
+                            completarGrafico(response.data);
+                            
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            
+                        })
+                        .finally(function () {
+                            // always executed
+                        });
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            
+            
+            
+            function completarGrafico(recetas) {
+                
+                var dato = [];
+                var cantidad = [];
+                var total = 0;
+                
+                for (var i = 0; i < recetas.length; i++) {
+                    dato.push(recetas[i].nombre_receta);
+                    console.log(recetas[i].nombre_receta);
+                }
+                
+                for (var i = 0; i < recetas.length; i++) {
+                    var jean = 0;
+                    cantidad.push(recetas[i].cantidad);
+                    console.log(recetas[i].cantidad);
+                    jean = parseInt(cantidad, 10);
+                    total = total + jean;
+                }
+                console.log(dato);
+                document.getElementById("totalReceta").innerHTML = total;
+                
+                var customersChartCanvas = $("#informeRecetas").get(0).getContext("2d");
+                var customersChart = new Chart(customersChartCanvas, {
+                    type: 'bar',
+                    data: {
+                        labels: dato,
+                        datasets: [{
+                                label: 'cantidad',
+                                data: cantidad,
+                                backgroundColor: '#6201ed'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        layout: {
+                            padding: {
+                                left: 0,
+                                right: 0,
+                                top: 0,
+                                bottom: 0
+                            }
+                        },
+                        scales: {
+                            yAxes: [{
+                                    display: false,
+                                    gridLines: {
+                                        drawBorder: false,
+                                        color: '#f1f3f9',
+                                        zeroLineColor: '#f1f3f9'
+                                    },
+                                    ticks: {
+                                        display: false,
+                                        fontColor: "#9fa0a2",
+                                        padding: 0,
+                                        stepSize: 20,
+                                        min: 0,
+                                        max: 15
+                                    }
+                                }],
+                            xAxes: [{
+                                    display: false,
+                                    stacked: false,
+                                    categoryPercentage: 1,
+                                    ticks: {
+                                        display: false,
+                                        beginAtZero: false,
+                                        display: true,
+                                                padding: 10,
+                                        fontSize: 11
+                                    },
+                                    gridLines: {
+                                        color: "rgba(0, 0, 0, 0)",
+                                        display: false
+                                    },
+                                    position: 'bottom',
+                                    barPercentage: 0.7
+                                }]
+                        },
+                        legend: {
+                            display: false
+                        },
+                        elements: {
+                            point: {
+                                radius: 0
+                            }
+                        }
+                    }
+                });
+            }
+            
+            
+            
+        </script>
+
+        <script type="text/javascript" >
+            axios.get(window.location.protocol + "//" + window.location.host + '/informeCliente/graficoCliente')
+                    .then(function (response) {
+                        console.log(response);
+                        completarGraficoCliente(response.data);
+                        
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        
+                    })
+                    .finally(function () {
+                        // always executed
+                    });
+            
+            function completarGraficoCliente(clientes) {
+                
+                var contador = 0;
+                var contadorMesa = 0;
+                
+                for (var i = 0; i < clientes.length; i++) {
+                    
+                    if (clientes[i].descripcion_estado == "Confirmado") {
+                        contador++;
+                    }else{
+                        contadorMesa++;
+                    }
+                }
+                
+                document.getElementById("totalClientesAtendidos").innerHTML = clientes.length;
+                document.getElementById("clienteConfirmado").innerHTML = contador;
+                document.getElementById("clienteMesa").innerHTML = contadorMesa;
+            }
+        </script>
 
     </body>
 

@@ -4,6 +4,7 @@ com\restaurante\bacon\dao\ProcedureQueryCliente.class
 com\restaurante\bacon\dto\procedure\ProcedureDeletetInsumo.class
 com\restaurante\bacon\dto\CategoriaReceta.class
 com\restaurante\bacon\exceptions\IllegalOrphanException.class
+com\restaurante\bacon\service\InformeService.class
 com\restaurante\bacon\dto\Boleta.class
 com\restaurante\bacon\dto\Insumo.class
 com\restaurante\bacon\dto\InsumoPedidoProveedor.class
@@ -12,6 +13,7 @@ com\restaurante\bacon\service\RecetaService.class
 com\restaurante\bacon\dao\IRolDao.class
 com\restaurante\bacon\dao\IRecetaDao.class
 com\restaurante\bacon\dao\IInsumoDao.class
+com\restaurante\bacon\dto\procedure\ProcedureQueryInforme.class
 com\restaurante\bacon\service\ClienteService.class
 com\restaurante\bacon\controller\PersonalInsumo.class
 com\restaurante\bacon\controller\ClienteIngresarController.class
@@ -52,6 +54,7 @@ com\restaurante\bacon\config\WebSecurityConfig.class
 com\restaurante\bacon\BaconApplication.class
 com\restaurante\bacon\dto\Personal.class
 com\restaurante\bacon\dao\ProcedureQueryIngrediente.class
+com\restaurante\bacon\controller\InformeController.class
 com\restaurante\bacon\dto\ControlCaja.class
 com\restaurante\bacon\dto\RecetaOrdenada.class
 com\restaurante\bacon\dao\IMesaDao.class
@@ -65,6 +68,7 @@ com\restaurante\bacon\dao\ProcedureQueryInsumo.class
 com\restaurante\bacon\config\UserRol.class
 com\restaurante\bacon\dto\RecetaOrden.class
 com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.class
+com\restaurante\bacon\dto\Informe.class
 com\restaurante\bacon\dto\InsumoProveedor.class
 com\restaurante\bacon\dao\ProcedureQueryMesa.class
 com\restaurante\bacon\dao\IClienteDao.class

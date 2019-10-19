@@ -17,6 +17,7 @@ C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalProv
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryCliente.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IInsumoDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoProveedor.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\InformeController.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\EgresoStock.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertMesa.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrdenada.java
@@ -30,6 +31,8 @@ C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertInsumo.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureQueryInforme.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\InformeService.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\CategoriaReceta.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoPedido.java
@@ -57,6 +60,7 @@ C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\BoletaControl.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\config\WebSecurityConfig.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IRecetaDao.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\ClienteService.java
+C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Informe.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\MesaController.java
 C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertCliente.java
