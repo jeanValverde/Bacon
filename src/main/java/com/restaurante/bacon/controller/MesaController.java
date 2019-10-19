@@ -129,7 +129,7 @@ public class MesaController {
             model.addAttribute("respuesta", 0);
         }
 
-        //  this.mesaService.editarMesa(mesa);
+        
         mesas = this.mesaService.listarMesa();
 
         model.addAttribute("personalSesion", personal);
