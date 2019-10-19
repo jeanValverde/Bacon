@@ -13,12 +13,15 @@ com\restaurante\bacon\service\RecetaService.class
 com\restaurante\bacon\dao\IRolDao.class
 com\restaurante\bacon\dao\IRecetaDao.class
 com\restaurante\bacon\dao\IInsumoDao.class
+com\restaurante\bacon\service\InformeClienteService.class
 com\restaurante\bacon\dto\procedure\ProcedureQueryInforme.class
 com\restaurante\bacon\service\ClienteService.class
+com\restaurante\bacon\dto\InformeCliente.class
 com\restaurante\bacon\controller\PersonalInsumo.class
 com\restaurante\bacon\controller\ClienteIngresarController.class
 com\restaurante\bacon\dto\Pedido.class
 com\restaurante\bacon\controller\MesaController.class
+com\restaurante\bacon\dto\procedure\ProcedureQueryInformeCliente.class
 com\restaurante\bacon\dto\MedioPago.class
 com\restaurante\bacon\controller\ClientePedirOrdenController.class
 com\restaurante\bacon\dto\Rol.class
@@ -35,6 +38,7 @@ com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.class
 com\restaurante\bacon\dao\ProcedureQueryReceta.class
 com\restaurante\bacon\config\WebConfig.class
 com\restaurante\bacon\dao\ProcedureQuery.class
+com\restaurante\bacon\controller\InformeClienteController.class
 com\restaurante\bacon\dto\procedure\ProcedureInsertInsumo.class
 com\restaurante\bacon\service\InsumoService.class
 com\restaurante\bacon\dto\InsumoPedido.class

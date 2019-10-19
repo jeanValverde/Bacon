@@ -1,8 +1,9 @@
-<<<<<<< HEAD
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\config\WebSecurityConfig.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IIngredienteDao.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\InformeClienteController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Boleta.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\config\UserRol.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureQueryInforme.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\exceptions\NonexistentEntityException.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IRecetaDao.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\PersonalInsumo.java
@@ -12,12 +13,15 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Orden.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrden.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\ClienteService.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\InformeClienteService.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryReceta.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertMesa.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Ingrediente.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\IndexController.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\InformeController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Cliente.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryMesa.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\service\InformeService.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\CocinaController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Proveedor.java
@@ -32,8 +36,10 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\EstadoOrden.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IClienteDao.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\InformeCliente.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Mesa.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\IInsumoDao.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Informe.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Notificacion.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdateMesa.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
@@ -56,6 +62,7 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\ClientePedirOrdenController.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\controller\PersonalProveedorInsumo.java
+C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureQueryInformeCliente.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQuery.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProveedor.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\InsumoProveedor.java
@@ -69,79 +76,3 @@ C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\b
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\Receta.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertInsumo.java
 C:\Users\jean\Desktop\PORTAFOLIO DE TITULO\bacon\src\main\java\com\restaurante\bacon\dto\EstadoPedido.java
-=======
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IIngredienteDao.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Receta.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\exceptions\NonexistentEntityException.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalController.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryInsumo.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdateMesa.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Cliente.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Notificacion.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrden.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\CocinaController.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IPersonalDao.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\BaconApplication.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryIngrediente.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalProveedorInsumo.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryCliente.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IInsumoDao.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoProveedor.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\InformeController.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\EgresoStock.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertMesa.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\RecetaOrdenada.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\RolService.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalInsumo.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQuery.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\InsumoService.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\ClientePedirOrdenController.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Personal.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IRolDao.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertInsumo.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatetInsumo.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureQueryInforme.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\InformeService.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfilPersonal.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\CategoriaReceta.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoPedido.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Orden.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoOrden.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProveedor.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\IngresoStock.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\ClienteIngresarController.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IClienteDao.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Proveedor.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryReceta.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\PersonalService.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\ControlCaja.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Insumo.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\config\UserRol.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryMesa.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\MesaService.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\ICategoriaRecetaDao.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureDeletetInsumo.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\RecetaService.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\IndexController.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Ingrediente.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoCliente.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\BoletaControl.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\config\WebSecurityConfig.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IRecetaDao.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\service\ClienteService.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Informe.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\MesaController.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertCliente.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Boleta.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\Mesa.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dao\IMesaDao.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedido.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\exceptions\IllegalOrphanException.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\config\WebConfig.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalMantenedorReceta.java
-C:\Users\totor\Bacon\src\main\java\com\restaurante\bacon\exceptions\PreexistingEntityException.java
->>>>>>> cf6bb82b4a480a32166238e8cb3e4b6aae73cd0c
