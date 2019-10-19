@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>DatavizUI Admin</title>
+        <!-- base:css -->
+        <link rel="stylesheet" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+        <link rel="stylesheet" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+        <link rel="stylesheet" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/horizontal-layout-light/style.css}">
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+    </head>
+
+    <body class="sidebar-fixed">
+        <div class="container-scroller">
+            <!-- partial:../../partials/_navbar.html -->
+
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <!-- partial:../../partials/_settings-panel.html -->
+                
+
+                <!-- partial -->
+                <!-- partial:../../partials/_sidebar.html -->
+
+                <!-- partial -->
+
+                <div class="main-panel">
+
+                    <div class="content-wrapper" style="background: #FFF" >
+                        
+                        <div class="row" >
+                            <div class="col-md-12" >
+                        <div class="card-body">
+                            <h4 class="card-title">Cantidad de Platillos Vendidos Por Platillos</h4>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+
+                                            <th>
+                                                Platillos
+                                            </th>
+                                            <th>
+                                                Cantidad Platillos Vendidos
+                                            </th>
+                                            <th>
+                                                Precio Platillos c/u
+                                            </th>
+                                            <th>
+                                                Total Precio Total
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="info: ${informe}">
+
+                                            <td th:text="${info.nombre_receta}">
+
+                                            </td>
+                                            <td th:text="${info.cantidad}">
+
+                                            </td>
+                                            <td th:text="${info.valor}">
+
+                                            </td>
+                                            <td th:text="${info.total}">
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                            </div>
+                            </div>
+                    </div>
+                    <button onclick="print(3)" type="button" class="btn btn-primary mr-2">Descargar PDF</button>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:../../partials/_footer.html -->
+                    <!-- partial -->
+                </div>
+                <!-- main-panel ends -->
+            </div>
+            <!-- page-body-wrapper ends -->
+        </div>
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{js/off-canvas.js}"></script>
+        <script th:src="@{js/hoverable-collapse.js}"></script>
+        <script th:src="@{js/template.js}"></script>
+        <script th:src="@{js/settings.js}"></script>
+        <script th:src="@{js/todolist.js}"></script>
+        <!-- endinject -->
+
+
+        <!-- End custom js for this page-->
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+        <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+
+        <script type="text/javascript">
+                            function print(quality = 2) {
+                            const filename = 'baconReporte.pdf';
+                                    html2canvas(document.querySelector('.content-wrapper'), {
+                                    scale: quality
+                                    }).then(canvas => {
+                            let pdf = new jsPDF('p', 'mm', 'a4');
+                                    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 200);
+                                    pdf.save(filename);
+                                    window.close();
+                            });
+                            }
+        </script>
+    </body>
+
+</html>

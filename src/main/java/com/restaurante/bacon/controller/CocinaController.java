@@ -35,8 +35,7 @@ public class CocinaController {
         
         //desarrollo aca 
         
-        
-        
+      
    
         //fin desarrollo 
         //despachos 
@@ -48,5 +47,4 @@ public class CocinaController {
         return "users/cocina/index";
     }
 
-    
 }
