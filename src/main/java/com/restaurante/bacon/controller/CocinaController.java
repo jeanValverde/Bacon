@@ -47,8 +47,4 @@ public class CocinaController {
         return "users/cocina/index";
     }
 
-    
-    
-    
-    
 }
