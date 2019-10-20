@@ -50,7 +50,7 @@
                                                                                 Completa estos campos para agregar un personal al sistema.
                                                                             </p>
                                                                             <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="POST" name="formAddPersonal" >
-                                                                                <input type="hidden" name="addPersonal" id="registroAgregar" th:value="${registroAgregar}" />                                                                           
+                                                                                <input type="hidden" name="agrego" id="agrego" th:value="${agrego}" />                                                                           
                                                                                 <div class="form-group">
                                                                                     <label for="rutPersonal">Rut Personal</label>
                                                                                     <input type="text" class="form-control" id="rut" name="rutPersonal" placeholder="11.111.111-1">
@@ -95,18 +95,13 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
-                                                                                    <div id="datepicker-popup" class="input-group date datepicker">
-                                                                                        <input th:value="${fechaNacimientoPersonal}" name="fechaNacimiento" type="text" id="fecha" class="form-control">
-                                                                                            <span class="input-group-addon input-group-append border-left">
-                                                                                                <span class="mdi mdi-calendar input-group-text"></span>
-                                                                                            </span>
-                                                                                    </div>
-                                                                                    <div class="valid-feedback">
-                                                                                        !Listo!
-                                                                                    </div>
-                                                                                    <div class="invalid-feedback">
-                                                                                        Ingrese Fecha Nacimiento.
-                                                                                    </div>
+                                                                                    <input type="text" class="form-control" id="fechaNacimientoPersonal" name="fechaNacimientoPersonal" placeholder="982961951">
+                                                                                        <div class="valid-feedback">
+                                                                                            !Listo!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            Ingrese Fecha Nacimiento.
+                                                                                        </div>
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="celularPersonal">Celular Personal</label>
@@ -185,8 +180,6 @@
 
                                                                             <form  th:action="@{/administrador_personal/buscar_por_filtro}"  enctype="multipart/form-data" method="post">
 
-
-
                                                                                 <div class="row">
                                                                                     <div class="col-2">
                                                                                         <h5 >Buscar por: </h5>
@@ -220,12 +213,13 @@
 
 
                                                                             </ul>
+                                                                            
+                                                                            
                                                                             <div class="tab-content" id="pills-tabContent">
                                                                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-
-                                                                                    <div  class="row">
-                                                                                        <div th:each="ins: ${personales}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
-                                                                                            <input type="hidden" name="elimino" id="agrego" th:value="${elimino}" />
+                                                                                   <div  class="row">
+                                                                                    <div th:each="ins: ${personales}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
+                                                                                        <input type="hidden" name="elimino" id="agrego" th:value="${elimino}" />
                                                                                             <div class="card">
                                                                                                 <div class="card-body text-center">
                                                                                                     <div style="text-align:right">
@@ -234,14 +228,33 @@
                                                                                                             <i class="mdi mdi-lead-pencil"></i>
                                                                                                         </button>
                                                                                                         -->
-                                                                                                        <a  th:href="@{/administrador_personal/cargar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                                        <a  th:href="@{/administrador_personal/cargar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
                                                                                                         <!--
                                                                                                         <button type="button" class="btn btn-danger btn-rounded btn-icon" >
                                                                                                             <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
                                                                                                             <i class="mdi mdi-close"></i>
                                                                                                         </button>
                                                                                                         -->
-                                                                                                        <a  th:href="@{/administrador_personal/eliminar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
+                                                                                                        <button type="button" class="btn btn-danger " data-toggle="modal"  th:attr="data-target='#modal'+${ins.idPersonal }" ><i class="mdi mdi-close"></i></button>
+                                                                                                        <div class="modal fade" th:id="'modal' + ${ins.idPersonal}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                                                                            <div class="modal-dialog modal-sm" role="document">
+                                                                                                                <div class="modal-content">
+                                                                                                                    <div class="modal-header">
+                                                                                                                        <h5 class="modal-title" id="exampleModalLabel-3">Eliminar Personal</h5>
+                                                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                                                        </button>
+                                                                                                                    </div>
+                                                                                                                    <div class="modal-body" id="pruebaModal">
+                                                                                                                        <p >¿Seguro que desea eliminar el personal?</p>
+                                                                                                                    </div>
+                                                                                                                    <div class="modal-footer">
+                                                                                                                        <a id="btn-eliminar" th:href="@{/administrador_personal/eliminar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-danger ">Eliminar</a>
+                                                                                                                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </div>
                                                                                                     </div>
 
                                                                                                     <div >
@@ -372,7 +385,7 @@
 
                                                                         <form  th:action="@{/administrador_personal/modificarPersonal}" name="formEditar" method="post">
 
-                                                                            <!--   <input type="hidden" th:value="${personales.rutPersonal}" id="modificarPersonal" name="rutPersonal"/>-->
+                                                                            <input type="hidden" th:value="${personal.idPersonal}" id="modificarPersonal" name="idPersonal"/>
 
                                                                             <div class="form-group">
                                                                                 <label for="rut">Rut Personal</label>
@@ -476,14 +489,13 @@
                                                                         </form>
                                                                     </div>
                                                                 </div>
-                                                            </div> 
+                                                            </div> -->
                                                         </div>
 
                                                     </div>
                                                 </div>
                                             </div>
-                                            </div>
-
+                        
 
 
 

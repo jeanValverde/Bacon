@@ -73,7 +73,7 @@ public class ProcedureQueryPersonal {
 
     //SuppressWarnings suprime las abvertencias de tipo unchecked
     @SuppressWarnings("unchecked")
-    public boolean modificarPersonal(BigDecimal idPersonal,String rut, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo, String contrasena, BigInteger estado,Rol idRol) {
+    public boolean modificarPersonal(BigDecimal idPersonal,String rut, String nombres, String apePaterno, String apeMaterno, Date fechaNacimiento, String celular, String correo, BigInteger estado,Rol idRol) {
         try {
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
             em.createNamedStoredProcedureQuery("modificarPersonal")
@@ -85,9 +85,7 @@ public class ProcedureQueryPersonal {
                     .setParameter(P_FECHA_NACIMIENTO_PERSONAL, fechaNacimiento)
                     .setParameter(P_CELULAR_PERSONAL, celular)
                     .setParameter(P_CORREO_PERSONAL, correo)
-                    .setParameter(P_CONTRASENA_PERSONAL, contrasena)
                     .setParameter(P_ESTADO_PERSONAL, estado)
-                    .setParameter(P_RUT_PERSONAL, rut)
                     .setParameter(P_ID_ROL, idRol).execute();
 
             return true;
@@ -199,7 +197,7 @@ public class ProcedureQueryPersonal {
 
     public boolean DeletePersonalById(BigInteger id) {
         try {
-            em.createNamedStoredProcedureQuery("DeletePersonalById")
+            em.createNamedStoredProcedureQuery("DeletePersonal")
                     .setParameter("P_ID_PERSONAL", id).execute();
             return true;
         } catch (Exception ex) {

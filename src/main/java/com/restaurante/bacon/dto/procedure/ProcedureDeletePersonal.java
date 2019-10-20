@@ -8,6 +8,7 @@ package com.restaurante.bacon.dto.procedure;
 import static com.restaurante.bacon.dto.Personal.P_ID_PERSONAL;
 import static com.restaurante.bacon.dto.Personal.P_RUT_PERSONAL;
 import java.io.Serializable;
+import java.math.BigInteger;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedStoredProcedureQueries;
@@ -30,9 +31,9 @@ import lombok.Setter;
 @Setter
         @NamedStoredProcedureQueries(
                 {
-                    @NamedStoredProcedureQuery(name = "DeletePersonal", procedureName = " PACKAGE_PERSONAL.P_DELETE_PERSONAL_BY_ID",
+                    @NamedStoredProcedureQuery(name = "DeletePersonal", procedureName = " PACKAGE_PERSONAL.PR_ELIMINAR_PERSONAL_POR_ID",
                             parameters = {
-                                @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ID_PERSONAL, type = String.class)
+                                @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ID_PERSONAL, type =  BigInteger.class)
                             }
                     )
 

@@ -6,6 +6,7 @@
 package com.restaurante.bacon.service;
 
 //import static com.restaurante.bacon.controller.ProveedorController.UPLOAD_DIR_IMAGEN;
+import com.restaurante.bacon.dao.IIPersonalDao;
 import com.restaurante.bacon.dto.Personal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Level;
 import org.jboss.logging.Logger;
@@ -60,6 +62,8 @@ public class PersonalService implements UserDetailsService {
     //se obtienen los metodos generados automaticamente por la interfaz
     @Autowired
     IPersonalDao personalDao;
+    IIPersonalDao personaldao2;
+    
     @Autowired
     ProcedureQueryPersonal procedureQuery;
     @Autowired
@@ -75,16 +79,17 @@ public class PersonalService implements UserDetailsService {
         return this.personalDao.save(personal);
     }
     
-      public Personal updatePersonalDao(Personal personal) {
-        return this.personalDao.save(personal);
-    }
+
+    public boolean modificarPersonal(Personal personal){
     
+    return this.procedureQuery.modificarPersonal(personal.getIdPersonal(), personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(),personal.getEstadoPersonal(), personal.getIdRol());
+    }
 
 	
-	public boolean ModificarPersonal (Personal personal) {
-		
-		return this.procedureQuery.modificarPersonal(personal.getIdPersonal(),personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(), personal.getContrasenaPersonal(), personal.getEstadoPersonal(), personal.getIdRol());
-	}
+//	public boolean ModificarPersonal (Personal personal) {
+//		
+//		return this.procedureQuery.modificarPersonal(personal.getIdPersonal(),personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(), personal.getContrasenaPersonal(), personal.getEstadoPersonal(), personal.getIdRol());
+//	}
 	
 
     public List<Personal> getAllUsuario() {
@@ -100,6 +105,11 @@ public class PersonalService implements UserDetailsService {
 		this.personalDao.deleteById(id);
 	}
         
+        public Personal retornarPersonalById (BigDecimal idPersonal){
+        Optional<Personal> optinalEntity= personaldao2.findById(idPersonal);
+        Personal personal=optinalEntity.get();
+        return personal;    
+        }
 
         
 //      public List<Proveedor> filtrarProveedoresByRut(String rut) {

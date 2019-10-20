@@ -34,7 +34,7 @@ public class Rol implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_ROL")
-    private BigInteger idRol;
+    private Integer idRol;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -48,20 +48,20 @@ public class Rol implements Serializable {
     public Rol() {
     }
 
-    public Rol(BigInteger idRol) {
+    public Rol(Integer idRol) {
         this.idRol = idRol;
     }
 
-    public Rol(BigInteger idRol, String descripcionRol) {
+    public Rol(Integer idRol, String descripcionRol) {
         this.idRol = idRol;
         this.descripcionRol = descripcionRol;
     }
 
-    public BigInteger getIdRol() {
+    public Integer getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(BigInteger idRol) {
+    public void setIdRol(Integer idRol) {
         this.idRol = idRol;
     }
 

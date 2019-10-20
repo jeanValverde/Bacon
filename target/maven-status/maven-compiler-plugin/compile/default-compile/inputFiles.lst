@@ -44,9 +44,11 @@ C:\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdatePerfil
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\MedioPago.java
 C:\Bacon\src\main\java\com\restaurante\bacon\BaconApplication.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\Ingrediente.java
+C:\Bacon\src\main\java\com\restaurante\bacon\dao\IIPersonalDao.java
 C:\Bacon\src\main\java\com\restaurante\bacon\service\ProveedorService.java
 C:\Bacon\src\main\java\com\restaurante\bacon\exceptions\NonexistentEntityException.java
 C:\Bacon\src\main\java\com\restaurante\bacon\config\WebConfig.java
+C:\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureModificarPersonal.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoPedidoProveedor.java
 C:\Bacon\src\main\java\com\restaurante\bacon\controller\PersonalController.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoOrden.java
