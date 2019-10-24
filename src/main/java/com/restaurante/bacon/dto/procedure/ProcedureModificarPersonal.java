@@ -5,6 +5,16 @@
  */
 package com.restaurante.bacon.dto.procedure;
 
+import static com.restaurante.bacon.dto.Personal.P_APE_MATERNO_PERSONAL;
+import static com.restaurante.bacon.dto.Personal.P_APE_PATERNO_PERSONAL;
+import static com.restaurante.bacon.dto.Personal.P_CELULAR_PERSONAL;
+import static com.restaurante.bacon.dto.Personal.P_CORREO_PERSONAL;
+import static com.restaurante.bacon.dto.Personal.P_ESTADO_PERSONAL;
+import static com.restaurante.bacon.dto.Personal.P_FECHA_NACIMIENTO_PERSONAL;
+import static com.restaurante.bacon.dto.Personal.P_ID_PERSONAL;
+import static com.restaurante.bacon.dto.Personal.P_ID_ROL;
+import static com.restaurante.bacon.dto.Personal.P_NOMBRES_PERSONAL;
+import static com.restaurante.bacon.dto.Personal.P_RUT_PERSONAL;
 import com.restaurante.bacon.dto.Rol;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -32,25 +42,28 @@ import lombok.Setter;
         {
             @NamedStoredProcedureQuery(name = "modificarPersonal", procedureName = "PACKAGE_PERSONAL.PR_MODIFICAR_PERSONAL",
                     parameters = {
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_PERSONAL", type = BigInteger.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ID_PERSONAL, type = BigInteger.class)
+                                                ,
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_RUT_PERSONAL, type = String.class)
+                            ,
+                        
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_NOMBRES_PERSONAL, type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_NOMBRE", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_APE_PATERNO_PERSONAL, type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_APE_PATERNO", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_APE_MATERNO_PERSONAL, type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_APE_MATERNO", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_FECHA_NACIMIENTO_PERSONAL, type = Date.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_FECHA_NACIMIENTO", type = Date.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_CELULAR_PERSONAL, type = String.class)
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CELULAR", type = String.class)
-                        ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_CORREO", type = String.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_CORREO_PERSONAL, type = String.class)
                     
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ESTADO", type = Integer.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ESTADO_PERSONAL, type = Integer.class)
                     
                                 ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_ROL", type = Integer.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ID_ROL, type = Integer.class)
                     }
                     
             )

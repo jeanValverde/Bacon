@@ -1,3 +1,4 @@
+com\restaurante\bacon\controller\OrdenControlador.class
 com\restaurante\bacon\dto\Cliente.class
 com\restaurante\bacon\dto\Ingrediente.class
 com\restaurante\bacon\dao\IIPersonalDao.class
@@ -29,6 +30,7 @@ com\restaurante\bacon\dao\ProcedureQuery.class
 com\restaurante\bacon\dto\InsumoPedido.class
 com\restaurante\bacon\controller\IndexController.class
 com\restaurante\bacon\dto\Proveedor.class
+com\restaurante\bacon\dao\IOrdenDao.class
 com\restaurante\bacon\dto\EgresoStock.class
 com\restaurante\bacon\dto\procedure\ProcedureInsertPersonal.class
 com\restaurante\bacon\exceptions\PreexistingEntityException.class
@@ -52,3 +54,4 @@ com\restaurante\bacon\config\UserRol.class
 com\restaurante\bacon\dao\ProcedureQueryPersonal.class
 com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.class
 com\restaurante\bacon\dto\InsumoProveedor.class
+com\restaurante\bacon\service\OrdenService.class

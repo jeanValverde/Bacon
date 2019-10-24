@@ -168,6 +168,129 @@
 
                                                                 </div>
 
+                                                                <!--Form editar-->
+                                                                <div th:if="${modificar}" class="col-lg-4 grid-margin stretch-card">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <h4 class="card-title">Modificar Personal</h4>
+
+
+                                                                            <form  th:action="@{/administrador_personal/modificar_Personal}" name="formAddPersonal" method="post">
+
+                                                                                <input type="hidden" id="idPersonal" name="idPersonal" th:value="${personals.idPersonal}"  >
+
+                                                                                    <div class="form-group">
+                                                                                        <label for="rut">Rut Personal</label>
+                                                                                        <input th:value="${personals.rutPersonal}" type="text" class="form-control" name="rutPersonal"  id="rut" aria-describedby="rut chileno" placeholder="Rut">
+                                                                                            <small id="rutHelp" class="form-text text-muted">Formato de rut XX.XXX.XXX-X .</small>
+                                                                                            <div class="valid-feedback">
+                                                                                                Se ve bien!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Ingresa un rut valido
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="nombresPersonal">Nombre</label>
+                                                                                        <input th:value="${personals.nombresPersonal}" type="text" class="form-control" name="nombresPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Nombre Personal">
+                                                                                            <small id="textHelp" class="form-text text-muted">Nombre obligatorio</small>
+                                                                                            <div class="valid-feedback">
+                                                                                                Se ve bien!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escribe al menos un carácter.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="apePaternoPersonal">Apellido Paterno</label>
+                                                                                        <input th:value="${personals.apePaternoPersonal}" type="text" class="form-control" name="apePaternoPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Apellido Paterno">
+                                                                                            <small id="textHelp" class="form-text text-muted">Apellido Paterno </small>
+                                                                                            <div class="valid-feedback">
+                                                                                                Se ve bien!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escribe al menos un carácter.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="apeMaternoPersonal">Apellido Materno</label>
+                                                                                        <input th:value="${personals.apeMaternoPersonal}" type="text" class="form-control" name="apeMaternoPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Apellido Materno">
+                                                                                            <small id="textHelp" class="form-text text-muted">Apellido Materno</small>
+                                                                                            <div class="valid-feedback">
+                                                                                                Se ve bien!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escribe al menos un carácter.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <div id="datepicker-popup" class="input-group date datepicker">
+                                                                                                <input th:value="${personals.fechaNacimientoPersonal}" name="fechaNacimientoPersonal" type="text" id="fecha" class="form-control">
+                                                                                                    <span class="input-group-addon input-group-append border-left">
+                                                                                                        <span class="mdi mdi-calendar input-group-text"></span>
+                                                                                                    </span>
+                                                                                            </div>
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Ingrese Fecha Nacimiento.
+                                                                                            </div>   
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="celularPersonal">Celular</label>
+                                                                                        <input th:value="${personals.celularPersonal}" type="text" class="form-control" name="celularPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Celular Personal">
+                                                                                            <small id="textHelp" class="form-text text-muted">Celular obligatorio</small>
+                                                                                            <div class="valid-feedback">
+                                                                                                Se ve bien!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escribe al menos un carácter.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="exampleInputEmail1">Correo electrónico</label>
+                                                                                        <input th:value="${personals.correoPersonal}" type="email" class="form-control" name="correoPersonal" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electrónico">
+                                                                                            <small id="emailHelp" class="form-text text-muted">Escribe un correo electrónico valido.</small>
+                                                                                            <div class="valid-feedback">
+                                                                                                ¡Buen Email!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                No es un correo electrónico
+                                                                                            </div>
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label for="estadoPersonal">Tipo</label>
+                                                                                        <select id="selectExample1" name="estadoPersonal" class="custom-select" required>
+                                                                                            <option th:selected="${personals.estadoPersonal == 1}" value="1">Activo</option>
+                                                                                            <option th:selected="${personals.estadoPersonal == 0}" value="0">Retirado</option>
+
+
+                                                                                        </select>
+                                                                                        <small id="selectHelp" class="form-text text-muted">Selecciona al menos una opción.</small>
+                                                                                        <div class="valid-feedback">
+                                                                                            ¡Fantástica elección!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            No te olvides de seleccionar al menos una opción.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group" id="rolpersonal">
+                                                                                        <label for="rolpersonal">Rol </label>
+                                                                                        <select  name="rolPersonal" class="form-control" id="rolpersonal">
+                                                                                            <option th:each="rol:${rolpersonal}"  th:selected="${rol.idRol==personals.idRol.idRol}" th:value="${rol.idRol}" th:text="${rol.descripcionRol}" ></option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <button type="submit" class="btn btn-primary mr-2">Actualizar</button>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+
 
 
 
@@ -197,6 +320,7 @@
                                                                                                 <div class="input-group-append">
                                                                                                     <button class="btn btn-sm btn-success" type="submit">Buscar</button>
                                                                                                 </div>
+
                                                                                         </div>
                                                                                     </div>
 
@@ -213,13 +337,13 @@
 
 
                                                                             </ul>
-                                                                            
-                                                                            
+
+
                                                                             <div class="tab-content" id="pills-tabContent">
                                                                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                                                                                   <div  class="row">
-                                                                                    <div th:each="ins: ${personales}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
-                                                                                        <input type="hidden" name="elimino" id="agrego" th:value="${elimino}" />
+                                                                                    <div  class="row">
+                                                                                        <div th:each="ins: ${personales}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
+                                                                                            <input type="hidden" name="elimino" id="agrego" th:value="${elimino}" />
                                                                                             <div class="card">
                                                                                                 <div class="card-body text-center">
                                                                                                     <div style="text-align:right">
@@ -228,7 +352,7 @@
                                                                                                             <i class="mdi mdi-lead-pencil"></i>
                                                                                                         </button>
                                                                                                         -->
-                                                                                                        <a  th:href="@{/administrador_personal/cargar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                                        <a  th:href="@{/administrador_personal/cargar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
                                                                                                         <!--
                                                                                                         <button type="button" class="btn btn-danger btn-rounded btn-icon" >
                                                                                                             <a th:href="@{/administrador/eliminar_insumo?(idInsumo=${ins.idInsumo})}" ></a>
@@ -334,7 +458,7 @@
                                                                                                 <tbody>
                                                                                                     <tbody>
                                                                                                         <tr th:each="ins: ${personales}">
-                                                                                                            <td th:text="${ins.idPersonal}" </td>
+                                                                                                            <td th:text="${ins.idPersonal}"></td>
                                                                                                             <td th:text="${ins.rutPersonal}"></td>
                                                                                                             <td th:text="${ins.nombresPersonal}"></td>
                                                                                                             <td th:text="${ins.ApePaternoPersonal}"></td>
@@ -376,126 +500,13 @@
 
 
 
-                                                            <!--Form editar-->
-                                                            <div th:if="${modificar}" class="col-lg-4 grid-margin stretch-card">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <h4 class="card-title">Modificar Personal</h4>
 
-
-                                                                        <form  th:action="@{/administrador_personal/modificarPersonal}" name="formEditar" method="post">
-
-                                                                            <input type="hidden" th:value="${personal.idPersonal}" id="modificarPersonal" name="idPersonal"/>
-
-                                                                            <div class="form-group">
-                                                                                <label for="rut">Rut Personal</label>
-                                                                                <input th:value="${rutPersonal}" type="text" class="form-control" name="rutPersonal"  id="rut" aria-describedby="rut chileno" placeholder="Rut">
-                                                                                    <small id="rutHelp" class="form-text text-muted">Formato de rut XX.XXX.XXX-X .</small>
-                                                                                    <div class="valid-feedback">
-                                                                                        Se ve bien!
-                                                                                    </div>
-                                                                                    <div class="invalid-feedback">
-                                                                                        Ingresa un rut valido
-                                                                                    </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="nombresPersonal">Nombre</label>
-                                                                                <input th:value="${nombresPersonal}" type="text" class="form-control" name="nombresPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Nombre Personal">
-                                                                                    <small id="textHelp" class="form-text text-muted">Nombre obligatorio</small>
-                                                                                    <div class="valid-feedback">
-                                                                                        Se ve bien!
-                                                                                    </div>
-                                                                                    <div class="invalid-feedback">
-                                                                                        Escribe al menos un carácter.
-                                                                                    </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="ApePaternoPersonal">Apellido Paterno</label>
-                                                                                <input th:value="${ApePaternoPersonal}" type="text" class="form-control" name="ApePaternoPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Apellido Paterno">
-                                                                                    <small id="textHelp" class="form-text text-muted">Apellido Paterno </small>
-                                                                                    <div class="valid-feedback">
-                                                                                        Se ve bien!
-                                                                                    </div>
-                                                                                    <div class="invalid-feedback">
-                                                                                        Escribe al menos un carácter.
-                                                                                    </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="ApeMaternoPersonal">Apellido Materno</label>
-                                                                                <input th:value="${ApeMaternoPersonal}" type="text" class="form-control" name="ApeMaternoPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Apellido Materno">
-                                                                                    <small id="textHelp" class="form-text text-muted">Apellido Materno</small>
-                                                                                    <div class="valid-feedback">
-                                                                                        Se ve bien!
-                                                                                    </div>
-                                                                                    <div class="invalid-feedback">
-                                                                                        Escribe al menos un carácter.
-                                                                                    </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
-                                                                                <div id="datepicker-popup" class="input-group date datepicker">
-                                                                                    <input th:value="${fechaNacimientoPersonal}" name="fechaNacimiento" type="text" id="fecha" class="form-control">
-                                                                                        <span class="input-group-addon input-group-append border-left">
-                                                                                            <span class="mdi mdi-calendar input-group-text"></span>
-                                                                                        </span>
-                                                                                </div>
-                                                                                <div class="valid-feedback">
-                                                                                    !Listo!
-                                                                                </div>
-                                                                                <div class="invalid-feedback">
-                                                                                    Ingrese Fecha Nacimiento.
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="CelularPersonal">Celular</label>
-                                                                                <input th:value="${CelularPersonal}" type="text" class="form-control" name="CelularPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Celular Personal">
-                                                                                    <small id="textHelp" class="form-text text-muted">Celular obligatorio</small>
-                                                                                    <div class="valid-feedback">
-                                                                                        Se ve bien!
-                                                                                    </div>
-                                                                                    <div class="invalid-feedback">
-                                                                                        Escribe al menos un carácter.
-                                                                                    </div>
-                                                                            </div>
-                                                                            <div class="form-group">
-                                                                                <label for="exampleInputEmail1">Correo electrónico</label>
-                                                                                <input th:value="${CorreoPersonal}" type="email" class="form-control" name="CorreoPersonal" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electrónico">
-                                                                                    <small id="emailHelp" class="form-text text-muted">Escribe un correo electrónico valido.</small>
-                                                                                    <div class="valid-feedback">
-                                                                                        ¡Buen Email!
-                                                                                    </div>
-                                                                                    <div class="invalid-feedback">
-                                                                                        No es un correo electrónico
-                                                                                    </div>
-                                                                            </div>
-
-                                                                            <div class="form-group">
-                                                                                <label for="estadoPersonal">Tipo</label>
-                                                                                <select id="selectExample1" name="estadoPersonal" class="custom-select" required>
-                                                                                    <option th:selected="${estadoPersonal == 1}" value="1">Activo</option>
-                                                                                    <option th:selected="${estadoPersonal == 0}" value="0">Retirado</option>
-
-
-                                                                                </select>
-                                                                                <small id="selectHelp" class="form-text text-muted">Selecciona al menos una opción.</small>
-                                                                                <div class="valid-feedback">
-                                                                                    ¡Fantástica elección!
-                                                                                </div>
-                                                                                <div class="invalid-feedback">
-                                                                                    No te olvides de seleccionar al menos una opción.
-                                                                                </div>
-                                                                            </div>
-                                                                            <button type="submit" class="btn btn-primary mr-2">Actualizar</button>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div> -->
                                                         </div>
 
                                                     </div>
                                                 </div>
                                             </div>
-                        
+
 
 
 

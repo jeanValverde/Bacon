@@ -15,12 +15,15 @@ C:\Bacon\src\main\java\com\restaurante\bacon\dto\InsumoProveedor.java
 C:\Bacon\src\main\java\com\restaurante\bacon\config\UserRol.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureInsertPersonal.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\Rol.java
+C:\Bacon\src\main\java\com\restaurante\bacon\service\OrdenService.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoPedido.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\Pedido.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureUpdateProveedor.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dao\IProveedorDao.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dao\ProcedureQueryIngrediente.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\EstadoCliente.java
+C:\Bacon\src\main\java\com\restaurante\bacon\dao\IOrdenDao.java
+C:\Bacon\src\main\java\com\restaurante\bacon\controller\OrdenControlador.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProceureUpdateContrasena.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\procedure\ProcedureDeletePersonal.java
 C:\Bacon\src\main\java\com\restaurante\bacon\dto\Orden.java

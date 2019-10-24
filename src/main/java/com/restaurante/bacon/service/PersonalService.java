@@ -62,6 +62,8 @@ public class PersonalService implements UserDetailsService {
     //se obtienen los metodos generados automaticamente por la interfaz
     @Autowired
     IPersonalDao personalDao;
+    
+    @Autowired
     IIPersonalDao personaldao2;
     
     @Autowired
@@ -106,11 +108,12 @@ public class PersonalService implements UserDetailsService {
 	}
         
         public Personal retornarPersonalById (BigDecimal idPersonal){
-        Optional<Personal> optinalEntity= personaldao2.findById(idPersonal);
-        Personal personal=optinalEntity.get();
-        return personal;    
+        
+        return this.personaldao2.findByIdPersonal(idPersonal);    
         }
-
+//    Optional<Mesa> optinalEntity = mesaDao.findById(idMesa);
+//        Mesa mesa = optinalEntity.get();
+//        return mesa;
         
 //      public List<Proveedor> filtrarProveedoresByRut(String rut) {
 //        return this.procedureQuery.filtrarProveedorByRut(rut);

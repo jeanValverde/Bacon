@@ -88,8 +88,9 @@ public class ProcedureQueryPersonal {
                     .setParameter(P_ESTADO_PERSONAL, estado)
                     .setParameter(P_ID_ROL, idRol).execute();
 
-            return true;
+         return true;
         } catch (Exception ex) {
+            System.out.println(ex.getMessage().toString());
             return false;
         }
     }
