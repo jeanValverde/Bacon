@@ -223,23 +223,19 @@
                                                                                                 Escribe al menos un carácter.
                                                                                             </div>
                                                                                     </div>
-                                                                                    <div class="form-group">
-                                                                                        <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
-                                                                                        <div class="col-sm-9">
-                                                                                            <div id="datepicker-popup" class="input-group date datepicker">
-                                                                                                <input th:value="${personals.fechaNacimientoPersonal}" name="fechaNacimientoPersonal" type="text" id="fecha" class="form-control">
-                                                                                                    <span class="input-group-addon input-group-append border-left">
-                                                                                                        <span class="mdi mdi-calendar input-group-text"></span>
-                                                                                                    </span>
+                                                                                    
+                                                                                        <div class="form-group">
+                                                                                            <label for="fechaNacimientoPersonal">Fecha de Nacimiento</label>
+                                                                                            <div class="col-sm-9">
+                                                                                                <div id="datepicker-popup" class="input-group date datepicker">
+                                                                                                    <input th:value="${personalSesion.fechaNacimientoPersonal}" name="fechaNacimientoPersonal" type="text" id="fecha" class="form-control">
+                                                                                                        <span class="input-group-addon input-group-append border-left">
+                                                                                                            <span class="mdi mdi-calendar input-group-text"></span>
+                                                                                                        </span>
+                                                                                                </div>
                                                                                             </div>
-                                                                                            <div class="valid-feedback">
-                                                                                                !Listo!
-                                                                                            </div>
-                                                                                            <div class="invalid-feedback">
-                                                                                                Ingrese Fecha Nacimiento.
-                                                                                            </div>   
                                                                                         </div>
-                                                                                    </div>
+                                                                                    
                                                                                     <div class="form-group">
                                                                                         <label for="celularPersonal">Celular</label>
                                                                                         <input th:value="${personals.celularPersonal}" type="text" class="form-control" name="celularPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Celular Personal">
@@ -264,10 +260,10 @@
                                                                                     </div>
 
                                                                                     <div class="form-group">
-                                                                                        <label for="estadoPersonal">Tipo</label>
+                                                                                        <label for="estadoPersonal">Estado Personal</label>
                                                                                         <select id="selectExample1" name="estadoPersonal" class="custom-select" required>
-                                                                                            <option th:selected="${personals.estadoPersonal == 1}" value="1">Activo</option>
-                                                                                            <option th:selected="${personals.estadoPersonal == 0}" value="0">Retirado</option>
+                                                                                            <option th:selected="${personals.estadoPersonal == 1}" th:value="1">Activo</option>
+                                                                                            <option th:selected="${personals.estadoPersonal == 0}" th:value="0">Retirado</option>
 
 
                                                                                         </select>
@@ -547,12 +543,14 @@
                                             <script th:src="@{/js/form-repeater.js}"></script>
                                             <!-- End custom js for this page-->
                                             <!-- plugin js for this page -->
+                                            
                                             <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
                                             <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
                                             <script th:src="@{/js/data-table.js}"></script>
 
                                             <!--validate form--->
                                             <script th:src="@{/custom/formularios.js}"></script>
+                                            
 
 
                                             <script th:inline="javascript">
@@ -591,6 +589,8 @@
                                                     check.style.visibility = "visible";
                                                 }
 
+                                               
+
 
                                             </script>
 
@@ -600,6 +600,11 @@
                                                 var formularioPassword = document.getElementsByName("formAddPersonal")[0];
                                                 validatorForms(formularioPassword);
                                             </script>
+                                            
+                                            
+                                             <script>
+                                                        $('#datepicker-popup').datepicker();
+                                             </script>
 
 
 

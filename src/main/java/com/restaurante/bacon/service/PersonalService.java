@@ -84,7 +84,7 @@ public class PersonalService implements UserDetailsService {
 
     public boolean modificarPersonal(Personal personal){
     
-    return this.procedureQuery.modificarPersonal(personal.getIdPersonal(), personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(),personal.getEstadoPersonal(), personal.getIdRol());
+    return this.procedureQuery.modificarPersonal(personal.getIdPersonal(), personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(),personal.getEstadoPersonal(), personal.getIdRol().getIdRol());
     }
 
 	

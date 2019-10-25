@@ -42,7 +42,7 @@ import lombok.Setter;
         {
             @NamedStoredProcedureQuery(name = "modificarPersonal", procedureName = "PACKAGE_PERSONAL.PR_MODIFICAR_PERSONAL",
                     parameters = {
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ID_PERSONAL, type = BigInteger.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ID_PERSONAL, type = BigDecimal.class)
                                                 ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_RUT_PERSONAL, type = String.class)
                             ,
@@ -60,7 +60,7 @@ import lombok.Setter;
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_CORREO_PERSONAL, type = String.class)
                     
                         ,
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ESTADO_PERSONAL, type = Integer.class)
+                    @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ESTADO_PERSONAL, type = BigInteger.class)
                     
                                 ,
                     @StoredProcedureParameter(mode = ParameterMode.IN, name = P_ID_ROL, type = Integer.class)

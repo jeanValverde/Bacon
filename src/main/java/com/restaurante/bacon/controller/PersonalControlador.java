@@ -155,16 +155,7 @@ public class PersonalControlador {
         BigInteger estado = BigInteger.valueOf(1);
         
        perso.setEstadoPersonal(estado);
-        
-        
-//        perso.setEstadoPersonal(BigInteger.valueOf(Integer.parseInt(estado.toString())));
-        
-//      this.procedureQuery.updateContrasenaPersonal(Integer.valueOf(perso.getIdPersonal().intValue()),(contra));
-        
-//        personal1.setIdRol(rolpersonal);
-        
-        
-                 
+       
         
         try {
             this.procedureQuery.InsertPersonal(rutPersonal, nombresPersonal, apePaternoPersonal, apeMaternoPersonal, fechaNacimiento, celularPersonal, correoPersonal, contra,estado,rolpersonal);
@@ -276,15 +267,15 @@ public class PersonalControlador {
         List<Personal> persosnales = new ArrayList<Personal>();
         persosnales = this.personalService.getAllUsuario();
 
-       
+        personal.setIdPersonal(idPersonal);
         personal.setRutPersonal(rutPersonal);
         personal.setNombresPersonal(nombresPersonal);
         personal.setApePaternoPersonal(apePaternoPersonal);
         personal.setApeMaternoPersonal(apeMaternoPersonal);
         
-        Date FechaNacimiento = PersonalService.ParseFecha(fechaNacimientoPersonal);
+        Date fecha = PersonalService.ParseFecha(fechaNacimientoPersonal);
         
-        personal.setFechaNacimientoPersonal(FechaNacimiento);
+        personal.setFechaNacimientoPersonal(fecha);
         personal.setCelularPersonal(celularPersonal);
         personal.setCorreoPersonal(correoPersonal);
         
