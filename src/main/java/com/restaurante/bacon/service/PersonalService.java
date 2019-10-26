@@ -18,6 +18,7 @@ import com.restaurante.bacon.dao.IPersonalDao;
 import com.restaurante.bacon.dao.IRolDao;
 import com.restaurante.bacon.dao.ProcedureQueryPersonal;
 import com.restaurante.bacon.dto.ControlCaja;
+import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.Rol;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
@@ -125,8 +126,21 @@ public class PersonalService implements UserDetailsService {
         return this.personalDao.findByRutPersonal(rut);
     }
     
+    
+     public Rol retornarRolById(Integer  idRol){
+        Optional<Rol> optinalEntity = rol.findById(idRol);
+        Rol rol = optinalEntity.get();
+        return rol;
+    }
+    
+    
+    
         public List<Personal> filtrarPersonalByRut(String rut) {
         return this.procedureQuery.filtrarPersonalByRut(rut);
+    }
+        
+        public List<Personal> filtrarPersonalByNombre(String nombrePersonal) {
+        return this.procedureQuery.filtroPorNombre(nombrePersonal);
     }
       
 //

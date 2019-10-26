@@ -160,7 +160,10 @@
                                                                                         <option th:each="rol:${rolpersonal}"  th:value="${rol.idRol}" th:text="${rol.descripcionRol}" ></option>
                                                                                     </select>
                                                                                 </div>
-                                                                                <button type="submit" class="btn btn-primary mr-2">Agregar</button>                                
+                                                                               
+                                                                                    <button class="btn btn-outline-success" onclick="showSwal('success-message')">Ingresar</button>
+
+                                                                                                          
 
                                                                             </form>
                                                                         </div>
@@ -223,19 +226,19 @@
                                                                                                 Escribe al menos un carácter.
                                                                                             </div>
                                                                                     </div>
-                                                                                    
-                                                                                        <div class="form-group">
-                                                                                            <label for="fechaNacimientoPersonal">Fecha de Nacimiento</label>
-                                                                                            <div class="col-sm-9">
-                                                                                                <div id="datepicker-popup" class="input-group date datepicker">
-                                                                                                    <input th:value="${personalSesion.fechaNacimientoPersonal}" name="fechaNacimientoPersonal" type="text" id="fecha" class="form-control">
-                                                                                                        <span class="input-group-addon input-group-append border-left">
-                                                                                                            <span class="mdi mdi-calendar input-group-text"></span>
-                                                                                                        </span>
-                                                                                                </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label for="fechaNacimientoPersonal">Fecha de Nacimiento</label>
+                                                                                        <div class="col-sm-9">
+                                                                                            <div id="datepicker-popup" class="input-group date datepicker">
+                                                                                                <input th:value="${personalSesion.fechaNacimientoPersonal}" name="fechaNacimientoPersonal" type="text" id="fecha" class="form-control">
+                                                                                                    <span class="input-group-addon input-group-append border-left">
+                                                                                                        <span class="mdi mdi-calendar input-group-text"></span>
+                                                                                                    </span>
                                                                                             </div>
                                                                                         </div>
-                                                                                    
+                                                                                    </div>
+
                                                                                     <div class="form-group">
                                                                                         <label for="celularPersonal">Celular</label>
                                                                                         <input th:value="${personals.celularPersonal}" type="text" class="form-control" name="celularPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Celular Personal">
@@ -288,7 +291,7 @@
                                                                 </div> 
 
 
-
+                                                                     
 
 
                                                                 <div class="col-md-8 col-xl-8 grid-margin stretch-card">
@@ -297,7 +300,7 @@
                                                                         <div class="card-body">
                                                                             <h3 class="card-title">Personal</h3>
 
-                                                                            <form  th:action="@{/administrador_personal/buscar_por_filtro}"  enctype="multipart/form-data" method="post">
+                                                                            <form  th:action="@{/administrador_personal/buscar_por_filtro}"  name="formAddPersonal"  method="post">
 
                                                                                 <div class="row">
                                                                                     <div class="col-2">
@@ -306,13 +309,13 @@
                                                                                     <div class="col-4">
                                                                                         <select class="btn btn-success dropdown-toggle"  name="tipoBusqueda">
                                                                                             <option value="nombre">Nombre personal</option>
-                                                                                            <option value="rut">rut personal</option>
+                                                                                            <option value="rut">Rut personal</option>
 
                                                                                         </select>
                                                                                     </div>
                                                                                     <div class="col-md-6">
                                                                                         <div class="input-group">
-                                                                                            <input type="text" class="form-control" name="filtro" aria-label="Escribe el nombre del Personal">
+                                                                                            <input type="text" class="form-control form-control-lg" name="filtro" id="rut">
                                                                                                 <div class="input-group-append">
                                                                                                     <button class="btn btn-sm btn-success" type="submit">Buscar</button>
                                                                                                 </div>
@@ -468,7 +471,26 @@
                                                                                                             <td>
                                                                                                                 <a  th:href="@{/administrador_personal/cargar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
 
-                                                                                                                <a  th:href="@{/administrador_personal/eliminar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
+                                                                                                                <button type="button" class="btn btn-danger " data-toggle="modal"  data-target="#exampleModalLong" th:id="'modal'+${ins.idPersonal }" ><i class="mdi mdi-close"></i></button>
+                                                                                                                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                                                                                    <div class="modal-dialog modal-sm" role="document">
+                                                                                                                        <div class="modal-content">
+                                                                                                                            <div class="modal-header">
+                                                                                                                                <h5 class="modal-title" id="exampleModalLabel-3">Eliminar Personal</h5>
+                                                                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                                                                </button>
+                                                                                                                            </div>
+                                                                                                                            <div class="modal-body" id="pruebaModal">
+                                                                                                                                <p >¿Seguro que desea eliminar el personal?</p>
+                                                                                                                            </div>
+                                                                                                                            <div class="modal-footer">
+                                                                                                                                <a id="btn-eliminar" th:href="@{/administrador_personal/eliminar_personal(idPersonal=${ins.idPersonal})}" class="btn btn-danger ">Eliminar</a>
+                                                                                                                                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </div>
 
 
 
@@ -543,44 +565,21 @@
                                             <script th:src="@{/js/form-repeater.js}"></script>
                                             <!-- End custom js for this page-->
                                             <!-- plugin js for this page -->
-                                            
+
                                             <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
                                             <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
                                             <script th:src="@{/js/data-table.js}"></script>
+                                            <script th:src="@{/custom/loginform.js}"></script>
+                                            <script src="../../../../js/sd"></script>
+                                            <script src="../../../../vendors/sweetalert/sweetalert.min.js"></script>
 
                                             <!--validate form--->
                                             <script th:src="@{/custom/formularios.js}"></script>
-                                            
+
 
 
                                             <script th:inline="javascript">
-                                                var tipoRespuesta = [[${tipoRespuesta}]];
-                                                        var respuesta = [[${respuesta}]];
-                                                        if (tipoRespuesta !== null) {
-                                                    switch (tipoRespuesta) {
-                                                        case 'agregar' :
-                                                            if (respuesta === 1) {
-                                                                showSwal('success-message', 'Personal agregado!', 'se ha registrado el proveedor exitosamente');
-                                                            } else if (respuesta === 0) {
-                                                                showSwal('warning-message', 'Error!', "No se ha podido agregar el proveedor");
-                                                            }
-                                                            break;
-                                                        case 'modificar' :
-                                                            if (respuesta === 1) {
-                                                                showSwal('success-message', 'Personal modificado!', 'se ha registrado el proveedor exitosamente');
-                                                            } else if (respuesta === 0) {
-                                                                showSwal('warning-message', 'Error!', "No se ha podido modificar el proveedor");
-                                                            }
-                                                            break;
-                                                        case 'eliminar' :
-                                                            if (respuesta === 1) {
-                                                                showSwal('success-message', 'Personal eliminado!', 'se ha eliminado el proveedor exitosamente');
-                                                            } else if (respuesta === 0) {
-                                                                showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
-                                                            }
-                                                            break;
-                                                    }
-                                                }
+                                              
 
 
                                                 function agregarRol() {
@@ -589,7 +588,7 @@
                                                     check.style.visibility = "visible";
                                                 }
 
-                                               
+
 
 
                                             </script>
@@ -601,16 +600,16 @@
                                                 validatorForms(formularioPassword);
                                             </script>
                                             
-                                            
-                                             <script>
-                                                        $('#datepicker-popup').datepicker();
-                                             </script>
+                                           
+
+                                            <script>
+                                                $('#datepicker-popup').datepicker();
+                                            </script>
 
 
 
 
-
-
+                            
 
 
 

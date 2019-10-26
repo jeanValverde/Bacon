@@ -33,9 +33,12 @@ import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
 import com.restaurante.bacon.dto.Receta;
 import com.restaurante.bacon.dto.Rol;
 import com.restaurante.bacon.service.PersonalService;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,6 +55,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ProcedureQueryPersonal {
+    
+     @Autowired
+    private PersonalService personalServicio;
 
     //acceder a la conexión 
     @Autowired
@@ -279,10 +285,10 @@ public class ProcedureQueryPersonal {
     }
         
         
-         @SuppressWarnings("unchecked")
+     @SuppressWarnings("unchecked")
     public List<Personal> filtrarPersonalByRut(String rut) {
         try {
-            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PERSONAL.PR_FIND_PERSONAL_BY_RUT");
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PERSONAL.PR_BUSCAR_PERSONAL_POR_RUT");
 
             // Registrar los parámetros de entrada y salida
             query.registerStoredProcedureParameter("P_RUT_PERSONAL", String.class, ParameterMode.IN);
@@ -299,19 +305,30 @@ public class ProcedureQueryPersonal {
            
             // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
-               Personal personal = new Personal();
+               
+                Personal personal = new Personal();
                 personal.setIdPersonal(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
                 personal.setRutPersonal(result[1].toString());
                 personal.setNombresPersonal(result[2].toString());
                 personal.setApePaternoPersonal(result[3].toString());
                 personal.setApeMaternoPersonal(result[4].toString());
-//              personal.setFechaNacimientoPersonal(result[5]);
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                String strFecha = result[5].toString();
+                Date fecha = formatoFecha.parse(strFecha);
+                personal.setFechaNacimientoPersonal(fecha);
+//                
                 personal.setCelularPersonal(result[6].toString());
                 personal.setCorreoPersonal(result[7].toString());
-                personal.setContrasenaPersonal(result[8].toString());
-                personal.setIdPersonal(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                personal.setEstadoPersonal(BigInteger.valueOf(Integer.parseInt(result[8].toString())));
+//                personal.setContrasenaPersonal(result[3].toString());
                 
+                Rol rol =new Rol();
+                personal.setIdRol(rol);
+//                rol=this.personalServicio.retornarRolById(Integer.parseInt(result[5].toString()));
+
+                rol.setDescripcionRol((result[9].toString()));
               
+                
                 Personals.add(personal);
             }
             
@@ -321,7 +338,64 @@ public class ProcedureQueryPersonal {
             ex.printStackTrace();
             return null;
         }
-    }    
+    }  
+    
+         @SuppressWarnings("unchecked")
+    public List<Personal> filtroPorNombre(String nombrePersonal) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_PERSONAL.FILTRO_NOMBRE_PERSONAL");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("p_nombres_personal", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("CURSOR_PERSONAL", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("p_nombres_personal", nombrePersonal);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Personal> Personals = new ArrayList<Personal>();
+           
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+               Personal personal = new Personal();
+                personal.setIdPersonal(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                personal.setRutPersonal(result[1].toString());
+                personal.setNombresPersonal(result[2].toString());
+                personal.setApePaternoPersonal(result[3].toString());
+                personal.setApeMaternoPersonal(result[4].toString());
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+                String strFecha = result[5].toString();
+                Date fecha = formatoFecha.parse(strFecha);
+                personal.setFechaNacimientoPersonal(fecha);
+//                
+                personal.setCelularPersonal(result[6].toString());
+                personal.setCorreoPersonal(result[7].toString());
+                personal.setEstadoPersonal(BigInteger.valueOf(Integer.parseInt(result[8].toString())));
+//                personal.setContrasenaPersonal(result[3].toString());
+                
+                Rol rol =new Rol();
+                personal.setIdRol(rol);
+//                rol=this.personalServicio.retornarRolById(Integer.parseInt(result[5].toString()));
+
+                rol.setDescripcionRol((result[9].toString()));
+              
+                
+                Personals.add(personal);
+            }
+            
+            return Personals;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }  
+    
+    
+ 
         
         
         

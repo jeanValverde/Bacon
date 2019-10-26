@@ -316,7 +316,7 @@ public class PersonalControlador {
         List<Personal> personales = new ArrayList<Personal>();
         switch (tipoBusqueda) {
             case "nombre":
-//                personals = this.proveedorService.filtrarProveedoresByNombre(filtro);
+                personales = this.personalService.filtrarPersonalByNombre(filtro);
                 break;
             case "rut":
                 personales= this.personalService.filtrarPersonalByRut(filtro);
