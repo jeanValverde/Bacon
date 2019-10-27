@@ -53,7 +53,5 @@ public class BaconApplication {
         templateEngine.setEnableSpringELCompiler(true);
         return templateEngine;
 
-    }
-    
-    
+    }    
 }
