@@ -346,7 +346,7 @@
                                                             <p>Duración Preparación</p>
                                                         </div>
                                                         <div class="col-4">
-                                                            <h6 th:text="'$' + ${receta.precioReceta}" >1596</h6>
+                                                            <h6 th:id="'receta-tarjeta-'+ ${receta.idReceta}" class="numberToFormat" th:text="${receta.precioReceta}" >1596</h6>
                                                             <p>Precio Receta</p>
                                                         </div>
                                                         <div class="col-4">
@@ -415,7 +415,7 @@
                                                                 <td th:text="${receta.duracionPreparacion} + ' min'" >
                                                                     duración
                                                                 </td>
-                                                                <td th:text="'$' + ${receta.precioReceta}" >
+                                                                <td th:id="'receta-tabla-'+ ${receta.idReceta} " class="numberToFormat" th:text="'$' + ${receta.precioReceta}" >
                                                                     precio
                                                                 </td >
                                                                 <td th:text="${receta.cantidadPrepDiariaReceta}">
@@ -434,7 +434,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <a th:href="@{/administrador/loadEditarReceta(idReceta=${receta.idReceta})}" class="btn btn-outline-warning btn-fw btn-sm mt-3 mb-4">Editar</a>
-                                                                    <a th:href="@{/administrador/deleteReceta(idReceta=${receta.idReceta})}" class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</a>
+                                                                    <a href="#" th:onclick="'d(' + ${receta.idReceta} + ')'" class="btn btn-outline-danger btn-fw btn-sm mt-3 mb-4">Eliminar</a>
                                                                     <a th:href="@{/administrador/recetaInsumos/ingredientesReceta(idReceta=${receta.idReceta})}" class="btn btn-info btn-sm mt-3 mb-4">Insumos</a>
                                                                 </td>
                                                             </tr>
@@ -603,6 +603,54 @@
 
 
 
+        <script type="text/javascript" >
+
+            function dar_formato(num) {
+
+                var cadena = "";
+                var aux;
+
+                var cont = 1, m, k;
+
+                if (num < 0)
+                    aux = 1;
+                else
+                    aux = 0;
+
+                num = num.toString();
+
+                for (m = num.length - 1; m >= 0; m--) {
+
+                    cadena = num.charAt(m) + cadena;
+
+                    if (cont % 3 == 0 && m > aux)
+                        cadena = "." + cadena;
+                    else
+                        cadena = cadena;
+
+                    if (cont == 3)
+                        cont = 1;
+                    else
+                        cont++;
+
+                }
+
+                cadena = cadena.replace(/.,/, ",");
+
+                return cadena;
+
+            }
+
+            var elements = document.getElementsByClassName('numberToFormat');
+            
+            for (var i = 0; i < elements.length; i++) {
+                
+                var valor = elements[i].innerHTML.trim();
+
+                document.getElementById(elements[i].id).innerHTML = "$" + dar_formato(valor);
+            }
+
+        </script>
 
 
 

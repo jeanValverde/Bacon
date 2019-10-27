@@ -9,7 +9,10 @@
             <!---este boton solo debe estar cuando no se tiene ninguna orden emitida--->
             <ul class="navbar-nav navbar-nav-right">
                 <li class="nav-item dropdown">
-                    <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" th:href="@{/}">
+                    <div id="identificador" class="badge badge-outline-primary mr-1" style=" background: #fff; "></div>
+                    <div id="nombreCliente" class="badge badge-outline-primary mr-1" style=" background: #fff; "></div>
+                    <div id="numeroMesa" class="badge badge-outline-primary mr-1" style=" background: #fff; "></div>
+                    <a id="salir" style="visibility: hidden;" class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" th:href="@{/}">
                         <i class="mdi mdi-logout-variant"></i>
                     </a>
                 </li>
@@ -21,4 +24,26 @@
             </button>
         </div>
     </div>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" >
+
+        axios.get(window.location.protocol + "//" + window.location.host + '/cliente/sesion/detalle')
+                .then(function (response) {
+                    console.log(response);
+                    document.getElementById('identificador').innerHTML = "Identificador Cliente: " + response.data.idCliente;
+                    document.getElementById('nombreCliente').innerHTML = response.data.nombre;
+                    document.getElementById('numeroMesa').innerHTML = "Número de Mesa: " + response.data.idMesa.numeroMesa;
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+                .finally(function () {
+                    // always executed
+                });
+
+    </script>
+
 </nav>

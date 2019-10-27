@@ -17,6 +17,10 @@ import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
 import static com.restaurante.bacon.dto.Proveedor.P_TIPO_PROVEEDOR;
 import com.restaurante.bacon.dto.CategoriaReceta;
 
+import com.restaurante.bacon.dto.Insumo;
+import static com.restaurante.bacon.dto.InsumoProveedor.I_ID_INSUMO_PROVEEDOR;
+import static com.restaurante.bacon.dto.InsumoProveedor.I_PRECIO;
+
 import com.restaurante.bacon.dto.Proveedor;
 import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
 
@@ -78,6 +82,63 @@ public class ProcedureQuery {
             return false;
         }
     }
+    @SuppressWarnings("unchecked")
+    public boolean InsertInsumoProveedor(BigInteger idInsumoProveedor, Integer precio)
+    {
+        try {
+            em.createNamedStoredProcedureQuery("InsertInsumoProveedor")
+
+                  .setParameter(I_ID_INSUMO_PROVEEDOR, idInsumoProveedor)
+                  .setParameter(I_PRECIO, precio).execute()
+
+         
+
+                 ;
+                  
+                    return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage().toString());
+            return false;
+        }
+   
+    
+    
+    
+    }
+       @SuppressWarnings("unchecked")
+    public boolean UpdateInsumoProveedor(Integer idInsumoProveedor, BigInteger precio)
+    {
+        try {
+            em.createNamedStoredProcedureQuery("UpdateInsumoProveedor")
+                  .setParameter(I_ID_INSUMO_PROVEEDOR, idInsumoProveedor)
+                  .setParameter(I_PRECIO, precio).execute();
+            
+                  
+                    return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage().toString());
+            return false;
+        }
+   
+    
+    
+    
+    }
+      @SuppressWarnings("unchecked")
+    public boolean DeleteInsumoProveedorById(Integer idInsumoProveedor) {
+        try {
+            //si no se realiza el procedimiento adecuadamente cae en una exeption 
+            em.createNamedStoredProcedureQuery("DeleteInsumoProveedor")
+                    .setParameter(I_ID_INSUMO_PROVEEDOR, idInsumoProveedor).execute();
+
+            return true;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    
 
 
 
@@ -379,8 +440,6 @@ public class ProcedureQuery {
             return null;
         }
     }
-
-
 
 
 }

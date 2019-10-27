@@ -42,53 +42,56 @@
                         <!--Desarrollar acá-->
 
 
-
-
                         <div class="row">
                             <div class="col-md-12">
+                                <div class="card mb-4">
+                                    <div class="card-body text-center">
+                                        <div>
+                                            <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${receta.foto}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                            <h4 th:text="${receta.nombreReceta}" >Maria Johnson</h4>
+                                            <p class="text-muted mb-0"></p>
 
-                                <div class="row">
-                                    <div class="col-md-12 grid-margin stretch-card">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-sm-flex flex-row flex-wrap text-center text-sm-left align-items-center">
-                                                    <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${receta.foto}" class="img-lg rounded" alt="profile image">
-                                                    <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
-                                                        <h6 class="mb-0" th:text="${receta.nombreReceta}" >Nombre de la Receta</h6>
-                                                        <br/>
-                                                        <p class="mb-0 text-success font-weight-bold" th:text="'$' + ${receta.precioReceta}" >$2321</p>
-                                                    </div>
-                                                    <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
-                                                        <h6 class="mb-0">Disponible</h6>
-                                                        <br />
-                                                        <p class="mb-0 text-success font-weight-bold">
-                                                        <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-outline-info ml-3"><i class="mdi mdi-check"></i></div>
-                                                        <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-outline-info ml-3"><i class="mdi mdi-close"></i></div>
-                                                        </p>
-                                                    </div>
-                                                    <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
-                                                        <p class="mb-0 text-success font-weight-bold">
-                                                        <div class="badge badge-primary"  th:text="'#' + ${receta.idReceta}"  >#ID</div>
-                                                        <div class="badge badge-primary" th:text="${receta.duracionPreparacion} + ' min'" >120 min</div>
-                                                        <div class="badge badge-primary" th:text="${receta.cantidadPrepDiariaReceta} + ' Estimación ventas'" >23 Estimación ventas</div>
-                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
-                                                        <div class="badge badge-outline-primary badge-pill" th:if="${receta.tipoReceta == '1' }" >Bar</div>
-                                                        <div class="badge badge-primary" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" th:if="${receta.tipoReceta == '0'}" >Categoría</div>
-                                                        </p>
-                                                    </div>
-                                                    <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
-                                                        <br/>
-                                                        <h6 class="mb-0" th:text="${receta.descripcionReceta}" >
-                                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                                            Aenean commodo ligula eget dolor. Lorem</h6>
-                                                    </div>
+                                            <div class="badge badge-primary mr-1" th:text="'#' + ${receta.idReceta}"  >#113</div>
+
+
+                                            <div class="badge badge-primary mr-1" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
+                                            <div class="badge badge-primary mr-1" th:if="${receta.tipoReceta == '1' }" >Bar</div>
+
+
+                                            <div class="badge badge-primary mr-1" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" th:if="${receta.tipoReceta == '0'}" >Categoría</div>
+
+                                            <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-primary ml-1"><i class="mdi mdi-check"></i></div>
+                                            <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-primary ml-1"><i class="mdi mdi-close"></i></div>
+
+                                        </div>
+                                        <p class="mt-2 card-text" th:text="${receta.descripcionReceta}" >
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                            Aenean commodo ligula eget dolor. Lorem
+                                        </p>
+
+                                        <div class="border-top pt-3">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <h6 th:text="${receta.duracionPreparacion} + ' Minutos'"  >5896</h6>
+                                                    <p>Duración Preparación</p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <h6 th:id="'receta-' + ${receta.idReceta}"  class="numberToFormat" th:text="${receta.precioReceta}" >1596</h6>
+                                                    <p>Precio Receta</p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <h6 th:text="${receta.cantidadPrepDiariaReceta}" >7896</h6>
+                                                    <p>Estimación Diaria</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
 
-
+                        <div class="row">
+                            <div class="col-md-12">
 
                                 <!---inicio fila de los filtros-->
                                 <div class="row">
@@ -132,7 +135,7 @@
                                             </button>
                                         </div>
                                     </div>
-                                    
+
                                     <!--fin vista tipos--->
 
                                 </div>
@@ -181,7 +184,7 @@
 
                                         <div class="card-body text-center">
                                             <div>
-                                                <img th:src="@{/uploads/}+${ingrediente.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                                <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${ingrediente.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image">
                                                 <h4 th:text="${ingrediente.idInsumo.nombreInsumo}" >Insumo</h4>
                                                 <p class="text-muted mb-0" th:text="'#' + ${ingrediente.idInsumo.idInsumo} "  >#ID</p>
                                             </div>
@@ -213,7 +216,7 @@
                             <div id="tablaIndumos" class="col-md-12" style="" th:if="${tipo == 'agregar' }"  >
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Recetas</h4>
+                                        <h4 class="card-title">Insumos</h4>
                                         <div class="table-responsive">
                                             <table class="table table-striped">
                                                 <thead>
@@ -238,7 +241,7 @@
                                                 <tbody>
                                                     <tr th:each="insumo: ${insumos}"  >
                                                         <td class="py-1">
-                                                            <img th:src="@{/uploads/}+${insumo.fotoInsumo}"  alt="image">
+                                                            <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${insumo.fotoInsumo}"  alt="image">
                                                         </td>
                                                         <td th:text="${insumo.idInsumo}"   >
                                                             Herman Beck
@@ -300,7 +303,7 @@
                                                 <tbody>
                                                     <tr th:each="ingrediente: ${ingredientes}" >
                                                         <td class="py-1">
-                                                            <img th:src="@{/uploads/}+${ingrediente.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                                            <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${ingrediente.idInsumo.fotoInsumo}" class="img-lg rounded-circle mb-2" alt="profile image">
                                                         </td>
                                                         <td th:text="${ingrediente.idInsumo.idInsumo}"  >
                                                             Herman Beck
@@ -319,11 +322,11 @@
                                                                 <div style="float: left; padding:0px;" class="form-group row">
                                                                     <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
                                                                     <div class="col-sm-9">
-                                                                        <input required=""  type="number"  step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
+                                                                        <input min="0.1" required="" type="number" step="any" name="cantidad" class="form-control" th:value="${ingrediente.cantidad}"  id="cantidadInsumo" placeholder="Cantidad">
                                                                     </div>
                                                                 </div> &nbsp;
                                                                 <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
-                                                                <a th:href="@{/administrador/recetaInsumos/deleteIngrediente(idReceta=${receta.idReceta}, idIngrediente=${ingrediente.idIngrediente})}"  class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</a>
+                                                                <a href="#" th:onclick="'deleteInsumoReceta(' + ${receta.idReceta} + ' , ' +  ${ingrediente.idIngrediente}  + ' )'"  class="btn btn-danger btn-sm mt-3 mb-4">Eliminar</a>
                                                             </form>
                                                         </td>
                                                     </tr>
@@ -401,13 +404,13 @@
             }
         </script>
 
-     
-           <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
 
         <script type="text/javascript" >
 
             function deleteInsumoReceta(idReceta, idIngrediente) {
-                
+
                 Swal.fire({
                     title: '¿Está seguro que desea eliminar?',
                     text: "Si elimina la receta se perderán todos los datos relacionados y serán irrecuperables",
@@ -418,14 +421,62 @@
                     confirmButtonText: '!Si, Eliminar!'
                 }).then((result) => {
                     if (result.value) {
-                        location.href="/administrador/recetaInsumos/deleteIngrediente?idReceta=" + idReceta + "&idIngrediente="+ idIngrediente;
+                        location.href = "/administrador/recetaInsumos/deleteIngrediente?idReceta=" + idReceta + "&idIngrediente=" + idIngrediente;
                     }
                 });
             }
 
         </script>
-        
-        
+
+
+        <script type="text/javascript" >
+
+            function dar_formato(num) {
+
+                var cadena = "";
+                var aux;
+
+                var cont = 1, m, k;
+
+                if (num < 0)
+                    aux = 1;
+                else
+                    aux = 0;
+
+                num = num.toString();
+
+                for (m = num.length - 1; m >= 0; m--) {
+
+                    cadena = num.charAt(m) + cadena;
+
+                    if (cont % 3 == 0 && m > aux)
+                        cadena = "." + cadena;
+                    else
+                        cadena = cadena;
+
+                    if (cont == 3)
+                        cont = 1;
+                    else
+                        cont++;
+
+                }
+
+                cadena = cadena.replace(/.,/, ",");
+
+                return cadena;
+
+            }
+
+            var elements = document.getElementsByClassName('numberToFormat');
+            
+            for (var i = 0; i < elements.length; i++) {
+                
+                var valor = elements[i].innerHTML.trim();
+
+                document.getElementById(elements[i].id).innerHTML = "$" + dar_formato(valor);
+            }
+
+        </script>
     </body>
 
 </html>

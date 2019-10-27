@@ -215,7 +215,7 @@ public class ProcedureQueryPedido {
             // Recorremos la lista con map y devolvemos un List<BusinessObject>
             for (Object[] result : results) {
                 
-                insumoProveedor.setIdInsumoProveedor(BigDecimal.valueOf(Integer.parseInt(result[0].toString())));
+                insumoProveedor.setIdInsumoProveedor(Integer.parseInt(result[0].toString()));
                 insumoProveedor.setPrecio(BigInteger.valueOf(Integer.parseInt(result[1].toString())));
                 Insumo insumo = new Insumo();
                 insumo = this.insumoService.retornarInsumoById(idInsumo);

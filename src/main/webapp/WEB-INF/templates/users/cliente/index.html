@@ -572,7 +572,7 @@
 
                     totalOrden = totalOrden + precioNuevo;
 
-                    document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(totalOrden);
+                    document.getElementById('totalOrden').innerHTML = "TOTAL DE LA ORDEN ES $" + dar_formato(totalOrden);
 
                     sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
 
@@ -644,7 +644,7 @@
 
                         totalOrden = totalOrden - totalDescuento;
                         //4000 - 5000 = 1000
-                        document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(totalOrden);
+                        document.getElementById('totalOrden').innerHTML = "TOTAL DE LA ORDEN ES $" + dar_formato(totalOrden);
 
                         sessionStorage.setItem('TOTAL_ORDEN', totalOrden);
                         borrar_receta_sesion(idReceta);
@@ -661,7 +661,7 @@
                 var valorBar = parseInt(bar, 10);
                 var total = valorCocina + valorBar;
 
-                document.getElementById('totalOrden').innerHTML = "TOTAL DE LA RODEN ES $" + dar_formato(total);
+                document.getElementById('totalOrden').innerHTML = "TOTAL DE LA ORDEN ES $" + dar_formato(total);
 
                 sessionStorage.setItem('TOTAL_ORDEN', total);
 

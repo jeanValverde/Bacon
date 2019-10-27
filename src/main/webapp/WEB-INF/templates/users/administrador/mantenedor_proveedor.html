@@ -419,7 +419,7 @@
                                                                                                             </div>
                                                                                                             <div class="col-12">
 
-
+                                                                                                                <a class="btn btn-primary"th:href="@{/administrador/insumoProveedor/mantenedor_Proveedor_Insumo?(idProveedor=${ins.idProveedor})}"> Visualizar Insumos</a>
                                                                                                             </div>
 
                                                                                                         </div>
@@ -552,7 +552,6 @@
 
 
                                                     <script th:inline="javascript">
-
                                                         var tipoRespuesta = [[${tipoRespuesta
                                                         }
                                                         ]];
@@ -576,14 +575,11 @@
                                                         }
                                                         break;
                                                         case 'eliminar' :
-
                                                                 if (respuesta === 1) {
                                                         showSwal('success-message', 'Proveedor eliminado!', 'se ha eliminado el proveedor exitosamente');
                                                         } else if (respuesta === 0) {
                                                         showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
                                                         }
-
-
                                                         break;
                                                         case 'error' :
                                                                 if (respuesta === 0) {
@@ -591,9 +587,6 @@
                                                         }
                                                         }
                                                         }
-
-
-
                                                     </script>
 
 
@@ -610,9 +603,7 @@
                                                     </script>
 
                                                     <script type="text/javascript" >
-
                                                         function d(idProveedor) {
-
                                                         Swal.fire({
                                                         title: '¿Está seguro que desea eliminar?',
                                                                 text: "Si elimina el proveedor se perderán todos los datos relacionados con el y serán irrecuperables",
@@ -627,7 +618,6 @@
                                                         }
                                                         })
                                                         }
-
                                                     </script>
 
 

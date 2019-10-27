@@ -217,6 +217,7 @@ public class PersonalMantenedorReceta {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
+        
         //desarrollo aca 
         Receta receta = this.recetaService.buscarRecetaById(idReceta);
 

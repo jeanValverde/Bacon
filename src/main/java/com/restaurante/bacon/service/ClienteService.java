@@ -28,4 +28,8 @@ public class ClienteService {
         return this.clienteDao.save(cliente);
     }
     
+    public Cliente findClienteById(Integer idCliente){
+        return this.clienteDao.findByIdCliente(idCliente);
+    }
+    
 }

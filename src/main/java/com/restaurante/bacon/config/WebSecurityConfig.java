@@ -49,7 +49,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/fonts/**",
                         "/custom/**", 
                         "/", 
-                        "/cliente/**").permitAll()
+                        "/cliente/**", 
+                        "/errorBacon/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

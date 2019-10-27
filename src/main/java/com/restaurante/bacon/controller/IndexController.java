@@ -65,19 +65,19 @@ public class IndexController {
                 page = "/administrador/index";
                 break;
             case "BODEGA":
-                page = "/bodega/index";
+                page = "/errorBacon/500";
                 break;
             case "COCINA":
-                page = "/cocina/index";
+                page = "/errorBacon/500";
                 break;
             case "BAR":
-                page = "/bar/index";
+                page = "/errorBacon/500";
                 break;
             case "FINANZAS":
-                page = "/finanzas/index";
+                page = "/errorBacon/500";
                 break;
             case "GARZON":
-                page = "/garzon/index";
+                page = "/errorBacon/500";
                 break;
             default:
                 page = "/login";
