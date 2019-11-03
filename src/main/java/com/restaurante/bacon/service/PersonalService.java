@@ -78,8 +78,8 @@ public class PersonalService implements UserDetailsService {
 //         
 //    }
     
-    public Personal addPersonalDao(Personal personal) {
-        return this.personalDao.save(personal);
+    public boolean insertPersonal(Personal personal) {
+        return this.procedureQuery.InsertPersonal(personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(),personal.getContrasenaPersonal(),personal.getEstadoPersonal(), personal.getIdRol().getIdRol());
     }
     
 
@@ -231,6 +231,8 @@ public class PersonalService implements UserDetailsService {
         }
         return fechaDate;
     }
+    
+
     
 //    public String subirImagen (MultipartFile[] file ) throws IOException{
 //         

@@ -33,6 +33,10 @@
                                                 <div class="container-fluid page-body-wrapper">
                                                     <!-- partial:../../fragments/_settings-panel.html -->
                                                     <div th:replace="fragments/_settings-panel :: div"></div>
+                                                    <div th:replace="fragments/_settings-panel :: div"></div>
+                                                    <!-- partial -->
+                                                    <!-- partial:../../fragments/_sidebar.html -->
+                                                    <nav th:replace="fragments/_sidebar :: navSilebar(nombreUsuario=${personalSesion.nombresPersonal} , rol=${personalSesion.idRol.descripcionRol})" ></nav>
                                                     <!-- partial -->
 
 
@@ -95,17 +99,25 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="fechaNacimientoPersonal">Fecha Nacimiento</label>
-                                                                                    <input type="text" class="form-control" id="fechaNacimientoPersonal" name="fechaNacimientoPersonal" placeholder="982961951">
-                                                                                        <div class="valid-feedback">
-                                                                                            !Listo!
-                                                                                        </div>
-                                                                                        <div class="invalid-feedback">
-                                                                                            Ingrese Fecha Nacimiento.
-                                                                                        </div>
+
+                                                                                    <div id="datepicker-popup" class="input-group date datepicker">
+
+                                                                                        <input type="text" class="form-control" id="fechaNacimientoPersonal" name="fechaNacimientoPersonal">
+                                                                                            <span class="input-group-addon input-group-append border-left">
+                                                                                                <span class="mdi mdi-calendar input-group-text"></span>
+                                                                                            </span>
+
+                                                                                    </div>
+                                                                                    <div class="valid-feedback">
+                                                                                        !Listo!
+                                                                                    </div>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Ingrese Fecha Nacimiento.
+                                                                                    </div>      
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="celularPersonal">Celular Personal</label>
-                                                                                    <input type="text" class="form-control" id="celularPersonal" name="celularPersonal" placeholder="982961951">
+                                                                                    <input type="text" class="form-control" id="celularPersonal" pattern="[0-9]{10}" name="celularPersonal" placeholder="982961951">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -115,7 +127,7 @@
                                                                                 </div>                                
                                                                                 <div class="form-group">
                                                                                     <label for="correoPersonal">Correo Personal</label>
-                                                                                    <input type="text" class="form-control" id="correoPersonal" name="correoPersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
+                                                                                    <input type="text" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="correoPersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -143,28 +155,14 @@
                                                                                             Las contraseñas no coinciden, ¡reintenta!
                                                                                         </div>
                                                                                 </div>    
-
-                                                                                <!--  <div class="form-group">
-                                                                                      <label for="estadoPersonal">Estado Personal</label>
-                                                                                      <input type="number" class="form-control" name="estadoPersonal" id="estadoPersonal" >
-                                                                                          <div class="valid-feedback">
-                                                                                              1 habilidato //0 No habilitado
-                                                                                          </div>
-                                                                                          <div class="invalid-feedback">
-                                                                                              Tiene que ser uno
-                                                                                          </div>
-                                                                                  </div>-->
                                                                                 <div class="form-group" id="rolpersonal">
                                                                                     <label for="rolpersonal">Rol </label>
                                                                                     <select  name="rolpersonal" class="form-control" id="rolpersonal">
                                                                                         <option th:each="rol:${rolpersonal}"  th:value="${rol.idRol}" th:text="${rol.descripcionRol}" ></option>
                                                                                     </select>
                                                                                 </div>
-                                                                               
-                                                                                    <button class="btn btn-outline-success" onclick="showSwal('success-message')">Ingresar</button>
 
-                                                                                                          
-
+                                                                                <button class="btn btn-outline-success" onclick="showSwal('success-message')">Ingresar</button>
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -241,7 +239,7 @@
 
                                                                                     <div class="form-group">
                                                                                         <label for="celularPersonal">Celular</label>
-                                                                                        <input th:value="${personals.celularPersonal}" type="text" class="form-control" name="celularPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Celular Personal">
+                                                                                        <input th:value="${personals.celularPersonal}" type="text" pattern="[0-9]{10}" class="form-control" name="celularPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Celular Personal">
                                                                                             <small id="textHelp" class="form-text text-muted">Celular obligatorio</small>
                                                                                             <div class="valid-feedback">
                                                                                                 Se ve bien!
@@ -252,7 +250,7 @@
                                                                                     </div>
                                                                                     <div class="form-group">
                                                                                         <label for="exampleInputEmail1">Correo electrónico</label>
-                                                                                        <input th:value="${personals.correoPersonal}" type="email" class="form-control" name="correoPersonal" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electrónico">
+                                                                                        <input th:value="${personals.correoPersonal}" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" name="correoPersonal" id="email" aria-describedby="emailHelp" placeholder="Correo electrónico">
                                                                                             <small id="emailHelp" class="form-text text-muted">Escribe un correo electrónico valido.</small>
                                                                                             <div class="valid-feedback">
                                                                                                 ¡Buen Email!
@@ -291,7 +289,7 @@
                                                                 </div> 
 
 
-                                                                     
+
 
 
                                                                 <div class="col-md-8 col-xl-8 grid-margin stretch-card">
@@ -384,6 +382,8 @@
 
 
                                                                                                         <h4 th:text="${ins.nombresPersonal}"></h4>
+                                                                                                        <h6>Rut :  </h6>
+                                                                                                        <p th:text="${ins.rutPersonal}" class="text-muted mb-0">Apellido Paterno</p>
                                                                                                         <h6>Apellido Paterno :</h6>
                                                                                                         <p th:text="${ins.ApePaternoPersonal}" class="text-muted mb-0">Apellido Paterno</p>
 
@@ -397,7 +397,7 @@
                                                                                                             <div class="col-12">
                                                                                                                 <h6>Fecha Nacimiento:</h6>
 
-                                                                                                                <p th:text="${ins.FechaNacimientoPersonal}" class="mt-2 card-text">Fecha Nacimiento</p>
+                                                                                                                <p th:text="${ins.FechaNacimientoPersonal}" class="mt-2 card-text" pattern="dd/MM/yyyy">Fecha Nacimiento</p>
                                                                                                             </div>
                                                                                                             <div class="col-12">
                                                                                                                 <h6>Celular:</h6>
@@ -411,8 +411,9 @@
                                                                                                             </div>
                                                                                                             <div class="col-12">
                                                                                                                 <h6>Estado:</h6>
-
-                                                                                                                <p th:text="${ins.EstadoPersonal}" class="mt-2 card-text">Estado</p>
+   
+                                                                                                              <p   th:if="${ins.EstadoPersonal}==0">Retirado</p>
+                                                                                                              <p th:if="${ins.EstadoPersonal}==1">Activo</p>
                                                                                                             </div>
 
                                                                                                             <div class="col-12">
@@ -465,7 +466,9 @@
                                                                                                             <td th:text="${ins.FechaNacimientoPersonal}"></td>
                                                                                                             <td th:text="${ins.CelularPersonal}"></td>
                                                                                                             <td th:text="${ins.CorreoPersonal}"></td>
-                                                                                                            <td th:text="${ins.EstadoPersonal}"></td>
+                                                                                                            <td th:if="${ins.EstadoPersonal}==0">Retirado</td>
+                                                                                                            <td th:if="${ins.EstadoPersonal}==1">Activo</td>
+                                                                                          
                                                                                                             <td th:text="${ins.IdRol.DescripcionRol}"> </td>
 
                                                                                                             <td>
@@ -572,22 +575,69 @@
                                             <script th:src="@{/custom/loginform.js}"></script>
                                             <script src="../../../../js/sd"></script>
                                             <script src="../../../../vendors/sweetalert/sweetalert.min.js"></script>
+                                            <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+                                            <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+                                            <script th:src="@{/js/alerts_perso.js}"></script>
+                                            <script th:src="@{/js/avgrund.js}"></script>
 
                                             <!--validate form--->
                                             <script th:src="@{/custom/formularios.js}"></script>
                                             <script th:src="@{/custom/formFiltrarPersonal.js}"></script>
+                                            
+                                            
+                                            
+                                            <script th:inline="javascript">
+                                                        var tipoRespuesta = [[${tipoRespuesta
+                                                        }
+                                                        ]];
+                                                        var respuesta = [[${respuesta
+                                                        }
+                                                        ]];
+                                                        if (tipoRespuesta !== null) {
+                                                        switch (tipoRespuesta) {
+                                                        case 'agregar' :
+                                                                if (respuesta === 1) {
+                                                        showSwal('success-message', 'Personal agregado!', 'se ha registrado el personal exitosamente');
+                                                        } else if (respuesta === 0) {
+                                                        showSwal('warning-message', 'Error!', "No se ha podido agregar el Personal");
+                                                        }
+                                                        break;
+                                                        case 'modificar' :
+                                                                if (respuesta === 1) {
+                                                        showSwal('success-message', 'Personal modificado!', 'se ha registrado el personal exitosamente');
+                                                        } else if (respuesta === 0) {
+                                                        showSwal('warning-message', 'Error!', "No se ha podido modificar el Personal");
+                                                        }
+                                                        break;
+                                                        case 'eliminar' :
+                                                                if (respuesta === 1) {
+                                                        showSwal('success-message', 'Personal eliminado!', 'se ha eliminado el personal exitosamente');
+                                                        } else if (respuesta === 0) {
+                                                        showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
+                                                        }
+                                                        break;
+                                                        case 'error' :
+                                                                if (respuesta === 0) {
+                                                        showSwal('warning-message', 'Error!', "No se pudo ingresar el personal ya que el rut ingresado ya existe");
+                                                        }
+                                                        }
+                                                        }
+                                            </script>
+                                            
+                                            
+                                            
 
 
 
                                             <script th:inline="javascript">
-                                              
 
 
-                                                function agregarRol() {
-                                                    var check = document.getElementById("rolpersonal");
-                                                    check.style.display = "inline";
-                                                    check.style.visibility = "visible";
-                                                }
+
+                                                                                        function agregarRol() {
+                                                                                            var check = document.getElementById("rolpersonal");
+                                                                                            check.style.display = "inline";
+                                                                                            check.style.visibility = "visible";
+                                                                                        }
 
 
 
@@ -600,12 +650,12 @@
                                                 var formularioPassword = document.getElementsByName("formAddPersonal")[0];
                                                 validatorForms(formularioPassword);
                                             </script>
-                                              <script type="text/javascript" >
-                                                var formularioPassword1 = document.getElementsByName("formLista")[0];
-                                                validatorFormsP(formularioPassword1);
+                                            <script type="text/javascript" >
+                                                var formulario = document.getElementsByName("formLista")[1];
+                                                validatorFormsP(formulario);
                                             </script>
-                                            
-                                           
+
+
 
                                             <script>
                                                 $('#datepicker-popup').datepicker();
@@ -614,7 +664,7 @@
 
 
 
-                            
+
 
 
 

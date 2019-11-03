@@ -63,7 +63,7 @@ public class PersonalControlador {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-      modelo.addAttribute("rolpersonal", this.personalService.listarRol());   
+        modelo.addAttribute("rolpersonal", this.personalService.listarRol());
         //desarrollo aca 
         modelo.addAttribute("Personal", this.personalService.getAllUsuario());
         //fin desarrollo 
@@ -75,8 +75,7 @@ public class PersonalControlador {
         //
         return "users/administrador/index";
     }
-    
-    
+
 //        @RequestMapping("/personal")
 //    public String personal(Model modelo) {
 //        //sesion 
@@ -99,7 +98,6 @@ public class PersonalControlador {
 //        //
 //        return "users/administrador/mantenedor_personal";
 //    }
-
     @RequestMapping("/mantenedor_personal")
     public String mantenedor_personal(Model modelo) {
         //sesion 
@@ -110,7 +108,7 @@ public class PersonalControlador {
         personales = this.personalService.getAllUsuario();
         //desarrollo aca 
         modelo.addAttribute("rolpersonal", this.personalService.listarRol());
-        
+
         modelo.addAttribute("personales", personales);
         modelo.addAttribute("agregar", true);
         modelo.addAttribute("modificar", false);
@@ -132,6 +130,7 @@ public class PersonalControlador {
             @RequestParam("celularPersonal") String celularPersonal,
             @RequestParam("correoPersonal") String correoPersonal,
             @RequestParam("contrasenaPersonal") String contrasenaPersonal,
+            
             @RequestParam("rolpersonal") Integer rolpersonal) {
 
         //sesion 
@@ -140,43 +139,68 @@ public class PersonalControlador {
         //sesion 
 
         String edad = this.personalService.getEdad(personal.getFechaNacimientoPersonal());
-
+        
+        
         Date fechaNacimiento = PersonalService.ParseFecha(fechaNacimientoPersonal);
 
         Personal personal1 = this.personalService.findByRut(rutPersonal);
 
         Personal perso = new Personal();
+        perso.setRutPersonal(rutPersonal);
+        perso.setNombresPersonal(nombresPersonal);
+        perso.setApePaternoPersonal(apePaternoPersonal);
+        perso.setApeMaternoPersonal(apeMaternoPersonal);
+        perso.setFechaNacimientoPersonal(fechaNacimiento);
+        perso.setCelularPersonal(celularPersonal);
+        perso.setCorreoPersonal(correoPersonal);
 
-        
         String contra = encoder.encode(contrasenaPersonal);
         perso.setContrasenaPersonal(contra);
-        
-        
+
         BigInteger estado = BigInteger.valueOf(1);
-        
-       perso.setEstadoPersonal(estado);
-       
-        
-        try {
-            this.procedureQuery.InsertPersonal(rutPersonal, nombresPersonal, apePaternoPersonal, apeMaternoPersonal, fechaNacimiento, celularPersonal, correoPersonal, contra,estado,rolpersonal);
-//            this.procedureQuery.InsertPersonal(rutPersonal, nombresPersonal, apePaternoPersonal, apeMaternoPersonal, fechaNacimiento, celularPersonal, correoPersonal, contrasenaPersonal, rol);
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+
+        perso.setEstadoPersonal(estado);
+
+        Rol rol = new Rol();
+        rol.setIdRol(rolpersonal);
+        perso.setIdRol(rol);
         //desarollo
         //fin desarrollo 
         //despacho  modelo.addAttribute(nombreDespacho, objetoAdespachar)
         //fin despacho 
         //siempre despachar esto por la sesion 
-
-        modelo.addAttribute("personalSesion", personal);
-
         List<Personal> personales = new ArrayList<Personal>();
         personales = this.personalService.getAllUsuario();
+        
+        boolean seRepite = false;
+
+        for (int i = 0; i < personales.size(); i++) {
+            if (rutPersonal.equals(personales.get(i).getRutPersonal())) {
+                seRepite = true;
+            }
+        }
+
+        if (!seRepite) {
+
+            if (this.personalService.insertPersonal(perso) != false) {
+                modelo.addAttribute("tipoRespuesta", "agregar");
+                modelo.addAttribute("respuesta", 1);
+            } else {
+                modelo.addAttribute("tipoRespuesta", "agregar");
+                modelo.addAttribute("respuesta", 0);
+            }
+        } else {
+            modelo.addAttribute("tipoRespuesta", "error");
+            modelo.addAttribute("respuesta", 0);
+        }
+        
+        
+        modelo.addAttribute("personalSesion", personal);
         //desarrollo aca 
         modelo.addAttribute("personales", personales);
         modelo.addAttribute("agregar", true);
+        
+        personales = this.personalService.getAllUsuario();
 
         //
         //cargar el html nombre
@@ -190,19 +214,17 @@ public class PersonalControlador {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        List <Personal> personales = new ArrayList<Personal>();
-        personales=   this.personalService.getAllUsuario();
+        List<Personal> personales = new ArrayList<Personal>();
+        personales = this.personalService.getAllUsuario();
         modelo.addAttribute("personales", personales);
-        modelo.addAttribute("rolpersonal", this.personalService.listarRol());  
-        
+        modelo.addAttribute("rolpersonal", this.personalService.listarRol());
+
         Personal personals = this.personalService.retornarPersonalById(idPersonal);
-       // modelo.addAttribute("modificarPersonal",true);
-        modelo.addAttribute("personals",personals);
-        
+        // modelo.addAttribute("modificarPersonal",true);
+        modelo.addAttribute("personals", personals);
+
         modelo.addAttribute("agregar", false);
         modelo.addAttribute("modificar", true);
-
-        
 
         //fin desarrollo 
         //siempre despachar esto por la sesion 
@@ -217,18 +239,15 @@ public class PersonalControlador {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
-        
+
         if (this.procedureQuery.DeletePersonalById(idPersonal)) {
             modelo.addAttribute("tipoRespuesta", "eliminar");
-                modelo.addAttribute("respuesta", 1);
-        }else{
+            modelo.addAttribute("respuesta", 1);
+        } else {
             modelo.addAttribute("tipoRespuesta", "eliminar");
-                modelo.addAttribute("respuesta", 0);
+            modelo.addAttribute("respuesta", 0);
         }
-        
-        
-        
+
         List<Personal> personales = new ArrayList<Personal>();
         personales = this.personalService.getAllUsuario();
         modelo.addAttribute("personales", personales);
@@ -257,12 +276,12 @@ public class PersonalControlador {
             @RequestParam("correoPersonal") String correoPersonal,
             @RequestParam("estadoPersonal") Integer estadoPersonal,
             @RequestParam("rolPersonal") Integer rolPersonal
-            ) {
+    ) {
         //sesion 
         UserRol user = new UserRol();
         Personal personalser = this.personalService.getPersonalSesion(user.getUsername());
         //sesion
-        
+
         Personal personal = new Personal();
         List<Personal> persosnales = new ArrayList<Personal>();
         persosnales = this.personalService.getAllUsuario();
@@ -272,31 +291,36 @@ public class PersonalControlador {
         personal.setNombresPersonal(nombresPersonal);
         personal.setApePaternoPersonal(apePaternoPersonal);
         personal.setApeMaternoPersonal(apeMaternoPersonal);
-        
+
         Date fecha = PersonalService.ParseFecha(fechaNacimientoPersonal);
-        
+
         personal.setFechaNacimientoPersonal(fecha);
         personal.setCelularPersonal(celularPersonal);
         personal.setCorreoPersonal(correoPersonal);
-        
-        BigInteger state= BigInteger.valueOf(estadoPersonal);
+
+        BigInteger state = BigInteger.valueOf(estadoPersonal);
         personal.setEstadoPersonal(state);
-        
-        Rol rol =new Rol();
+
+        Rol rol = new Rol();
         rol.setIdRol(rolPersonal);
         personal.setIdRol(rol);
 
-        
 //        perso.setEstadoPersonal(BigInteger.valueOf(Integer.parseInt(estado.toString())));
-             
-        this.personalService.modificarPersonal(personal);
+        if (this.personalService.modificarPersonal(personal)) {
+
+            modelo.addAttribute("tipoRespuesta", "modificar");
+            modelo.addAttribute("respuesta", 1);
+        } else {
+            modelo.addAttribute("tipoRespuesta", "modificar");
+            modelo.addAttribute("respuesta", 0);
+        }
+
         modelo.addAttribute("agregar", true);
         modelo.addAttribute("modificar", false);
         modelo.addAttribute("personales", persosnales);
-      
+
         //fin desarrollo 
         //despachos 
-
         //fin despacho 
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", personal);
@@ -304,27 +328,25 @@ public class PersonalControlador {
         return "users/administrador/mantenedor_personal";
     }
 
-    
-    
-        @RequestMapping("/buscar_por_filtro")
+    @RequestMapping("/buscar_por_filtro")
     public String buscar_por_filtro(Model modelo, @RequestParam("tipoBusqueda") String tipoBusqueda, @RequestParam("filtro") String filtro) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        
+
         List<Personal> personales = new ArrayList<Personal>();
         switch (tipoBusqueda) {
             case "nombre":
                 personales = this.personalService.filtrarPersonalByNombre(filtro);
                 break;
             case "rut":
-                personales= this.personalService.filtrarPersonalByRut(filtro);
+                personales = this.personalService.filtrarPersonalByRut(filtro);
                 break;
-             default:
+            default:
                 personales = this.personalService.getAllUsuario();
         }
-        
+
         modelo.addAttribute("personales", personales);
         modelo.addAttribute("agregar", true);
         modelo.addAttribute("personalSesion", personal);
@@ -333,18 +355,5 @@ public class PersonalControlador {
         //cargar el html nombre
         return "users/administrador/mantenedor_personal";
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
