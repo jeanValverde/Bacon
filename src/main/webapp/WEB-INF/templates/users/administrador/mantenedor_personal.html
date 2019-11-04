@@ -117,7 +117,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="celularPersonal">Celular Personal</label>
-                                                                                    <input type="text" class="form-control" id="celularPersonal" pattern="[0-9]{10}" name="celularPersonal" placeholder="982961951">
+                                                                                    <input type="number" class="form-control" id="celular" pattern="[0-9]{10}" name="celularPersonal" placeholder="982961951">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -127,7 +127,7 @@
                                                                                 </div>                                
                                                                                 <div class="form-group">
                                                                                     <label for="correoPersonal">Correo Personal</label>
-                                                                                    <input type="text" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="correoPersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
+                                                                                    <input type="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="correoPersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -239,7 +239,7 @@
 
                                                                                     <div class="form-group">
                                                                                         <label for="celularPersonal">Celular</label>
-                                                                                        <input th:value="${personals.celularPersonal}" type="text" pattern="[0-9]{10}" class="form-control" name="celularPersonal"  id="textoExample1" aria-describedby="Texto" placeholder="Celular Personal">
+                                                                                        <input th:value="${personals.celularPersonal}" type="number" pattern="[0-9]{10}" class="form-control" name="celularPersonal"  id="celular" placeholder="Celular Personal">
                                                                                             <small id="textHelp" class="form-text text-muted">Celular obligatorio</small>
                                                                                             <div class="valid-feedback">
                                                                                                 Se ve bien!
@@ -579,7 +579,7 @@
                                             <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
                                             <script th:src="@{/js/alerts_perso.js}"></script>
                                             <script th:src="@{/js/avgrund.js}"></script>
-
+                                            <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
                                             <!--validate form--->
                                             <script th:src="@{/custom/formularios.js}"></script>
                                             <script th:src="@{/custom/formFiltrarPersonal.js}"></script>
