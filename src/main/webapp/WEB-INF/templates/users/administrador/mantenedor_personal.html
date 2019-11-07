@@ -229,7 +229,7 @@
                                                                                         <label for="fechaNacimientoPersonal">Fecha de Nacimiento</label>
                                                                                         <div class="col-sm-9">
                                                                                             <div id="datepicker-popup" class="input-group date datepicker">
-                                                                                                <input th:value="${personalSesion.fechaNacimientoPersonal}" name="fechaNacimientoPersonal" type="text" id="fecha" class="form-control">
+                                                                                                <input th:value="${personals.fechaNacimientoPersonal}" name="fechaNacimientoPersonal" type="text" id="fecha" class="form-control">
                                                                                                     <span class="input-group-addon input-group-append border-left">
                                                                                                         <span class="mdi mdi-calendar input-group-text"></span>
                                                                                                     </span>
@@ -239,7 +239,7 @@
 
                                                                                     <div class="form-group">
                                                                                         <label for="celularPersonal">Celular</label>
-                                                                                        <input th:value="${personals.celularPersonal}" type="number" pattern="[0-9]{10}" class="form-control" name="celularPersonal"  id="celular" placeholder="Celular Personal">
+                                                                                        <input th:value="${personals.celularPersonal}" min="100000000" max="99999999999" type="number" pattern="[0-9]{10}" class="form-control" name="celularPersonal"  id="celular" placeholder="Celular Personal">
                                                                                             <small id="textHelp" class="form-text text-muted">Celular obligatorio</small>
                                                                                             <div class="valid-feedback">
                                                                                                 Se ve bien!
@@ -575,10 +575,9 @@
                                             <script th:src="@{/custom/loginform.js}"></script>
                                             <script src="../../../../js/sd"></script>
                                             <script src="../../../../vendors/sweetalert/sweetalert.min.js"></script>
-                                            <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
-                                            <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+                                       
                                             <script th:src="@{/js/alerts_perso.js}"></script>
-                                            <script th:src="@{/js/avgrund.js}"></script>
+                                            
                                             <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
                                             <!--validate form--->
                                             <script th:src="@{/custom/formularios.js}"></script>
