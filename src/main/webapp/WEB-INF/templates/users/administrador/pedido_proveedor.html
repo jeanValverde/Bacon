@@ -75,13 +75,73 @@
                                         <form  th:action="@{/administrador/pedidoInsumo/buscar_insumos_proveedor}"  enctype="multipart/form-data" method="post">
 
                                             <div class="row">
-                                                <div class="col-2">
-                                                    <h5 >Buscar proveedor: </h5>
-                                                </div>
-                                                <div class="col-10" style="text-align: left">
-                                                    <div  class="input-group">
 
-                                                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal"  data-target="#modalInsumos" >Ver pedidos</button>
+                                                <div class="col-12" >
+
+                                                    <div  class="input-group">
+                                                        <button style="width: 250px" type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#modalInsumos">
+                                                            <i class="mdi mdi-cart-outline"></i>                      
+                                                            Ver pedidos 
+                                                        </button>
+                                                        &nbsp;
+                                                        <button type="button" class="btn btn-warning btn-rounded btn-icon" data-toggle="modal" data-target="#modalInstrucciones">
+                                                            <i class="mdi mdi-book-open-page-variant"></i>
+                                                        </button>
+
+                                                        <div class="modal fade" id="modalInstrucciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
+                                                            <div class="modal-dialog modal-lg" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel-3">Instrucciones</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body" id="pruebaModal">
+                                                                        <table style="text-align: initial" >
+                                                                            <tr>
+                                                                                <td style ="vertical-align:text-top;" valign="top">
+                                                                                    1- Verifique que su insumo no se encuentre con este mensaje  
+                                                                                    <div style="width: 280px" class="card card-inverse-danger" id="context-menu-open"><div class="card-body"><p class="card-text">Ningun proveedor provee este insumo</p></div></div>
+                                                                                </td>
+                                                                                <td style ="vertical-align:text-top;" valign="top">
+                                                                                    2- Seleccione un proveedor para el insumo a solicitar<br/><br/>
+                                                                                    <select class="btn btn-success dropdown-toggle" >
+                                                                                        <option value="select">SOPRAVAL S.A</option>
+                                                                                    </select>
+                                                                                </td>
+                                                                                <td style ="vertical-align:text-top;" valign="top">
+                                                                                    3- Agregue el insumo al carro 
+                                                                                    <div class="form-check form-check-flat form-check-primary">
+                                                                                        <label class="form-check-label">
+                                                                                            <input type="checkbox" class="form-check-input">
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style ="vertical-align:text-top;" valign="top">
+                                                                                    4- Seleccione el botón ver pediso para ver una lista de todos los insumos agregados al carro.
+                                                                                    <br/><br/>
+                                                                                    <a style="color: white" class="btn btn-primary"><i class="mdi mdi-cart-outline"></i> Ver pedido</a>
+                                                                                    
+                                                                                </td>
+                                                                                <td style ="vertical-align:text-top;" valign="top">
+                                                                                    5- Verifique que todos los insumos que agregó se encuentren en la lista.
+                                                                                </td>
+                                                                                <td style ="vertical-align:text-top;" valign="top">
+                                                                                    6- Seleccione el botón Realizar pedido<br/><br/>
+                                                                                    <a class="btn btn-success ">Realizar pedido</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-light" data-dismiss="modal">Ok</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel-3" aria-hidden="true">
                                                             <div class="modal-dialog modal-sm" role="document">
                                                                 <div class="modal-content">
@@ -112,18 +172,14 @@
                                                                     <div class="modal-body" id="pruebaModal" style="text-align: center">
                                                                         <h5 id="exampleModalLabel-3">No se han encontrado insumos en la lista</h5>
                                                                     </div>
-
-
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </form>
                                     </div>
@@ -134,7 +190,7 @@
                                     <div class="card-body">
                                         <h3 class="card-title">Insumos</h3>
 
-                                        <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist">
+                                        <ul class="nav nav-pills nav-pills-primary" id="pills-tab" role="tablist">
                                             <li class="nav-item">
                                                 <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Lista</a>
                                             </li>
@@ -149,7 +205,7 @@
                                                     <div style="padding: 5px" th:each="ins_pe: ${insumos_pedidos}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
                                                         <div class="card">
                                                             <div class="card-body text-center">
-                                                                <div class="form-check form-check-flat form-check-success">
+                                                                <div class="form-check form-check-flat form-check-primary">
                                                                     <label  th:if="${ins_pe.proveedores.size()!=0}" class="form-check-label">
                                                                         <input th:id="'check' + ${ins_pe.insumoPedido.idInsumoPedido}"  onchange="cargarInsumo(this)" th:value="${ins_pe.insumoPedido.idInsumoPedido}" th:attr="data-idInsumo=${ins_pe.insumo.idInsumo}"  type="checkbox" class="form-check-input">
 
@@ -166,9 +222,9 @@
 
                                                                 </div>
                                                                 <div>
-                                                                    <h4 th:id="'precio' + ${ins_pe.insumoPedido.idInsumoPedido}">$ 0</h4>
+                                                                    <h4 th:id="'precio' + ${ins_pe.insumoPedido.idInsumoPedido}">Precio: $ N/A</h4>
                                                                 </div>
-                                                                <select th:if="${ins_pe.proveedores.size()!=0}" onchange="cargarPrecio(this)" th:attr="data-idInsumoPedido=${ins_pe.insumoPedido.idInsumoPedido},data-idInsumo=${ins_pe.insumo.idInsumo}" class="btn btn-success dropdown-toggle"  th:id="'proveedor' + ${ins_pe.insumoPedido.idInsumoPedido}">
+                                                                <select th:if="${ins_pe.proveedores.size()!=0}" onchange="cargarPrecio(this)" th:attr="data-idInsumoPedido=${ins_pe.insumoPedido.idInsumoPedido},data-idInsumo=${ins_pe.insumo.idInsumo}" class="btn btn-primary dropdown-toggle"  th:id="'proveedor' + ${ins_pe.insumoPedido.idInsumoPedido}">
                                                                     <option value="select">Seleccione proveedor</option>
                                                                     <option th:each="proveedor : ${ins_pe.proveedores}"  th:value="${proveedor.idProveedor}" th:utext="${proveedor.nombreProveedor}"></option>
                                                                 </select>
@@ -179,19 +235,10 @@
                                                                             Ningun proveedor provee este insumo</p>
                                                                     </div>
                                                                 </div>
-
-
-
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-
-
                                                 </div>
-
-
                                             </div>
                                             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                                 <div class="media">
@@ -212,7 +259,7 @@
                                                             <tbody>
                                                                 <tr th:each="ins_pe: ${insumos_pedidos}">
                                                                     <td>
-                                                                        <div class="form-check form-check-flat form-check-success">
+                                                                        <div class="form-check form-check-flat form-check-primary">
                                                                             <label th:if="${ins_pe.proveedores.size()!=0}" class="form-check-label">
                                                                                 <input th:id="'check2' + ${ins_pe.insumoPedido.idInsumoPedido}" onchange="cargarInsumo(this)" th:value="${ins_pe.insumoPedido.idInsumoPedido}" th:attr="data-idInsumo=${ins_pe.insumo.idInsumo}"  type="checkbox" class="form-check-input">
                                                                             </label>
@@ -222,21 +269,23 @@
                                                                     <td ><h4 th:text="${ins_pe.insumo.nombreInsumo}"></h4></td>
                                                                     <td ><p  class="text-muted mb-0">[[${ins_pe.insumoPedido.cantidadInsumo}]] [[${ins_pe.insumo.unidadMedidaInsumo}]]</p></td>
                                                                     <td >
-                                                                        <select th:if="${ins_pe.proveedores.size()!=0}" onchange="cargarPrecio(this)" th:attr="data-idInsumoPedido=${ins_pe.insumoPedido.idInsumoPedido},data-idInsumo=${ins_pe.insumo.idInsumo}" class="btn btn-success dropdown-toggle"  th:id="'proveedor2' + ${ins_pe.insumoPedido.idInsumoPedido}">
+                                                                        <select th:if="${ins_pe.proveedores.size()!=0}" onchange="cargarPrecio(this)" th:attr="data-idInsumoPedido=${ins_pe.insumoPedido.idInsumoPedido},data-idInsumo=${ins_pe.insumo.idInsumo}" class="btn btn-primary dropdown-toggle"  th:id="'proveedor2' + ${ins_pe.insumoPedido.idInsumoPedido}">
                                                                             <option value="select">Seleccione proveedor</option>
                                                                             <option th:each="proveedor : ${ins_pe.proveedores}"  th:value="${proveedor.idProveedor}" th:utext="${proveedor.nombreProveedor}"></option>
                                                                         </select>
+
                                                                         <div th:if="${ins_pe.proveedores.size()==0}" class="card card-inverse-danger" id="context-menu-open">
                                                                             <div class="card-body">
                                                                                 <p class="card-text">
                                                                                     Ningun proveedor provee este insumo</p>
                                                                             </div>
                                                                         </div>
+                                                                        <br/><br/>
                                                                         <div th:id="'mensaje2' + ${ins_pe.insumoPedido.idInsumoPedido}">
 
                                                                         </div>
                                                                     </td>
-                                                                    <td ><h4 th:id="'precio2' + ${ins_pe.insumoPedido.idInsumoPedido}">$ 0</h4></td>
+                                                                    <td ><h4 th:id="'precio2' + ${ins_pe.insumoPedido.idInsumoPedido}">$ N/A</h4></td>
                                                                     <td ></td>
 
                                                                 </tr>
@@ -331,6 +380,41 @@
         </script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script type="text/javascript" >
+                                                                            function dar_formato(num) {
+
+                                                                                var cadena = "";
+                                                                                var aux;
+
+                                                                                var cont = 1, m, k;
+
+                                                                                if (num < 0)
+                                                                                    aux = 1;
+                                                                                else
+                                                                                    aux = 0;
+
+                                                                                num = num.toString();
+
+                                                                                for (m = num.length - 1; m >= 0; m--) {
+
+                                                                                    cadena = num.charAt(m) + cadena;
+
+                                                                                    if (cont % 3 == 0 && m > aux)
+                                                                                        cadena = "." + cadena;
+                                                                                    else
+                                                                                        cadena = cadena;
+
+                                                                                    if (cont == 3)
+                                                                                        cont = 1;
+                                                                                    else
+                                                                                        cont++;
+
+                                                                                }
+
+                                                                                cadena = cadena.replace(/.,/, ",");
+
+                                                                                return cadena;
+
+                                                                            }
 
                                                                             function cargarPrecio(select) {
                                                                                 var id_proveedor = new Number(select.value.toString());
@@ -346,11 +430,12 @@
 
 
 
-                                                                                    axios.get( window.location.protocol + "//" + window.location.host + '/administrador/pedidoInsumo/cargarPrecio?idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                    axios.get(window.location.protocol + "//" + window.location.host + '/administrador/pedidoInsumo/cargarPrecio?idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
                                                                                             .then(function (response) {
                                                                                                 console.log(response);
                                                                                                 if (response.data != null) {
-                                                                                                    var contenido = "$" + response.data.toString();
+
+                                                                                                    var contenido = "$" + dar_formato(response.data);
                                                                                                     document.getElementById("precio" + id_insumo_pedido).innerHTML = contenido;
                                                                                                     document.getElementById("precio2" + id_insumo_pedido).innerHTML = contenido;
                                                                                                 }
@@ -379,6 +464,7 @@
                                                                                                 .then(function (response) {
                                                                                                     console.log(response.data);
                                                                                                     console.log(response);
+                                                                                                    var totalFinal = new Number();
                                                                                                     if (response.data != null) {
                                                                                                         // alert('se agregó el insumo');
                                                                                                         var contenidoPedido = '<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel-3">Insumos para pedir</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
@@ -392,13 +478,15 @@
                                                                                                                 var total = new Number();
                                                                                                                 var precio = new Number(response.data.insumos[x].insumoProveedor.precio);
                                                                                                                 var cantidad = new Number(response.data.insumos[x].insumoPedido.cantidadInsumo);
-
+                                                                                                                
                                                                                                                 total = parseInt(precio * cantidad);
+                                                                                                                totalFinal = totalFinal = total;
                                                                                                                 if (idPro == response.data.grupoProveedores[i].idProveedor) {
-                                                                                                                    contenidoPedido = contenidoPedido + '<tr><td>' + response.data.insumos[x].insumo.nombreInsumo + '</td><td>' + response.data.insumos[x].insumoProveedor.precio + '</td><td>' + response.data.insumos[x].insumo.unidadMedidaInsumo + '</td><td>' + response.data.insumos[x].insumoPedido.cantidadInsumo + '</td><td>' + total + '</td></tr>'
+                                                                                                                    contenidoPedido = contenidoPedido + '<tr><td>' + response.data.insumos[x].insumo.nombreInsumo + '</td><td>' + dar_formato(response.data.insumos[x].insumoProveedor.precio) + '</td><td>' + response.data.insumos[x].insumo.unidadMedidaInsumo + '</td><td>' + response.data.insumos[x].insumoPedido.cantidadInsumo + '</td><td>' + dar_formato(total) + '</td></tr>'
                                                                                                                 }
+                                                                                                                
                                                                                                             }
-                                                                                                            contenidoPedido = contenidoPedido + '</tbody></table></div></div>';
+                                                                                                            contenidoPedido = contenidoPedido + '</tbody></table><br/><h3>TOTAL PEDIDO: '+dar_formato(totalFinal)+'</h3></div></div>';
 
                                                                                                         }
                                                                                                         if (response.data.insumos.length > 0) {
@@ -422,7 +510,7 @@
 
                                                                                         document.getElementById("check" + id_insumo_pedido).checked = false;
                                                                                         document.getElementById("check2" + id_insumo_pedido).checked = false;
-                                                                                        contenidoMensaje = '<div class="card card-inverse-warning"><div class="card-body"><p class="card-text">Ningun proveedor provee este insumo</p></div></div>';
+                                                                                        contenidoMensaje = '<div class="card card-inverse-warning"><div class="card-body"><p class="card-text">Seleccione un proveedor!</p></div></div>';
                                                                                         document.getElementById("mensaje" + id_insumo_pedido).innerHTML = contenidoMensaje;
                                                                                         document.getElementById("mensaje2" + id_insumo_pedido).innerHTML = contenidoMensaje;
                                                                                     }
@@ -430,7 +518,7 @@
                                                                                     var id_proveedor = new Number(document.getElementById("proveedor" + id_insumo_pedido).value);
                                                                                     document.getElementById("check" + id_insumo_pedido).checked = false;
                                                                                     document.getElementById("check2" + id_insumo_pedido).checked = false;
-                                                                                    axios.get(window.location.protocol + "//" + window.location.host  + '/administrador/pedidoInsumo/eliminarInsumoPedidoProveedor?idInsumoPedido=' + id_insumo_pedido + '&idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
+                                                                                    axios.get(window.location.protocol + "//" + window.location.host + '/administrador/pedidoInsumo/eliminarInsumoPedidoProveedor?idInsumoPedido=' + id_insumo_pedido + '&idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
                                                                                             .then(function (response) {
                                                                                                 console.log(response.data);
                                                                                                 console.log(response);
@@ -490,20 +578,6 @@
         <script type="text/javascript" >
 
         </script>
-
-        <script type="text/javascript" >
-            var formularioPassword = document.getElementsByName("formAgregarInsumo")[0];
-            validatorForms(formularioPassword);
-        </script>
-
-
-
-        <script type="text/javascript" >
-            var formularioPassword = document.getElementsByName("formModificarInsumo")[0];
-            validatorForms(formularioPassword);
-        </script>
-
-
 
     </body>
 

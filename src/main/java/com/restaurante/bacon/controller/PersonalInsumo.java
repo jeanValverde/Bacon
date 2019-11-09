@@ -86,30 +86,14 @@ public class PersonalInsumo {
     }
 
     @RequestMapping("/buscar_por_filtro")
-    public String buscar_por_filtro(Model modelo, @RequestParam("tipoBusqueda") String tipoBusqueda, @RequestParam("filtro") String filtro) {
+    public String buscar_por_filtro(Model modelo, @RequestParam("filtro") String filtro) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
         
         List<Insumo> insumos = new ArrayList<Insumo>();
-        switch (tipoBusqueda) {
-            case "nombre":
-                insumos = this.insumoService.filtrarInsumosByNombre(filtro);
-                break;
-            case "stock":
-                if(!filtro.equals("")){
-                insumos = this.insumoService.filtrarInsumosByStock(BigInteger.valueOf(Integer.parseInt(filtro)));
-                }else{
-                    insumos = this.insumoService.listarInsumos();
-                }
-                break;
-            case "unidad":
-                insumos = this.insumoService.filtrarInsumosByUnidadMedida(filtro);
-                break;
-            default:
-                insumos = this.insumoService.listarInsumos();
-        }
+        insumos = this.insumoService.filtrarInsumos(filtro);
 
         //desarrollo aca 
         modelo.addAttribute("insumos", insumos);
@@ -150,7 +134,7 @@ public class PersonalInsumo {
         if (nombreImagen != null){
 
             insumo.setFotoInsumo(nombreImagen);
-            this.amazonClient.uploadFile(file[0], nombre);
+            this.amazonClient.uploadFile(file[0], nombreImagen);
             if (this.insumoService.ingresarInsumo(insumo)) {
                 //envia al javascrit la respuesta del agregar
                 modelo.addAttribute("tipoRespuesta", "agregar");
@@ -182,7 +166,7 @@ public class PersonalInsumo {
             @RequestParam("stock") BigInteger stock,
             @RequestParam("stockMinimo") BigInteger stockMinimo,
             @RequestParam("stockMaximo") BigInteger stockMaximo,
-            @RequestParam("imagenInsumo") MultipartFile[] file) {
+            @RequestParam("imagenInsumo2") MultipartFile[] file) {
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
@@ -206,7 +190,7 @@ public class PersonalInsumo {
             String nombreImagen = this.personalService.subirImagen(file);
             insumo.setFotoInsumo(nombreImagen);
             this.amazonClient.uploadFile(file[0], nombreImagen);
-            this.personalService.eliminarImagen(insu.getFotoInsumo());
+            this.amazonClient.deleteFileFromS3Bucket(insu.getFotoInsumo());
         }
         
         
@@ -220,10 +204,14 @@ public class PersonalInsumo {
         
         List<Insumo> insumos = new ArrayList<Insumo>();
         insumos = this.insumoService.listarInsumos();
+        for(int i=0; i<insumos.size();i++){
+            System.out.println("descripcion: "+insumos.get(i).getDescripcionInsumo());
+            
+        }
         //desarrollo aca 
-        
-        modelo.addAttribute("insumos", insumos);
         modelo.addAttribute("agregar", true);
+        modelo.addAttribute("insumos", insumos);
+        
         //fin desarrollo 
         //despachos 
 
@@ -231,6 +219,7 @@ public class PersonalInsumo {
         //siempre despachar esto por la sesion 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
         //
+        
         return "users/administrador/mantenedor_insumos";
     }
 
@@ -242,7 +231,7 @@ public class PersonalInsumo {
         //sesion 
         
         if(this.insumoService.eliminarInsumo(idInsumo)){
-            this.personalService.eliminarImagen(nombreFoto);
+            this.amazonClient.deleteFileFromS3Bucket(nombreFoto);
             modelo.addAttribute("tipoRespuesta", "eliminar");
             modelo.addAttribute("respuesta", 1);
         }else{

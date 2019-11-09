@@ -29,6 +29,7 @@ public class InsumoService {
     @Autowired
     ProcedureQueryInsumo procedureQueryInsumo;
     
+    
     //se implementan los metodos declarados en la interfaz 
    
     public boolean ingresarInsumo(Insumo insumo) {
@@ -48,10 +49,14 @@ public class InsumoService {
         return insumo;
     }
     public List<Insumo> listarInsumos(){
-        return this.insumoDao.findAll();
+        return this.procedureQueryInsumo.listarInsumos();
+        //return this.insumoDao.findAll();
+    }
+     public List<Insumo> filtrarInsumos(String filtro) {
+        return this.procedureQueryInsumo.filtrarInsumos(filtro);
     }
      public List<Insumo> filtrarInsumosByNombre(String nombreInsumo) {
-        return this.procedureQueryInsumo.filtrarInsumosByNombre(nombreInsumo);
+        return this.procedureQueryInsumo.filtrarInsumos(nombreInsumo);
     }
      public List<Insumo> filtrarInsumosByStock(BigInteger stock) {
         return this.procedureQueryInsumo.filtrarInsumosByStock(stock);
