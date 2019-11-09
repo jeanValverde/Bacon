@@ -59,7 +59,7 @@
                                                                                 <input type="hidden" name="agrego" id="agrego" th:value="${agrego}" />
                                                                                 <div class="form-group">
                                                                                     <label for="rut">Rut Proveedor</label>
-                                                                                    <input type="text" class="form-control" name="rutProveedor"  id="rut" aria-describedby="rut chileno" placeholder="Rut">
+                                                                                    <input type="text" class="form-control" name="rutProveedor"  id="rut" aria-describedby="rut chileno" placeholder="19.760.352-6">
                                                                                         <small id="rutHelp" class="form-text text-muted">Formato de rut XX.XXX.XXX-X .</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
@@ -71,7 +71,7 @@
 
                                                                                 <div class="form-group">
                                                                                     <label for="nombreProveedor">Nombre</label>
-                                                                                    <input type="text" class="form-control" name="nombreProveedor"  id="textoExample1" aria-describedby="Texto" placeholder="Nombre proveedor">
+                                                                                    <input type="text" class="form-control" name="nombreProveedor"  id="textoExample1" aria-describedby="Texto" placeholder="Felipe González">
                                                                                         <small id="textHelp" class="form-text text-muted">Nombre obligatorio</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
@@ -82,9 +82,9 @@
                                                                                 </div>
 
                                                                                 <div class="form-group">
-                                                                                    <label for="direccionProveedor">Direccion</label>
-                                                                                    <input type="text" class="form-control" name="direccionProveedor"  id="textoExample2" aria-describedby="Texto" placeholder="Direccion proveedor">
-                                                                                        <small id="textHelp" class="form-text text-muted">Direccion obligatorio</small>
+                                                                                    <label for="direccionProveedor">Dirección</label>
+                                                                                    <input type="text" class="form-control" name="direccionProveedor"  id="textoExample2" aria-describedby="Texto" placeholder="Viña del Mar">
+                                                                                        <small id="textHelp" class="form-text text-muted">Dirección obligatoria</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
                                                                                         </div>
@@ -93,8 +93,8 @@
                                                                                         </div>
                                                                                 </div>
                                                                                 <div class="form-group">
-                                                                                    <label for="telefonoProveedor">Telefono</label>
-                                                                                    <input type="text" class="form-control" name="telefonoProveedor"  id="textoExample3" aria-describedby="Texto" placeholder="Telefono proveedor">
+                                                                                    <label for="telefonoProveedor">Teléfono</label>
+                                                                                    <input type="number" class="form-control" name="telefonoProveedor" min="0" maxlength="9" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  id="textoExample3" aria-describedby="Numero" placeholder="21986587">
                                                                                         <small id="textHelp" class="form-text text-muted">Telefono obligatorio</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
@@ -105,7 +105,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="contactoVenta">Contacto</label>
-                                                                                    <input type="text" class="form-control" name="contactoVenta"  id="textoExample4" aria-describedby="Texto" placeholder="Contacto proveedor">
+                                                                                    <input type="text" class="form-control" name="contactoVenta" maxlength="12"  id="textoExample4" aria-describedby="Texto" placeholder="Jose Perez">
                                                                                         <small id="textHelp" class="form-text text-muted">Contacto obligatorio</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
@@ -131,7 +131,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="exampleInputEmail1">Correo electrónico</label>
-                                                                                    <input type="email" class="form-control" name="correoProveedor" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electrónico">
+                                                                                    <input type="email" class="form-control" name="correoProveedor" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@gmail.com">
                                                                                         <small id="emailHelp" class="form-text text-muted">Escribe un correo electrónico valido.</small>
                                                                                         <div class="valid-feedback">
                                                                                             ¡Buen Email!
@@ -142,7 +142,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="celularProveedor">Celular</label>
-                                                                                    <input type="number" class="form-control" name="celularProveedor"  id="numeroExample1" aria-describedby="Numero" placeholder="Numero">
+                                                                                    <input type="number" class="form-control" name="celularProveedor" min="0" maxlength="9" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" id="numeroExample1" aria-describedby="Numero" placeholder="945257550">
                                                                                         <small id="numeroHelp" class="form-text text-muted">Escribe solo números.</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
@@ -209,9 +209,9 @@
                                                                                         </div>
                                                                                 </div>
                                                                                 <div class="form-group">
-                                                                                    <label for="direccionProveedor">Direccion</label>
+                                                                                    <label for="direccionProveedor">Dirección</label>
                                                                                     <input th:value="${proveedor.direccionProveedor}" type="text" class="form-control" name="direccionProveedor"  id="textoExample1" aria-describedby="Texto" placeholder="Direccion proveedor">
-                                                                                        <small id="textHelp" class="form-text text-muted">Direccion obligatorio</small>
+                                                                                        <small id="textHelp" class="form-text text-muted">Dirección obligatorio</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
                                                                                         </div>
@@ -220,9 +220,9 @@
                                                                                         </div>
                                                                                 </div>
                                                                                 <div class="form-group">
-                                                                                    <label for="telefonoProveedor">Telefono</label>
-                                                                                    <input th:value="${proveedor.telefonoProveedor}" type="text" class="form-control" name="telefonoProveedor"  id="textoExample1" aria-describedby="Texto" placeholder="Telefono proveedor">
-                                                                                        <small id="textHelp" class="form-text text-muted">Telefono obligatorio</small>
+                                                                                    <label for="telefonoProveedor">Teléfono</label>
+                                                                                    <input th:value="${proveedor.telefonoProveedor}" type="number" class="form-control" name="telefonoProveedor" min="0" maxlength="9" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" id="textoExample1" aria-describedby="Numero" placeholder="Telefono proveedor">
+                                                                                        <small id="textHelp" class="form-text text-muted">Teléfono obligatorio</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
                                                                                         </div>
@@ -232,7 +232,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="contactoVenta">Contacto</label>
-                                                                                    <input th:value="${proveedor.contactoVenta}" type="text" class="form-control" name="contactoVenta"  id="textoExample1" aria-describedby="Texto" placeholder="Contacto proveedor">
+                                                                                    <input th:value="${proveedor.contactoVenta}" type="text" class="form-control" name="contactoVenta" maxlength="12" id="textoExample1" aria-describedby="Texto" placeholder="Contacto proveedor">
                                                                                         <small id="textHelp" class="form-text text-muted">Contacto obligatorio</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
@@ -270,7 +270,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="celularProveedor">Celular</label>
-                                                                                    <input th:value="${proveedor.celularProveedor}" type="number" class="form-control" name="celularProveedor"  id="numeroExample1" aria-describedby="Numero" placeholder="Numero">
+                                                                                    <input th:value="${proveedor.celularProveedor}" type="number" class="form-control" name="celularProveedor" min="0" maxlength="9" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"   id="numeroExample1" aria-describedby="Numero" placeholder="Numero">
                                                                                         <small id="numeroHelp" class="form-text text-muted">Escribe solo números.</small>
                                                                                         <div class="valid-feedback">
                                                                                             Se ve bien!
@@ -418,6 +418,9 @@
                                                                                                                 <p th:text="${ins.celularProveedor}" class="mt-2 card-text">Celular</p>
                                                                                                             </div>
                                                                                                             <div class="col-12">
+                                                                                                                <h6>Teléfono:</h6>
+
+                                                                                                                <p th:text="${ins.telefonoProveedor}" class="mt-2 card-text">Teléfono</p>
 
 
                                                                                                             </div>
