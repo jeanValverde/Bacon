@@ -25,6 +25,18 @@ import com.restaurante.bacon.dto.Proveedor;
 import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
 
 import com.restaurante.bacon.dto.Insumo;
+import static com.restaurante.bacon.dto.InsumoProveedor.I_ID_INSUMO_PROVEEDOR;
+import static com.restaurante.bacon.dto.InsumoProveedor.I_PRECIO;
+import static com.restaurante.bacon.dto.Proveedor.P_CATEGORIA_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_CELULAR_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_CONTACTO_VENTA;
+import static com.restaurante.bacon.dto.Proveedor.P_CORREO_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_DIRECCION_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_ID_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_NOMBRE_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_RUT_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_TELEFONO_PROVEEDOR;
+import static com.restaurante.bacon.dto.Proveedor.P_TIPO_PROVEEDOR;
 
 import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
@@ -440,6 +452,8 @@ public class ProcedureQuery {
             return null;
         }
     }
+
+
 
 
 }

@@ -55,54 +55,54 @@
                                         <form class="forms-sample" th:action="@{/administrador/addReceta}" method="POST" name="formReceta" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <label for="nombreReceta">Nombre Receta</label>
-                                                <input type="text" class="form-control" id="nombreReceta" name="nombreReceta" placeholder="Nombre Receta">
+                                                <input maxlength="59"  type="text" class="form-control" id="nombreReceta" name="nombreReceta" placeholder="Nombre Receta">
                                                     <div class="valid-feedback">
                                                         !Listo!
                                                     </div>
                                                     <div class="invalid-feedback">
-                                                        Escribe un nombre para la receta.
+                                                        Escribe un nombre para la receta (Max. 60 caracteres).
                                                     </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="descripcionReceta">Descripción de la Receta</label>
-                                                <textarea name="descripcionReceta" id="descripcionReceta" class="form-control" rows="3" cols="3"></textarea>
+                                                <textarea maxlength="499"  name="descripcionReceta" id="descripcionReceta" class="form-control" rows="3" cols="3"></textarea>
                                                 <div class="valid-feedback">
                                                     !Buena Descripción!
                                                 </div>
                                                 <div class="invalid-feedback">
-                                                    Una Descripción es obligatoria. Es la carta de presentación para el cliente.
+                                                    Una Descripción es obligatoria. Es la carta de presentación para el cliente. (Max. 499 caracteres)
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="duracionReceta">Duración de Preparación (en minutos)</label>
-                                                <input type="number" class="form-control" name="duracionReceta" min="1"  id="duracionReceta" placeholder="120">
+                                                <input  type="number" class="form-control" name="duracionReceta" min="1" max="500"  id="duracionReceta" placeholder="120">
                                                     <div class="valid-feedback">
                                                         !Buen tiempo!
                                                     </div>
                                                     <div class="invalid-feedback">
-                                                        Recuerda que el formato es solo números y en minutos, ejemplo: 130
+                                                        Recuerda que el formato es solo números y en minutos, ejemplo: 130 (Max. 500 minutos)
                                                     </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="precioReceta">Precio de la Receta (Sin puntos)</label>
-                                                <input type="number" class="form-control" min="1" name="precioReceta" id="precioReceta" placeholder="7800">
+                                                <input type="number" class="form-control" min="1" name="precioReceta" max="999999" id="precioReceta" placeholder="7800">
                                                     <div class="valid-feedback">
                                                         !Buen precio!
                                                     </div>
                                                     <div class="invalid-feedback">
-                                                        El precio tiene que ser númerico
+                                                        El precio tiene que ser númerico. (Max. $999.999)
                                                     </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="cantidadReceta">Cantidad de Preparación</label>
                                                 <br />
                                                 <small class="text-info">Es una estimación de cuantas preparaciones se hacen en un día.</small>
-                                                <input type="number" class="form-control" min="1" name="cantidadReceta" id="cantidadReceta" placeholder="120">
+                                                <input type="number" class="form-control" min="1" max="999" name="cantidadReceta" id="cantidadReceta" placeholder="120">
                                                     <div class="valid-feedback">
                                                         !Listo!
                                                     </div>
                                                     <div class="invalid-feedback">
-                                                        La cantidad es una estimación que defines tú.
+                                                        La cantidad es una estimación que defines tú. (Max. 999 minutos)
                                                     </div>
                                             </div>
                                             <div class="form-group row">
@@ -149,63 +149,61 @@
                             <div class="col-md-4 grid-margin stretch-card" th:if="${tipoForm == 'editar' }"  >
                                 <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title">Editar Recetas</h4>
+                                        <h4 class="card-title">Editar Receta</h4>
                                         <p class="card-description text-justify">
-                                            Completa estos campos para agregar una receta al sistema, recuerda usar
-                                            una imagen actualizada y lo más real al producto.
                                         </p>
                                         <form class="forms-sample" th:action="@{/administrador/recetaInsumos/editarReceta}" method="POST" name="formReceta" enctype="multipart/form-data">
                                             <input type="hidden" name="idReceta" th:value="${recetaEdit.idReceta}" />
                                             <div class="form-group">
                                                 <label for="nombreReceta">Nombre Receta</label>
-                                                <input type="text" class="form-control" id="nombreReceta" th:value="${recetaEdit.nombreReceta}" name="nombreReceta" placeholder="Nombre Receta">
+                                                <input type="text" maxlength="59"  class="form-control" id="nombreReceta" th:value="${recetaEdit.nombreReceta}" name="nombreReceta" placeholder="Nombre Receta">
                                                     <div class="valid-feedback">
                                                         !Listo!
                                                     </div>
                                                     <div class="invalid-feedback">
-                                                        Escribe un nombre para la receta.
+                                                        Escribe un nombre para la receta. (Max. 60 caracteres)
                                                     </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="descripcionReceta">Descripción de la Receta</label>
-                                                <textarea name="descripcionReceta" id="descripcionReceta" th:text="${recetaEdit.descripcionReceta}" class="form-control" rows="3" cols="3"></textarea>
+                                                <textarea maxlength="499"  name="descripcionReceta" id="descripcionReceta" th:text="${recetaEdit.descripcionReceta}" class="form-control" rows="3" cols="3"></textarea>
                                                 <div class="valid-feedback">
                                                     !Buena Descripción!
                                                 </div>
                                                 <div class="invalid-feedback">
-                                                    Una Descripción es obligatoria. Es la carta de presentación para el cliente.
+                                                    Una Descripción es obligatoria. Es la carta de presentación para el cliente. (Max. 499 caracteres)
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="duracionReceta">Duración de Preparación (en minutos)</label>
-                                                <input type="number" class="form-control" min="1" name="duracionReceta" th:value="${recetaEdit.duracionPreparacion}" id="duracionReceta" placeholder="120">
+                                                <input type="number" max="500" class="form-control" min="1" name="duracionReceta" th:value="${recetaEdit.duracionPreparacion}" id="duracionReceta" placeholder="120">
                                                     <div class="valid-feedback">
                                                         !Buen tiempo!
                                                     </div>
                                                     <div class="invalid-feedback">
-                                                        Recuerda que el formato es solo números y en minutos, ejemplo: 130
+                                                        Recuerda que el formato es solo números y en minutos, ejemplo: 130 (Max. 500 minutos)
                                                     </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="precioReceta">Precio de la Receta (Sin puntos)</label>
-                                                <input type="number" class="form-control" min="1" name="precioReceta" th:value="${recetaEdit.precioReceta}" id="precioReceta" placeholder="7800">
+                                                <input max="999999" type="number" class="form-control" min="1" name="precioReceta" th:value="${recetaEdit.precioReceta}" id="precioReceta" placeholder="7800">
                                                     <div class="valid-feedback">
                                                         !Buen precio!
                                                     </div>
                                                     <div class="invalid-feedback">
-                                                        El precio tiene que ser númerico
+                                                        El precio tiene que ser númerico. (Max. $999.999)
                                                     </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="cantidadReceta">Cantidad de Preparación</label>
                                                 <br />
                                                 <small class="text-info">Es una estimación de cuantas preparaciones se hacen en un día.</small>
-                                                <input type="number" class="form-control" min="1" name="cantidadReceta" th:value="${recetaEdit.cantidadPrepDiariaReceta}"  id="cantidadReceta" placeholder="120">
+                                                <input max="999" type="number" class="form-control" min="1" name="cantidadReceta" th:value="${recetaEdit.cantidadPrepDiariaReceta}"  id="cantidadReceta" placeholder="120">
                                                     <div class="valid-feedback">
                                                         !Listo!
                                                     </div>
                                                     <div class="invalid-feedback">
-                                                        La cantidad es una estimación que defines tú.
+                                                        La cantidad es una estimación que defines tú. (Max. 999 minutos)
                                                     </div>
                                             </div>
                                             <div class="form-group row">
@@ -239,7 +237,7 @@
                                             </div>
                                             <div class="form-group is-valid">
                                                 <label for="imagenReceta">Imagen de la Receta</label>
-                                                <input type="file" name="imagenReceta" id="dropify" class="dropify" th:data-default-file="@{/uploads/}+${recetaEdit.foto}" />
+                                                <input type="file" name="imagenReceta" id="dropify" class="dropify" th:data-default-file="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${recetaEdit.foto}" />
                                             </div>
                                             <div id="foto-mensaje1"  class="invalid-feedback">
                                                 Suba el archivo que tenga las extensiones .jpeg / .jpg / .png solamente.
@@ -316,8 +314,38 @@
 
                                 <div class="row">
 
+                                    <div th:if="${resultados != true }" class="d-flex align-items-center text-center error-page bg-primary mt-4" style="width: 100%; border-radius: 2%; " id="sinNotificaciones">
+                                        <div class="row flex-grow mt-4">
+                                            <div class="col-lg-7 mx-auto text-white mt-4">
+                                                <div class="row align-items-center d-flex flex-row mt-4">
+
+                                                    <div class="col-lg-12 error-page-divider text-lg-left pl-lg-4">
+                                                        <h2>¡Lo sentimos!</h2>
+                                                        <h3 class="font-weight-light">
+                                                            No se han encontrado resultados para la búsqueda 
+                                                             presione <i class="mdi mdi-autorenew"></i> para ver todas las recetas.
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-5">
+                                                    <div class="col-12 text-center mt-xl-2">
+
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-5">
+                                                    <div class="col-12 mt-xl-2">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div id="cardReceta" class="card-columns">
                                         <!--card inicio receta--->
+
+
+
                                         <div class="card"  th:each="receta: ${recetas}"  >
                                             <div class="card-body text-center">
                                                 <div>
@@ -577,13 +605,13 @@
 
 
         </script>
-        
+
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
 
         <script type="text/javascript" >
 
             function d(idReceta) {
-                
+
                 Swal.fire({
                     title: '¿Está seguro que desea eliminar?',
                     text: "Si elimina la receta se perderán todos los datos relacionados con ella y serán irrecuperables",
@@ -594,7 +622,7 @@
                     confirmButtonText: '!Si, Eliminar!'
                 }).then((result) => {
                     if (result.value) {
-                        location.href="/administrador/deleteReceta?idReceta=" + idReceta;
+                        location.href = "/administrador/deleteReceta?idReceta=" + idReceta;
                     }
                 })
             }
@@ -642,9 +670,9 @@
             }
 
             var elements = document.getElementsByClassName('numberToFormat');
-            
+
             for (var i = 0; i < elements.length; i++) {
-                
+
                 var valor = elements[i].innerHTML.trim();
 
                 document.getElementById(elements[i].id).innerHTML = "$" + dar_formato(valor);

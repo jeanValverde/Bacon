@@ -6,10 +6,7 @@
  * Para realizar correctamente la validación del file y visualizar su preview debes asignar al img un id llamado imagePreview o cambiarlo en la linea 264 por el que prefieras
  * Nota: el validar contraseña debe estar un input abajo de otro
  */
-function validatorForms(formulario) {
-        
-    
-
+function validatorFormsP(formulario) {
 
     console.log(formulario);
     /**
@@ -282,7 +279,7 @@ function validatorForms(formulario) {
      * @param {type} e
      * @returns  void / Validar y recorrer input pot input y validarlos
      */
-    var validar = function (e) {
+    var validarP = function (e) {
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             //tipo email validador
             if (formulario.elements[i].type == "email") {
@@ -301,7 +298,8 @@ function validatorForms(formulario) {
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
                     //validar rut
                     //Solo cambiar el id por el id del rut de tu formulario
-                    if (formulario.elements[i].id == "rut") {
+					var nameRut = "rut-" + formulario.name;
+                    if (formulario.elements[i].id == nameRut) {
                         if (valida_Rut(formulario.elements[i])) {
                             formulario.elements[i].setAttribute("class", "form-control is-valid");
                             formato_rut(formulario.elements[i]);
@@ -389,8 +387,8 @@ function validatorForms(formulario) {
         }
     };
     //cada vez que cambia algún input
-    formulario.addEventListener("change", validar);
+    formulario.addEventListener("change", validarP);
     //Evento de envio de formulario
-    formulario.addEventListener("submit", validar);
+    formulario.addEventListener("submit", validarP);
 }
 ;

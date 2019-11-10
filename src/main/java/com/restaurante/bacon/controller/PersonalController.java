@@ -104,7 +104,7 @@ public class PersonalController {
         //fin mensajes 
 
         modelo.addAttribute("recetas", this.recetaService.listar());
-
+        modelo.addAttribute("resultados", true);
         //fin desarrollo 
         //despachos 
         //fin despacho 
@@ -126,9 +126,12 @@ public class PersonalController {
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
         List<Receta> recetas = this.recetaService.filtrarRecetasByNombre(nombreReceta);
-
+        boolean res = false;
+        if(recetas.size() >= 1 ){
+            res = true;
+        }
         modelo.addAttribute("recetas", recetas);
-
+        modelo.addAttribute("resultados", res);
         modelo.addAttribute("tipoForm", "agregar");
 
         ///mensajes 1 = si mensaje / 0 = no mensaje
@@ -159,7 +162,7 @@ public class PersonalController {
         List<Receta> recetas = this.recetaService.listar();
 
         modelo.addAttribute("recetas", recetas);
-
+        modelo.addAttribute("resultados", true);
         modelo.addAttribute("tipoForm", "agregar");
         //fin desarrollo 
         //despachos 
@@ -195,7 +198,7 @@ public class PersonalController {
         List<Receta> recetas = this.recetaService.listar();
 
         modelo.addAttribute("recetas", recetas);
-
+        modelo.addAttribute("resultados", true);
         modelo.addAttribute("recetaEdit", receta);
 
         modelo.addAttribute("tipoForm", "editar");
@@ -282,7 +285,7 @@ public class PersonalController {
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
         modelo.addAttribute("tipoForm", "agregar");
-
+        modelo.addAttribute("resultados", true);
         modelo.addAttribute("recetas", this.recetaService.listar());
 
         //desarollo
@@ -536,40 +539,43 @@ public class PersonalController {
 
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL CAMBIAR A PORST
     //ESTE ES UN EJEMPLO PARA AGREGAR UN PERSONAL *CAMBIAR A PORST*
-    @RequestMapping("/add")
-    public String add(Model modelo) {
-        //sesion 
-        UserRol user = new UserRol();
-        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
-        //desarollo 
-        Personal person = new Personal();
+//    @RequestMapping("/add")
+//    public String add(Model modelo) {
+//        //sesion 
+//        UserRol user = new UserRol();
+//        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+//        //sesion 
+//        //desarollo 
+//        Personal person = new Personal();
+//
+//        //person.setIdPersonal(BigDecimal.valueOf(5));
+//        person.setRutPersonal("17.347.762-6");
+//        person.setNombresPersonal("Diego Alejandro");
+//        person.setApePaternoPersonal("León");
+//        person.setApeMaternoPersonal("Plaza");
+//        person.setFechaNacimientoPersonal(new Date());
+//        person.setCelularPersonal("954714587");
+//        person.setCorreoPersonal("diego.leon@gmail.com");
+//        person.setContrasenaPersonal(encoder.encode("123"));
+//        person.setEstadoPersonal(BigInteger.valueOf(1));
+//
+//        Rol rol = new Rol();
+//        rol.setIdRol(BigDecimal.valueOf(2));
+//
+//        person.setIdRol(rol);
+//
+//        this.personalService.addPersonal(person);
+//
+//        //fin desarrollo 
+//        //despacho 
+//        //fin despacacho 
+//        //siempre despachar esto por la sesion 
+//        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+//        //
+//        return "users/administrador/index";
+//    }
 
-        //person.setIdPersonal(BigDecimal.valueOf(5));
-        person.setRutPersonal("17.347.762-6");
-        person.setNombresPersonal("Diego Alejandro");
-        person.setApePaternoPersonal("León");
-        person.setApeMaternoPersonal("Plaza");
-        person.setFechaNacimientoPersonal(new Date());
-        person.setCelularPersonal("954714587");
-        person.setCorreoPersonal("diego.leon@gmail.com");
-        person.setContrasenaPersonal(encoder.encode("123"));
-        person.setEstadoPersonal(BigInteger.valueOf(1));
-
-        Rol rol = new Rol();
-        rol.setIdRol(BigDecimal.valueOf(2));
-
-        person.setIdRol(rol);
-
-        this.personalService.addPersonal(person);
-
-        //fin desarrollo 
-        //despacho 
-        //fin despacacho 
-        //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        //
-        return "users/administrador/index";
-    }
-
+    
+    
+    
 }

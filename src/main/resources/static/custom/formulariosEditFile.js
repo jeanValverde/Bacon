@@ -6,7 +6,14 @@
  * Para realizar correctamente la validación del file y visualizar su preview debes asignar al img un id llamado imagePreview o cambiarlo en la linea 264 por el que prefieras
  * Nota: el validar contraseña debe estar un input abajo de otro
  */
+<<<<<<< HEAD:src/main/resources/static/custom/formulariosEditFile.js
 function validatorFormsEditFile(formulario) {
+=======
+function validatorForms(formulario) {
+        
+    
+
+>>>>>>> Enrique:target/classes/static/custom/formularios.js
 
     console.log(formulario);
     /**

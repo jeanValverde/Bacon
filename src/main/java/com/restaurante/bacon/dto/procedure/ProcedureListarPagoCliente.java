@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.restaurante.bacon.dto.procedure;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedStoredProcedureQueries;
@@ -18,7 +20,7 @@ import lombok.Setter;
 
 /**
  *
- * @author jean
+ * @author Felipe
  */
 @Entity
 @Table
@@ -26,14 +28,20 @@ import lombok.Setter;
 @Setter
 @NamedStoredProcedureQueries(
         {
-            @NamedStoredProcedureQuery(name = "DeleteInsumo", procedureName = "PACKAGE_INSUMO.PR_ELIMINAR_INSUMO_POR_ID",
+            @NamedStoredProcedureQuery(name = "ListarTotalPagarCliente", procedureName = "PACKAGE_CLIENTE.PR_TOTAL_A_PAGAR_CLIENTE",
                     parameters = {
-                    @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_INSUMO", type = Integer.class)
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "P_ID_CLIENTE", type = Integer.class),
+                        @StoredProcedureParameter(mode = ParameterMode.OUT, name = "V_TOTAL", type = Integer.class)
+                        
                     }
             )
         }
 )
-public class ProcedureDeletetInsumo implements Serializable {
-     @Id
+
+
+
+
+public class ProcedureListarPagoCliente implements Serializable {
+    @Id
     private int id;
 }

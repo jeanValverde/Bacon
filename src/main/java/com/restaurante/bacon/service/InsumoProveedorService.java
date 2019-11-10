@@ -6,6 +6,7 @@
 package com.restaurante.bacon.service;
 
 import com.restaurante.bacon.dao.IInsumoProveedorDao;
+import com.restaurante.bacon.dao.IInsumoProveedorDao2;
 import com.restaurante.bacon.dao.IProveedorDao;
 import com.restaurante.bacon.dao.ProcedureQuery;
 import com.restaurante.bacon.dao.ProcedureQueryInsumoProveedor;
@@ -29,7 +30,7 @@ public class InsumoProveedorService {
     @Autowired
     ProcedureQueryInsumoProveedor procedureQueryInsumo;
     @Autowired
-    IInsumoProveedorDao insumoproveedordao;
+    IInsumoProveedorDao2 insumoproveedordao;
     @Autowired
     IProveedorDao provedorDao;
     @Autowired
@@ -43,15 +44,13 @@ public class InsumoProveedorService {
         return this.procedureQueryInsumoProveedor.InsertInsumoProveedor(precio, idInsumo, idProveedor);
     }
 
-
     public InsumoProveedor ingresarInsumoProveedor(InsumoProveedor insumoProveedor) {
         return this.insumoproveedordao.save(insumoProveedor);
 
     }
 
-
-    public InsumoProveedor buscarPorId(Integer idInsumoProveedor) {
-        return this.procedureQueryInsumo.buscarIdInsumoProveedor(idInsumoProveedor);
+    public List<InsumoProveedor> buscarPorId(Integer idInsumoProveedor) {
+        return this.procedureQueryInsumoProveedor.buscarIdInsumoProveedor(idInsumoProveedor);
     }
 
     public List<InsumoProveedor> listarInsumoProveedor() {
@@ -65,30 +64,33 @@ public class InsumoProveedorService {
 
     public List<Insumo> listarInsumosAgregarProveedor(BigDecimal idProveedor) {
         List<Insumo> totalInsumos = this.insumoService.listarInsumos();
-        List<Insumo> insumos = totalInsumos;
-        List<Insumo> insumosI = new ArrayList<>();
+        List<Insumo> insumos = new ArrayList<Insumo>();
+        List<Insumo> insumosReturn = new ArrayList<Insumo>();
 
         List<InsumoProveedor> insumosUsados = this.insumosByIdProveedor(idProveedor);
-        List<InsumoProveedor> insumosProveedor = insumosUsados;
-
-        for (Insumo insumo : totalInsumos) {
-            insumosI.add(insumo);
-        }
+        List<Insumo> insumosProveedor = new ArrayList<Insumo>();
         try {
-            for (Insumo insumosTotales : insumosI) {
-
-                for (InsumoProveedor insumoProveedor1 : insumosProveedor) {
-                    if (insumosTotales.getIdInsumo() == insumoProveedor1.getIdInsumo().getIdInsumo()) {
-                        insumos.remove(insumosTotales);
+            for (InsumoProveedor insumoUsado : insumosUsados) {
+                Insumo insu = new Insumo();
+                insu = insumoUsado.getIdInsumo();
+                insumosProveedor.add(insu);
+            }
+            for (Insumo insumo : totalInsumos) {
+                Insumo ins = new Insumo();
+                ins = insumo;
+                insumos.add(ins);
+                insumosReturn.add(ins);
+            }
+            for (Insumo insumo : insumos) {
+                for (Insumo insumoProveedor1 : insumosProveedor) {
+                    if (insumo.getIdInsumo() == insumoProveedor1.getIdInsumo()) {
+                        insumosReturn.remove(insumoProveedor1);
                     }
-
                 }
 
             }
-
-            return insumos;
+            return insumosReturn;
         } catch (Exception ex) {
-
             ex.printStackTrace();
             return insumos;
         }
@@ -112,7 +114,5 @@ public class InsumoProveedorService {
     public Proveedor buscarProveedorById(BigDecimal idProveedor) {
         return this.provedorDao.findByIdProveedor(idProveedor);
     }
-
-   
 
 }

@@ -165,7 +165,7 @@ public class ProcedureQueryInsumoProveedor {
     }
 
     @SuppressWarnings("unchecked")
-    public InsumoProveedor buscarIdInsumoProveedor(Integer idInsumoProveedor
+    public List<InsumoProveedor> buscarIdInsumoProveedor(Integer idInsumoProveedor
     ) {
         try {
             StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_INSUMO_PROVEEDOR.BUSCAR_ID_INSUMO_PROVEEDOR");
@@ -181,12 +181,23 @@ public class ProcedureQueryInsumoProveedor {
 
             // Obtenemos el resultado del cursos en una lista
             List<Object[]> results = query.getResultList();
-            InsumoProveedor insumosProveedor = new InsumoProveedor();
+            List<InsumoProveedor> insumosProveedor = new ArrayList<InsumoProveedor>();
 
             for (Object[] result : results) {
 
-                insumosProveedor.setIdInsumoProveedor(Integer.parseInt(result[0].toString()));
-                insumosProveedor.setPrecio(BigInteger.valueOf(Integer.parseInt(result[1].toString())));
+                InsumoProveedor insumoProveedor = new InsumoProveedor();
+                insumoProveedor.setIdInsumoProveedor(Integer.parseInt(result[0].toString()));
+                Insumo insumo = new Insumo();
+                insumo.setIdInsumo(Integer.parseInt(result[1].toString()));
+                Proveedor proveedor = new Proveedor();
+                proveedor.setIdProveedor(BigDecimal.valueOf(Integer.parseInt(result[2].toString())));
+                insumo.setNombreInsumo(result[3].toString());
+                insumoProveedor.setPrecio(BigInteger.valueOf(Integer.parseInt(result[4].toString())));
+
+                insumoProveedor.setIdProveedor(proveedor);
+                insumo.setFotoInsumo(result[5].toString());
+                insumoProveedor.setIdInsumo(insumo);
+                
 
                 break;
 

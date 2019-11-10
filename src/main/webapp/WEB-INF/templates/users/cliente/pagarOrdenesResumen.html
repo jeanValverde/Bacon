@@ -29,67 +29,69 @@
 
         <div class="container-scroller">
             <!-- partial:partials/_horizontal-navbar.html -->
-            <div  class="horizontal-menu">
+            <div class="horizontal-menu">
 
                 <nav th:replace="fragments/_navCliente :: nav"></nav>
 
                 <nav th:replace="fragments/_navBarCliente :: nav"></nav>
 
-
             </div>
 
-            <div class="container-fluid page-body-wrapper">
-                <div class="main-panel">
-                    <div class="content-wrapper">
-                        <div style="text-align: center">
-                            <h2 id="deudaTotal">$</h2>
-                            <h3>Total Deuda</h3>
-                        </div>
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div style="text-align: center">
+                        <h2 id="deudaTotal">$</h2>
+                        <h3>Total Deuda</h3>
+                    </div>
+                    <br/>
+                    <div class="row">
                         <br/>
-                        <div>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <div style=" height: 45px; width: 350px; margin-left: 400px; " class="alert alert-info">Seleccione una opción para pagar sus ordenes</div>
-                            <br/>
-                            <div class="row" style="text-align: center;">
-                                <div class="col-6">
-                                    <button class="btn btn-outline-primary btn-icon-text" style="">
-                                        <i class="mdi mdi-square-inc-cash btn-icon-prepend mdi-36px"></i>
-                                        <span class="d-inline-block text-left">
-                                            <small class="font-weight-light d-block">Pagar con</small>
-                                            Efectivo
-                                        </span>
-                                    </button>
-                                </div>
-                                <div class="col-6">
-                                    <button class="btn btn-outline-primary btn-icon-text">
-                                        <i class="mdi mdi-credit-card-multiple btn-icon-prepend mdi-36px"></i>
-                                        <span class="d-inline-block text-left">
-                                            <small class="font-weight-light d-block">Pagar</small>
-                                            Online
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
+                        <br/>
+                        <br/>
+                        <br/>
+
+
+
+
+                        <div style=" height: 45px; width: 350px; margin-left: 400px; " class="alert alert-info">Seleccione una opción para pagar sus ordenes</div>
+                        <br/>
+                        <div style="margin-left: 310px">
+                            <button style="inline-box-align: "  type="button" data-toggle="modal"  data-target="#exampleModal-3" class="btn btn-outline-primary btn-fw">Caja</button>
+
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+                            <p>Pago Online:</p>
+                            <a target="_blank" href="https://app.payku.cl/p?a=2889pfe27" >
+                                <img  width="120px" height="auto" src="https://storage.googleapis.com/storage-payku-prd/public/img/botonpago/boton_pago_logo.png">
+                            </a>
                         </div>
                         <br/>
                         <br/>
-                        <div id="divRecetas" style="column-count: 2" class="card-columns mt-4">
+
+
+                        <div id="divRecetas" class="row">
 
                             <!--inicio row-->
 
+
+
+
+
+
+
                             <!--fin tarjeta de ordenes--->
 
+
                         </div>
+
+
                     </div>
                 </div>
             </div>
-        </div>
-        <!---fin columnas--->
-        <!--fin row-->
 
+            <!---fin columnas--->
+        </div>
+        <!--fin row-->
         <!-- content-wrapper ends -->
         <!-- partial:../../partials/_footer.html -->
 
@@ -97,6 +99,7 @@
         <!-- partial:../../partials/_footer.html -->
 
         <!-- partial -->
+
 
         <!-- container-scroller -->
 
@@ -132,6 +135,7 @@
                 bottom: 2%;
                 right: 20%;
             }
+
             .activeTipo{
                 color: rgb(255, 255, 255);
                 background-color: rgb(98, 1, 237);
@@ -140,31 +144,7 @@
         </style>
 
 
-        <script>
-            function dar_formato(num) {
-                var cadena = "";
-                var aux;
-                var cont = 1, m, k;
-                if (num < 0)
-                    aux = 1;
-                else
-                    aux = 0;
-                num = num.toString();
-                for (m = num.length - 1; m >= 0; m--) {
-                    cadena = num.charAt(m) + cadena;
-                    if (cont % 3 == 0 && m > aux)
-                        cadena = "." + cadena;
-                    else
-                        cadena = cadena;
-                    if (cont == 3)
-                        cont = 1;
-                    else
-                        cont++;
-                }
-                cadena = cadena.replace(/.,/, ",");
-                return cadena;
-            }
-        </script>
+
 
 
         <script th:inline="javascript">
@@ -173,19 +153,11 @@
             var sumaValorTotal = 0;
             var sumaRecetasCantidad = 0;
             var sumaTotalRecetas = 0;
-            var precioFinal = 0;
-
-            var variable = 0;
-
-
-            sumaValorTotal = '[[${precioTotal}]]';
-
-
 
             for (var i = 0; i < ordenes.length; i++) {
 
-                contenido = contenido + '<div class="card"><div class="card-body text-left"><h3 class="card-title mt-3 text-center">Número de Orden </h3>'
-                        + '<div style="margin-left: 47%;" class=" badge badge-primary">' + ordenes[i].orden.idOrden + '</div><br/>'
+                contenido = contenido + '<div style="padding: 7px" class="col-md-6 grid-margin grid-margin-md-0 stretch-card"><div class="card"><div class="card-body text-left"><h3 class="card-title mt-3 text-center">Numero de Orden </h3>'
+                        + '<div style="margin-left: 250px" class=" badge badge-primary">' + ordenes[i].orden.idOrden + '</div><br/>'
                         + '<table class="table mb-0"><thead><tr><th class="pl-0">Receta</th><th class="text-right">Cantidad</th><th class="text-right">Precio</th></tr></thead>';
 
 
@@ -193,7 +165,7 @@
                 for (var x = 0; x < ordenes[i].recetaOrdenada.length; x++) {
 
                     contenido = contenido
-                            + '<tbody><tr><td class="pl-0">' + ordenes[i].recetaOrdenada[x].idReceta.nombreReceta + '</td><td class="pr-0 text-right"> <div class="badge badge-pill badge-outline-danger">' + ordenes[i].recetaOrdenada[x].cantidad + '</div></td><td class="pr-0 text-right"><div class="badge badge-pill badge-outline-primary">$' + dar_formato(ordenes[i].recetaOrdenada[x].valor) + '</div></td></tr></tbody>';
+                            + '<tbody><tr><td class="pl-0">' + ordenes[i].recetaOrdenada[x].idReceta.nombreReceta + '</td><td class="pr-0 text-right"> <div class="badge badge-pill badge-outline-danger">' + ordenes[i].recetaOrdenada[x].cantidad + '</div></td><td class="pr-0 text-right"><div class="badge badge-pill badge-outline-primary">$' + ordenes[i].recetaOrdenada[x].valor + '</div></td></tr></tbody>';
 
 
                     // + '<div><h4 class="card-title mt-3">Descripción</h4></div>'
@@ -206,36 +178,84 @@
 
                     sumaRecetasCantidad = ordenes[i].recetaOrdenada[x].valor * ordenes[i].recetaOrdenada[x].cantidad;
                     sumaTotalRecetas = sumaRecetasCantidad + ordenes[i].recetaOrdenada[x].valor * ordenes[i].recetaOrdenada[x].cantidad;
-
-
-
-
-
-
+                    sumaValorTotal = sumaValorTotal + ordenes[i].orden.totalOrden;
                 }
-
-
-                contenido = contenido + '</table><h3 class="card-title mt-3">Descripción</h3>' + ordenes[i].orden.descripcion + '<hr><div class="card mt-2" style="border-radius: 0px; box-shadow: none; border: 0px;" ><div class="card-body" style="padding: 0px;float:right;"><div class="d-flex flex-wrap mt-1"><h3 class="font-weight-normal mb-0">$' + dar_formato(ordenes[i].orden.totalOrden) + '</h3></div><small class="font-weight-medium d-block mt-2" style="float: right;">Total</small></div></div></div></div>';
-
-
-                document.getElementById("deudaTotal").innerHTML = '$' + dar_formato(sumaValorTotal);
-
+                contenido = contenido + '</table><h3 class="card-title mt-3">Descripción</h3>' + ordenes[i].orden.descripcion + '<table class="table mb-0"><thead><tr><th class="text-left"><h3 style="display: inline">Total Orden: $</h3><h4 style="display: inline">' + ordenes[i].orden.totalOrden + '</h4></th></tr></thead></table></div></div></div></div>';
             }
-
+            document.getElementById("deudaTotal").innerHTML = '$' + sumaValorTotal;
             document.getElementById("divRecetas").innerHTML = contenido;
-
 
         </script>
 
+
+
+
+
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script type="text/javascript" >
+            function listarRecetaByorden(idOrden) {
+
+                //  document.getElementById("loader").innerHTML = "<div class='square-box-loader'><div class='square-box-loader-container'><div class='square-box-loader-corner-top'></div> <div class='square-box-loader-corner-bottom'></div></div><div class='square-box-loader-square'></div></div>";
+
+                //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
+
+                // axios.get('http://localhost:8034/cliente/pagar/pagarOrdenes?idOrden =' + idOrden)
+                // .then(function (response) {
+                //  console.log(response);
+                //if (response.data != null) {
+                //    document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre de la receta</th><th class='text-right'>Valor de la receta</th></tr></thead><tbody id='contenidoListarRecetaByOrden' ></tbody></table></div>";
+                // }
+                //  if (response.data.length != 0) {
+                //       var contenido = "";
+                //      for (var i = 0; i < response.data.length; i++) {
+                //  contenido += "<tr> <td class='pl-0'> " + response.data[i].idOrden.descripcion + " </td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'> " + response.data[i].totalOrden + " </div></td></tr>";
+                //      }
+                //      document.getElementById('contenidoListarRecetaByOrden').innerHTML = contenido;
+                //   } else {
+                //       document.getElementById('loader').innerHTML = '<div class="alert alert-danger" >Sin recetas disponibles</div>';
+                //   }
+                //  })
+                // .catch(function (error) {
+                // handle error
+                //     document.getElementById("loader").innerHTML = '<div class="alert alert-danger" >Error</div>';
+                //  })
+                //  .finally(function () {
+                // always executed
+                //  });
+
+            }
+            // listarRecetaByorden(3);   
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <script type="text/javascript" >
+
             var tipoUno = document.getElementById('tipoUno');
             var tipoDos = document.getElementById('tipoDos');
             var tipoTres = document.getElementById('tipoTres');
             var tipoCuatro = document.getElementById('tipoCuatro');
             var tipoMenosUno = document.getElementById('tipoMenosUno');
+
             var tipoActivo = '[[${tipo}]]';
+
             switch (tipoActivo) {
                 case '1':
                     tipoUno.className = "btn btn-outline-primary btn-icon-text activeTipo";
@@ -255,13 +275,17 @@
                 default:
                     break;
             }
+
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
 
         <script type="text/javascript" >
+
             function d(idReceta) {
+
                 var input = document.getElementById('pedido-' + idReceta);
+
                 if (input.value < 1 || input.value == null || input.value == 0) {
                     input.setAttribute("class", "form-control is-invalid");
                 } else {
@@ -280,7 +304,10 @@
                         }
                     })
                 }
+
+
             }
+
         </script>
 
     </body>

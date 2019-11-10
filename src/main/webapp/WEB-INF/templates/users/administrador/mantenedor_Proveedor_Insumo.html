@@ -78,6 +78,31 @@
 
                                                     </div>
 
+                                                    <div class="card border border-success pricing-card-body" style="width: 390px; height: 330px;">
+                                                        <div class="text-center pricing-card-head">
+                                                            <h6 class="text-success"> Instructivo para Insumo Proveedor</h6>
+
+
+                                                        </div>
+                                                        <ul class="list-unstyled plan-features" style=" height: 45px;" >
+                                                            <strong>El componente Insumo Proveedor, tiene por función principal el poder dar a los proveedores la opción de comprar insumos,
+                                                                así como también poder editarlos e incluso quitarlos del proveedo,
+                                                                a continuación se detalla el uso de cada uno de los botones de este componente y su uso</strong>
+                                                            <br>
+                                                            <br>
+                                                            <h6> 1-. El botón agregar Insumo: tiene como función el poder añadir un insumo x al proveedor seleccionado, pasando a una nueva lista,
+                                                                la cual despliega los insumos que están asignados a dicho proveedor.</h6>
+                                                            <br>
+                                                            <h6>2-. El botón editar: su función es cambiar el precio del insumo, siempre y cuando, el usuario haya ingresado un precio diferente al que ya está registrado,
+                                                                en caso contrario, este botón no tiene funcionalidad alguna</h6>
+                                                            <br>
+                                                            <h6>3-. botón eliminar: tiene como función, el quitar un insumo x del proveedor seleccionado
+                                                                y dejarlo en una lista de insumos disponibles para ese mismo proveedor.</h6>
+                                                        </ul>
+
+
+                                                    </div>
+
 
                                                 </div>
                                             </div>
@@ -104,24 +129,54 @@
 
                                     <!---inicio fila de los filtros-->
                                     <div class="row">
+                                        <!--inicio filtro nombre-->
+                                        <div class="col-md-9 grid-margin stretch-card">
+                                            <div class="card">
+                                                <div class="card-body" >
+                                                    <form class=""  th:action="@{/administrador/insumoProveedor/buscar_Nombre}" method="get">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+
+                                                                <input type="hidden" name="idProveedor" th:value="${proveedor.idProveedor}"/>
+
+                                                                <input type="text" class="form-control" name="nombre" placeholder="Escribe el nombre del insumo" aria-label="Escribe el nombre del insumo">
+
+                                                                <div class="input-group-append">
+                                                                    <button class="btn btn-sm btn-primary" type="submit">Buscar</button>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
 
 
+                                                       <!-- <div th:if="${existe == true}" th:text="'No se encontraron Insumos!'" ></div>
+                                                        <div th:unless="${existe != true}" th:text="'se encontraron Insumos!'" ></div>-->
+
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!--fin filtro nombre--->
+
+                                        <!--inicio vista tipos--->
                                         <!--inicio vista tipos--->
                                         <div class="col-md-2 grid-margin">
                                             <div class="btn-group mt-4" role="group" aria-label="Basic example">
-                                                <a th:href="@{/administrador_proveedor/mantenedor_proveedor}" class="btn btn-primary">
+                                                <a data-toggle="tooltip"  data-placement="top" title="" data-original-title="Ver Proveedores" th:href="@{/administrador_proveedor/mantenedor_proveedor}" class="btn btn-primary">
                                                     <i class="mdi mdi-backburger"></i>
                                                 </a>
-                                                <a  th:href="@{/administrador/insumoProveedor/insumosProveedor(idProveedor=${proveedor.idProveedor})}"   class="btn btn-primary">
+                                                <a  data-toggle="tooltip"  data-placement="top" title="" data-original-title="Insumos vinculados al Proveedor"  th:href="@{/administrador/insumoProveedor/insumosProveedor(idProveedor=${proveedor.idProveedor})}"   class="btn btn-primary">
                                                     <i class="mdi mdi-dropbox"></i>
                                                 </a>
-                                                <a th:href="@{/administrador/insumoProveedor/verInsumos(idProveedor=${proveedor.idProveedor})}" class="btn btn-primary">
+                                                <a data-toggle="tooltip"  data-placement="top" title="" data-original-title="Agregar insumos nuevos para el Proveedor" th:href="@{/administrador/insumoProveedor/verInsumos(idProveedor=${proveedor.idProveedor})}" class="btn btn-primary">
                                                     <i class="mdi mdi-plus-circle-outline"></i>
                                                 </a>
-                                                <button onclick="verCard()" type="button" class="btn btn-primary">
+                                                <button data-toggle="tooltip"  data-placement="top" title="" data-original-title="Ver en modo tarjeta" onclick="verCard()" type="button" class="btn btn-primary">
                                                     <i class="mdi mdi-grid"></i>
                                                 </button>
-                                                <button onclick="verTabla()" type="button" class="btn btn-primary">
+                                                <button data-toggle="tooltip"  data-placement="top" title="" data-original-title="Ver en modo lista" onclick="verTabla()" type="button" class="btn btn-primary">
                                                     <i class="mdi mdi-format-list-bulleted"></i>
                                                 </button>
                                             </div>
@@ -161,7 +216,7 @@
 
                                                         <label for="precio" class="col-sm-3 col-form-label">Precio</label>
                                                         <div class="col-sm-8">
-                                                            <input required="" min="1" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" id="precio" placeholder="Precio">
+                                                            <input required="" min="1000" max="5000000" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000">
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
@@ -200,7 +255,7 @@
 
                                                         <label for="precio" class="col-sm-3 col-form-label">Precio</label>
                                                         <div class="col-sm-9">
-                                                            <input required="" min="1" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" th:value="${ins.precio}"  id="precio" placeholder="Precio"/>
+                                                            <input required="" min="1000" max="5000000" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" th:value="${ins.precio}"  id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000"/>
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
@@ -279,7 +334,7 @@
                                                                     <div style="float: left; padding:0px;" class="form-group row">
                                                                         <label for="precio" class="col-sm-3 col-form-label">Precio</label>
                                                                         <div class="col-sm-9">
-                                                                            <input required=""  min="1" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" id="precio" placeholder="Precio">
+                                                                            <input required=""  min="1000"  max="5000000" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000">
                                                                         </div>
                                                                     </div> &nbsp;
                                                                     <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
@@ -343,7 +398,7 @@
                                                                         <div style="float: left; padding:0px; " class="form-group row">
                                                                             <label for="precio" class="col-sm-3 col-form-label">Precio</label>
                                                                             <div class="col-sm-9">
-                                                                                <input required="" min="1" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" th:value="${ins.precio}"  id="precio" placeholder="Precio"/>
+                                                                                <input required="" min="1000" max="5000000" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" th:value="${ins.precio}"  id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000"/>
                                                                             </div>
 
                                                                         </div> &nbsp;
@@ -419,6 +474,14 @@
             <script th:src="@{/js/template.js}"></script>
             <script th:src="@{/js/settings.js}"></script>
             <script th:src="@{/js/todolist.js}"></script>
+            <script th:src="@{/js/tooltips.js}"></script>
+            <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+            <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+
+            <script th:src="@{/js/alerts_personalizado.js}"></script>
+            <script th:src="@{/js/avgrund.js}"></script>
+
+
             <!-- endinject -->
             <!-- plugin js for this page -->
             <!-- End plugin js for this page -->
@@ -429,8 +492,6 @@
                 var tabla = document.getElementById("tablaIndumos");
                 tabla.style.display = "none";
                 tabla.style.visibility = "hidden";
-
-
                 function verCard() {
                     var tabla = document.getElementById("tablaIndumos");
                     tabla.style.display = "none";
@@ -439,7 +500,6 @@
                     cards.style.display = "";
                     cards.style.visibility = "";
                 }
-
                 function verTabla() {
                     var cards = document.getElementById("cardInsumos");
                     cards.style.display = "none";

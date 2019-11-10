@@ -7,7 +7,7 @@
  * Nota: el validar contraseña debe estar un input abajo de otro
  */
 function validatorForms(formulario) {
-
+    
     console.log(formulario);
     /**
      *
@@ -82,12 +82,6 @@ function validatorForms(formulario) {
             return false;
         }
     }
-
-    /*
-     *
-     * @param {type}
-     * @returns {Valida todos los radio de un grupo}
-     */
     function validarRadio() {
         var radios = new Array();
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
@@ -120,11 +114,6 @@ function validatorForms(formulario) {
             return false;
         }
     }
-    /*
-     *
-     * @param {elementos} e , e2
-     * @returns {Boolean} TRUE (iguales) / FALSE (Diferentes invalido)
-     */
     function validar_igual_password(e) {
         var elemento = formulario.elements[objeterIndexPasswordValidar()];
         var elementoPass = formulario.elements[objeterIndexPasswordValidar() - 1];
@@ -135,11 +124,6 @@ function validatorForms(formulario) {
             e.preventDefault(e);
         }
     }
-    /*
-     *
-     * @param
-     * @returns {El index del segundo input password}
-     */
     function objeterIndexPasswordValidar() {
         var indexs = new Array();
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
@@ -157,11 +141,6 @@ function validatorForms(formulario) {
         }
         return numMax;
     }
-    /*
-     *
-     * @param {type}
-     * @returns {Void} cambia la clase de los input tipo radio
-     */
     function quitarFormatoInvalid() {
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             if (formulario.elements[i].type == "radio") {
@@ -170,12 +149,6 @@ function validatorForms(formulario) {
             }
         }
     }
-    /*
-     *
-     * @param {Elemento} e
-     * @returns {Boolean}
-     * TRUE (Si el selecciono una opción / FALSE (No se selecciono ninguna opción valida)
-     */
     function validarSelectOne(e) {
         var elemento = formulario.elements[e];
         if (elemento.value == "select") {
@@ -184,12 +157,6 @@ function validatorForms(formulario) {
             return true;
         }
     }
-    /*
-     *
-     * @param {elemento} e
-     * @returns {Boolean}
-     * Archivo valido que tenga las extensiones .jpeg / .jpg / .png / .gif solamente.
-     */
     function validarInputFile(elemento) {
         var filePath = elemento.value;
         var allowedExtensions = /(.jpg|.jpeg|.png|.gif)$/i;
@@ -212,29 +179,7 @@ function validatorForms(formulario) {
             return false;
         }
     }
-
-    /*
-     *
-     * @param {type} e
-     * @returns  void / Validar y recorrer input pot input y validarlos
-     */
     var validar = function (e) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         for (var i = 0, max = formulario.elements.length; i < max; i++) {
             //tipo email validador
             if (formulario.elements[i].id == "nombre") {
@@ -252,6 +197,7 @@ function validatorForms(formulario) {
                     document.getElementById("descripcion-mensaje1").setAttribute("style", "display: display");
                     formulario.elements[i].setAttribute("class", "form-control is-valid");
                 } else {
+                    
                     document.getElementById("descripcion-mensaje1").setAttribute("style", "display: block");
                     formulario.elements[i].setAttribute("class", "form-control is-invalid");
                     e.preventDefault(e);
@@ -285,12 +231,6 @@ function validatorForms(formulario) {
                     e.preventDefault(e);
                 }
             }
-
-
-
-
-
-
             if (formulario.elements[i].id == "stockMinimo") {
                 document.getElementById("stockMin-mensaje1").setAttribute("style", "display: display");
                 if (validarSiNumero(formulario.elements[i])) {
@@ -310,6 +250,7 @@ function validatorForms(formulario) {
                     }
                 } else {
                     formulario.elements[i].setAttribute("class", "form-control is-invalid");
+                    document.getElementById("prueba").setAttribute("th:text","perro");
                     document.getElementById("stockMin-mensaje1").setAttribute("style", "display: block");
                     e.preventDefault(e);
                 }
@@ -345,20 +286,12 @@ function validatorForms(formulario) {
                     e.preventDefault(e);
                 }
             }
-
-            //validar rut
-            //Solo cambiar el id por el id del rut de tu formulario
-
-
-
-
         }
     };
-
 
     //cada vez que cambia algún input
     formulario.addEventListener("change", validar);
     //Evento de envio de formulario
     formulario.addEventListener("submit", validar);
-}
-;
+    return mesanje;
+};

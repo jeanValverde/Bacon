@@ -79,7 +79,87 @@ public class ProcedureQueryInsumo {
         }
     }
     @SuppressWarnings("unchecked")
-    public List<Insumo> filtrarInsumosByNombre(String nombreInsumo) {
+    public List<Insumo> listarInsumos() {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_INSUMO.PR_LISTAR_INSUMOS");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("cursor_insumos", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Insumo> insumos = new ArrayList<Insumo>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+                Insumo insumo = new Insumo();
+                insumo.setIdInsumo(Integer.parseInt(result[0].toString()));
+                insumo.setNombreInsumo(result[1].toString());
+                insumo.setDescripcionInsumo(result[2].toString());
+                insumo.setStockInsumo(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
+                insumo.setUnidadMedidaInsumo(result[4].toString());
+                insumo.setMinimoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[5].toString())));
+                insumo.setMaximoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[6].toString())));
+                insumo.setFotoInsumo(result[7].toString());
+                
+              
+                insumos.add(insumo);
+            }
+            
+            return insumos;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    @SuppressWarnings("unchecked")
+    public List<Insumo> filtrarInsumos(String filtro) {
+        try {
+            StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_INSUMO.FILTRO_INSUMO");
+
+            // Registrar los parámetros de entrada y salida
+            query.registerStoredProcedureParameter("P_FILTRO", String.class, ParameterMode.IN);
+            query.registerStoredProcedureParameter("P_INSUMOS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
+
+            // Configuramos el valor de entrada
+            query.setParameter("P_FILTRO", filtro);
+
+            query.execute();
+
+            // Obtenemos el resultado del cursos en una lista
+            List<Object[]> results = query.getResultList();
+            List<Insumo> insumos = new ArrayList<Insumo>();
+            
+            // Recorremos la lista con map y devolvemos un List<BusinessObject>
+            for (Object[] result : results) {
+                Insumo insumo = new Insumo();
+                insumo.setIdInsumo(Integer.parseInt(result[0].toString()));
+                insumo.setNombreInsumo(result[1].toString());
+                insumo.setDescripcionInsumo(result[2].toString());
+                insumo.setStockInsumo(BigInteger.valueOf(Integer.parseInt(result[3].toString())));
+                insumo.setUnidadMedidaInsumo(result[4].toString());
+                insumo.setMinimoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[5].toString())));
+                insumo.setMaximoStockInsumo(BigInteger.valueOf(Integer.parseInt(result[6].toString())));
+                insumo.setFotoInsumo(result[7].toString());
+                
+              
+                insumos.add(insumo);
+            }
+            
+            return insumos;
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    @SuppressWarnings("unchecked")
+    public List<Insumo> filtrarInsumosByNombre(String nombre) {
         try {
             StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_INSUMO.FILTRO_NOMBRE_INSUMO");
 
@@ -88,7 +168,7 @@ public class ProcedureQueryInsumo {
             query.registerStoredProcedureParameter("P_INSUMOS_CURSOR", Class.class, ParameterMode.REF_CURSOR);
 
             // Configuramos el valor de entrada
-            query.setParameter("P_NOMBRE_INSUMO", nombreInsumo);
+            query.setParameter("P_NOMBRE_INSUMO", nombre);
 
             query.execute();
 
