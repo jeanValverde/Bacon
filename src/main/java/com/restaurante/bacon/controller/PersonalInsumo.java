@@ -232,6 +232,7 @@ public class PersonalInsumo {
         
         if(this.insumoService.eliminarInsumo(idInsumo)){
             this.amazonClient.deleteFileFromS3Bucket(nombreFoto);
+            System.out.println(idInsumo);
             modelo.addAttribute("tipoRespuesta", "eliminar");
             modelo.addAttribute("respuesta", 1);
         }else{

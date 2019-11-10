@@ -124,7 +124,7 @@
                                                                                     4- Seleccione el botón ver pediso para ver una lista de todos los insumos agregados al carro.
                                                                                     <br/><br/>
                                                                                     <a style="color: white" class="btn btn-primary"><i class="mdi mdi-cart-outline"></i> Ver pedido</a>
-                                                                                    
+
                                                                                 </td>
                                                                                 <td style ="vertical-align:text-top;" valign="top">
                                                                                     5- Verifique que todos los insumos que agregó se encuentren en la lista.
@@ -453,6 +453,7 @@
                                                                                 var contenidoMensaje = "";
                                                                                 var id_insumo_pedido = new Number(checkbox.value.toString());
                                                                                 document.getElementById("mensaje" + id_insumo_pedido).innerHTML = contenidoMensaje;
+                                                                                document.getElementById("mensaje2" + id_insumo_pedido).innerHTML = contenidoMensaje;
                                                                                 var id_insumo = new Number(checkbox.getAttribute("data-idInsumo").toString());
                                                                                 if (checkbox.checked) {
                                                                                     document.getElementById("check" + id_insumo_pedido).checked = true;
@@ -470,25 +471,30 @@
                                                                                                         var contenidoPedido = '<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel-3">Insumos para pedir</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
                                                                                                         for (var i = 0; i < response.data.grupoProveedores.length; i++) {
                                                                                                             contenidoPedido = contenidoPedido
-                                                                                                                    + '<div class="modal-body" id="pruebaModal" style="text-align: center"><h5 id="exampleModalLabel-3">Pedido para ' + response.data.grupoProveedores[i].nombreProveedor + '</h5><div class="table-responsive"><table id="order-listing" class="table">'
+                                                                                                                    + '<div class="modal-body" id="pruebaModal" style="text-align: center">'
+                                                                                                                    + '<h5 id="exampleModalLabel-3">Pedido para ' + response.data.grupoProveedores[i].nombreProveedor + '</h5>\n\ '
+                                                                                                                    + '<div class="table-responsive">\n\ '
+                                                                                                                    + '<table id="order-listing" class="table">'
                                                                                                                     + '<thead><tr><th>Nombre Insumo</th><th>Precio</th><th>Unidad</th><th>Cantidad</th><th>Valor total</th></tr></thead>'
                                                                                                                     + '<tbody>';
+                                                                                                            var totalPedido = new Number();
+                                                                                                            var idProveedorGrupo = Number(response.data.grupoProveedores[i].idProveedor);
                                                                                                             for (var x = 0; x < response.data.insumos.length; x++) {
                                                                                                                 var idPro = new Number(response.data.insumos[x].proveedor.idProveedor);
-                                                                                                                var total = new Number();
+                                                                                                                if (idPro == idProveedorGrupo) {
+                                                                                                                
                                                                                                                 var precio = new Number(response.data.insumos[x].insumoProveedor.precio);
                                                                                                                 var cantidad = new Number(response.data.insumos[x].insumoPedido.cantidadInsumo);
-                                                                                                                
+                                                                                                                var total = new Number();
                                                                                                                 total = parseInt(precio * cantidad);
-                                                                                                                totalFinal = totalFinal = total;
-                                                                                                                if (idPro == response.data.grupoProveedores[i].idProveedor) {
-                                                                                                                    contenidoPedido = contenidoPedido + '<tr><td>' + response.data.insumos[x].insumo.nombreInsumo + '</td><td>' + dar_formato(response.data.insumos[x].insumoProveedor.precio) + '</td><td>' + response.data.insumos[x].insumo.unidadMedidaInsumo + '</td><td>' + response.data.insumos[x].insumoPedido.cantidadInsumo + '</td><td>' + dar_formato(total) + '</td></tr>'
+                                                                                                                totalPedido = totalPedido + total;
+                                                                                                                    contenidoPedido = contenidoPedido + '<tr><td>' + response.data.insumos[x].insumo.nombreInsumo + '</td><td>' + dar_formato(response.data.insumos[x].insumoProveedor.precio) + '</td><td>' + response.data.insumos[x].insumo.unidadMedidaInsumo + '</td><td>' + response.data.insumos[x].insumoPedido.cantidadInsumo + '</td><td>' + dar_formato(total) + '</td></tr>';
                                                                                                                 }
-                                                                                                                
                                                                                                             }
-                                                                                                            contenidoPedido = contenidoPedido + '</tbody></table><br/><h3>TOTAL PEDIDO: '+dar_formato(totalFinal)+'</h3></div></div>';
-
+                                                                                                            totalFinal = totalFinal + totalPedido;
+                                                                                                            contenidoPedido = contenidoPedido + '<tr><td></td><td></td><td></td><td>Total pedido: </td><td>' + dar_formato(totalPedido) + '</td></tr></tbody></table>';
                                                                                                         }
+                                                                                                        contenidoPedido = contenidoPedido + '<br/><h3></div>TOTAL PEDIDOS: ' + dar_formato(totalFinal) + '</h3></div>';
                                                                                                         if (response.data.insumos.length > 0) {
                                                                                                             contenidoPedido = contenidoPedido + '<div class="modal-footer"><a onclick="agregarPedido()" class="btn btn-success ">Realizar pedido</a><button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button></div>';
                                                                                                         }
@@ -522,30 +528,38 @@
                                                                                             .then(function (response) {
                                                                                                 console.log(response.data);
                                                                                                 console.log(response);
+                                                                                                var totalFinal = new Number();
                                                                                                 if (response.data != null) {
                                                                                                     // alert('se agregó el insumo');
                                                                                                     var contenidoPedido = '<div class="modal-header"><h5 class="modal-title" id="exampleModalLabel-3">Insumos para pedir</h5><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
                                                                                                     for (var i = 0; i < response.data.grupoProveedores.length; i++) {
-
-                                                                                                        contenidoPedido = contenidoPedido
-                                                                                                                + '<div class="modal-body" id="pruebaModal" style="text-align: center"><h5 id="exampleModalLabel-3">Pedido para ' + response.data.grupoProveedores[i].nombreProveedor + '</h5><div class="table-responsive"><table id="order-listing" class="table">'
-                                                                                                                + '<thead><tr><th>Nombre Insumo</th><th>Precio</th><th>Unidad</th><th>Cantidad</th><th>Valor total</th></tr></thead>'
-                                                                                                                + '<tbody>';
-                                                                                                        for (var x = 0; x < response.data.insumos.length; x++) {
-                                                                                                            var idPro = new Number(response.data.insumos[x].proveedor.idProveedor);
-                                                                                                            var total = new Number();
-                                                                                                            var precio = new Number(response.data.insumos[x].insumoProveedor.precio);
-                                                                                                            var cantidad = new Number(response.data.insumos[x].insumoPedido.cantidadInsumo);
-
-                                                                                                            total = parseInt(precio * cantidad);
-
-                                                                                                            if (idPro == response.data.grupoProveedores[i].idProveedor) {
-                                                                                                                contenidoPedido = contenidoPedido + '<tr><td>' + response.data.insumos[x].insumo.nombreInsumo + '</td><td>' + response.data.insumos[x].insumoProveedor.precio + '</td><td>' + response.data.insumos[x].insumo.unidadMedidaInsumo + '</td><td>' + response.data.insumos[x].insumoPedido.cantidadInsumo + '</td><td>' + total + '</td></tr>'
+                                                                                                            contenidoPedido = contenidoPedido
+                                                                                                                    + '<div class="modal-body" id="pruebaModal" style="text-align: center">'
+                                                                                                                    + '<h5 id="exampleModalLabel-3">Pedido para ' + response.data.grupoProveedores[i].nombreProveedor + '</h5>\n\ '
+                                                                                                                    + '<div class="table-responsive">\n\ '
+                                                                                                                    + '<table id="order-listing" class="table">'
+                                                                                                                    + '<thead><tr><th>Nombre Insumo</th><th>Precio</th><th>Unidad</th><th>Cantidad</th><th>Valor total</th></tr></thead>'
+                                                                                                                    + '<tbody>';
+                                                                                                            var totalPedido = new Number();
+                                                                                                            var idProveedorGrupo = Number(response.data.grupoProveedores[i].idProveedor);
+                                                                                                            for (var x = 0; x < response.data.insumos.length; x++) {
+                                                                                                                var idPro = new Number(response.data.insumos[x].proveedor.idProveedor);
+                                                                                                                if (idPro == idProveedorGrupo) {
+                                                                                                                
+                                                                                                                var precio = new Number(response.data.insumos[x].insumoProveedor.precio);
+                                                                                                                var cantidad = new Number(response.data.insumos[x].insumoPedido.cantidadInsumo);
+                                                                                                                var total = new Number();
+                                                                                                                total = parseInt(precio * cantidad);
+                                                                                                                totalPedido = totalPedido + total;
+                                                                                                                
+                                                                                                                contenidoPedido = contenidoPedido + '<tr><td>' + response.data.insumos[x].insumo.nombreInsumo + '</td><td>' + dar_formato(response.data.insumos[x].insumoProveedor.precio) + '</td><td>' + response.data.insumos[x].insumo.unidadMedidaInsumo + '</td><td>' + response.data.insumos[x].insumoPedido.cantidadInsumo + '</td><td>' + dar_formato(total) + '</td></tr>';
+                                                                                                                }
                                                                                                             }
+                                                                                                            totalFinal = totalFinal + totalPedido;
+                                                                                                            contenidoPedido = contenidoPedido + '<tr><td></td><td></td><td></td><td>Total pedido: </td><td>' + dar_formato(totalPedido) + '</td></tr></tbody></table>';
                                                                                                         }
-                                                                                                        contenidoPedido = contenidoPedido + '</tbody></table></div></div>';
-
-                                                                                                    }
+                                                                                                        contenidoPedido = contenidoPedido + '<br/><h3></div>TOTAL PEDIDO: ' + dar_formato(totalFinal) + '</h3></div>';
+                                                                                                        
                                                                                                     if (response.data.insumos.length > 0) {
                                                                                                         contenidoPedido = contenidoPedido + '<div class="modal-footer"><button type="button" class="btn btn-success">Realizar pedido</button><button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button></div>';
                                                                                                     } else {

@@ -70,11 +70,15 @@ public class ProcedureQueryInsumo {
     @SuppressWarnings("unchecked")
     public boolean DeleteInsumo(Integer id) {
         try {
+             StoredProcedureQuery query = em.createStoredProcedureQuery("PACKAGE_INSUMO.PR_ELIMINAR_INSUMO_POR_ID");
             //si no se realiza el procedimiento adecuadamente cae en una exeption 
-            em.createNamedStoredProcedureQuery("DeleteInsumo")
-                    .setParameter("P_ID_INSUMO", id).execute();
+            query.registerStoredProcedureParameter("P_ID_INSUMO",Integer.class,ParameterMode.IN);
+                    
+            query.setParameter("P_ID_INSUMO", id);
+            query.execute();
             return true;
         } catch (Exception ex) {
+            System.out.println(ex.getMessage().toString());
             return false;
         }
     }

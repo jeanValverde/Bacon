@@ -63,7 +63,7 @@
                 <div class="main-panel">
                     <div class="content-wrapper">
                         <div class="row">
-                            <div th:if="${agregar}" class="col-lg-4 grid-margin stretch-card">
+                            <div th:if="${agregar}" class="col-lg-4 ">
                                 <div class="card">
                                     <div class="card-body">
                                         <h4 class="card-title">Agregar Insumo</h4>
@@ -73,7 +73,7 @@
 
                                                     <div class="form-group">
                                                         <label for="exampleInputUsername1" >Nombre</label>
-                                                        <input type="text" class="form-control" id="nombre" placeholder="Ej: arrón primavera" name="nombre"/>
+                                                        <input type="text" class="form-control" id="nombre" placeholder="Ej: arróz primavera" name="nombre"/>
 
                                                     </div>
                                                     <div id="nombre-mensaje1"  class="invalid-feedback">
@@ -81,7 +81,7 @@
                                                     </div>
                                                     <div class="form-group is-invalid">
                                                         <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
-                                                        <textarea class="form-control" id="descripcion" placeholder="Ej: arrón primavera marca lider" name="descripcion"></textarea>
+                                                        <textarea class="form-control" id="descripcion" placeholder="Ej: arróz primavera marca lider" name="descripcion"></textarea>
                                                     </div>
                                                     <div id="descripcion-mensaje1"  class="invalid-feedback">
 
@@ -107,7 +107,7 @@
 
                                                     </div>
                                                     <div class="form-group">
-                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Stock mínimo</label>
                                                         <input type="number" class="form-control" placeholder="Ej: 1"  id="stockMinimo" name="stockMinimo"/>
 
                                                     </div>
@@ -118,7 +118,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Stock máximo</label>
                                                         <input type="number" class="form-control" placeholder="Ej: 10"  id="stockMaximo" name="stockMaximo"/>
                                                     </div>
                                                     <div id="stockMax-mensaje1"  class="invalid-feedback">
@@ -159,14 +159,14 @@
                                                     <input th:value="${insumo.idInsumo}"  type="hidden" name="id"/>
                                                     <div class="form-group">
                                                         <label for="exampleInputUsername1" >Nombre</label>
-                                                        <input th:value="${insumo.nombreInsumo}"  type="text" class="form-control" id="nombre" placeholder="Ej: arrón primavera" name="nombre"/>
+                                                        <input th:value="${insumo.nombreInsumo}"  type="text" class="form-control" id="nombre" placeholder="Ej: arróz primavera" name="nombre"/>
                                                     </div>
                                                     <div id="nombre-mensaje1"  class="invalid-feedback">
 
                                                     </div>
                                                     <div class="form-group">
-                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Descripcion</label>
-                                                        <textarea class="form-control" id="descripcion" placeholder="Ej: arrón primavera marca lider" name="descripcion">[[${insumo.descripcionInsumo}]]</textarea>
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Descripción</label>
+                                                        <textarea class="form-control" id="descripcion" placeholder="Ej: arróz primavera marca lider" name="descripcion">[[${insumo.descripcionInsumo}]]</textarea>
                                                     </div>
                                                     <div id="descripcion-mensaje1"  class="invalid-feedback">
 
@@ -193,14 +193,14 @@
 
                                                     </div>
                                                     <div class="form-group">
-                                                        <label  style="margin-top: 20px" for="exampleInputUsername1">Stock minimo</label>
+                                                        <label  style="margin-top: 20px" for="exampleInputUsername1">Stock mínimo</label>
                                                         <input th:value="${insumo.minimoStockInsumo}" type="number" placeholder="Ej: 1" class="form-control" id="stockMinimo" name="stockMinimo" onkeydown=""/>
                                                     </div>
                                                     <div id="stockMin-mensaje1" class="invalid-feedback">
 
                                                     </div>
                                                     <div class="form-group">
-                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Stock maximo</label>
+                                                        <label style="margin-top: 20px" for="exampleInputUsername1">Stock máximo</label>
                                                         <input th:value="${insumo.maximoStockInsumo}" type="number" placeholder="Ej: 10" class="form-control" id="stockMaximo" name="stockMaximo"/>
                                                     </div>
                                                     <div id="stockMax-mensaje1"  class="invalid-feedback">
@@ -245,7 +245,7 @@
                                 </div>
                             </div>
                             <!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
-                            <div class="col-md-8 col-xl-8 grid-margin stretch-card">
+                            <div class="col-md-8 col-xl-8 ">
                                 <div class="row">
                                     <div class="card">
                                         <div class="card-body">
@@ -263,12 +263,12 @@
                                                     </div>
                                                 </div>
                                             </form>
-                                            <h4 style="margin-top: 20px" class="card-title">Nota: se puede buscar por nombre, descripción,la unidad de medida, stock actual, stock máximo, stock mínimo.</h4>
+                                            <h4 style="margin-top: 20px" class="card-title">Nota: se puede buscar por nombre, descripción, la unidad de medida, stock actual, stock máximo, stock mínimo.</h4>
 
                                         </div> 
                                     </div>
 
-                                    <div class="card" style="margin-top: 20px">
+                                    <div class="card" style="margin-top: 20px;width: 100%">
                                         <div class="card-body">
                                             <h5 >Insumos </h5>
                                             <ul class="nav nav-pills nav-pills-success" id="pills-tab" role="tablist" >
@@ -279,7 +279,7 @@
                                                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tabla</a>
                                                 </li>
                                             </ul>
-                                            <div class="tab-content" id="pills-tabContent">
+                                            <div class="tab-content" id="pills-tabContent" >
                                                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                                     <div  class="row">
                                                         <div th:if="${insumos.size()==0}" class="card card-inverse-" id="context-menu-open">
@@ -290,7 +290,7 @@
                                                                 </div>
                                                             </center>
                                                         </div>
-                                                        <div style="padding: 5px" th:each="ins: ${insumos}" class="col-xl-6 grid-margin grid-margin-md-0 stretch-card">
+                                                        <div style="padding: 5px" th:each="ins: ${insumos}" class="col-xl-6 ">
                                                             <div class="card">
                                                                 <div class="card-body text-center">
                                                                     <div style="text-align:right">
@@ -402,8 +402,10 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
 
@@ -769,17 +771,22 @@
             formulario.elements[i].setAttribute("class", "form-control is-invalid");
             document.getElementById("stockMin-mensaje1").setAttribute("style", "display: block");
             document.getElementById("stockMin-mensaje1").innerHTML = '<p>El stock mínimo debe ser un numero entero.</p>';
-            } else if (stockMin > stock) {
-            formulario.elements[i].setAttribute("class", "form-control is-invalid");
-            document.getElementById("stockMin-mensaje1").setAttribute("style", "display: block");
-            document.getElementById("stockMin-mensaje1").innerHTML = '<p>El stock mínimo no puede ser mayor al stock actual.</p>';
-            e.preventDefault(e);
             } else if (stockMin < 0) {
             formulario.elements[i].setAttribute("class", "form-control is-invalid");
             document.getElementById("stockMin-mensaje1").setAttribute("style", "display: block");
             document.getElementById("stockMin-mensaje1").innerHTML = '<p>El stock mínimo debe ser mayor a 0.</p>';
             e.preventDefault(e);
-            }
+            }else if (stockMin > stock+1 & stock ==0) {
+            formulario.elements[i].setAttribute("class", "form-control is-invalid");
+            document.getElementById("stockMin-mensaje1").setAttribute("style", "display: block");
+            document.getElementById("stockMin-mensaje1").innerHTML = '<p>El stock mínimo solo pueder ser 1 en caso que el stock actual sea 0.</p>';
+            e.preventDefault(e);
+            }else if (stockMin > stock & stock!=0) {
+            formulario.elements[i].setAttribute("class", "form-control is-invalid");
+            document.getElementById("stockMin-mensaje1").setAttribute("style", "display: block");
+            document.getElementById("stockMin-mensaje1").innerHTML = '<p>El stock mínimo no puede ser mayor al stock actual.</p>';
+            e.preventDefault(e);
+            } 
             } else {
             formulario.elements[i].setAttribute("class", "form-control is-invalid");
             document.getElementById("stockMin-mensaje1").setAttribute("style", "display: block");
@@ -799,6 +806,11 @@
             formulario.elements[i].setAttribute("class", "form-control is-invalid");
             document.getElementById("stockMax-mensaje1").setAttribute("style", "display: block");
             document.getElementById("stockMax-mensaje1").innerHTML = '<p>El stock máximo debe ser un numero entero.</p>';
+            e.preventDefault(e);
+            }else if (stockMax < 0) {
+            formulario.elements[i].setAttribute("class", "form-control is-invalid");
+            document.getElementById("stockMax-mensaje1").setAttribute("style", "display: block");
+            document.getElementById("stockMax-mensaje1").innerHTML = '<p>El stock máximo no debe ser menor a 0.</p>';
             e.preventDefault(e);
             }
             else if (stockMax < stock) {
