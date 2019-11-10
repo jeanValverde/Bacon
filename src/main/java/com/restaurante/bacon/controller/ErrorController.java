@@ -21,6 +21,5 @@ public class ErrorController {
     @RequestMapping("/500")
     public String error_500(Model modelo) {
         return "error/error-500";
-    }
-    
+    } 
 }
