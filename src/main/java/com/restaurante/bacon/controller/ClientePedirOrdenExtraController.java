@@ -22,6 +22,4 @@ public class ClientePedirOrdenExtraController {
     public ModelAndView pedirOrdenExtra(Model model, HttpSession sesion){
         return new ModelAndView("redirect:/cliente/pedirOrden/?tipo=2");
     } 
-    
-    
 }
