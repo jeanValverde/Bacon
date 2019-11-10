@@ -21,5 +21,7 @@ public class ClientePedirOrdenExtraController {
     @RequestMapping("/")
     public ModelAndView pedirOrdenExtra(Model model, HttpSession sesion){
         return new ModelAndView("redirect:/cliente/pedirOrden/?tipo=2");
-    }  
+    } 
+    
+    
 }
