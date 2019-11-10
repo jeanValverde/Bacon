@@ -453,5 +453,4 @@ public class PersonalMantenedorReceta {
         //
         return "users/administrador/mantenedorReceta";
     }
-    
 }
