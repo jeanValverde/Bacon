@@ -6,6 +6,7 @@
 package com.restaurante.bacon.service;
 
 import static com.restaurante.bacon.controller.PersonalController.UPLOAD_DIR_IMAGEN;
+import com.restaurante.bacon.dao.IIPersonalDao;
 import com.restaurante.bacon.dto.Personal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.restaurante.bacon.dao.IPersonalDao;
+import com.restaurante.bacon.dao.IRolDao;
+import com.restaurante.bacon.dao.ProcedureQueryPersonal;
+import com.restaurante.bacon.dto.Rol;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +56,14 @@ public class PersonalService implements UserDetailsService {
     //se obtienen los metodos generados automaticamente por la interfaz
     @Autowired
     IPersonalDao personalDao;
+
+    @Autowired
+    IIPersonalDao personaldao2;
+
+    @Autowired
+    ProcedureQueryPersonal procedureQuery;
+    @Autowired
+    IRolDao rol;
 
     //se implementa el metodo de la interfaz 
     public List<Personal> getAllUsuario() {
@@ -102,15 +116,17 @@ public class PersonalService implements UserDetailsService {
             return null;
         }
     }
-    public boolean comprobarImagen(String nombreArchivo){
-        File f = new File(UPLOAD_DIR_IMAGEN+'/'+nombreArchivo);
-        if(f.exists()&&!f.isDirectory()){
+
+    public boolean comprobarImagen(String nombreArchivo) {
+        File f = new File(UPLOAD_DIR_IMAGEN + '/' + nombreArchivo);
+        if (f.exists() && !f.isDirectory()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
-    public void eliminarImagen(String nombreArchivo){
+
+    public void eliminarImagen(String nombreArchivo) {
         Path fileNamePath = Paths.get(UPLOAD_DIR_IMAGEN, nombreArchivo);
         try {
             Files.delete(fileNamePath);
@@ -183,6 +199,43 @@ public class PersonalService implements UserDetailsService {
             System.out.println(ex);
         }
         return fechaDate;
+    }
+
+    public boolean insertPersonal(Personal personal) {
+        return this.procedureQuery.InsertPersonal(personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(), personal.getContrasenaPersonal(), personal.getEstadoPersonal(), personal.getIdRol().getIdRol());
+    }
+
+    public boolean modificarPersonal(Personal personal) {
+
+        return this.procedureQuery.modificarPersonal(personal.getIdPersonal(), personal.getRutPersonal(), personal.getNombresPersonal(), personal.getApePaternoPersonal(), personal.getApeMaternoPersonal(), personal.getFechaNacimientoPersonal(), personal.getCelularPersonal(), personal.getCorreoPersonal(), personal.getEstadoPersonal(), personal.getIdRol().getIdRol());
+    }
+
+    public List<Rol> listarRol() {
+        return this.rol.findAll();
+    }
+
+    public void deletePersonalByID(String id) {
+
+        this.personalDao.deleteById(id);
+    }
+
+    public Personal retornarPersonalById(BigDecimal idPersonal) {
+
+        return this.personaldao2.findByIdPersonal(idPersonal);
+    }
+    
+    public Rol retornarRolById(Integer idRol) {
+        Optional<Rol> optinalEntity = rol.findById(idRol);
+        Rol rol = optinalEntity.get();
+        return rol;
+    }
+
+    public List<Personal> filtrarPersonalByRut(String rut) {
+        return this.procedureQuery.filtrarPersonalByRut(rut);
+    }
+
+    public List<Personal> filtrarPersonalByNombre(String nombrePersonal) {
+        return this.procedureQuery.filtroPorNombre(nombrePersonal);
     }
 
 }

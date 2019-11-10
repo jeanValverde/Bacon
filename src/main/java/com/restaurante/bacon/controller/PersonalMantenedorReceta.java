@@ -18,6 +18,7 @@ import com.restaurante.bacon.service.PersonalService;
 import com.restaurante.bacon.service.RecetaService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -67,8 +68,14 @@ public class PersonalMantenedorReceta {
 
         modelo.addAttribute("tipoForm", "agregar");
 
-        modelo.addAttribute("recetas", this.recetaService.filtrarRecetasByDisponibilidad(disponibilidad));
-
+        
+        boolean resultado = false;
+        List<Receta> filtro = this.recetaService.filtrarRecetasByDisponibilidad(disponibilidad);
+        if(filtro.size()>= 1){
+            resultado = true;
+        }
+        modelo.addAttribute("recetas", filtro);
+        modelo.addAttribute("resultados", resultado);
         ///mensajes 1 = si mensaje / 0 = no mensaje
         modelo.addAttribute("isMensaje", 0);
         //fin mensajes 
@@ -93,13 +100,23 @@ public class PersonalMantenedorReceta {
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
         modelo.addAttribute("tipoForm", "agregar");
-
+        boolean resultado = false;
+        List<Receta> filtro = new ArrayList<Receta>();
         if (idCategoriaReceta == -1) {
-            modelo.addAttribute("recetas", this.recetaService.filtrarRecetasByBar());
+            filtro = this.recetaService.filtrarRecetasByBar();
+            if(filtro.size() > 0){
+                resultado = true;
+            }
+            
         } else {
-            modelo.addAttribute("recetas", this.recetaService.filtrarRecetasByCategoriaCocina(idCategoriaReceta));
+            
+            filtro = this.recetaService.filtrarRecetasByCategoriaCocina(idCategoriaReceta);
+            if(filtro.size() > 0){
+                resultado = true;
+            }
         }
-
+        modelo.addAttribute("recetas", filtro );
+        modelo.addAttribute("resultados", resultado);
         ///mensajes 1 = si mensaje / 0 = no mensaje
         modelo.addAttribute("isMensaje", 0);
         //fin mensajes 
@@ -165,7 +182,7 @@ public class PersonalMantenedorReceta {
         modelo.addAttribute("categoriasReceta", this.recetaService.listarCategoria());
 
         modelo.addAttribute("recetas", this.recetaService.listar());
-
+        modelo.addAttribute("resultados", true);
         modelo.addAttribute("tipoForm", "agregar");
 
         ///mensajes 1 = si mensaje / 0 = no mensaje
@@ -196,10 +213,15 @@ public class PersonalMantenedorReceta {
         Receta receta = this.recetaService.buscarRecetaById(idReceta);
 
         //buscar los insumos para la receta 
-        modelo.addAttribute("ingredientes", this.recetaService.listarIngredientesByIdReceta(idReceta));
-
+        List<Ingrediente> ingredientes = this.recetaService.listarIngredientesByIdReceta(idReceta);
+        modelo.addAttribute("ingredientes", ingredientes);
+        boolean res = false;
+        if(ingredientes.size() >= 1){
+            res = true;
+        }
         modelo.addAttribute("receta", receta);
-
+        modelo.addAttribute("vistaAgrega", res);
+        modelo.addAttribute("resultados", true);
         modelo.addAttribute("tipo", "misInsumos");
 
         //fin desarrollo 
@@ -220,13 +242,16 @@ public class PersonalMantenedorReceta {
         
         //desarrollo aca 
         Receta receta = this.recetaService.buscarRecetaById(idReceta);
-
-        modelo.addAttribute("insumos", this.recetaService.listarInsumosAgregarReceta(idReceta));
-
+        List<Insumo> insumos = this.recetaService.listarInsumosAgregarReceta(idReceta);
+        modelo.addAttribute("insumos", insumos);
+        boolean res = false;
         modelo.addAttribute("tipo", "agregar");
-
+        if(insumos.size() >= 1){
+            res = true;
+        }
         modelo.addAttribute("receta", receta);
-
+        modelo.addAttribute("vistaAgrega", true);
+        modelo.addAttribute("resultados", res);
         //buscar los insumos para la receta 
         //fin desarrollo 
         //despachos 
@@ -259,12 +284,16 @@ public class PersonalMantenedorReceta {
         ingrediente.setCantidad(cantidad);
 
         this.recetaService.addIngrediente(ingrediente);
-
+        List<Ingrediente> ingredientes = this.recetaService.listarIngredientesByIdReceta(idReceta);
         //cargar insumos
-        modelo.addAttribute("ingredientes", this.recetaService.listarIngredientesByIdReceta(idReceta));
-
+        modelo.addAttribute("ingredientes", ingredientes );
+        boolean res = false;
+        if(ingredientes.size() >= 1 ){
+            res = true;
+        }
         modelo.addAttribute("tipo", "misInsumos");
-
+        modelo.addAttribute("vistaAgrega", true);
+        modelo.addAttribute("resultados", res);
         modelo.addAttribute("receta", receta);
 
         //buscar los insumos para la receta 
@@ -285,11 +314,15 @@ public class PersonalMantenedorReceta {
         //sesion 
         //desarrollo aca 
         Receta receta = this.recetaService.buscarRecetaById(idReceta);
-
-        modelo.addAttribute("insumos", this.insumoService.filtrarInsumosByNombre(nombre));
-
+        List<Insumo> insumos = this.insumoService.filtrarInsumosByNombre(nombre);
+        modelo.addAttribute("insumos", insumos);
+        boolean res = false;
+        if(insumos.size() >= 1){
+            res = true;
+        }
         modelo.addAttribute("tipo", "agregar");
-
+        modelo.addAttribute("vistaAgrega", true);
+        modelo.addAttribute("resultados", res);
         modelo.addAttribute("receta", receta);
 
         //buscar los insumos para la receta 
@@ -328,12 +361,16 @@ public class PersonalMantenedorReceta {
         ingrediente.setIdInsumo(insumo);
 
         this.recetaService.editarIngrediente(ingrediente);
-
+        List<Ingrediente> ingredientes = this.recetaService.listarIngredientesByIdReceta(idReceta);
         //cargar insumos
-        modelo.addAttribute("ingredientes", this.recetaService.listarIngredientesByIdReceta(idReceta));
-
+        modelo.addAttribute("ingredientes", ingredientes);
+        boolean res = false;
+        if(ingredientes.size() >= 1 ){
+            res = true;
+        }
         modelo.addAttribute("tipo", "misInsumos");
-
+        modelo.addAttribute("vistaAgrega", true);
+        modelo.addAttribute("resultados", res);
         modelo.addAttribute("receta", receta);
 
         //buscar los insumos para la receta 
@@ -361,12 +398,16 @@ public class PersonalMantenedorReceta {
         //borrar ingrediente
         
         this.recetaService.deleteIngrediente(idIngrediente); 
-        
+        List<Ingrediente> ingredientes = this.recetaService.listarIngredientesByIdReceta(idReceta);
         //buscar los insumos para la receta 
-        modelo.addAttribute("ingredientes", this.recetaService.listarIngredientesByIdReceta(idReceta));
-
+        modelo.addAttribute("ingredientes", ingredientes);
+        boolean res = false;
+        if(ingredientes.size() >= 1){
+            res = true;
+        }
         modelo.addAttribute("receta", receta);
-
+        modelo.addAttribute("vistaAgrega", res);
+        modelo.addAttribute("resultados", true);
         modelo.addAttribute("tipo", "misInsumos");
 
         //fin desarrollo 
@@ -390,6 +431,12 @@ public class PersonalMantenedorReceta {
 
         List<Receta> recetas = this.recetaService.filtrarRecetasByNombre(nombreReceta);
 
+        boolean resultado = false;
+        if(recetas.size()>= 1){
+            resultado = true;
+        }
+        modelo.addAttribute("resultados", resultado);
+        
         modelo.addAttribute("recetas", recetas);
 
         modelo.addAttribute("tipoForm", "agregar");
@@ -406,5 +453,4 @@ public class PersonalMantenedorReceta {
         //
         return "users/administrador/mantenedorReceta";
     }
-    
 }

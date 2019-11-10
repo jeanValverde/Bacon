@@ -6,6 +6,8 @@
 package com.restaurante.bacon.dto;
 
 
+
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -18,6 +20,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -27,7 +31,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -85,19 +94,32 @@ public class Personal implements Serializable {
     private String correoPersonal;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
     @Column(name = "CONTRASENA_PERSONAL")
     private String contrasenaPersonal;
     @Basic(optional = false)
     @NotNull
     @Column(name = "ESTADO_PERSONAL")
-    private BigInteger estadoPersonal;
+    private BigInteger estadoPersonal; 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonal")
     private Collection<ControlCaja> controlCajaCollection;
     @JoinColumn(name = "ID_ROL", referencedColumnName = "ID_ROL")
     @ManyToOne(optional = false)
     private Rol idRol;
-
+    
+    
+    public static final String P_ID_PERSONAL = "P_ID_PERSONAL";
+    public static final String P_RUT_PERSONAL = "P_RUT_PERSONAL";
+    public static final String P_NOMBRES_PERSONAL = "P_NOMBRES_PERSONAL";
+    public static final String P_APE_PATERNO_PERSONAL = "P_APE_PATERNO_PERSONAL";
+    public static final String P_APE_MATERNO_PERSONAL = "P_APE_MATERNO_PERSONAL";
+    public static final String P_FECHA_NACIMIENTO_PERSONAL = "P_FECHA_NACIMIENTO_PERSONAL";
+    public static final String P_CELULAR_PERSONAL = "P_CELULAR_PERSONAL";
+    public static final String P_CORREO_PERSONAL = "P_CORREO_PERSONAL";
+    public static final String P_CONTRASENA_PERSONAL = "P_CONTRASENA_PERSONAL";
+    public static final String P_ESTADO_PERSONAL = "P_ESTADO_PERSONAL";
+    public static final String P_ID_ROL = "P_ID_ROL";
+                    
+    
     public Personal() {
     }
 
@@ -106,7 +128,7 @@ public class Personal implements Serializable {
     }
     
     
-    public Personal(BigDecimal idPersonal, String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal, BigInteger estadoPersonal, Collection<ControlCaja> controlCajaCollection, Rol idRol) {
+    public Personal(BigDecimal idPersonal, String rutPersonal, String nombresPersonal, String apePaternoPersonal, String apeMaternoPersonal, Date fechaNacimientoPersonal, String celularPersonal, String correoPersonal, String contrasenaPersonal, BigInteger estadoPersonal) {
         this.idPersonal = idPersonal;
         this.rutPersonal = rutPersonal;
         this.nombresPersonal = nombresPersonal;
@@ -117,10 +139,12 @@ public class Personal implements Serializable {
         this.correoPersonal = correoPersonal;
         this.contrasenaPersonal = contrasenaPersonal;
         this.estadoPersonal = estadoPersonal;
-        this.controlCajaCollection = controlCajaCollection;
-        this.idRol = idRol;
-    }
 
+
+    }
+    
+    
+  
     public BigDecimal getIdPersonal() {
         return idPersonal;
     }
@@ -188,7 +212,7 @@ public class Personal implements Serializable {
     public String getContrasenaPersonal() {
         return contrasenaPersonal;
     }
-
+    
     public void setContrasenaPersonal(String contrasenaPersonal) {
         this.contrasenaPersonal = contrasenaPersonal;
     }

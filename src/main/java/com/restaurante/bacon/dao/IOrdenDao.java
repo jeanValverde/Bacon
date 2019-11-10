@@ -5,19 +5,17 @@
  */
 package com.restaurante.bacon.dao;
 
-import com.restaurante.bacon.dto.Insumo;
+import com.restaurante.bacon.dto.Orden;
+import com.restaurante.bacon.dto.Proveedor;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author jean
+ * @author Andresiero
  */
-@Repository
-public interface IInsumoDao extends JpaRepository<Insumo, Integer>{
-
-   
+public interface IOrdenDao extends JpaRepository<Orden, BigDecimal> {
+    
+    Proveedor findByIdOrden(BigDecimal idOrden);
     
 }

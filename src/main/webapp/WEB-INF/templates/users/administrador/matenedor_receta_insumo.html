@@ -44,49 +44,134 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="card mb-4">
-                                    <div class="card-body text-center">
-                                        <div>
-                                            <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${receta.foto}" class="img-lg rounded-circle mb-2" alt="profile image">
-                                            <h4 th:text="${receta.nombreReceta}" >Maria Johnson</h4>
-                                            <p class="text-muted mb-0"></p>
-
-                                            <div class="badge badge-primary mr-1" th:text="'#' + ${receta.idReceta}"  >#113</div>
 
 
-                                            <div class="badge badge-primary mr-1" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
-                                            <div class="badge badge-primary mr-1" th:if="${receta.tipoReceta == '1' }" >Bar</div>
-
-
-                                            <div class="badge badge-primary mr-1" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" th:if="${receta.tipoReceta == '0'}" >Categoría</div>
-
-                                            <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-primary ml-1"><i class="mdi mdi-check"></i></div>
-                                            <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-primary ml-1"><i class="mdi mdi-close"></i></div>
-
+                                <div class="accordion accordion-solid-header" id="accordion-4" role="tablist">
+                                    <div class="card">
+                                        <div class="card-header" role="tab" id="heading-10">
+                                            <h6 class="mb-0">
+                                                <a data-toggle="collapse" href="#collapse-10" aria-expanded="false" aria-controls="collapse-10" class="">
+                                                    ¿Cómo se relacionan la receta con insumos? (Ingredientes de la receta)
+                                                </a>
+                                            </h6>
                                         </div>
-                                        <p class="mt-2 card-text" th:text="${receta.descripcionReceta}" >
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                                            Aenean commodo ligula eget dolor. Lorem
-                                        </p>
+                                        <div id="collapse-10" class="collapse" role="tabpanel" aria-labelledby="heading-10" data-parent="#accordion-4" style="">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <ol class="pl-3">
+                                                            <p class="mb-2" >Para agregar un insumo para una receta debes:</p>
+                                                            <li>
+                                                                <p class="">
+                                                                    Presiona <i class="mdi mdi-plus-circle-outline"></i> busca el insumo que desees en la lista. 
+                                                                </p>
+                                                            </li>
+                                                            <li>Ingresa una cantidad en decimales (Ejemplo: 0,3)</li>
+                                                            <li>Presiona el botón "Agregar" para finalizar.</li>
+                                                        </ol>
+                                                    </div>
 
-                                        <div class="border-top pt-3">
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <h6 th:text="${receta.duracionPreparacion} + ' Minutos'"  >5896</h6>
-                                                    <p>Duración Preparación</p>
-                                                </div>
-                                                <div class="col-4">
-                                                    <h6 th:id="'receta-' + ${receta.idReceta}"  class="numberToFormat" th:text="${receta.precioReceta}" >1596</h6>
-                                                    <p>Precio Receta</p>
-                                                </div>
-                                                <div class="col-4">
-                                                    <h6 th:text="${receta.cantidadPrepDiariaReceta}" >7896</h6>
-                                                    <p>Estimación Diaria</p>
+                                                    <div class="col-4">
+                                                        <ol class="pl-3">
+                                                            <p class="mb-2" >Para editar un insumo relacionado con la receta debes:</p>
+                                                            <li>
+                                                                <p class="">
+                                                                    Presiona <i class="mdi mdi-dropbox"></i> y buscar el insumo a editar.
+                                                                </p>
+                                                            </li>
+                                                            <li>Cambiar el valor en la entrada en decimales (Ejemplo: 0,3)</li>
+                                                            <li>Presiona el botón "Editar"</li>
+                                                        </ol>
+                                                    </div>
+
+                                                    <div class="col-4">
+                                                        <ol class="pl-3">
+                                                            <p class="mb-2" >Para eliminar un insumo relacionado con la receta debes: </p>
+                                                            <li>
+                                                                <p class="">
+                                                                    Presiona <i class="mdi mdi-dropbox"></i> y busca el insumo a eliminar.
+                                                                </p>
+                                                            </li>
+                                                            <li>Presiona el botón "Eliminar" (Al eliminar un insumo relacionado con la receta los datos serán irrecuperables, pero el insumo no verá afectado)</li>
+                                                           
+                                                        </ol>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <div class="accordion accordion-solid-header" id="accordion-receta" role="tablist">
+                                    <div class="card">
+                                        <div class="card-header" role="tab" id="heading-11">
+                                            <h6 class="mb-0">
+                                                <a data-toggle="collapse" href="#collapse-11" aria-expanded="true" aria-controls="collapse-11" class="">
+                                                    Detalle de la receta ( <small th:text="${receta.nombreReceta}"  ></small> )
+                                                </a> 
+                                            </h6>
+                                        </div>
+                                        <div id="collapse-11" class="collapse show" role="tabpanel" aria-labelledby="heading-10" data-parent="#accordion-4" style="">
+                                            <div class="card-body">
+                                                <div class="row">
+
+                                                    <div class="col-12" >
+                                                        
+                                                        <div class="card mb-4" style="border: 0px;box-shadow: none; border-radius: 0%;" >
+                                                            <div class="card-body text-center">
+                                                                <div>
+                                                                    <img th:src="'https://baconappimagenes.s3-sa-east-1.amazonaws.com/'+${receta.foto}" class="img-lg rounded-circle mb-2" alt="profile image">
+                                                                    <h4 th:text="${receta.nombreReceta}" >Maria Johnson</h4>
+                                                                    <p class="text-muted mb-0"></p>
+
+                                                                    <div class="badge badge-primary mr-1" th:text="'#' + ${receta.idReceta}"  >#113</div>
+
+
+                                                                    <div class="badge badge-primary mr-1" th:if="${receta.tipoReceta == '0' }" >Cocina</div>
+                                                                    <div class="badge badge-primary mr-1" th:if="${receta.tipoReceta == '1' }" >Bar</div>
+
+
+                                                                    <div class="badge badge-primary mr-1" th:text="${receta.idCategoriaReceta.descripcionCategoriaReceta}" th:if="${receta.tipoReceta == '0'}" >Categoría</div>
+
+                                                                    <div th:if="${receta.disponibilidadReceta == 1 }"  class="badge badge-pill badge-primary ml-1"><i class="mdi mdi-check"></i></div>
+                                                                    <div th:if="${receta.disponibilidadReceta == 0 }" class="badge badge-pill badge-primary ml-1"><i class="mdi mdi-close"></i></div>
+
+                                                                </div>
+                                                                <p class="mt-2 card-text" th:text="${receta.descripcionReceta}" >
+                                                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                                                    Aenean commodo ligula eget dolor. Lorem
+                                                                </p>
+
+                                                                <div class="border-top pt-3">
+                                                                    <div class="row">
+                                                                        <div class="col-4">
+                                                                            <h6 th:text="${receta.duracionPreparacion} + ' Minutos'"  >5896</h6>
+                                                                            <p>Duración Preparación</p>
+                                                                        </div>
+                                                                        <div class="col-4">
+                                                                            <h6 th:id="'receta-' + ${receta.idReceta}"  class="numberToFormat" th:text="${receta.precioReceta}" >1596</h6>
+                                                                            <p>Precio Receta</p>
+                                                                        </div>
+                                                                        <div class="col-4">
+                                                                            <h6 th:text="${receta.cantidadPrepDiariaReceta}" >7896</h6>
+                                                                            <p>Estimación Diaria</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
                             </div>
                         </div>
 
@@ -149,6 +234,61 @@
                         <div class="row">
 
                             <div class="col-md-12">
+                                
+                                <div th:if="${resultados != true }" class="d-flex align-items-center text-center error-page bg-primary mt-4" style="width: 100%; border-radius: 2%; " id="sinNotificaciones">
+                                        <div class="row flex-grow mt-4">
+                                            <div class="col-lg-7 mx-auto text-white mt-4">
+                                                <div class="row align-items-center d-flex flex-row mt-4">
+
+                                                    <div class="col-lg-12 error-page-divider text-lg-left pl-lg-4">
+                                                        <h2>¡Lo sentimos!</h2>
+                                                        <h3 class="font-weight-light">
+                                                            No se han encontrado resultados para la búsqueda 
+                                                             presione <i class="mdi mdi-dropbox"></i> para ver todos los insumos de la receta.
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-5">
+                                                    <div class="col-12 text-center mt-xl-2">
+
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-5">
+                                                    <div class="col-12 mt-xl-2">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                <div th:if="${vistaAgrega != true }" class="d-flex align-items-center text-center error-page bg-primary mt-4" style="width: 100%; border-radius: 2%; " id="sinNotificaciones">
+                                        <div class="row flex-grow mt-4">
+                                            <div class="col-lg-7 mx-auto text-white mt-4">
+                                                <div class="row align-items-center d-flex flex-row mt-4">
+
+                                                    <div class="col-lg-12 error-page-divider text-lg-left pl-lg-4">
+                                                        <h2>¡Agrega al menos un insumo para la receta!</h2>
+                                                        <h3 class="font-weight-light">
+                                                            Sigue las instrucciones (¿Cómo se relacionan la receta con insumos?). 
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-5">
+                                                    <div class="col-12 text-center mt-xl-2">
+
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-5">
+                                                    <div class="col-12 mt-xl-2">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                
                                 <div id="cardInsumos" class="card-columns">
 
                                     <!--inicio card insumos no agregados--->
@@ -170,7 +310,7 @@
                                                 <div class="form-group row">
                                                     <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
                                                     <div class="col-sm-8">
-                                                        <input min="0.1" required="" type="number" step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
+                                                        <input min="0.1" max="9999" required="" type="number" step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="0,5">
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
@@ -199,7 +339,7 @@
                                                 <div class="form-group row">
                                                     <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
                                                     <div class="col-sm-9">
-                                                        <input min="0.1" required="" type="number" step="any" name="cantidad" class="form-control" th:value="${ingrediente.cantidad}"  id="cantidadInsumo" placeholder="Cantidad">
+                                                        <input min="0.1" max="9999" required="" type="number" step="any" name="cantidad" class="form-control" th:value="${ingrediente.cantidad}"  id="cantidadInsumo" placeholder="0,5">
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
@@ -259,7 +399,7 @@
                                                                 <div style="float: left; padding:0px;" class="form-group row">
                                                                     <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
                                                                     <div class="col-sm-9">
-                                                                        <input required="" type="number" step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="Cantidad">
+                                                                        <input min="0.1" max="9999" required="" type="number" step="any" name="cantidad" class="form-control" id="cantidadInsumo" placeholder="0,5">
                                                                     </div>
                                                                 </div> &nbsp;
                                                                 <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
@@ -322,7 +462,7 @@
                                                                 <div style="float: left; padding:0px;" class="form-group row">
                                                                     <label for="cantidadInsumo" class="col-sm-3 col-form-label">Cantidad</label>
                                                                     <div class="col-sm-9">
-                                                                        <input min="0.1" required="" type="number" step="any" name="cantidad" class="form-control" th:value="${ingrediente.cantidad}"  id="cantidadInsumo" placeholder="Cantidad">
+                                                                        <input min="0.1" max="9999" required="" type="number" step="any" name="cantidad" class="form-control" th:value="${ingrediente.cantidad}"  id="cantidadInsumo" placeholder="0,5">
                                                                     </div>
                                                                 </div> &nbsp;
                                                                 <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
@@ -468,9 +608,9 @@
             }
 
             var elements = document.getElementsByClassName('numberToFormat');
-            
+
             for (var i = 0; i < elements.length; i++) {
-                
+
                 var valor = elements[i].innerHTML.trim();
 
                 document.getElementById(elements[i].id).innerHTML = "$" + dar_formato(valor);

@@ -6,6 +6,7 @@
 package com.restaurante.bacon.service;
 
 import com.restaurante.bacon.dao.IPagarOrdenDao;
+import com.restaurante.bacon.dao.ProcedureQueryListarPagoCliente;
 import com.restaurante.bacon.dao.ProcedureQueryOrden;
 import com.restaurante.bacon.dto.Orden;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,9 @@ public class PagarOrdenService {
 
     @Autowired
     ProcedureQueryOrden procedureQueryOrden;
+    
+    @Autowired
+    ProcedureQueryListarPagoCliente procedureQueryPagoCliente;
 
     public List<Orden> listarOrdenes(BigDecimal idCliente) {
         return this.procedureQueryOrden.listarOrdenes(idCliente);
@@ -37,4 +41,10 @@ public class PagarOrdenService {
         Orden orden = optinalEntity.get();
         return orden;
     }
+    
+    public Integer retornarPago (Integer idCliente){
+        return this.procedureQueryPagoCliente.ListarPagoCliente(idCliente);
+    }
+    
+    
 }

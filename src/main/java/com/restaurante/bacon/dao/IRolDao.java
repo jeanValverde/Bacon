@@ -18,4 +18,6 @@ public interface IRolDao extends JpaRepository<Rol, Integer>{
        
     
     
+    Rol findByIdRol(Integer idRol);
+    
 }

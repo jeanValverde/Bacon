@@ -85,6 +85,40 @@ public class InsumoProveedorController {
         return "users/administrador/mantenedor_Proveedor_Insumo";
     }
 
+    @RequestMapping("/buscar_Nombre")
+    public String buscarInsumos(Model modelo, @RequestParam("idProveedor") BigDecimal idProveedor, @RequestParam("nombre") String nombre) {
+        //sesion
+        UserRol user = new UserRol();
+        Personal personal = this.personalService.getPersonalSesion(user.getUsername());
+        //sesion
+        //desarrollo aca
+
+        Proveedor proveedor = this.proveedorService.buscarProveedorById(idProveedor);
+        List<InsumoProveedor> insumoProveedor = this.insumoproveedor.insumosByIdProveedor(idProveedor);
+        boolean existe = false;
+        if (insumoProveedor.size() != 0) {
+            System.out.println("NO HAY RESULTADOS");
+            existe = true;
+
+        }
+
+        modelo.addAttribute("insumos", this.insumoservice.filtrarInsumosByNombre(nombre));
+        modelo.addAttribute("existe", existe);
+
+        modelo.addAttribute("proveedor", proveedor);
+        modelo.addAttribute("tipo", "agregar");
+
+        modelo.addAttribute("insumoProveedor", insumoProveedor);
+
+        //fin desarrollo
+        //despachos
+        //fin despacho
+        //siempre despachar esto por la sesion
+        modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
+        //
+        return "users/administrador/mantenedor_Proveedor_Insumo";
+    }
+
     @RequestMapping("/verInsumos")
     public String verInsumos(Model modelo, @RequestParam("idProveedor") BigDecimal idProveedor) {
         //sesion
@@ -142,10 +176,10 @@ public class InsumoProveedorController {
     @RequestMapping("/deleteInsumo")
     public String deleteInsumo(Model modelo, @RequestParam("idProveedor") BigDecimal idProveedor,
             @RequestParam("idInsumoProveedor") Integer idInsumoProveedor) {
-        //sesion 
+        //sesion
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
+        //sesion
 
         Proveedor proveedor = this.proveedorService.buscarProveedorById(idProveedor);
         this.insumoproveedor.eliminarInsumoProveedor(idInsumoProveedor);
@@ -173,10 +207,10 @@ public class InsumoProveedorController {
             @RequestParam("idProveedor") BigDecimal idProveedor
     ) {
 
-        //sesion 
+        //sesion
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
-        //sesion 
+        //sesion
 
         InsumoProveedor insumoProveedor = new InsumoProveedor();
         insumoProveedor.setIdInsumoProveedor(idInsumoProveedor);

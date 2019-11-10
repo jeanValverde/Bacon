@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
  * 
  */
 @Repository
-public interface IPersonalDao extends JpaRepository<Personal, Integer> {
+public interface IPersonalDao extends JpaRepository<Personal, String> {
     //llamar a metodo buscar por rut del personal 
     Personal findByRutPersonal(String rut);
 }

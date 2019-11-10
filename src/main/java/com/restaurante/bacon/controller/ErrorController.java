@@ -8,7 +8,6 @@ package com.restaurante.bacon.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 /**
  *
  * @author jean
@@ -16,11 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/errorBacon")
 @Controller
 public class ErrorController {
-    
-    
     @RequestMapping("/500")
     public String error_500(Model modelo) {
         return "error/error-500";
-    }
-    
+    } 
 }

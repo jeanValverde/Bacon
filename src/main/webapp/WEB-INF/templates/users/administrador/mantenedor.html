@@ -1,0 +1,349 @@
+
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <title>BACON Restaurante</title>
+                <!-- base:css -->
+                <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}">
+                    <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}">
+                        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+                            <!-- endinject -->
+                            <!-- plugin css for this page -->
+                            <link rel="stylesheet" th:href="@{/vendors/dropify/dropify.min.css}">
+                                <link rel="stylesheet" th:href="@{/vendors/jquery-file-upload/uploadfile.css}">
+                                    <!-- End plugin css for this page -->
+                                    <!-- inject:css -->
+                                    <link rel="stylesheet" type="text/css" th:href="@{/css/vertical-layout-light/style.css}">
+                                        <!-- endinject -->
+                                        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+                                        </head>
+
+                                        <body class="sidebar-fixed">
+                                            <div class="container-scroller">
+
+                                                <!-- partial:../../fragments/_navbar.html -->
+                                                <nav th:replace="fragments/_navbar :: nav"></nav>
+                                                <!-- partial -->
+                                                <div class="container-fluid page-body-wrapper">
+                                                    <!-- partial:../../fragments/_settings-panel.html -->
+                                                    <div th:replace="fragments/_settings-panel :: div"></div>
+                                                    <!-- partial -->
+
+
+                                                    <div class="main-panel">
+                                                        <div class="content-wrapper">
+                                                            <!--Desarrollar acá-->
+                                                            <div class="row">
+                                                                <!--Form agregar-->
+                                     
+                                                                    <div th:if="${agregar}" class="col-md-4 grid-margin stretch-card">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <h4 class="card-title">Agregar Personal</h4>
+                                                                                <p class="card-description text-justify">
+                                                                                    Completa estos campos para agregar un personal al sistema.
+                                                                                </p>
+                                                                                <form class="forms-sample"  th:action="@{/administrador_personal/addPersonal}" method="POST" name="formAddPersonal" enctype="multipart/form-data">
+                                                                                  <input type="hidden" name="agregar" id="agregar" th:value="${agregar}" />                                                                                   
+                                                                                    <div class="form-group">
+                                                                                        <label for="rutPersonal">Rut Personal</label>
+                                                                                        <input type="text" class="form-control" id="rutPersonal" name="rutPersonal" placeholder="11.111.111-1">
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escribe un rut para el personal.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="nombresPersonal">Nombres Personal</label>
+                                                                                        <input type="text" class="form-control" id="nombresPersonal" name="nombresPersonal" placeholder="Pablo Pedro">
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escriba los nombres para el personal.
+                                                                                            </div>
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label for="apepaternopersonal">apellido Paterno</label>
+                                                                                        <input type="text" class="form-control" id="apepaternopersonal" name="apeaternopersonal" placeholder="Perez">
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escriba el apellido Paterno  para el personal.
+                                                                                            </div>
+                                                                                    </div>
+
+                                                                                    <div class="form-group">
+                                                                                        <label for="apematernopersonal">apellido Materno</label>
+                                                                                        <input type="text" class="form-control" id="apematernopersonal" name="apematernopersonal" placeholder="Suarez">
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                               Escriba el apellido Materno  para el personal.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="fechaNacimiento">Fecha Nacimiento</label>
+                                                                                        <input type="text" class="form-control" id="fechaNacimiento" name="fechaNacimiento" >
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Ingrese Fecha Nacimiento.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="telefonoPersonal">Celular Personal</label>
+                                                                                        <input type="text" class="form-control" id="telefonoPersonal" name="telefonoPersonal" placeholder="982961951">
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escribe un telefono para el personal.
+                                                                                            </div>
+                                                                                    </div>                                
+                                                                                    <div class="form-group">
+                                                                                        <label for="correopersonal">Correo Personal</label>
+                                                                                        <input type="text" class="form-control" id="correopersonal" name="correopersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escribe E-mail para el personal.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                  
+                                                                                    <div class="form-group">
+                                                                                        <label for="password">CONTRASEÑA</label>
+                                                                                        <input type="password" class="form-control" id="password" name="password" placeholder="************">
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escribe una contraseña para el personal.
+                                                                                            </div>
+                                                                                    </div>                                                                                  
+
+                                                                                    <div class="form-group">
+                                                                                        <label for="password">REPITA CONTRASEÑA</label>
+                                                                                        <input type="password" class="form-control" id="password" name="password" placeholder="************">
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Escribe una contraseña para el personal.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label for="estadopersonal">estadopersonal</label>
+                                                                                        <input type="number" min="1" max="4" class="form-control" id="estadopersonal" name="estadopersonal" placeholder="1">
+                                                                                            <div class="valid-feedback">
+                                                                                                !Listo!
+                                                                                            </div>
+                                                                                            <div class="invalid-feedback">
+                                                                                                Seleccione un estado para el personal.
+                                                                                            </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <select id="rolpersonal" name="rolpersonal" class="custom-select" required>
+                                                                                            <option value="select">seleccióne</option>
+                                                                                            <option value="admin">ADMIN</option>
+                                                                                            <option value="bodega">BODEGA</option>
+                                                                                            <option value="finanzas">FINANZAS</option>
+                                                                                            <option value="garzon">GARZON</option>
+                                                                                            <option value="cocina">COCINA</option>
+
+                                                                                        </select>
+                                                                                        <small id="selectHelp" class="form-text text-muted">Selecciona al menos una opción.</small>
+                                                                                        <div class="valid-feedback">
+                                                                                            ¡Fantástica elección!
+                                                                                        </div>
+                                                                                        <div class="invalid-feedback">
+                                                                                            No te olvides de seleccionar al menos una opción.
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <button type="submit" class="btn btn-primary mr-2">Agregar</button>                                
+
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!---inicio fila de los filtros-->
+                                                                    </div>
+                                                                
+                                                                <div class="container-fluid">
+                                                                <div class="media" >
+                                                                    <div class="table-responsive">
+                                                                        <table id="order-listing" class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Rut</th>
+                                                                                    <th>Nombres</th>
+                                                                                    <th>Apellido Paterno </th>
+                                                                                    <th>Apellido Materno</th>
+                                                                                    <th>Fecha de Nacimiento</th>
+                                                                                    <th>Celular Personal</th>
+                                                                                    <th>Correo</th>
+                                                                                    <th>Estado</th>
+                                                                                    <th>Rol</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tbody>
+                                                                                    <tr th:each="ins: ${personales}">
+                                                                                        <td th:text="${ins.rutPersonal}"></td>
+                                                                                        <td th:text="${ins.nombresPersonal}"></td>
+                                                                                        <td th:text="${ins.ApePaternoPersonal}"></td>
+                                                                                        <td th:text="${ins.ApeMaternoPersonal}"></td>
+                                                                                        <td th:text="${ins.FechaNacimientoPersonal}"></td>
+                                                                                        <td th:text="${ins.CelularPersonal}"></td>
+                                                                                        <td th:text="${ins.CorreoPersonal}"></td>
+                                                                                        <td th:text="${ins.EstadoPersonal}"></td>
+                                                                                        <td th:text="${ins.IdRol}"></td>
+                                                                                        <td>
+                                                                                            <a  th:href="@{/administrador_proveedor/modificar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-success "><i class="mdi mdi-lead-pencil"></i></a>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <a  th:href="@{/administrador_proveedor/eliminar_personal?(idPersonal=${ins.idPersonal})}" class="btn btn-danger"><i class="mdi mdi-close"></i></a>
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                                
+                                                                
+                                                          
+                                                            </div>
+                                                        </div>
+                                                    </div>    
+
+                                                </div>
+
+
+
+                                                <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+                                                <script th:src="@{/js/off-canvas.js}"></script>
+                                                <script th:src="@{/js/hoverable-collapse.js}"></script>
+                                                <script th:src="@{/js/template.js}"></script>
+                                                <script th:src="@{/js/settings.js}"></script>
+                                                <script th:src="@{/js/todolist.js}"></script>
+                                                <script sth:src="@{/vendors/jquery-bar-rating/jquery.barrating.min.js}"></script>
+                                                <script th:src="@{/vendors/jquery-asColor/jquery-asColor.min.js}"></script>
+                                                <script th:src="@{/vendors/jquery-asGradient/jquery-asGradient.min.js}"></script>
+                                                <script th:src="@{/vendors/jquery-asColorPicker/jquery-asColorPicker.min.js}"></script>
+                                                <script th:src="@{/vendors/x-editable/bootstrap-editable.min.js}"></script>
+                                                <script th:src="@{/vendors/moment/moment.min.js}"></script>
+                                                <script th:src="@{/vendors/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.js}"></script>
+                                                <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
+                                                <script th:src="@{/vendors/dropify/dropify.min.js}"></script>
+                                                <script th:src="@{/vendors/jquery-file-upload/jquery.uploadfile.min.js}"></script>
+                                                <script th:src="@{/vendors/jquery-tags-input/jquery.tagsinput.min.js}"></script>
+                                                <script th:src="@{/vendors/dropzone/dropzone.js}"></script>
+                                                <script th:src="@{/vendors/jquery.repeater/jquery.repeater.min.js}"></script>
+                                                <script th:src="@{/vendors/inputmask/jquery.inputmask.bundle.js}"></script>
+                                                <script th:src="@{/vendors/inputmask/inputmask.binding.js}"></script>
+                                                <script th:src="@{/vendors/inputmask/phone-be.js}"></script>
+                                                <script th:src="@{/vendors/inputmask/phone-ru.js}"></script>
+                                                <script th:src="@{/vendors/inputmask/phone.js}"></script>
+                                                <!-- End plugin js for this page -->
+                                                <!-- Custom js for this page-->
+                                                <script th:src="@{/js/formpickers.js}"></script>
+                                                <script th:src="@{/js/form-addons.js}"></script>
+                                                <script th:src="@{/js/x-editable.js}"></script>
+                                                <script th:src="@{/js/dropify.js}"></script>
+                                                <script th:src="@{/js/dropzone.js}"></script>
+                                                <script th:src="@{/js/jquery-file-upload.js}"></script>
+                                                <script th:src="@{/js/formpickers.js}"></script>
+                                                <script th:src="@{/js/form-repeater.js}"></script>
+                                                <!-- End custom js for this page-->
+                                                <!-- plugin js for this page -->
+                                                <script th:src="@{/vendors/datatables.net/jquery.dataTables.js}"></script>
+                                                <script th:src="@{/vendors/datatables.net-bs4/dataTables.bootstrap4.js}"></script>
+                                                <script th:src="@{/js/data-table.js}"></script>
+
+                                                <!--validate form--->
+                                                <script th:src="@{/custom/formularios.js}"></script>
+
+<!--                                                
+                                             <script th:inline="javascript">
+                                                
+            
+         
+
+                                                        var tipoRespuesta = [[${tipoRespuesta}]];
+                                                        var respuesta = [[${respuesta}]];
+                                                        if (tipoRespuesta !== null) {
+                                                            switch (tipoRespuesta) {
+                                                                case 'Agregar' :
+                                                                    if (respuesta === 1) {
+                                                                         showSwal('success-message', 'PERSONAL agregado!', 'se ha registrado el personal exitosamente');
+                                                                    } else if (respuesta === 0) {
+                                                                        showSwal('warning-message', 'Error!', "No se ha podido agregar el personal");
+                                                                    }
+                                                                    break;
+                                                                case 'modificar' :
+                                                                    if (respuesta === 1) {
+                                                                        showSwal('success-message', 'PERSONAL modificado!', 'se ha registrado el personal exitosamente');
+                                                                    } else if (respuesta === 0) {
+                                                                       showSwal('warning-message', 'Error!', "No se ha podido modificar el personal");
+                                                                    }
+                                                                    break;
+                                                                case 'eliminar' :
+                                                                    if (respuesta === 1) {
+                                                                        showSwal('success-message', 'PERSONAL eliminado!', 'se ha eliminado el proveedor exitosamente');
+                                                                    } else if (respuesta === 0) {
+                                                                       showSwal('warning-message', 'Error!', "No se pudo eliminar debido que esta siendo ocupado");
+                                                                    }
+                                                                    break;
+                                                            }
+                                                        }
+
+
+
+                                                    </script>
+                                                
+                                                
+
+                                                
+
+                                              <script type="text/javascript" >
+                                                    var formularioPassword = document.getElementsByName("formAddPersonal")[0];
+                                                    validatorForms(formularioPassword);
+                                                </script>
+                                                <script type="text/javascript" >
+                                                    var formularioPassword = document.getElementsByName("formEditar")[0];
+                                                    validatorForms(formularioPassword);
+                                                </script>
+                  
+
+                                                <script src="text/javascript">
+                                                    dropify.dropify({
+                                                        "defaultFile": "full path file",
+                                                        "messages": {
+                                                            default: 'Arrastre un archivo o haga clic aquí',
+                                                            replace: 'Arrastre un archivo o haga clic en reemplazar',
+                                                            remove: 'Eliminar',
+                                                            error: 'Lo sentimos, el archivo demasiado grande'
+                                                        }
+                                                    });
+                                                </script>
+-->
+
+
+                                        </body>
+
+                                        </html>
