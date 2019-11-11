@@ -6,8 +6,6 @@
 package com.restaurante.bacon.dao;
 
 import com.restaurante.bacon.dto.CategoriaReceta;
-import com.restaurante.bacon.dto.Cliente;
-import com.restaurante.bacon.dto.Orden;
 import com.restaurante.bacon.dto.Receta;
 import com.restaurante.bacon.service.RecetaService;
 import java.math.BigDecimal;
