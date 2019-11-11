@@ -126,10 +126,11 @@
                                         </p>
                                         <form class="forms-sample" th:action="@{/administrador/mesa/modificar}" method="POST" name="formMesa">
                                             <input type="hidden" id="idMesa" name="idMesa" th:value="${mesa.idMesa}">
+                                           
                                             <div class="form-group">
                                                 <label for="numeroMesa">Número Mesa</label>
                                                 <input type="number" class="form-control" id="numeroMesa" name="numeroMesa" placeholder="Numero Mesa" th:value="${mesa.numeroMesa}" min="1">
-
+                                                
                                             </div>
                                             <div class="invalid-feedback" id="mensajeNumeroMesa1">
                                                 Escribe un numero para la mesa.

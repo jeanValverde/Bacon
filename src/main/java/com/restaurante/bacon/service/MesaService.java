@@ -47,7 +47,10 @@ public class MesaService {
         Mesa mesa = optinalEntity.get();
         return mesa;
     }
-
+     public Mesa mesaByIdMesa(Integer idMesa) {
+        return this.mesaDao.findByIdMesa(idMesa); 
+    }
+    
     public List<Mesa> listarMesa() {
         return this.mesaDao.findAll();
     }

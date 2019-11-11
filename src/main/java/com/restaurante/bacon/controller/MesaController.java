@@ -100,41 +100,62 @@ public class MesaController {
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
 
-        Mesa mesa = new Mesa();
-
         List<Mesa> mesas = new ArrayList<Mesa>();
         mesas = this.mesaService.listarMesa();
 
-        mesa.setIdMesa(idMesa);
-        mesa.setNumeroMesa(BigInteger.valueOf(numeroMesa));
-        mesa.setCantidadAsientosMesa(cantidadAsientosMesa);
-        mesa.setEstadoMesa(estadoMesa);
+        Mesa mesa = this.mesaService.mesaByIdMesa(idMesa);
 
         boolean seRepite = false;
-        for (int i = 0; i < mesas.size(); i++) {
-            if (BigInteger.valueOf(numeroMesa) == mesas.get(i).getNumeroMesa()) {
-                seRepite = true;
+
+        //si son diferentes 
+        if (Integer.parseInt(mesa.getNumeroMesa().toString()) != Integer.parseInt(BigInteger.valueOf(numeroMesa).toString())) {
+            //comprobar con los restantes 
+            for (Mesa mesa1 : mesas) {
+                if (Integer.parseInt(mesa1.getNumeroMesa().toString()) == numeroMesa) {
+                    seRepite = true;
+                    break;
+                }
             }
-        }
-        if (!seRepite) {
-            if (this.mesaService.editarMesa(mesa)) {
+
+            if (seRepite == false) {
+                mesa.setNumeroMesa(BigInteger.valueOf(numeroMesa));
+            }
+
+            if (seRepite == false) {
+                Mesa mesaCambio = this.mesaService.add(mesa);
+                if (mesaCambio != null) {
+                    model.addAttribute("tipoRespuesta", "modificar");
+                    model.addAttribute("respuesta", 1);
+                } else {
+                    model.addAttribute("tipoRespuesta", "modificar");
+                    model.addAttribute("respuesta", 0);
+                }
+            } else {
+                model.addAttribute("tipoRespuesta", "modificar");
+                model.addAttribute("respuesta", 0);
+            }
+
+        } else {
+            //si son iguales
+            mesa.setCantidadAsientosMesa(cantidadAsientosMesa);
+            mesa.setEstadoMesa(estadoMesa);
+
+            Mesa mesaCambio = this.mesaService.add(mesa);
+            if (mesaCambio != null) {
                 model.addAttribute("tipoRespuesta", "modificar");
                 model.addAttribute("respuesta", 1);
             } else {
                 model.addAttribute("tipoRespuesta", "modificar");
                 model.addAttribute("respuesta", 0);
             }
-        } else {
-            model.addAttribute("tipoRespuesta", "modificar");
-            model.addAttribute("respuesta", 0);
         }
 
-        
-        mesas = this.mesaService.listarMesa();
+        List<Mesa> mesasAll = new ArrayList<Mesa>();
+        mesasAll = this.mesaService.listarMesa();
 
         model.addAttribute("personalSesion", personal);
         model.addAttribute("agregarMesa", true);
-        model.addAttribute("mesas", mesas);
+        model.addAttribute("mesas", mesasAll);
 
         return "users/administrador/mantenedorMesa";
 
