@@ -19,4 +19,5 @@ public class ErrorController {
     public String error_500(Model modelo) {
         return "error/error-500";
     } 
+    
 }
