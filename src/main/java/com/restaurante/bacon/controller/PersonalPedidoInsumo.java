@@ -9,34 +9,23 @@ import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dao.InsumoPedidoInsumoProveedorDAO;
 import com.restaurante.bacon.dao.InsumoPedidoProveedorDAO;
 import com.restaurante.bacon.dao.ListaInsumosPedidosProveedores;
-import com.restaurante.bacon.dto.CategoriaReceta;
-import com.restaurante.bacon.dao.ProcedureQuery;
-import com.restaurante.bacon.dto.EstadoPedido;
 import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.InsumoPedido;
 import com.restaurante.bacon.dto.InsumoPedidoProveedor;
 import com.restaurante.bacon.dto.InsumoProveedor;
-import com.restaurante.bacon.dto.Pedido;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.dto.Proveedor;
-import com.restaurante.bacon.dto.Receta;
-import com.restaurante.bacon.dto.Rol;
 import com.restaurante.bacon.service.EstadoPedidoService;
 import com.restaurante.bacon.service.InsumoPedidoProveedorService;
 import com.restaurante.bacon.service.InsumoPedidoService;
 import com.restaurante.bacon.service.PersonalService;
-import com.restaurante.bacon.service.RecetaService;
-import java.io.IOException;
 import com.restaurante.bacon.service.InsumoService;
 import com.restaurante.bacon.service.PedidoService;
 import com.restaurante.bacon.service.ProveedorService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -46,8 +35,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -328,12 +315,13 @@ public class PersonalPedidoInsumo {
                     }
                 }
             }
-            sesion.setAttribute("ordenesPedidos", null);
-            sesion.setAttribute("proveedores", null);
+            
 
         } else {
 
         }
+        gp = new ArrayList<Proveedor>();
+        insumos = new ArrayList<InsumoPedidoInsumoProveedorDAO>();
         List<InsumoPedidoProveedorDAO> insumos_pedidos_proveedor = new ArrayList<InsumoPedidoProveedorDAO>();
         insumos_pedidos_proveedor = this.insumoPedidoService.listarInsumosPedidos();
         //desarrollo aca 
