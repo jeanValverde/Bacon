@@ -7,32 +7,21 @@ package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.config.UserRol;
 import com.restaurante.bacon.dao.ProcedureQueryPersonal;
-import com.restaurante.bacon.dto.ControlCaja;
 import com.restaurante.bacon.dto.Personal;
-import com.restaurante.bacon.dto.Proveedor;
 import com.restaurante.bacon.dto.Rol;
 import com.restaurante.bacon.service.PersonalService;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import javax.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
