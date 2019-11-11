@@ -312,7 +312,7 @@ public class PersonalControlador {
         //despachos 
         //fin despacho 
         //siempre despachar esto por la sesion 
-        modelo.addAttribute("personalSesion", personal);
+        modelo.addAttribute("personalSesion", personalser);
         //
         return "users/administrador/mantenedor_personal";
     }
