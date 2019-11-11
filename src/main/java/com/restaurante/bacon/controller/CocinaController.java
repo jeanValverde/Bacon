@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CocinaController { 
     //acceder a CRUB y más del personal 
+    
     @Autowired
     PersonalService personalService;
-   
     @RequestMapping("/index")
     public String prueba(Model modelo) {
         //sesion 

@@ -6,22 +6,15 @@
 package com.restaurante.bacon.controller;
 
 import com.restaurante.bacon.config.UserRol;
-import com.restaurante.bacon.dto.CategoriaReceta;
 import com.restaurante.bacon.dao.ProcedureQuery;
-import com.restaurante.bacon.dto.Insumo;
 import com.restaurante.bacon.dto.Personal;
 import com.restaurante.bacon.dto.Proveedor;
-import com.restaurante.bacon.dto.Receta;
-import com.restaurante.bacon.dto.Rol;
 import com.restaurante.bacon.service.PersonalService;
 import com.restaurante.bacon.service.RecetaService;
-import java.io.IOException;
 import com.restaurante.bacon.service.InsumoService;
 import com.restaurante.bacon.service.ProveedorService;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,7 +23,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
