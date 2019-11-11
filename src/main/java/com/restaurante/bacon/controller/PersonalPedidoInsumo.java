@@ -85,6 +85,8 @@ public class PersonalPedidoInsumo {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
+    static ArrayList<Proveedor> gp;
+    static ArrayList<InsumoPedidoInsumoProveedorDAO> insumos;
     @RequestMapping("/pedido")
     public String inicio(Model modelo, HttpSession sesion) {
         //sesion 
@@ -96,7 +98,8 @@ public class PersonalPedidoInsumo {
 
         List<InsumoPedidoProveedorDAO> insumos_pedidos_proveedor = new ArrayList<InsumoPedidoProveedorDAO>();
         insumos_pedidos_proveedor = this.insumoPedidoService.listarInsumosPedidos();
-
+        gp = new ArrayList<Proveedor>();
+        insumos = new ArrayList<InsumoPedidoInsumoProveedorDAO>();
         //desarrollo aca 
         modelo.addAttribute("insumos_pedidos", insumos_pedidos_proveedor);
         modelo.addAttribute("personalSesion", personal);
@@ -131,66 +134,59 @@ public class PersonalPedidoInsumo {
 
     @RequestMapping("/agregarInsumoPedidoProveedor")
     public ResponseEntity agregarInsumoPedidoProveedor(Model modelo, HttpSession sesion, @RequestParam("idInsumoPedido") Integer idInsumoPedido, @RequestParam("idProveedor") BigDecimal idProveedor, @RequestParam("idInsumo") Integer idInsumo) {
-        System.out.println("id insumo: "+idInsumo);
-        System.out.println("id Proveedor: "+idProveedor);
-        System.out.println("id insumo pedido: "+idInsumoPedido);
+        
         InsumoPedidoInsumoProveedorDAO insumoPedidoInsumoProveedor = new InsumoPedidoInsumoProveedorDAO();
         ListaInsumosPedidosProveedores lipp = new ListaInsumosPedidosProveedores();
 
-        ArrayList<InsumoPedidoInsumoProveedorDAO> insumos;
         
-        ArrayList<Proveedor> grupoProveedores ;
-        if (sesion.getAttribute("ordenesPedidos") != null) {
-            insumos = (ArrayList) sesion.getAttribute("ordenesPedidos");
-        } else {
-            insumos = new ArrayList<InsumoPedidoInsumoProveedorDAO>();
-        }
-
-        if (sesion.getAttribute("proveedores") != null) {
-            grupoProveedores = (ArrayList) sesion.getAttribute("proveedores");
-        }else{
-            grupoProveedores = new ArrayList<Proveedor>();
-        }
         
         Proveedor grupoProveedorPaso = new Proveedor();
         Proveedor grupoProveedor = new Proveedor();
         grupoProveedorPaso = this.proveedorService.retornarProveedorPorId(Integer.parseInt(""+idProveedor));
-
+        
         //guarda los proveedors de forma agrupada, para despues agrupar los insumos a cada proveedor
-        if (grupoProveedores.size() == 0) {
+        boolean proveedorExiste = false;
+        if (gp.size() == 0) {
             grupoProveedor.setIdProveedor(idProveedor);
             grupoProveedor.setNombreProveedor(grupoProveedorPaso.getNombreProveedor());
             grupoProveedorPaso = null;
-            grupoProveedores.add(grupoProveedor);
+            //grupoProveedores.add(grupoProveedor);
+            gp.add(grupoProveedor);
         } else {
-            for (int i = 0; i < grupoProveedores.size(); i++) {
+            for (int i = 0; i < gp.size(); i++) {
                 String x = "" + idProveedor;
-                String y = "" + grupoProveedores.get(i).getIdProveedor();
+                String y = "" + gp.get(i).getIdProveedor();
+                System.out.println("idProveedor: "+idProveedor);
+                System.out.println("idProveedor 2: "+gp.get(i).getIdProveedor());
                 if (y.equals(x)) {
-                    grupoProveedores = (ArrayList) sesion.getAttribute("proveedores");
-                } else {
-                    System.out.println(grupoProveedorPaso.getIdProveedor());
-                    System.out.println(grupoProveedorPaso.getNombreProveedor());
-                    System.out.println(grupoProveedorPaso.getRutProveedor());
-                    grupoProveedor.setIdProveedor(BigDecimal.valueOf(Integer.parseInt(x)));
-                    grupoProveedor.setNombreProveedor(grupoProveedorPaso.getNombreProveedor());
-                    grupoProveedorPaso = null;
-                    grupoProveedores.add(grupoProveedor);
-                    grupoProveedor = null;
+                    proveedorExiste = true;
                 }
             }
+            if(!proveedorExiste){
+                grupoProveedor.setIdProveedor(idProveedor);
+                grupoProveedor.setNombreProveedor(grupoProveedorPaso.getNombreProveedor());
+                gp.add(grupoProveedor);
+            }
+            
         }
+        
+        
+        for(int i=0;i<insumos.size();i++){
+            System.out.println("df: ");
+        }
+        
 
         boolean insumoExiste = false;
-        if (sesion.getAttribute("proveedores") != null) {
+        
             for (int i = 0; i < insumos.size(); i++) {
+                System.out.println(insumos.get(i).getInsumoPedido().getIdInsumoPedido());
                 if (Integer.parseInt("" + insumos.get(i).getInsumoPedido().getIdInsumoPedido()) == Integer.parseInt("" + idInsumoPedido)) {
                     insumoExiste = true;
                     System.out.println("si existe");
                     break;
                 }
             }
-        }
+        
         if (!insumoExiste) {
             Insumo insumo = new Insumo();
             insumo = this.insumoService.retornarInsumoById(idInsumo);
@@ -230,17 +226,13 @@ public class PersonalPedidoInsumo {
         } else {
 
         }
-
+        System.out.println("tamaño arreglo: "+gp.size());
         lipp.setInsumos(insumos);
 
-        lipp.setGrupoProveedores(grupoProveedores);
-        System.out.println("Tañano arreglo proveedores: " + grupoProveedores.size());
-        System.out.println("Tañano arreglo insumos: " + insumos.size());
+        lipp.setGrupoProveedores(gp);
 
         sesion.setAttribute("ordenesPedidos", insumos);
-        sesion.setAttribute("proveedores", grupoProveedores);
-        insumos = null;
-        grupoProveedores = null;
+        sesion.setAttribute("proveedores", gp);
 
         return new ResponseEntity(lipp, HttpStatus.OK);
     }
@@ -250,48 +242,39 @@ public class PersonalPedidoInsumo {
 
         ListaInsumosPedidosProveedores lipp = new ListaInsumosPedidosProveedores();
 
-        ArrayList<InsumoPedidoInsumoProveedorDAO> insumos;
-        ArrayList<Proveedor> grupoProveedores;
+       
 
-        if (sesion.getAttribute("ordenesPedidos") != null) {
+        if (insumos.size()!=0) {
             insumos = (ArrayList) sesion.getAttribute("ordenesPedidos");
             for (int i = 0; i < insumos.size(); i++) {
                 if (Integer.parseInt("" + insumos.get(i).getInsumoPedido().getIdInsumoPedido()) == idInsumoPedido) {
                     insumos.remove(i);
                 }
             }
-        } else {
-            insumos = new ArrayList<InsumoPedidoInsumoProveedorDAO>();
-        }
+        } 
 
-        if (sesion.getAttribute("proveedores") != null) {
-            grupoProveedores = (ArrayList) sesion.getAttribute("proveedores");
-
-            for (int i = 0; i < grupoProveedores.size(); i++) {
+        for (int i = 0; i < gp.size(); i++) {
                 boolean extiste = false;
                 for (int x = 0; x < insumos.size(); x++) {
-                    if (Integer.parseInt("" + grupoProveedores.get(i).getIdProveedor()) == Integer.parseInt("" + insumos.get(x).getProveedor().getIdProveedor())) {
+                    if (Integer.parseInt("" + gp.get(i).getIdProveedor()) == Integer.parseInt("" + insumos.get(x).getProveedor().getIdProveedor())) {
                         extiste = true;
                         break;
                     }
                 }
                 if (!extiste) {
-                    grupoProveedores.remove(i);
+                    gp.remove(i);
                 }
 
-            }
-
-        } else {
-            grupoProveedores = new ArrayList<Proveedor>();
         }
 
+
         lipp.setInsumos(insumos);
-        lipp.setGrupoProveedores(grupoProveedores);
-        System.out.println("Tañano arreglo proveedores: " + grupoProveedores.size());
+        lipp.setGrupoProveedores(gp);
+        System.out.println("Tañano arreglo proveedores: " + gp.size());
         System.out.println("Tañano arreglo insumos: " + insumos.size());
 
         sesion.setAttribute("ordenesPedidos", insumos);
-        sesion.setAttribute("proveedores", grupoProveedores);
+        sesion.setAttribute("proveedores", gp);
 
         return new ResponseEntity(lipp, HttpStatus.OK);
     }
@@ -302,20 +285,19 @@ public class PersonalPedidoInsumo {
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        ArrayList<InsumoPedidoInsumoProveedorDAO> insumos;
-        ArrayList<Proveedor> grupoProveedores;
+        
         ArrayList<InsumoPedidoProveedor> insumosPedidosProveedor;
 
-        if (sesion.getAttribute("ordenesPedidos") != null) {
-            insumos = (ArrayList) sesion.getAttribute("ordenesPedidos");
-            grupoProveedores = (ArrayList) sesion.getAttribute("proveedores");
+        if (insumos.size()!=0) {
+            
+            
 
-            for (int i = 0; i < grupoProveedores.size(); i++) {
+            for (int i = 0; i < gp.size(); i++) {
                 System.out.println("---- Pedido N° " + i + " ----");
                 Integer totalPedido = 0;
                 Integer valorPedido = 0;
                 for (int x = 0; x < insumos.size(); x++) {
-                    if (Integer.parseInt(""+ insumos.get(x).getProveedor().getIdProveedor()) == Integer.parseInt(""+grupoProveedores.get(i).getIdProveedor())) {
+                    if (Integer.parseInt(""+ insumos.get(x).getProveedor().getIdProveedor()) == Integer.parseInt(""+gp.get(i).getIdProveedor())) {
                         Integer precio = Integer.parseInt("" + insumos.get(x).getInsumoProveedor().getPrecio());
                         Integer cantidad = Integer.parseInt("" + insumos.get(x).getInsumoPedido().getCantidadInsumo());
                         Integer total = precio * cantidad;
@@ -328,13 +310,13 @@ public class PersonalPedidoInsumo {
                 Integer iva = Integer.parseInt("" + ivaPaso);
                 totalPedido = valorPedido;
                  System.out.println("valorPedido: "+valorPedido);
-                System.out.println("Id Proveedor: " + grupoProveedores.get(i).getIdProveedor());
+                System.out.println("Id Proveedor: " + gp.get(i).getIdProveedor());
 
-                Integer idPedido = this.pedidoService.insertarPedido(valorPedido, iva, totalPedido, " ", 0, " ", 1, Integer.parseInt("" + grupoProveedores.get(i).getIdProveedor()));
+                Integer idPedido = this.pedidoService.insertarPedido(valorPedido, iva, totalPedido, " ", 0, " ", 1, Integer.parseInt("" + gp.get(i).getIdProveedor()));
                 
                 System.out.println("idPedido: "+idPedido);
                 for (int x = 0; x < insumos.size(); x++) {
-                    if (Integer.parseInt(""+ insumos.get(x).getProveedor().getIdProveedor()) == Integer.parseInt(""+grupoProveedores.get(i).getIdProveedor())) {
+                    if (Integer.parseInt(""+ insumos.get(x).getProveedor().getIdProveedor()) == Integer.parseInt(""+gp.get(i).getIdProveedor())) {
                         Integer precio = Integer.parseInt("" + insumos.get(x).getInsumoProveedor().getPrecio());
                         Integer cantidad = Integer.parseInt("" + insumos.get(x).getInsumoPedido().getCantidadInsumo());
                         Integer total = precio * cantidad;
