@@ -131,13 +131,15 @@ public class PersonalPedidoInsumo {
 
     @RequestMapping("/agregarInsumoPedidoProveedor")
     public ResponseEntity agregarInsumoPedidoProveedor(Model modelo, HttpSession sesion, @RequestParam("idInsumoPedido") Integer idInsumoPedido, @RequestParam("idProveedor") BigDecimal idProveedor, @RequestParam("idInsumo") Integer idInsumo) {
-
+        System.out.println("id insumo: "+idInsumo);
+        System.out.println("id Proveedor: "+idProveedor);
+        System.out.println("id insumo pedido: "+idInsumoPedido);
         InsumoPedidoInsumoProveedorDAO insumoPedidoInsumoProveedor = new InsumoPedidoInsumoProveedorDAO();
         ListaInsumosPedidosProveedores lipp = new ListaInsumosPedidosProveedores();
 
         ArrayList<InsumoPedidoInsumoProveedorDAO> insumos;
-        ArrayList<Proveedor> grupoProveedores = new ArrayList<Proveedor>();
-
+        
+        ArrayList<Proveedor> grupoProveedores ;
         if (sesion.getAttribute("ordenesPedidos") != null) {
             insumos = (ArrayList) sesion.getAttribute("ordenesPedidos");
         } else {
@@ -146,11 +148,13 @@ public class PersonalPedidoInsumo {
 
         if (sesion.getAttribute("proveedores") != null) {
             grupoProveedores = (ArrayList) sesion.getAttribute("proveedores");
-
+        }else{
+            grupoProveedores = new ArrayList<Proveedor>();
         }
+        
         Proveedor grupoProveedorPaso = new Proveedor();
         Proveedor grupoProveedor = new Proveedor();
-        grupoProveedorPaso = this.proveedorService.retornarProveedorById(idProveedor);
+        grupoProveedorPaso = this.proveedorService.retornarProveedorPorId(Integer.parseInt(""+idProveedor));
 
         //guarda los proveedors de forma agrupada, para despues agrupar los insumos a cada proveedor
         if (grupoProveedores.size() == 0) {
@@ -163,9 +167,12 @@ public class PersonalPedidoInsumo {
                 String x = "" + idProveedor;
                 String y = "" + grupoProveedores.get(i).getIdProveedor();
                 if (y.equals(x)) {
-
+                    grupoProveedores = (ArrayList) sesion.getAttribute("proveedores");
                 } else {
-                    grupoProveedor.setIdProveedor(idProveedor);
+                    System.out.println(grupoProveedorPaso.getIdProveedor());
+                    System.out.println(grupoProveedorPaso.getNombreProveedor());
+                    System.out.println(grupoProveedorPaso.getRutProveedor());
+                    grupoProveedor.setIdProveedor(BigDecimal.valueOf(Integer.parseInt(x)));
                     grupoProveedor.setNombreProveedor(grupoProveedorPaso.getNombreProveedor());
                     grupoProveedorPaso = null;
                     grupoProveedores.add(grupoProveedor);

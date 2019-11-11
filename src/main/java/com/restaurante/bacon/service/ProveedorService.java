@@ -7,6 +7,7 @@ package com.restaurante.bacon.service;
 
 import com.restaurante.bacon.dao.IProveedorDao;
 import com.restaurante.bacon.dao.ProcedureQuery;
+import com.restaurante.bacon.dao.ProcedureQueryProveedor;
 import com.restaurante.bacon.dto.Proveedor;
 import com.restaurante.bacon.dto.Receta;
 import java.math.BigDecimal;
@@ -26,6 +27,9 @@ public class ProveedorService {
     IProveedorDao provedorDao;
     @Autowired
     ProcedureQuery procedureQuery;
+    @Autowired
+    ProcedureQueryProveedor procedureQueryProveedor;
+
 
    
     public boolean ingresarProveedor(Proveedor proveedor) {
@@ -54,7 +58,13 @@ public class ProveedorService {
     
     public Proveedor retornarProveedorById(BigDecimal  idProveedor){
         Optional<Proveedor> optinalEntity = provedorDao.findById(idProveedor);
+        
         Proveedor proveedor = optinalEntity.get();
+        return proveedor;
+    }
+    public Proveedor retornarProveedorPorId(Integer  idProveedor){
+        Proveedor proveedor = procedureQueryProveedor.retornarProveedor(idProveedor);
+        
         return proveedor;
     }
     

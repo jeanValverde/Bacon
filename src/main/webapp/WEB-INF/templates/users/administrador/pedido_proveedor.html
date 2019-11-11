@@ -429,7 +429,7 @@
                                                                                 } else {
 
 
-
+                                                                                    console.log(id_proveedor);
                                                                                     axios.get(window.location.protocol + "//" + window.location.host + '/administrador/pedidoInsumo/cargarPrecio?idProveedor=' + id_proveedor + "&idInsumo=" + id_insumo)
                                                                                             .then(function (response) {
                                                                                                 console.log(response);
