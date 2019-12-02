@@ -49,79 +49,115 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row">
+                                                    <div class="accordion accordion-filled" id="accordion-4" role="tablist">
+                                                        <div class="card">
+                                                            <div class="card-header" role="tab" id="heading-10">
+                                                                <h6 class="mb-0">
+                                                                    <a data-toggle="collapse" href="#collapse-10" aria-expanded="false" aria-controls="collapse-10" class="">
+                                                                        ¿Cómo se relacionan los Proveedores con los insumos? (Insumos del Proveedor)
+                                                                    </a>
+                                                                </h6>
+                                                            </div>
+                                                            <div id="collapse-10" class="collapse" role="tabpanel" aria-labelledby="heading-10" data-parent="#accordion-4" style="">
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-4">
+                                                                            <ol class="pl-3">
+                                                                                <p class="mb-2" >Para agregar un insumo al Proveedor debes:</p>
+                                                                                <li>
+                                                                                    <p class="">
+                                                                                        Presiona <i class="mdi mdi-plus-circle-outline"></i> busca el insumo que desees en la lista. 
+                                                                                    </p>
+                                                                                </li>
+                                                                                <li>Ingresa un Precio dentro del Rango (1000 a 5000000)</li>
+                                                                                <li>Presiona el botón "Agregar" para finalizar.</li>
+                                                                            </ol>
+                                                                        </div>
 
-                                                    <div class="card border border-success pricing-card-body" style="width: 390px; height: 430px;">
-                                                        <div class="text-center pricing-card-head">
-                                                            <h6 class="text-success" th:text="'Datos del Proveedor: #' + ${proveedor.idProveedor}" ></h6>
+                                                                        <div class="col-4">
+                                                                            <ol class="pl-3">
+                                                                                <p class="mb-2" >Para editar un insumo relacionado con el proveedor debes:</p>
+                                                                                <li>
+                                                                                    <p class="">
+                                                                                        Presiona <i class="mdi mdi-dropbox"></i> y buscar el insumo a editar.
+                                                                                    </p>
+                                                                                </li>
+                                                                                <li>Cambiar el valor en la entrada del precio  (Ejemplo: 5000)</li>
+                                                                                <li>Presiona el botón "Editar"</li>
+                                                                            </ol>
+                                                                        </div>
 
-                                                            <h1 class="font-weight-normal mb-4"></h1>
+                                                                        <div class="col-4">
+                                                                            <ol class="pl-3">
+                                                                                <p class="mb-2" >Para eliminar un insumo relacionado con el proveedor debes: </p>
+                                                                                <li>
+                                                                                    <p class="">
+                                                                                        Presiona <i class="mdi mdi-dropbox"></i> y busca el insumo a eliminar.
+                                                                                    </p>
+                                                                                </li>
+                                                                                <li>Presiona el botón "Eliminar" (Al eliminar un insumo relacionado con el proveedor los datos serán irrecuperables, pero el insumo no verá afectado)</li>
+
+                                                                            </ol>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <ul class="list-unstyled plan-features" style=" height: 80px;">
-                                                            <h6>Nombre Proveedor:</h6>
-                                                            <li th:text="${proveedor.nombreProveedor}"></li>
-                                                            <h6>Rut Proveedor:</h6>
-                                                            <li th:text="'#' + ${proveedor.rutProveedor}"></li>
-                                                            <h6>Tipo de Proveedor:</h6>
-                                                            <li th:text="${proveedor.tipoProveedor}"></li>
-                                                            <h6>Dirección Proveedor:</h6>
-                                                            <li th:text="${proveedor.direccionProveedor}"></li>
-                                                            <h6>Télefono Proveedor:</h6>
-                                                            <li th:text="'#' + ${proveedor.telefonoProveedor}"></li>
-                                                            <h6>Contacto Proveedor:</h6>
-                                                            <li th:text="${proveedor.contactoVenta}"></li>
-                                                            <h6>Correo Proveedor:</h6>
-                                                            <li th:text="${proveedor.correoProveedor}"></li>
-                                                            <h6>Categoria Proveedor:</h6>
-                                                            <li th:text="${proveedor.categoriaProveedor}"></li>
-                                                        </ul>
-
-
                                                     </div>
+                                                    <div class="accordion accordion-filled" id="accordion-5" role="tablist">
+                                                        <div class="card">
+                                                            <div class="card-header" role="tab" id="heading-10">
+                                                                <h6 class="mb-0">
+                                                                    <a data-toggle="collapse" href="#collapse-11" aria-expanded="false" aria-controls="collapse-10" class="">
+                                                                        Visualiza Aquí Información del Proveedor
+                                                                    </a>
+                                                                </h6>
+                                                            </div>
+                                                            <div id="collapse-11" class="collapse" role="tabpanel" aria-labelledby="heading-10" data-parent="#accordion-5" style="">
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <ul class="pl-6">
+                                                                                <h6>Nombre Proveedor:</h6>
+                                                                                <li th:text="${proveedor.nombreProveedor}"></li>
+                                                                                
+                                                                                <h6>Rut Proveedor:</h6>
+                                                                                <li th:text="'#' + ${proveedor.rutProveedor}"></li>
+                                                                                <h6>Tipo de Proveedor:</h6>
+                                                                                <li th:text="${proveedor.tipoProveedor}"></li>
+                                                                                <h6>Dirección Proveedor:</h6>
+                                                                                <li th:text="${proveedor.direccionProveedor}"></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <ul class="pl-6">
+                                                                                <h6>Télefono Proveedor:</h6>
+                                                                                <li th:text="'#' + ${proveedor.telefonoProveedor}"></li>
+                                                                                <h6>Contacto Proveedor:</h6>
+                                                                                <li th:text="${proveedor.contactoVenta}"></li>
+                                                                                <h6>Correo Proveedor:</h6>
+                                                                                <li th:text="${proveedor.correoProveedor}"></li>
+                                                                                <h6>Categoria Proveedor:</h6>
+                                                                                <li th:text="${proveedor.categoriaProveedor}"></li>
+                                                                            </ul>
+                                                                      
+                                                                        </div>
 
-                                                    <div class="card border border-success pricing-card-body" style="width: 390px; height: 330px;">
-                                                        <div class="text-center pricing-card-head">
-                                                            <h6 class="text-success"> Instructivo para Insumo Proveedor</h6>
+                                                                     
 
+                                                                     
 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <ul class="list-unstyled plan-features" style=" height: 45px;" >
-                                                            <strong>El componente Insumo Proveedor, tiene por función principal el poder dar a los proveedores la opción de comprar insumos,
-                                                                así como también poder editarlos e incluso quitarlos del proveedo,
-                                                                a continuación se detalla el uso de cada uno de los botones de este componente y su uso</strong>
-                                                            <br>
-                                                            <br>
-                                                            <h6> 1-. El botón agregar Insumo: tiene como función el poder añadir un insumo x al proveedor seleccionado, pasando a una nueva lista,
-                                                                la cual despliega los insumos que están asignados a dicho proveedor.</h6>
-                                                            <br>
-                                                            <h6>2-. El botón editar: su función es cambiar el precio del insumo, siempre y cuando, el usuario haya ingresado un precio diferente al que ya está registrado,
-                                                                en caso contrario, este botón no tiene funcionalidad alguna</h6>
-                                                            <br>
-                                                            <h6>3-. botón eliminar: tiene como función, el quitar un insumo x del proveedor seleccionado
-                                                                y dejarlo en una lista de insumos disponibles para ese mismo proveedor.</h6>
-                                                        </ul>
-
-
                                                     </div>
 
 
                                                 </div>
                                             </div>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="d-sm-flex flex-row flex-wrap text-center text-sm-left align-items-center">
 
-                                                        <div class="ml-sm-3 ml-md-0 ml-xl-3 mt-2 mt-sm-0 mt-md-2 mt-xl-0">
-
-
-
-
-                                                        </div>
-
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
@@ -149,8 +185,8 @@
                                                         </div>
 
 
-                                                       <!-- <div th:if="${existe == true}" th:text="'No se encontraron Insumos!'" ></div>
-                                                        <div th:unless="${existe != true}" th:text="'se encontraron Insumos!'" ></div>-->
+                                                        <!-- <div th:if="${existe == true}" th:text="'No se encontraron Insumos!'" ></div>
+                                                         <div th:unless="${existe != true}" th:text="'se encontraron Insumos!'" ></div>-->
 
 
                                                     </form>
@@ -216,7 +252,8 @@
 
                                                         <label for="precio" class="col-sm-3 col-form-label">Precio</label>
                                                         <div class="col-sm-8">
-                                                            <input required="" min="1000" max="5000000" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000">
+                                                            <input required="" min="1000" max="5000000" pattern="^[0-9]+"       oninvalid="setCustomValidity('El Precio es obligatorio y debe estar en el rango permitido (1000 a 5000000)')"
+                                                                   oninput="setCustomValidity('')" /><br  type="number" step="any" name="precio" class="form-control" id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000"/>
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
@@ -255,8 +292,8 @@
 
                                                         <label for="precio" class="col-sm-3 col-form-label">Precio</label>
                                                         <div class="col-sm-9">
-                                                            <input required="" min="1000" max="5000000" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" th:value="${ins.precio}"  id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000"/>
-                                                        </div>
+                                                            <input required="" min="1000" max="5000000" pattern="^[0-9]+"       oninvalid="setCustomValidity('El Precio es obligatorio y debe estar en el rango permitido (1000 a 5000000)')"
+                                                                   oninput="setCustomValidity('')"   type="number" step="any" name="precio" th:value="${ins.precio}" class="form-control" id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000"/>                                                        </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4">Editar</button>
                                                     <button type="button" class="btn btn-danger btn-sm mt-3 mb-4 " data-toggle="modal"  th:attr="data-target='#modal'+${ins.idInsumoProveedor}" >Eliminar</button>
@@ -334,8 +371,8 @@
                                                                     <div style="float: left; padding:0px;" class="form-group row">
                                                                         <label for="precio" class="col-sm-3 col-form-label">Precio</label>
                                                                         <div class="col-sm-9">
-                                                                            <input required=""  min="1000"  max="5000000" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000">
-                                                                        </div>
+                                                                            <input required="" min="1000" max="5000000" pattern="^[0-9]+"       oninvalid="setCustomValidity('El Precio es obligatorio y debe estar en el rango permitido (1000 a 5000000)')"
+                                                                                   oninput="setCustomValidity('')"   type="number" step="any" name="precio" class="form-control" id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000"/>                                                                        </div>
                                                                     </div> &nbsp;
                                                                     <button type="submit" class="btn btn-info btn-sm mt-3 mb-4">Agregar</button>
 
@@ -398,8 +435,8 @@
                                                                         <div style="float: left; padding:0px; " class="form-group row">
                                                                             <label for="precio" class="col-sm-3 col-form-label">Precio</label>
                                                                             <div class="col-sm-9">
-                                                                                <input required="" min="1000" max="5000000" pattern="^[0-9]+" type="number" step="any" name="precio" class="form-control" th:value="${ins.precio}"  id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000"/>
-                                                                            </div>
+                                                                                <input required="" min="1000" max="5000000" pattern="^[0-9]+"       oninvalid="setCustomValidity('El Precio es obligatorio y debe estar en el rango permitido (1000 a 5000000)')"
+                                                                                       oninput="setCustomValidity('')"  type="number" step="any" name="precio" th:value="${ins.precio}" class="form-control" id="precio" placeholder="Ingrese un precio para el Insumo Ejemplo: $2000"/>                                                                            </div>
 
                                                                         </div> &nbsp;
                                                                         <button type="submit" class="btn btn-warning btn-sm mt-3 mb-4" style="margin: 2px;">Editar</button>
