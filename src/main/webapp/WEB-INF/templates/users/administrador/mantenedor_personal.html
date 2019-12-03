@@ -57,7 +57,7 @@
                                                                                 <input type="hidden" name="agrego" id="agrego" th:value="${agrego}" />                                                                           
                                                                                 <div class="form-group">
                                                                                     <label for="rutPersonal">Rut Personal</label>
-                                                                                    <input type="text" class="form-control" id="rut" name="rutPersonal" placeholder="11.111.111-1">
+                                                                                    <input type="text" class="form-control" id="rut" maxlength="13" name="rutPersonal" placeholder="11.111.111-1">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -67,7 +67,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="nombresPersonal">Nombres Personal</label>
-                                                                                    <input type="text" class="form-control" id="nombresPersonal" name="nombresPersonal" placeholder="Pablo Pedro">
+                                                                                    <input type="text" class="form-control" id="nombresPersonal" maxlength="60" name="nombresPersonal" placeholder="Pablo Pedro">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -77,8 +77,8 @@
                                                                                 </div>
 
                                                                                 <div class="form-group">
-                                                                                    <label for="apePaternoPersonal">apellido Paterno</label>
-                                                                                    <input type="text" class="form-control" id="apePaternoPersonal" name="apePaternoPersonal" placeholder="Perez">
+                                                                                    <label for="apePaternoPersonal">Apellido Paterno</label>
+                                                                                    <input type="text" class="form-control" id="apePaternoPersonal" maxlength="45" name="apePaternoPersonal" placeholder="Perez">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -88,8 +88,8 @@
                                                                                 </div>
 
                                                                                 <div class="form-group">
-                                                                                    <label for="apeMaternoPersonal">apellido Materno</label>
-                                                                                    <input type="text" class="form-control" id="apeMaternoPersonal" name="apeMaternoPersonal" placeholder="Suarez">
+                                                                                    <label for="apeMaternoPersonal">Apellido Materno</label>
+                                                                                    <input type="text" class="form-control" id="apeMaternoPersonal" maxlength="45" name="apeMaternoPersonal" placeholder="Suarez">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -117,7 +117,7 @@
                                                                                 </div>
                                                                                 <div class="form-group">
                                                                                     <label for="celularPersonal">Celular Personal</label>
-                                                                                    <input type="number" class="form-control" id="celular" pattern="[0-9]{10}" name="celularPersonal" placeholder="982961951">
+                                                                                    <input type="number" class="form-control" id="celular" min="1" max="999999999999" pattern="[0-9]{10}" name="celularPersonal" placeholder="982961951">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -127,7 +127,7 @@
                                                                                 </div>                                
                                                                                 <div class="form-group">
                                                                                     <label for="correoPersonal">Correo Personal</label>
-                                                                                    <input type="email" class="form-control" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="correoPersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
+                                                                                    <input type="email" class="form-control" id="email" maxlength="45" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="correoPersonal" aria-describedby="emailHelp" placeholder="sistemabacon@gmail.com">
                                                                                         <div class="valid-feedback">
                                                                                             !Listo!
                                                                                         </div>
@@ -157,12 +157,19 @@
                                                                                 </div>    
                                                                                 <div class="form-group" id="rolpersonal">
                                                                                     <label for="rolpersonal">Rol </label>
-                                                                                    <select  name="rolpersonal" class="form-control" id="rolpersonal">
-                                                                                        <option th:each="rol:${rolpersonal}"  th:value="${rol.idRol}" th:text="${rol.descripcionRol}" ></option>
+                                                                                    <select  name="rolpersonal" class="form-control form-control-lg" id="rolpersonal">
+                                                                                        <!--<option th:each="rol:${rolpersonal}"  th:value="${rol.idRol}" th:text="${rol.descripcionRol}" ></option>-->
+                                                                                        <option value="select">Seleccione</option>
+                                                                                        <option value="1">Administrador</option>
+                                                                                        <option value="2">Bodega</option>
+                                                                                        <option value="3">Finanzas</option>
+                                                                                        <option value="4">Garzon</option>
+                                                                                        <option value="5">Cocina</option>
+                                                                                        <option value="6">Bar</option>
                                                                                     </select>
                                                                                 </div>
 
-                                                                                <button class="btn btn-outline-success" onclick="showSwal('success-message')">Ingresar</button>
+                                                                                <button class="btn btn-outline-success" type="submit">Ingresar</button>
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -574,9 +581,12 @@
                                             <script th:src="@{/js/data-table.js}"></script>
                                             <script th:src="@{/custom/loginform.js}"></script>
                                             <script src="../../../../js/sd"></script>
+                                            
                                             <script src="../../../../vendors/sweetalert/sweetalert.min.js"></script>
-                                       
+                                            <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+                                            <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
                                             <script th:src="@{/js/alerts_perso.js}"></script>
+                                            <script th:src="@{/js/avgrund.js}"></script>
                                             
                                             <script th:src="@{/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js}"></script>
                                             <!--validate form--->
