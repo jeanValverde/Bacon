@@ -52,24 +52,26 @@ public class OrdenControlador {
         return "users/administrador/index";
     }
     
-       @RequestMapping("/mantenedor_orden")
-    public String mantenedor_orden(Model modelo,
-            @RequestParam("idOrden") BigDecimal idOrden) {
+       @RequestMapping("/pagarOrdenesResumen")
+    public String mantenedor_orden(Model modelo){
         //sesion 
         UserRol user = new UserRol();
         Personal personal = this.personalService.getPersonalSesion(user.getUsername());
         //sesion 
-        Orden ordenes = this.ordenDao.bucarId(idOrden);
+        List<Orden> ordenes = new ArrayList<Orden>();
+        ordenes = this.ordenDao.listarOrden();
+        modelo.addAttribute("ordenes", ordenes);
+        
                
      
                        
-        modelo.addAttribute("ordenes", ordenes);
+        
        
 
         modelo.addAttribute("personalSesion", personal);
 
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
-        return "users/administrador/resumen_orden";
+        return "users/administrador/pagarOrdenesResumen";
 
     }
     
