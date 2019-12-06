@@ -43,20 +43,7 @@ public class PagarOnlineController {
     @Autowired
     ClienteService clienteService;
     
-    @PostMapping("/pago")
-    public ResponseEntity pagarOrdenes(Model modelo, @RequestParam("order_id") Integer order_id, @RequestParam("transaction_id") Integer transaction_id, 
-            @RequestParam("status") Integer status, @RequestParam("verification_key") String verification_key) {
-        
-        System.out.println(order_id);
-        System.out.println(transaction_id);
-        System.out.println(status);
-        System.out.println(verification_key);
-        
-        if(status == 1){
-             Integer result = this.clienteService.pagarOnline(order_id);
-        }
-        return new ResponseEntity(true, HttpStatus.OK);
-    }
+   
     
     @RequestMapping("/exito")
     public String exitoPago(Model modelo, HttpSession sesion, Integer idOrden) {
