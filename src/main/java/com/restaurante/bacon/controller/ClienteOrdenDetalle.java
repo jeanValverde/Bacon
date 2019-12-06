@@ -37,7 +37,6 @@ public class ClienteOrdenDetalle {
 
     @RequestMapping("/")
     public String pagarOrdenes(Model modelo, HttpSession sesion, Integer idOrden) {
-
         //sesion 
         Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
         List<Orden> ordenes = new ArrayList<Orden>();
@@ -66,17 +65,11 @@ public class ClienteOrdenDetalle {
             recetasByOrden.setRecetaOrdenada(recetasOrdenadas);
 
             recetaByOrden.add(recetasByOrden);
-
         }
-
         //modelo.addAttribute("ordenes", ordenes);
         modelo.addAttribute("recetaByOrden", recetaByOrden);
 
         //fin desarrollo 
-        //despachos 
-        //fin despacho 
-        //siempre despachar esto por la sesion 
-        //
         return "users/cliente/detalleOrdenes";
     }
 
