@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/custom/**", 
                         "/", 
                         "/cliente/**", 
-                        "/cliente/pagarOnline/",
+                        "/cliente/pagarOnline/pago",
                         "/errorBacon/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
