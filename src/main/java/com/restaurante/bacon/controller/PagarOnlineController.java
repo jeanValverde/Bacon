@@ -43,8 +43,6 @@ public class PagarOnlineController {
     @Autowired
     ClienteService clienteService;
     
-   
-    
     @RequestMapping("/exito")
     public String exitoPago(Model modelo, HttpSession sesion, Integer idOrden) {
         //sesion 
