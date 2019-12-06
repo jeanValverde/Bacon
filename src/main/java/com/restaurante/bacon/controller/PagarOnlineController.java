@@ -55,7 +55,7 @@ public class PagarOnlineController {
         if(status == 1){
              Integer result = this.clienteService.pagarOnline(order_id);
         }
-        return new ResponseEntity("", HttpStatus.OK);
+        return new ResponseEntity(true, HttpStatus.OK);
     }
     
     @RequestMapping("/exito")
