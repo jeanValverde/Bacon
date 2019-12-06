@@ -95,7 +95,13 @@ public class SolicitarAsistenciaController {
     }
 
     @RequestMapping("/cancel")
-    public String botonCancel() {
+    public String botonCancel(Model modelo,
+            HttpSession sesion) {
+        Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
+
+        Integer id = cliente.getIdCliente();
+        String nombre = cliente.getNombre();
+        modelo.addAttribute("asistencias", this.solicitudAsistencia.asistenciasByIdCliente(id));
         return "users/cliente/visualizarAsistencias";
 
     }
