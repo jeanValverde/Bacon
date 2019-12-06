@@ -71,6 +71,8 @@ public class Cliente implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "idCliente")
     private Boleta boleta;
 
+    public static final String c_id = "c_id";
+    public static final String c_nom = "c_nombre";
     public Cliente() {
     }
 

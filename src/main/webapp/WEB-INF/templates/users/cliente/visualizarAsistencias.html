@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--[[${#httpServletRequest.remoteUser}]] obtiene el username (rut) de la sesion-->
+<html lang="es">
+
+    <head>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>BACON Restaurante</title>
+        <!-- base:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/mdi/css/materialdesignicons.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/flag-icon-css/css/flag-icon.min.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/vendors/css/vendor.bundle.base.css}">
+        <!-- endinject -->
+        <!-- plugin css for this page -->
+        <link rel="stylesheet" href="@{/vendors/flag-icon-css/css/flag-icon.min.css}" />
+        <!-- End plugin css for this page -->
+        <!-- inject:css -->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/horizontal-layout-light/style.css}"/>
+        <!-- endinject -->
+        <link rel="shortcut icon" th:href="@{/images/favicon.png}" />
+
+        <!---->
+    </head>
+    <body>
+
+        <div class="container-scroller">
+            <!-- partial:partials/_horizontal-navbar.html -->
+            <div  class="horizontal-menu">
+
+                <nav th:replace="fragments/_navCliente :: nav"></nav>
+
+                <nav th:replace="fragments/_navBarCliente :: nav"></nav>
+
+
+            </div>
+
+            <div class="card" >
+                <div class="card-body">
+                    <div class="content-wrapper ">
+                        <div style="text-align: center">
+                        <h4 class="card-title">Notificaciones de Asistencias</h4>
+                        <p class="card-description">Todas las notificaciones de Asistencias generadas por el Cliente</p>
+                        <div class="mt-5">
+                            <div class="timeline">
+                                <div class="container-fluid align-items-center">
+                               
+                                    <div class="timeline-wrapper timeline-wrapper-warning" >
+                                        <div class="timeline-badge"></div>
+
+                                        <div class="timeline-wrapper timeline-inverted timeline-wrapper-danger" th:each="asis: ${asistencias}" >
+                                            <div class="timeline-badge"></div>
+                                            <div class="timeline-panel" >
+                                                <div class="timeline-heading">
+                                                  
+                                                    <h6 class="text-left timeline-title" th:text="${asis.asunto}" >Bootstrap 4 Alpha 6</h6>
+                                                </div>
+
+                                                <div class="timeline-body" th:text="${asis.descripcion}">
+                                                    <p>Alpha 6 has landed, and it’s one of our biggest ships to date.</p>
+                                                </div>
+
+                                                <div class="timeline-footer d-flex align-items-center flex-wrap" >
+                                                    <i th:if="${asis.estado== 0}" class="mdi mdi-check text-muted mr-1"></i>
+                                                    <i th:if="${asis.estado== 1}" class="mdi mdi-check-all text-muted mr-1"></i>
+
+                                                    <span class="ml-md-auto font-weight-bold" th:text="${asis.fechaNotificacion}" >10th Aug 2017</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
