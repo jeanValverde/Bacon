@@ -40,7 +40,7 @@ public class APIpago {
         return new ResponseEntity(true, HttpStatus.OK);
     }
     
-    @PostMapping("/prueba")
+    @RequestMapping("/prueba")
     public ResponseEntity prueba(Model modelo, @RequestParam("order_id") Integer order_id, @RequestParam("transaction_id") Integer transaction_id, 
             @RequestParam("status") Integer status, @RequestParam("verification_key") String verification_key) {
         
