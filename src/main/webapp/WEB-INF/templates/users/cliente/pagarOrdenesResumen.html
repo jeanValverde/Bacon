@@ -41,7 +41,7 @@
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div style="text-align: center">
-                        <h2 id="deudaTotal">$</h2>
+                        <h2 id="deudaTotal"></h2>
                         <h3>Total Deuda</h3>
                     </div>
                     <br/>
@@ -182,7 +182,7 @@
                 }
                 contenido = contenido + '</table><h3 class="card-title mt-3">Descripción</h3>' + ordenes[i].orden.descripcion + '<table class="table mb-0"><thead><tr><th class="text-left"><h3 style="display: inline">Total Orden: $</h3><h4 style="display: inline">' + ordenes[i].orden.totalOrden + '</h4></th></tr></thead></table></div></div></div></div>';
             }
-            document.getElementById("deudaTotal").innerHTML = '$' + sumaValorTotal;
+            document.getElementById("deudaTotal").innerHTML = '' + sumaValorTotal;
             document.getElementById("divRecetas").innerHTML = contenido;
 
         </script>
@@ -306,6 +306,11 @@
                 }
 
 
+            }
+
+            function accecibilidad() {
+                localStorage.setItem("pop", 'si');
+                location.reload();
             }
 
         </script>
