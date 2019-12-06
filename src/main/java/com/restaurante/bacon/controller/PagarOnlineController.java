@@ -43,11 +43,11 @@ public class PagarOnlineController {
     ClienteService clienteService;
     
     @RequestMapping("/")
-    public ResponseEntity pagarOrdenes(Model modelo, @RequestParam("order_id") String order_id, @RequestParam("transaction_id") String transaction_id, 
+    public ResponseEntity pagarOrdenes(Model modelo, @RequestParam("order_id") Integer order_id, @RequestParam("transaction_id") Integer transaction_id, 
             @RequestParam("status") Integer status, @RequestParam("verification_key") String verification_key) {
      
         if(status == 1){
-             Integer result = this.clienteService.pagarOnline(Integer.parseInt(order_id));
+             Integer result = this.clienteService.pagarOnline(order_id);
         }
         return new ResponseEntity("", HttpStatus.OK);
     }
