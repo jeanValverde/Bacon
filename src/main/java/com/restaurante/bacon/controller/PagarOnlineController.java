@@ -57,6 +57,43 @@ public class PagarOnlineController {
         return new ResponseEntity("", HttpStatus.OK);
     }
     
+    @RequestMapping("/exito")
+    public String exitoPago(Model modelo, HttpSession sesion, Integer idOrden) {
+        //sesion 
+        Cliente cliente = (Cliente) sesion.getAttribute("sesionCliente");
+        List<Orden> ordenes = new ArrayList<Orden>();
+        ordenes = this.pagarOrdenService.listarOrdenes((BigDecimal.valueOf(cliente.getIdCliente())));
+
+        Integer totalOrden;
+        totalOrden = this.pagarOrdenService.retornarPago(cliente.getIdCliente());
+        modelo.addAttribute("precioTotal", totalOrden);
+
+        List<Receta> recetas = new ArrayList<Receta>();
+
+        List<RecetaOrdenada> recetaOrdenada = new ArrayList<RecetaOrdenada>();
+        //recetaOrdenada = this.recetaService.listarRecetasDeOrdenes(3);
+
+        List<RecetaOrdenadaByOrden> recetaByOrden = new ArrayList<RecetaOrdenadaByOrden>();
+
+        for (Orden orden : ordenes) {
+            RecetaOrdenadaByOrden recetasByOrden = new RecetaOrdenadaByOrden();
+
+            recetasByOrden.setOrden(orden);
+
+            List<RecetaOrdenada> recetasOrdenadas = new ArrayList<RecetaOrdenada>();
+
+            recetasOrdenadas = this.recetaService.listarRecetasDeOrdenes(orden.getIdOrden());
+
+            recetasByOrden.setRecetaOrdenada(recetasOrdenadas);
+
+            recetaByOrden.add(recetasByOrden);
+        }
+        //modelo.addAttribute("ordenes", ordenes);
+        modelo.addAttribute("recetaByOrden", recetaByOrden);
+
+        //fin desarrollo 
+        return "users/cliente/pagoExito";
+    }
     
      
 }
