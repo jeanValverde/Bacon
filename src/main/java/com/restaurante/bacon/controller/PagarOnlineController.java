@@ -49,9 +49,6 @@ public class PagarOnlineController {
         if(status == 1){
              Integer result = this.clienteService.pagarOnline(Integer.parseInt(order_id));
         }
-        //modelo.addAttribute("ordenes", ordenes);
-        //modelo.addAttribute("recetaByOrden", recetaByOrden);
-        
         return new ResponseEntity("", HttpStatus.OK);
     }
      
