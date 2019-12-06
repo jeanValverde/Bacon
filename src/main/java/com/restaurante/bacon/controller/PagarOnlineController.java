@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,7 +43,7 @@ public class PagarOnlineController {
     @Autowired
     ClienteService clienteService;
     
-    @RequestMapping("/")
+    @PostMapping("/")
     public ResponseEntity pagarOrdenes(Model modelo, @RequestParam("order_id") Integer order_id, @RequestParam("transaction_id") Integer transaction_id, 
             @RequestParam("status") Integer status, @RequestParam("verification_key") String verification_key) {
         
