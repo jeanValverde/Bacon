@@ -1,0 +1,10 @@
+{
+    "elements": {
+        "style": {}
+    },
+    "attributes": {
+        "th:src": {
+            "context": "script"
+        }
+    }
+}

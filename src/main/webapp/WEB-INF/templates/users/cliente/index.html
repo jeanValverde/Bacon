@@ -30,10 +30,10 @@
             <div  class="horizontal-menu">
 
                 <nav th:replace="fragments/_navCliente :: nav"></nav>
-                
+
                 <nav th:replace="fragments/_navBarCliente :: nav"></nav>
 
-                
+
             </div>
 
             <!-- partial -->
@@ -44,7 +44,7 @@
                         <div class="" ></div>
                         <div class="row" >
                             <div class="col-md-12 text-center" >
-                                <a id="tipoDos" th:href="@{/cliente/pedirOrden/(tipo=2)}" class="btn btn-outline-primary btn-icon-text" >
+                                <a id="tipoDos" th:href="@{/cliente/pedirOrden/(tipo=2)}" class="btn btn-outline-primary btn-icon-text"  data-toggle="popover" title="" data-content="Busca por cada una de las categorías de las recetas Fría, Caliente, Repostería, jugos/Aguas, Bar" data-original-title="Categoría de recetas" data-placement="bottom" >
                                     <i class="mdi mdi-umbrella mdi-36px"></i>
                                     <span class="d-inline-block text-left">
                                         <small class="font-weight-light d-block">Tipo de receta</small>
@@ -125,11 +125,11 @@
                                             <div class="valid-feedback">
                                                 Excelente
                                             </div>
-                                            <div class="invalid-feedback" th:text=" 'Debe ser mayor a 1 y menor de ' + ${receta.cantidadPrepDiariaReceta}">
+                                            <div class="invalid-feedback" th:text=" 'Debe ser mayor o igual a 1 y menor o igual a ' + ${receta.cantidadPrepDiariaReceta}">
 
                                             </div>
                                         </div>
-                                        <button th:onclick="'d(' + ${receta.idReceta} + ',' +  ${receta.cantidadPrepDiariaReceta}  + ')'" type="button" class="btn btn-primary btn-lg btn-block">
+                                        <button  id="z" data-toggle="popover" title="" data-content="Puedes pedir un platillo para su orden, al presionar 'pedir' se registrara un platillo a su pedido pero todos los que pidas tienen que ser confirmados para enviarlos a cocina." data-original-title="Ingresar una receta a su orden" data-placement="left"  th:onclick="'d(' + ${receta.idReceta} + ',' +  ${receta.cantidadPrepDiariaReceta}  + ')'" type="button" class="btn btn-primary btn-lg btn-block">
                                             <i class="mdi mdi-check-all"></i>                      
                                             Pedir
                                         </button>
@@ -164,7 +164,7 @@
                                 </div>
                             </div>
 
-                            <a th:if="${orden == true}" class='btn btn-primary btn-lg flotante' data-toggle="modal" data-target="#finalizar" href='#' >Finalizar</a>
+                            <a   th:if="${orden == true}" class='btn btn-primary btn-lg flotante' data-toggle="modal" data-target="#finalizar" href='#' >Finalizar</a>
 
                             <div class="modal fade" id="finalizar" tabindex="-1" role="dialog" aria-labelledby="finalizar" aria-hidden="true">
                                 <div class="modal-dialog modal-lg" role="document">
@@ -347,7 +347,7 @@
         <script th:src="@{/js/template.js}"></script>
         <script th:src="@{/js/settings.js}"></script>
         <script th:src="@{/js/todolist.js}"></script>
-        <script src="../../../../js/modal-demo.js"></script>
+        <script th:src="@{/js/popover.js}"></script>
         <!-- endinject -->
         <!-- plugin js for this page -->
         <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
@@ -455,11 +455,11 @@
 
                 //document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Item</th><th class='text-right'>Label</th></tr></thead><tbody><tr id='contenidoDetalleReceta' ><td class='pl-0'>Rounded Primary</td><td class='pr-0 text-right'><div class='badge badge-pill badge-primary'>2</div></td></tr></tbody></table></div>";
 
-                axios.get( window.location.protocol + "//" + window.location.host + '/cliente/pedirOrden/detalleReceta?idReceta=' + idReceta)
+                axios.get(window.location.protocol + "//" + window.location.host + '/cliente/pedirOrden/detalleReceta?idReceta=' + idReceta)
                         .then(function (response) {
                             console.log(response);
                             if (response.data != null) {
-                                document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre del ingrediente</th><th class='text-right'>Cantidad por porción (En Kilogramos)</th></tr></thead><tbody id='contenidoDetalleReceta' ></tbody></table></div>";
+                                document.getElementById('loader').innerHTML = "<div class='template-demo'><table class='table mb-0'><thead><tr><th class='pl-0'>Nombre del ingrediente</th><th class='text-right'>Cantidad por porción (En Gramos)</th></tr></thead><tbody id='contenidoDetalleReceta' ></tbody></table></div>";
                             }
                             if (response.data.length != 0) {
                                 var contenido = "";
@@ -786,7 +786,7 @@
                 document.getElementById("loaderSesion").style.visibility = "none";
 
 
-                axios.get(window.location.protocol + "//" + window.location.host +'/cliente/pedirOrden/eliminarReceraSesion?idReceta=' + idReceta)
+                axios.get(window.location.protocol + "//" + window.location.host + '/cliente/pedirOrden/eliminarReceraSesion?idReceta=' + idReceta)
                         .then(function (response) {
                             console.log(response);
                             if (response.data == true) {
@@ -805,6 +805,31 @@
                             // always executed
                         });
             }
+
+            
+
         </script>
+        <script type="text/javascript" >
+            if (localStorage.pop === 'si' ) {
+                
+                $('#element').popover('show')
+                $('#tipoDos').popover('show')
+
+                $('#solicitarAsistencia').popover('show')
+
+                $('#pagar').popover('show')
+                $('#misOrdenes').popover('show')
+
+                $('#z').popover('show')
+                
+                localStorage.setItem("pop", 'nop');
+            }
+            
+            function accecibilidad() {
+               localStorage.setItem("pop", 'si');
+               location.reload();
+            }
+        </script>
+
     </body>
 </html>

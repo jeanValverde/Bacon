@@ -2,25 +2,25 @@
     <div class="container">
         <ul class="nav page-navigation">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" id="solicitarAsistencia" href="#" data-toggle="popover" title="" data-content="Llama la atención de un garzón para que se dirija a su mesa." data-original-title="Ayuda cliente" data-placement="left" >
                     <i class="mdi mdi-help-circle-outline menu-icon"></i>
                     <span class="menu-title">Solicitar Asistencia</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/cliente/pedirOrdenExtra/}">
+                <a  class="nav-link" th:href="@{/cliente/pedirOrdenExtra/}"   >
                     <i class="mdi mdi-cart-plus menu-icon"></i>
                     <span class="menu-title">Agregar Orden</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a id="misOrdenes" class="nav-link" th:href="@{/cliente/detalleOrden/}" data-toggle="popover" title="" data-content="Podras ver todas las ordenes que has emitido a cocina, si quieres pedir mas ordenes puedes presionar la opción de 'Agregar Orden'" data-original-title="Resumen de las ordenes" data-placement="bottom" >
                     <i class="mdi mdi-shopping menu-icon"></i>
                     <span class="menu-title">Mis Ordenes</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/cliente/pagar/pagarOrdenes}">
+                <a id="pagar" class="nav-link" th:href="@{/cliente/pagar/pagarOrdenes}" data-toggle="popover" title="" data-content="Puedes pagar las ordenes emitidas de manera online o solicitar el pago en caja" data-original-title="Pagar Ordenes" data-placement="right" >
                     <i class="mdi mdi-cash-multiple menu-icon"></i>
                     <span class="menu-title">Pagar</span>
                 </a>

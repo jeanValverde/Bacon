@@ -41,43 +41,9 @@
             <div class="container-fluid page-body-wrapper">
                 <div class="main-panel">
                     <div class="content-wrapper">
-                        <div style="text-align: center">
-                            <h2 id="deudaTotal">$</h2>
-                            <h3>Total Deuda</h3>
-                        </div>
-                        <br/>
-                        <div>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <div style=" height: 45px; width: 350px; margin-left: 400px; " class="alert alert-info">Seleccione una opción para pagar sus ordenes</div>
-                            <br/>
-                            <div class="row" style="text-align: center;">
-                                <div class="col-6">
-                                    <button class="btn btn-outline-primary btn-icon-text" style="">
-                                        <i class="mdi mdi-square-inc-cash btn-icon-prepend mdi-36px"></i>
-                                        <span class="d-inline-block text-left">
-                                            <small class="font-weight-light d-block">Pagar con</small>
-                                            Efectivo
-                                        </span>
-                                    </button>
-                                </div>
-                                <div class="col-6">
-                                    <button onclick="cargarDatos()" class="btn btn-outline-primary btn-icon-text" data-toggle="modal" data-target="#exampleModal-4" data-whatever="@mdo" >
-                                        <i class="mdi mdi-credit-card-multiple btn-icon-prepend mdi-36px"></i>
-                                        <span class="d-inline-block text-left">
-                                            <small class="font-weight-light d-block">Pagar</small>
-                                            Online
-                                        </span>
-                                    </button>
-
-                                </div>
-                            </div>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div id="divRecetas" style="column-count: 2" class="card-columns mt-4">
+                        <h2 id="deudaTotal">$</h2>
+                        
+                        <div id="divRecetas" style="column-count: 1" class="card-columns mt-4">
 
                             <!--inicio row-->
 
@@ -142,29 +108,29 @@
 
 
         <script>
-                                        function dar_formato(num) {
-                                            var cadena = "";
-                                            var aux;
-                                            var cont = 1, m, k;
-                                            if (num < 0)
-                                                aux = 1;
-                                            else
-                                                aux = 0;
-                                            num = num.toString();
-                                            for (m = num.length - 1; m >= 0; m--) {
-                                                cadena = num.charAt(m) + cadena;
-                                                if (cont % 3 == 0 && m > aux)
-                                                    cadena = "." + cadena;
-                                                else
-                                                    cadena = cadena;
-                                                if (cont == 3)
-                                                    cont = 1;
-                                                else
-                                                    cont++;
-                                            }
-                                            cadena = cadena.replace(/.,/, ",");
-                                            return cadena;
-                                        }
+            function dar_formato(num) {
+                var cadena = "";
+                var aux;
+                var cont = 1, m, k;
+                if (num < 0)
+                    aux = 1;
+                else
+                    aux = 0;
+                num = num.toString();
+                for (m = num.length - 1; m >= 0; m--) {
+                    cadena = num.charAt(m) + cadena;
+                    if (cont % 3 == 0 && m > aux)
+                        cadena = "." + cadena;
+                    else
+                        cadena = cadena;
+                    if (cont == 3)
+                        cont = 1;
+                    else
+                        cont++;
+                }
+                cadena = cadena.replace(/.,/, ",");
+                return cadena;
+            }
         </script>
 
 
@@ -219,13 +185,11 @@
                 contenido = contenido + '</table><h3 class="card-title mt-3">Descripción</h3>' + ordenes[i].orden.descripcion + '<hr><div class="card mt-2" style="border-radius: 0px; box-shadow: none; border: 0px;" ><div class="card-body" style="padding: 0px;float:right;"><div class="d-flex flex-wrap mt-1"><h3 class="font-weight-normal mb-0">$' + dar_formato(ordenes[i].orden.totalOrden) + '</h3></div><small class="font-weight-medium d-block mt-2" style="float: right;">Total</small></div></div></div></div>';
 
 
-                document.getElementById("deudaTotal").innerHTML = '$' + dar_formato(sumaValorTotal);
+                document.getElementById("deudaTotal").innerHTML = "";
 
             }
 
             document.getElementById("divRecetas").innerHTML = contenido;
-
-
 
 
         </script>
@@ -287,8 +251,8 @@
         </script>
 
         <script type="text/javascript" >
-            if (localStorage.pop === 'si') {
-
+            if (localStorage.pop === 'si' ) {
+                
                 $('#element').popover('show')
                 $('#tipoDos').popover('show')
 
@@ -298,82 +262,16 @@
                 $('#misOrdenes').popover('show')
 
                 $('#z').popover('show')
-
+                
                 localStorage.setItem("pop", 'nop');
             }
-
+            
             function accecibilidad() {
-                localStorage.setItem("pop", 'si');
-                location.reload();
+               localStorage.setItem("pop", 'si');
+               location.reload();
             }
         </script>
-
-        <script type="text/javascript" >
-            function cargarDatos() {
-                document.getElementById("deudaTotalOnline").value = sumaValorTotal;
-
-                document.getElementById("deudaTotalOnlineDos").value = sumaValorTotal;
-                
-                document.getElementById("deudaTotalMostrar").innerHTML = '$' + dar_formato(sumaValorTotal);
-
-                var idClienteOnline = document.getElementById('identificador').innerHTML;
-
-                document.getElementById("idClienteOnline").value = idClienteOnline.split(":")[1].trim();
-            }
-        </script>
-
-        <div class="modal fade" id="exampleModal-4" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="ModalLabel">Para emitir el pago online debes completar estos pasos</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <form action="https://des.payku.cl/gateway/pago" method="post" target="_black"  >
-                        <div class="modal-body">
-
-                            <h2 class="text-center" id="deudaTotalMostrar"></h2>
-                            
-                            <input type="hidden" id="idClienteOnline" name="order_id" value=""/>
-
-                            <input type="hidden" id="deudaTotalOnline" name="amount" value=""/>
-                            
-                            <input type="hidden" id="deudaTotalOnlineDos" name="amount_order" value=""/>
-
-                            <input type="hidden" name="directpay" value="1">
-
-                            <input type="hidden" name="percent" value="0">
-
-                            <input type="hidden" name="currency" value="CLP">
-
-                            <input type="hidden" name="token" value="3a2fb397fc70fd8a08a54b2bf92706fc">
-
-                            <input type="hidden" name="notify_url" value="https://evening-reef-92725.herokuapp.com/cliente/pagarOnline/">
-
-                            <input type="hidden" name="return_url" value="">
-
-                            <input type="hidden" name="detail" value="Pago Bacon Restaurante">
-
-                            <input type="hidden"  name="adittional" value="0">
-
-                            <div class="form-group">
-                                <label for="recipient-name"  class="col-form-label">Correo Electronico: (Opcional)</label>
-                                <input  type="email" name="email_from" class="form-control" id="recipient-name">
-                            </div>
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Pagar</button>
-                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
+        
     </body>
 
 </html>

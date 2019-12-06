@@ -269,7 +269,7 @@ public class ClientePedirOrdenController {
 
         sesion.setAttribute("ordenesBar", recetasBarOtra);
 
-        return new ModelAndView("redirect:/cliente/pedirOrden/?tipo=2");
+        return new ModelAndView("redirect:/cliente/detalleOrden/");
     }
 
     public Integer calcularTotal(Map<Receta, Integer> busqueda) {
