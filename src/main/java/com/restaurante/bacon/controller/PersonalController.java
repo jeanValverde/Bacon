@@ -391,5 +391,4 @@ public class PersonalController {
         //
         return "users/administrador/mantenedor_insumos";
     }
-
 }
