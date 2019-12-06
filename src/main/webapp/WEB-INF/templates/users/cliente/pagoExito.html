@@ -16,6 +16,7 @@
         <!-- plugin css for this page -->
         <link rel="stylesheet" href="@{/vendors/flag-icon-css/css/flag-icon.min.css}" />
         <!-- End plugin css for this page -->
+        <link rel="stylesheet" th:href="@{/vendors/jquery-toast-plugin/jquery.toast.min.css}"/>
         <!-- inject:css -->
         <link rel="stylesheet" type="text/css" th:href="@{/css/horizontal-layout-light/style.css}"/>
         <!-- endinject -->
@@ -33,8 +34,19 @@
 
                 <nav th:replace="fragments/_navCliente :: nav"></nav>
 
-                <nav th:replace="fragments/_navBarCliente :: nav"></nav>
 
+                <nav class="bottom-navbar">
+                    <div class="container">
+                        <ul class="nav page-navigation">
+                            <li class="nav-item">
+                                <a  class="nav-link" th:href="@{/}" >
+                                    <i class="mdi mdi-logout-variant menu-icon"></i>
+                                    <span class="menu-title">Salir</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
 
             </div>
 
@@ -110,29 +122,29 @@
 
 
         <script>
-                                        function dar_formato(num) {
-                                            var cadena = "";
-                                            var aux;
-                                            var cont = 1, m, k;
-                                            if (num < 0)
-                                                aux = 1;
-                                            else
-                                                aux = 0;
-                                            num = num.toString();
-                                            for (m = num.length - 1; m >= 0; m--) {
-                                                cadena = num.charAt(m) + cadena;
-                                                if (cont % 3 == 0 && m > aux)
-                                                    cadena = "." + cadena;
-                                                else
-                                                    cadena = cadena;
-                                                if (cont == 3)
-                                                    cont = 1;
-                                                else
-                                                    cont++;
-                                            }
-                                            cadena = cadena.replace(/.,/, ",");
-                                            return cadena;
-                                        }
+            function dar_formato(num) {
+                var cadena = "";
+                var aux;
+                var cont = 1, m, k;
+                if (num < 0)
+                    aux = 1;
+                else
+                    aux = 0;
+                num = num.toString();
+                for (m = num.length - 1; m >= 0; m--) {
+                    cadena = num.charAt(m) + cadena;
+                    if (cont % 3 == 0 && m > aux)
+                        cadena = "." + cadena;
+                    else
+                        cadena = cadena;
+                    if (cont == 3)
+                        cont = 1;
+                    else
+                        cont++;
+                }
+                cadena = cadena.replace(/.,/, ",");
+                return cadena;
+            }
         </script>
 
 
@@ -255,7 +267,10 @@
         </script>
 
         <script type="text/javascript" >
-            showSwal('success-message', 'Pago Exitoso', 'Se ha realizado el pago con éxito');
+
+            Swal.fire('Pago Exitoso', 'Se ha realizado el pago con éxito', 'success')
+
+            document.getElementById('salir').style.visibility = '';
 
             if (localStorage.pop === 'si') {
 
@@ -278,7 +293,7 @@
             }
         </script>
 
-        
+
 
     </body>
 
