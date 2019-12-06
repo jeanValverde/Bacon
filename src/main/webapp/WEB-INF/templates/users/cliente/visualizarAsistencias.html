@@ -33,49 +33,119 @@
 
                 <nav th:replace="fragments/_navBarCliente :: nav"></nav>
 
-
             </div>
 
-            <div class="card" >
-                <div class="card-body">
-                    <div class="content-wrapper ">
-                        <div style="text-align: center">
-                        <h4 class="card-title">Notificaciones de Asistencias</h4>
-                        <p class="card-description">Todas las notificaciones de Asistencias generadas por el Cliente</p>
-                        <div class="mt-5">
-                            <div class="timeline">
-                                <div class="container-fluid align-items-center">
-                               
-                                    <div class="timeline-wrapper timeline-wrapper-warning" >
-                                        <div class="timeline-badge"></div>
-
-                                        <div class="timeline-wrapper timeline-inverted timeline-wrapper-danger" th:each="asis: ${asistencias}" >
-                                            <div class="timeline-badge"></div>
-                                            <div class="timeline-panel" >
-                                                <div class="timeline-heading">
-                                                  
-                                                    <h6 class="text-left timeline-title" th:text="${asis.asunto}" >Bootstrap 4 Alpha 6</h6>
+            <!-- partial -->
+            <div class="container-fluid page-body-wrapper">
+                <div class="main-panel">
+                    <div class="content-wrapper">
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center">Notificaciones de Asistencias</h4>
+                                        <p class="card-description text-center">Todas las notificaciones de Asistencias generadas por el Cliente</p>
+                                        <div class="mt-5">
+                                            <div class="timeline">
+                                                
+                                                <div th:class="${(asis.estado == 1) ? 'timeline-wrapper timeline-wrapper-warning' : 'timeline-wrapper timeline-inverted timeline-wrapper-danger'}" th:each="asis: ${asistencias}"  >
+                                                    <div class="timeline-badge"></div>
+                                                    <div class="timeline-panel">
+                                                        <div class="timeline-heading">
+                                                            <h6 class="timeline-title" th:text="${asis.asunto}" >Bootstrap 4 Beta</h6>
+                                                        </div>
+                                                        <div class="timeline-body" >
+                                                            <p th:text="${asis.descripcion}" >Two years in the making, we finally have our first beta release of Bootstrap 4.</p>
+                                                        </div>
+                                                        <div class="timeline-footer d-flex align-items-center flex-wrap" th:if="${asis.estado== 0}" >
+                                                            <i class="mdi mdi-check text-muted text-muted mr-1"></i>
+                                                            <span>Enviado</span>
+                                                            <span class="ml-md-auto font-weight-bold" th:text="${asis.fechaNotificacion}" >19 Oct 2017</span>
+                                                        </div>
+                                                        <div class="timeline-footer d-flex align-items-center flex-wrap" th:if="${asis.estado== 1}" >
+                                                            <i class="mdi mdi-check-all text-muted mr-1"></i>
+                                                            <span>Leído</span>
+                                                            <span class="ml-md-auto font-weight-bold" th:text="${asis.fechaNotificacion}" >19 Oct 2017</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-
-                                                <div class="timeline-body" th:text="${asis.descripcion}">
-                                                    <p>Alpha 6 has landed, and it’s one of our biggest ships to date.</p>
-                                                </div>
-
-                                                <div class="timeline-footer d-flex align-items-center flex-wrap" >
-                                                    <i th:if="${asis.estado== 0}" class="mdi mdi-check text-muted mr-1"></i>
-                                                    <i th:if="${asis.estado== 1}" class="mdi mdi-check-all text-muted mr-1"></i>
-
-                                                    <span class="ml-md-auto font-weight-bold" th:text="${asis.fechaNotificacion}" >10th Aug 2017</span>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
+                    <!-- content-wrapper ends -->
+                    <!-- partial:partials/_footer.html -->
+                    <footer class="footer">
+                        <div class="w-100 clearfix">
+                            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2019.</span>
+                            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Creado con <i class="mdi mdi-heart-outline text-danger"></i> por el <a href="https://github.com/jeanValverde/Bacon" target="_black" >Team</a></span>
+                        </div>
+                    </footer>
+                    <!-- partial -->
                 </div>
+                <!-- main-panel ends -->
             </div>
+            <!-- page-body-wrapper ends -->
         </div>
-        </div>
+
+
+        <!-- container-scroller -->
+        <!-- base:js -->
+        <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
+        <!-- endinject -->
+        <!-- Plugin js for this page-->
+        <!-- End plugin js for this page-->
+        <!-- inject:js -->
+        <script th:src="@{/js/off-canvas.js}"></script>
+        <script th:src="@{/js/hoverable-collapse.js}"></script>
+        <script th:src="@{/js/template.js}"></script>
+        <script th:src="@{/js/settings.js}"></script>
+        <script th:src="@{/js/todolist.js}"></script>
+        <script src="../../../../js/modal-demo.js"></script>
+        <!-- endinject -->
+        <!-- plugin js for this page -->
+        <script th:src="@{/vendors/sweetalert/sweetalert.min.js}"></script>
+        <script th:src="@{/vendors/jquery.avgrund/jquery.avgrund.min.js}"></script>
+        <!-- End plugin js for this page -->
+        <!-- Custom js for this page-->
+        <script th:src="@{/js/alerts.js}"></script>
+        <script th:src="@{/js/avgrund.js}"></script>
+        <script th:src="@{/js/alerts_personalizado.js}"></script>
+        <!-- End custom js for this page-->
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.6/dist/sweetalert2.all.min.js"></script>
+
+        <script type="text/javascript" >
+
+            function solicitud() {
+
+
+                Swal.fire({
+                    title: '¿Está seguro que desea Solicitar Pago en Efectivo?',
+                    text: "Si solicita Pago en Efectivo, el Garzón se acercará a la brevedad",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '!Si, Solicitar!'
+                }).then((result) => {
+                    if (result.value) {
+                        location.href = "/cliente/addAsistenciaPago";
+                    } else {
+
+                        location.href = "/cliente/cancel"
+                    }
+                })
+            }
+
+        </script>
+
+    </body>
+</html>
