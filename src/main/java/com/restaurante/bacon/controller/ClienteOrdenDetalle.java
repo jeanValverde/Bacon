@@ -72,5 +72,4 @@ public class ClienteOrdenDetalle {
         //fin desarrollo 
         return "users/cliente/detalleOrdenes";
     }
-
 }
