@@ -45,9 +45,7 @@ public class InformeController {
         
         modelo.addAttribute("personalSesion", this.personalService.getPersonalSesion(user.getUsername()));
                 
-        return "informe/informe";
-
-        
+        return "informe/informe";   
     }
     
     @RequestMapping("/graficoReceta")
